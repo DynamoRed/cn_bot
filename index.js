@@ -18,7 +18,7 @@ bot.on("ready", () => {
 });
 bot.on("raw", (packet) => {
     require("./events/client/raw")(bot, packet);
-});
+}); 
 bot.on("message", async (message) => {
     require("./events/guild/message")(bot, message);
 });

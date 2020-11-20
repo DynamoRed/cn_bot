@@ -1,0 +1,19 @@
+{
+  "name": "splife-community-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "DynamoRed",
+  "license": "ISC",
+  "dependencies": {
+    "ascii-table": "0.0.9",
+    "discord.js": "^12.4.1",
+    "fs": "0.0.1-security",
+    "ms": "^2.1.2",
+    "snekfetch": "^4.0.4",
+    "util": "^0.12.3"
+  }
+}

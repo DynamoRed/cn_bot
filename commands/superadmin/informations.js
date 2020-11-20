@@ -95,6 +95,8 @@ module.exports = {
             Nos partenaires bénéficient d'avantages lors de giveaways, animations ou encore lors d'annonces multiples.
 
             Si vous souhaitez parler d'un potentiel partenariat avec nos plateformes, veuillez contacter <@${bot.config.OWNER_ID}>
+
+            Notre Branding est disponible [ici](https://cdn.discordapp.com/attachments/779357716128071762/779490359632986132/SPLife-Branding.rar) pour ceux souhaitant mettre en avant SPLife !
             
             ${botEmojis.GLOBAL.TEAM} **Une commande !nom_du_partenaire est disponible pour obtenir les informations de chaque partenaire**`));
 

@@ -29,4 +29,4 @@ bot.on("guildMemberAdd", (member) => {
     require("./events/guild/guildMemberAdd")(bot, member);
 });
 
-bot.login(config.BOT_TOKEN);
+bot.login(process.env.TOKEN);

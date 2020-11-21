@@ -30,6 +30,6 @@ bot.on("guildMemberAdd", (member) => {
 });
 bot.on("guildMemberRemove", (member) => {
     require("./events/guild/guildMemberRemove")(bot, member);
-})
+}); 
 
 bot.login(process.env.TOKEN);

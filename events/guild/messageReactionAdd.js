@@ -27,6 +27,7 @@ module.exports = async (bot, reaction, user) => {
 
             channel.ticketIsClosing = false;
             channel.ticketMember = user;
+            channel.send(`<@&${bot.config.I_ROLES.STAFF}> <@${user.id}>`);
 
             let ticketEmbed1 = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)

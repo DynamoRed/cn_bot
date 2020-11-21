@@ -19,7 +19,6 @@ module.exports = (bot, m) => {
         .setDescription(`${bot.botEmojis.GLOBAL.BULLET} **Bienvenue <@${m.user.id}> sur SPLife !**
         Veuillez réagir sous le message dans <#${bot.config.I_CHANNELS.VERIFICATION}> avec ✅ pour passer notre captcha.`);
 
-    m.guild.channels.cache.find(c => c.id == bot.config.I_CHANNELS.MEMBER_STATS).setName(`👥 Membres: ${m.guild.memberCount}`);
     m.user.send(captchaEmbed1);
     m.user.send(captchaEmbed2);
 }

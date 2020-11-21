@@ -28,8 +28,5 @@ bot.on("messageReactionAdd", (reaction, user) => {
 bot.on("guildMemberAdd", (member) => {
     require("./events/guild/guildMemberAdd")(bot, member);
 });
-bot.on("guildMemberRemove", (member) => {
-    require("./events/guild/guildMemberRemove")(bot, member);
-}); 
 
 bot.login(process.env.TOKEN);

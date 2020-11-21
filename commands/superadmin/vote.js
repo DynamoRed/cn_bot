@@ -12,10 +12,10 @@ module.exports = {
         let voteEmbed1 = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setTitle(`📨 Vote`)
-            .setDescription(`${botEmojis.GLOBAL.BULLET} Votez pour notre serveur sur [Top-Serveur](https://top-serveurs.net/garrys-mod/vote/fr-splife-recrutement-on-5f6bab49ecb56) !
+            .setDescription(`${botEmojis.GLOBAL.BULLET} Votez pour notre serveur sur [Top-Serveur](https://top-serveurs.net/garrys-mod/vote/splife) !
             Les trois plus gros votants recevront une récompense a la fin du mois !`);
 
         message.channel.send(voteEmbed1);
-        message.channel.send("https://top-serveurs.net/garrys-mod/vote/fr-splife-recrutement-on-5f6bab49ecb56");
+        message.channel.send("https://top-serveurs.net/garrys-mod/vote/splife");
     }
 }

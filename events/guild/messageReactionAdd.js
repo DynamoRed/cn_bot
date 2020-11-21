@@ -14,11 +14,11 @@ module.exports = async (bot, reaction, user) => {
             message.guild.channels.create(`ticket-de-` + authorName, {
                 type: 'text',
             }).then(async ch => {
-                ch.setParent(bot.config.I_CHANNELS.TICKET_CATEGORY)
                 ch.updateOverwrite(ch.guild.roles.everyone, { VIEW_CHANNEL: false });
                 ch.updateOverwrite(bot.config.I_ROLES.STAFF, { VIEW_CHANNEL: true });
                 ch.updateOverwrite(user.id, { VIEW_CHANNEL: true });
                 ch.send(`<@&${bot.config.I_ROLES.STAFF}>`);
+                ch.ticketIsClosing = false;
                 let ticketEmbed1 = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
                     .setTitle(`🎫 Ticket Support de ${authorName}`)
@@ -26,6 +26,7 @@ module.exports = async (bot, reaction, user) => {
                     Merci de décrire clairement et avec détails votre soucis afin que la résolution de votre problème se fasse avec le plus rapidement possible !`);
                 let msg = await ch.send(ticketEmbed1);
                 msg.react(`🔐`);
+                ch.setParent(bot.config.I_CHANNELS.TICKET_CATEGORY)
             });
             reaction.users.remove(user);
         }
@@ -40,6 +41,7 @@ module.exports = async (bot, reaction, user) => {
 
     if(message.channel.name.includes("ticket-de-")){
         if(reaction.emoji.name == "🔐"){
+            if(message.channel.ticketIsClosing) return;
             reaction.users.remove(user);
             if(!message.guild.members.cache.find(m => m.user.id == user.id).roles.cache.find(r => r.id == bot.config.I_ROLES.STAFF)) {
                 var replyEmbed = new Discord.MessageEmbed()
@@ -54,6 +56,7 @@ module.exports = async (bot, reaction, user) => {
                 .setColor(bot.config.COLORS.DENY)
                 .setDescription(`**Fermeture du ticket dans 10 secondes !**`)
             let msg = await message.channel.send(replyEmbed);
+            message.channel.ticketIsClosing = true;
             setTimeout(() => {
                 message.channel.delete()
             }, 10 * 1000)

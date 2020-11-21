@@ -19,7 +19,7 @@ module.exports = async (bot, message) => {
         let patchNoteEmbed2 = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setTitle(`:loudspeaker: Patch-Note du ${dd}/${mm}/${yyyy}`)
-            .setDescription(`${botEmojis.GLOBAL.BULLET} ${message.content}`);
+            .setDescription(`${bot.botEmojis.GLOBAL.BULLET} ${message.content}`);
 
         message.channel.send(patchNoteEmbed1);
         message.channel.send(patchNoteEmbed2);

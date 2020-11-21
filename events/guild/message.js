@@ -6,8 +6,6 @@ module.exports = async (bot, message) => {
     if(message.author.bot) return;
 
     if(message.channel.id == bot.config.I_CHANNELS.PATCH_NOTES){
-        message.delete();
-
         //PATCH-NOTE EMBEDS
         let patchNoteEmbed1 = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
@@ -25,6 +23,7 @@ module.exports = async (bot, message) => {
 
         message.channel.send(patchNoteEmbed1);
         message.channel.send(patchNoteEmbed2);
+        message.delete();
         return;
     }
 

@@ -11,23 +11,24 @@ module.exports = async (bot, reaction, user) => {
 
     if(message.channel.id == bot.config.I_CHANNELS.TICKETS){
         if(reaction.emoji.name == "📩"){
-            message.guild.channels.create(`ticket-de-` + authorName, {
+            let ch = message.guild.channels.create(`ticket-de-` + authorName, {
                 type: 'text',
-            }).then(async ch => {
-                ch.updateOverwrite(ch.guild.roles.everyone, { VIEW_CHANNEL: false });
-                ch.updateOverwrite(bot.config.I_ROLES.STAFF, { VIEW_CHANNEL: true });
-                ch.updateOverwrite(user.id, { VIEW_CHANNEL: true });
-                ch.send(`<@&${bot.config.I_ROLES.STAFF}>`);
-                ch.ticketIsClosing = false;
-                let ticketEmbed1 = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.BASE)
-                    .setTitle(`🎫 Ticket Support de ${authorName}`)
-                    .setDescription(`${bot.botEmojis.GLOBAL.BULLET} <@${user.id}> un membre de notre équipe arrive pour vous aider.
-                    Merci de décrire clairement et avec détails votre soucis afin que la résolution de votre problème se fasse avec le plus rapidement possible !`);
-                let msg = await ch.send(ticketEmbed1);
-                msg.react(`🔐`);
-                ch.setParent(bot.config.I_CHANNELS.TICKET_CATEGORY)
             });
+            ch.updateOverwrite(ch.guild.roles.everyone, { VIEW_CHANNEL: false });
+            ch.updateOverwrite(bot.config.I_ROLES.MEMBER, { VIEW_CHANNEL: false });
+            ch.updateOverwrite(bot.config.I_ROLES.STAFF, { VIEW_CHANNEL: true });
+            ch.updateOverwrite(user.id, { VIEW_CHANNEL: true });
+            ch.send(`<@&${bot.config.I_ROLES.STAFF}>`);
+            ch.ticketIsClosing = false;
+            let ticketEmbed1 = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.BASE)
+                .setTitle(`🎫 Ticket Support de ${authorName}`)
+                .setDescription(`${bot.botEmojis.GLOBAL.BULLET} <@${user.id}> un membre de notre équipe arrive pour vous aider.
+                Merci de décrire clairement et avec détails votre soucis afin que la résolution de votre problème se fasse avec le plus rapidement possible !`);
+            let msg = await ch.send(ticketEmbed1);
+            msg.react(`🔐`);
+            ch.setParent(bot.config.I_CHANNELS.TICKET_CATEGORY)
+
             reaction.users.remove(user);
         }
     }

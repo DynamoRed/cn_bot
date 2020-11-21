@@ -11,7 +11,10 @@ module.exports = async (bot, reaction, user) => {
 
     if(message.channel.id == bot.config.I_CHANNELS.TICKETS){
         if(reaction.emoji.name == "📩"){
+            if(user.isInTicket) return;
+            user.isInTicket = true;
             const channel = await reaction.message.guild.channels.create(`ticket-de-${authorName}`,{
+                type: 'text',
                 parent: bot.config.I_CHANNELS.TICKET_CATEGORY,
                 permissionOverwrites: [
                     {deny: 'VIEW_CHANNEL', id: reaction.message.guild.id},
@@ -19,6 +22,11 @@ module.exports = async (bot, reaction, user) => {
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.STAFF},
                 ],
             });
+
+            let ticketCategory = message.guild.channels.cache.find(c => c.id == bot.config.I_CHANNELS.TICKET_CATEGORY);
+
+            channel.ticketIsClosing = false;
+            channel.ticketMember = user;
 
             let ticketEmbed1 = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
@@ -42,6 +50,7 @@ module.exports = async (bot, reaction, user) => {
         if(reaction.emoji.name == "🔐"){
             if(message.channel.ticketIsClosing) return;
             reaction.users.remove(user);
+            if(message.channel.ticketMember) message.channel.ticketMember.isInTicket = false;
             if(!message.guild.members.cache.find(m => m.user.id == user.id).roles.cache.find(r => r.id == bot.config.I_ROLES.STAFF)) {
                 var replyEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.DENY)

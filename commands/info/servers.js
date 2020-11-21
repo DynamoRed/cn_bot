@@ -19,7 +19,7 @@ module.exports = {
         informationsMessages.set("servers_2", new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setTitle(`:joystick: Nos plateformes de Jeu`)
-            .setDescription(`SPLife est composé de 3 serveurs Garry's Mod distincts:${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}
+            .setDescription(`SPLife est composé de 3 serveurs Garry's Mod distincts: ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET}
             ${botEmojis.SPLIFE.DARK_RP.LOGO} **Notre serveur DarkRP:**
                 ${botEmojis.GLOBAL.BULLET} **Discord**: [Cliquez ici](https://discord.gg/WqsPx3J)
                 ${botEmojis.GLOBAL.BULLET} **Collection Steam**: [Cliquez ici](https://steamcommunity.com/sharedfiles/filedetails/?id=2190229711)

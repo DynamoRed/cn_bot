@@ -28,7 +28,7 @@ module.exports = {
             
             ${botEmojis.SOCIAL_NETWORK.DISCORD} __Discord__: [Cliquez ici](https://discord.gg/WqsPx3J)
             ${botEmojis.SOCIAL_NETWORK.STEAM} __Groupe Steam__: [Cliquez ici](https://www.steamcommunity.com/)
-            ${botEmojis.SOCIAL_NETWORK.TOP_SERVEUR} __Top-Serveur__: [Cliquez ici](https://top-serveurs.net/garrys-mod/vote/fr-splife-recrutement-on-5f6bab49ecb56)
+            ${botEmojis.SOCIAL_NETWORK.TOP_SERVEUR} __Top-Serveur__: [Cliquez ici](https://top-serveurs.net/garrys-mod/vote/splife)
             ${botEmojis.SOCIAL_NETWORK.YOUTUBE} __Youtube__: [Cliquez ici](https://www.youtube.com/)
             
             ${botEmojis.GLOBAL.TEAM} **Notre équipe vous souhaite la bienvenue !**`));
@@ -61,7 +61,7 @@ module.exports = {
         informationsMessages.set("servers_2", new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setTitle(`:joystick: Nos plateformes de Jeu`)
-            .setDescription(`SPLife est composé de 3 serveurs Garry's Mod distincts:${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}${botEmojis.GLOBAL.BLANK_BULLET}
+            .setDescription(`SPLife est composé de 3 serveurs Garry's Mod distincts: ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET}
             ${botEmojis.SPLIFE.DARK_RP.LOGO} **Notre serveur DarkRP:**
                 ${botEmojis.GLOBAL.BULLET} **Discord**: [Cliquez ici](https://discord.gg/WqsPx3J)
                 ${botEmojis.GLOBAL.BULLET} **Collection Steam**: [Cliquez ici](https://steamcommunity.com/sharedfiles/filedetails/?id=2190229711)

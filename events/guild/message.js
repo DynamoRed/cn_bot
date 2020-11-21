@@ -28,6 +28,7 @@ module.exports = async (bot, message) => {
     }
 
     if(message.channel.id == bot.config.I_CHANNELS.BOOSTS){
+        console.log(message.type);
         if(message instanceof USER_PREMIUM_GUILD_SUBSCRIPTION){
             //BOOST EMBEDS
             let boostEmbed = new Discord.MessageEmbed()

@@ -11,42 +11,23 @@ module.exports = async (bot, reaction, user) => {
 
     if(message.channel.id == bot.config.I_CHANNELS.TICKETS){
         if(reaction.emoji.name == "📩"){
-            message.guild.channels.cache.forEach(c => {
-                if(c.name == "ticket-de-" + authorName){
-                    return;
-                }
-            })
-
-            let everyoneRole = message.guild.roles.cache.find(r => r.name === '@everyone');
-
-            message.guild.channels.create(`ticket-de-` + authorName, {
-                type: 'text',
+            const channel = await reaction.message.guild.channels.create(`ticket-de-${authorName}`,{
+                parent: bot.config.I_CHANNELS.TICKET_CATEGORY,
                 permissionOverwrites: [
-                    {
-                        id: everyoneRole.id,
-                        deny: ['VIEW_CHANNEL'],
-                    },
-                    {
-                        id: bot.config.I_ROLES.STAFF,
-                        allow: ['VIEW_CHANNEL'],
-                    },
-                    {
-                        id: user.id,
-                        deny: ['VIEW_CHANNEL'],
-                    }
+                    {deny: 'VIEW_CHANNEL', id: reaction.message.guild.id},
+                    {allow: 'VIEW_CHANNEL', id: user.id},
+                    {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.STAFF},
                 ],
-            }).then(async ch => {
-                ch.send(`<@&${bot.config.I_ROLES.STAFF}>`);
-                ch.ticketIsClosing = false;
-                let ticketEmbed1 = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.BASE)
-                    .setTitle(`🎫 Ticket Support de ${authorName}`)
-                    .setDescription(`${bot.botEmojis.GLOBAL.BULLET} <@${user.id}> un membre de notre équipe arrive pour vous aider.
-                    Merci de décrire clairement et avec détails votre soucis afin que la résolution de votre problème se fasse avec le plus rapidement possible !`);
-                let msg = await ch.send(ticketEmbed1);
-                msg.react(`🔐`);
-                ch.setParent(bot.config.I_CHANNELS.TICKET_CATEGORY)
             });
+
+            let ticketEmbed1 = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.BASE)
+                .setTitle(`🎫 Ticket Support de ${authorName}`)
+                .setDescription(`${bot.botEmojis.GLOBAL.BULLET} <@${user.id}> un membre de notre équipe arrive pour vous aider.
+                Merci de décrire clairement et avec détails votre soucis afin que la résolution de votre problème se fasse avec le plus rapidement possible !`);
+            let msg = await channel.send(ticketEmbed1);
+            msg.react(`🔐`);
+
             reaction.users.remove(user);
         }
     }
@@ -54,7 +35,6 @@ module.exports = async (bot, reaction, user) => {
     if(message.channel.id == bot.config.I_CHANNELS.VERIFICATION){
         if(reaction.emoji.name == "✅"){
             message.guild.members.cache.find(m => m.user.id == user.id).roles.add(bot.config.I_ROLES.MEMBER, "");
-            reaction.users.remove(user);
         }
     }
 

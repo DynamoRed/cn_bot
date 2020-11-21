@@ -27,6 +27,20 @@ module.exports = async (bot, message) => {
         return;
     }
 
+    if(message.channel.id == bot.config.I_CHANNELS.BOOSTS){
+        if(message instanceof USER_PREMIUM_GUILD_SUBSCRIPTION){
+            //BOOST EMBEDS
+            let boostEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.BASE)
+                .setTitle(`${botEmojis.BOOST.HAND}${botEmojis.BOOST.BOOST}${botEmojis.BOOST.HAND_REVERSE} Nouveau BOOOOOOOOOOOOST !`)
+                .setDescription(`${bot.botEmojis.GLOBAL.BULLET} <@${message.author.id}> fait désormais partie de nos boosters ! Merci a lui :tada:`);
+
+            message.channel.send(boostEmbed);
+            message.delete();
+            return;
+        }
+    }
+
     if(!message.content.startsWith(bot.config.PREFIX)) return;
     if(!message.guild) return;
     if(!message.member) message.member = await message.guild.fetchMember(message);

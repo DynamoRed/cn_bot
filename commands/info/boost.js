@@ -4,7 +4,7 @@ module.exports = {
     description: "Informations sur les Boosters Discord",
     category: "info",
     timeout: 120000,
-    enabled: true,
+    enabled: true, 
     restrictions: [""],
     aliases: ["boosters", "boosts", "booster"],
     run: async (bot, message, args, botEmojis) => {

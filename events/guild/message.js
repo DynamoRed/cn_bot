@@ -37,7 +37,7 @@ module.exports = async (bot, message) => {
             let boostEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
                 .setTitle(`${bot.botEmojis.BOOST.HAND}${bot.botEmojis.BOOST.BOOST}${bot.botEmojis.BOOST.HAND_REVERSE} Nouveau BOOOOOOOOOOOOST !`)
-                .setDescription(`${bot.botEmojis.GLOBAL.BULLET} <@${message.author.id}> fait désormais partie de nos boosters ! Merci a lui :tada:`);
+                .setDescription(`${bot.botEmojis.GLOBAL.BULLET} <@${message.author.id}> vient de **booster** notre discord ! **Quel BG !** Merci a lui :tada:`);
 
             message.channel.send(boostEmbed);
             message.delete();

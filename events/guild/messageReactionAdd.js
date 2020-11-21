@@ -11,10 +11,10 @@ module.exports = async (bot, reaction, user) => {
 
     if(message.channel.id == bot.config.I_CHANNELS.TICKETS){
         if(reaction.emoji.name == "📩"){
-            let ch = message.guild.channels.create(`ticket-de-` + authorName, {
+            let ch = await message.guild.channels.create(`ticket-de-` + authorName, {
                 type: 'text',
             });
-            ch.updateOverwrite(ch.guild.roles.everyone, { VIEW_CHANNEL: false });
+            ch.updateOverwrite(ch.guild.id, { VIEW_CHANNEL: false });
             ch.updateOverwrite(bot.config.I_ROLES.MEMBER, { VIEW_CHANNEL: false });
             ch.updateOverwrite(bot.config.I_ROLES.STAFF, { VIEW_CHANNEL: true });
             ch.updateOverwrite(user.id, { VIEW_CHANNEL: true });
@@ -36,7 +36,6 @@ module.exports = async (bot, reaction, user) => {
     if(message.channel.id == bot.config.I_CHANNELS.VERIFICATION){
         if(reaction.emoji.name == "✅"){
             message.guild.members.cache.find(m => m.user.id == user.id).roles.add(bot.config.I_ROLES.MEMBER, "");
-            reaction.users.remove(user);
         }
     }
 

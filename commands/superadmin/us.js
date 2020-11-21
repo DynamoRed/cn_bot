@@ -25,8 +25,10 @@ module.exports = {
             
             ${botEmojis.SOCIAL_NETWORK.DISCORD} __Discord__: [Cliquez ici](https://discord.gg/WqsPx3J)
             ${botEmojis.SOCIAL_NETWORK.STEAM} __Groupe Steam__: [Cliquez ici](https://www.steamcommunity.com/)
-            ${botEmojis.SOCIAL_NETWORK.TOP_SERVEUR} __Top-Serveur__: [Cliquez ici](https://top-serveurs.net/garrys-mod/vote/fr-splife-recrutement-on-5f6bab49ecb56)
-            ${botEmojis.SOCIAL_NETWORK.YOUTUBE} __Youtube__: [Cliquez ici](https://www.youtube.com/)`);
+            ${botEmojis.SOCIAL_NETWORK.TOP_SERVEUR} __Top-Serveur__: [Cliquez ici](https://top-serveurs.net/garrys-mod/vote/splife)
+            ${botEmojis.SOCIAL_NETWORK.YOUTUBE} __Youtube__: [Cliquez ici](https://www.youtube.com/channel/UCqf4CqxojIcwekxP_J65ETg)
+            :family: __Système de Familles Officielles__: [Cliquez ici](https://sites.google.com/view/splife-garrys-mod/famille-officiel?authuser=0)
+            :shopping_cart: __Boutique__: [Cliquez ici](https://www.splife.fr/)`);
 
         message.channel.send(usEmbed1);
         message.channel.send(usEmbed2);

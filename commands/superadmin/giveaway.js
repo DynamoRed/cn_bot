@@ -9,7 +9,7 @@ module.exports = {
     aliases: ["gaway", "givea", "ga"],
     run: async (bot, message, args, botEmojis) => {
         let options = message.content.slice(bot.config.PREFIX.length).trim().split(`"`);
-        if(options < 4){
+        if(options.length < 4){
             return;
         }
         if(isNaN(args[0])){

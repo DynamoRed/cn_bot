@@ -29,10 +29,10 @@ module.exports = {
         }
 
         for(var i = 0; i < giveawayMessage.nbOfWinners; i++){
+            console.log(participants.length);
             let rdm = Math.floor(Math.random() * (participants.length + 1));
             if(winners.includes(participants[rdm])) continue;
-            console.log(participants);
-            console.log("RANDOM:" + rdm);
+            console.log(`Random: ${rdm}`);
             winners[i] = participants[rdm];
             resultDesc = ` 
                 ${bot.botEmojis.GLOBAL.BULLET} <@${winners[i].id}>`;

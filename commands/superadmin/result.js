@@ -6,9 +6,9 @@ module.exports = {
     timeout: 0,
     enabled: true,
     restrictions: ["staff+"],
-    aliases: ["gaway", "givea", "ga"],
+    aliases: [""],
     run: async (bot, message, args, botEmojis) => {
-        if(isNaN(args[0])){
+        if(isNaN(args[0]) || args.length != 1){
             return;
         }
 

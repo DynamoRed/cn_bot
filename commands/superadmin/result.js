@@ -4,7 +4,7 @@ module.exports = {
     description: "Creer un giveaway",
     category: "superadmin",
     timeout: 0,
-    enabled: true,
+    enabled: false,
     restrictions: ["staff+"],
     aliases: [""],
     run: async (bot, message, args, botEmojis) => {
@@ -18,8 +18,8 @@ module.exports = {
             return;
         }
 
+        giveawayMessage.reactions.cache.get(botEmojis.GLOBAL.GIVEAWAY.id).users.remove(bot.id);
         let participants = giveawayMessage.reactions.cache.get(botEmojis.GLOBAL.GIVEAWAY.id).users;
-        participants.remove(bot.id);
         let winners = [];
         let resultDesc = ``;
         let pronoms = ["DU", "lui", ""];

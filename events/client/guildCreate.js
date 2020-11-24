@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports = (bot, g) => {
+module.exports = async (bot, g) => {
     let guildJoinMessage = `<@${g.owner.user.id}> vient d'ajouter le bot a son serveur ${g.name}
     
     ${await g.channels.cache.first().createInvite()}`;

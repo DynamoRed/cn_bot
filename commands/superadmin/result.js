@@ -22,13 +22,13 @@ module.exports = {
         let participants = giveawayMessage.reactions.cache.get(botEmojis.GLOBAL.GIVEAWAY.id).users.cache;
         let winners = [];
         let resultDesc = ``;
-        let pronoms = ["DU", "LUI", ""];
+        let pronoms = ["DU", "lui", ""];
 
-        if(giveawayMessage.nbOfWinner > 1){
-            pronoms = ["DES", "EUX", "(S)"];
+        if(giveawayMessage.nbOfWinners > 1){
+            pronoms = ["DES", "eux", "(S)"];
         }
 
-        for(var i = 0; i < giveawayMessage.nbOfWinner; i++){
+        for(var i = 0; i < giveawayMessage.nbOfWinners; i++){
             let rdm = Math.floor(Math.random() * (participants.length + 1));
             if(winners.includes(rdm)) continue;
             winners[i] = participants.get(rdm);
@@ -42,7 +42,7 @@ module.exports = {
         
         let resultEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
-            .setTitle(`**GAGNANT${pronoms[2]} ${pronoms[0]}${giveawayMessage.nbOfWinner}x ${giveawayMessage.gain.toUpperCase()} !**`)
+            .setTitle(`**GAGNANT${pronoms[2]} ${pronoms[0]}${giveawayMessage.nbOfWinners}x ${giveawayMessage.gain.toUpperCase()} !**`)
             .setDescription(resultDesc);
 
         message.channel.send(resultEmbed);

@@ -4,7 +4,7 @@ module.exports = {
     description: "Affiche le message du système de captcha",
     category: "superadmin",
     timeout: 0,
-    enabled: true,
+    enabled: false,
     restrictions: ["staff+"],
     aliases: ["verif"],
     run: async (bot, message, args, botEmojis) => {

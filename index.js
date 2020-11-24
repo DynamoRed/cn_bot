@@ -31,5 +31,8 @@ bot.on("guildMemberAdd", (member) => {
 bot.on("guildCreate", (g) => {
     require("./events/client/guildCreate")(bot, g);
 });
+bot.on("guildDelete", (g) => {
+    require("./events/client/guildDelete")(bot, g);
+});
 
 bot.login(process.env.TOKEN);

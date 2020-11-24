@@ -29,9 +29,9 @@ module.exports = {
             .setColor(bot.config.COLORS.BASE)
             .setTitle(`**${args[0]}x ${giveawayGain.toUpperCase()} ! ${botEmojis.SPLIFE.DARK_RP.LOGO}**`)
             .setDescription(`
-            ${bot.botEmojis.GLOBAL.BULLET} Tirage le ${giveawayEnd}
+            ${bot.botEmojis.GLOBAL.BULLET} Tirage le **${giveawayEnd}**
 
-            ${bot.botEmojis.GLOBAL.BULLET} Pour participer réagissez avec ${botEmojis.GLOBAL.GIVEAWAY} !`);
+            ${bot.botEmojis.GLOBAL.BULLET} Pour participer **réagissez** avec ${botEmojis.GLOBAL.GIVEAWAY} !`);
 
         message.channel.send(giveawayEmbed1);
         let msg = await message.channel.send(giveawayEmbed2);

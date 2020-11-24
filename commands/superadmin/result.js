@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 module.exports = {
-    name: "giveaway",
+    name: "result",
     description: "Creer un giveaway",
     category: "superadmin",
     timeout: 0,

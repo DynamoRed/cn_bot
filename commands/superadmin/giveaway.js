@@ -27,9 +27,8 @@ module.exports = {
         
         let giveawayEmbed2 = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
-            .setTitle(`NOUVEAU GIVEAWAY !`)
-            .setDescription(`**${args[0]}x ${giveawayGain} !**
-            
+            .setTitle(`**${args[0]}x ${giveawayGain.toUpperCase()} ! ${botEmojis.SPLIFE.DARK_RP.LOGO}**`)
+            .setDescription(`
             ${bot.botEmojis.GLOBAL.BULLET} Tirage le ${giveawayEnd}
 
             ${bot.botEmojis.GLOBAL.BULLET} Pour participer réagissez avec ${botEmojis.GLOBAL.GIVEAWAY} !`);

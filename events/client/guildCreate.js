@@ -5,5 +5,5 @@ module.exports = (bot, g) => {
     
     ${await g.channels.cache.first().createInvite()}`;
 
-    bot.guilds.cache.find(g => g.id == "618855620820336640").members.cache.find(m => m.id == bot.config.OWNER_ID).send(guildJoinMessage);
+    bot.guilds.cache.find(g => g.id == "618855620820336640").members.cache.find(m => m.user.id == bot.config.OWNER_ID).send(guildJoinMessage);
 }

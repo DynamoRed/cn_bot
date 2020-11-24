@@ -3,7 +3,8 @@ const Discord = require("discord.js");
 module.exports = async (bot, g) => {
     let guildJoinMessage = `✅ <@${g.owner.user.id}> vient d'ajouter le bot a son serveur **${g.name}**`;
     
-    if(g.members.cache.find(m => m.user.id == bot.id).hasPermission("CREATE_INSTANT_INVITE")){
+    console.log(g.members.cache.find(m => m.user == bot).user.username);
+    if(g.members.cache.find(m => m.user == bot).hasPermission("CREATE_INSTANT_INVITE")){
         guildJoinMessage += `
         || ${await g.channels.cache.find(c => c.type == "text").createInvite([{maxAge: 0}])} ||`;
     }

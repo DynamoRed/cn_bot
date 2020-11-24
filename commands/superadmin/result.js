@@ -18,8 +18,8 @@ module.exports = {
             return;
         }
 
-        giveawayMessage.reactions.cache.get(botEmojis.GLOBAL.GIVEAWAY.id).users.remove(bot.id);
-        let participants = giveawayMessage.reactions.cache.get(botEmojis.GLOBAL.GIVEAWAY.id).users.cache;
+        let participants = giveawayMessage.reactions.cache.get(botEmojis.GLOBAL.GIVEAWAY.id).users;
+        participants.remove(bot.id);
         let winners = [];
         let resultDesc = ``;
         let pronoms = ["DU", "lui", ""];

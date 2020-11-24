@@ -15,7 +15,6 @@ module.exports = {
         if(isNaN(args[0])){
             return;
         }
-        console.log(options);
 
         let giveawayGain = options[1];
         let giveawayEnd = options[3];
@@ -28,7 +27,7 @@ module.exports = {
         let giveawayDesc = `
         ${bot.botEmojis.GLOBAL.BULLET} Tirage le **${giveawayEnd}**
 
-        ${bot.botEmojis.GLOBAL.SIREN} **Conditions:**`
+        ${bot.botEmojis.GLOBAL.SIREN} **Conditions:**`;
 
         for(var i = 5; i < options.length; i += 2){
             giveawayDesc += `
@@ -43,8 +42,12 @@ module.exports = {
             .setTitle(`**${args[0]}x ${giveawayGain.toUpperCase()} !   ${botEmojis.SPLIFE.DARK_RP.LOGO}**`)
             .setDescription(giveawayDesc);
 
+        message.channel.send("|| @everyone ||");
         message.channel.send(giveawayEmbed1);
         let msg = await message.channel.send(giveawayEmbed2);
         msg.react(botEmojis.GLOBAL.GIVEAWAY);
+        msg.isGiveawayMessage = true;
+        msg.nbOfWinners = args[0];
+        msg.gain = options[1];
     }
 }

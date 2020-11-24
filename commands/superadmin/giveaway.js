@@ -9,14 +9,17 @@ module.exports = {
     aliases: ["gaway", "givea", "ga"],
     run: async (bot, message, args, botEmojis) => {
         let options = message.content.slice(bot.config.PREFIX.length).trim().split(`"`);
-        if(options.length < 4){
+        if(options.length < 5){
             return;
         }
         if(isNaN(args[0])){
             return;
         }
         console.log(options);
-        return;
+
+        let giveawayGain = options[1];
+        let giveawayEnd = options[3];
+
         //GIVEAWAY EMBEDS
         let giveawayEmbed1 = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)

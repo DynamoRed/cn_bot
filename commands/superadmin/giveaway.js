@@ -24,14 +24,24 @@ module.exports = {
         let giveawayEmbed1 = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setImage("https://i.imgur.com/PCqkkuN.png");
+
+        let giveawayDesc = `
+        ${bot.botEmojis.GLOBAL.BULLET} Tirage le **${giveawayEnd}**
+
+        ${bot.botEmojis.GLOBAL.SIREN} **Conditions:**`
+
+        for(var i = 5; i < options.length; i += 2){
+            giveawayDesc += `
+            - ${options[i]} !`;
+        }
+
+        giveawayDesc += `
+        - Pour participer **réagissez** avec ${botEmojis.GLOBAL.GIVEAWAY} !`;
         
         let giveawayEmbed2 = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
-            .setTitle(`**${args[0]}x ${giveawayGain.toUpperCase()} ! ${botEmojis.SPLIFE.DARK_RP.LOGO}**`)
-            .setDescription(`
-            ${bot.botEmojis.GLOBAL.BULLET} Tirage le **${giveawayEnd}**
-
-            ${bot.botEmojis.GLOBAL.BULLET} Pour participer **réagissez** avec ${botEmojis.GLOBAL.GIVEAWAY} !`);
+            .setTitle(`**${args[0]}x ${giveawayGain.toUpperCase()} !   ${botEmojis.SPLIFE.DARK_RP.LOGO}**`)
+            .setDescription(giveawayDesc);
 
         message.channel.send(giveawayEmbed1);
         let msg = await message.channel.send(giveawayEmbed2);

@@ -18,16 +18,16 @@ module.exports = {
             return;
         }
 
+        console.log(giveawayMessage.reactions.cache);
+        giveawayMessage.reactions.cache.get(botEmojis.GLOBAL.GIVEAWAY.id).users.remove(bot);
+        let participants = giveawayMessage.reactions.cache.get(botEmojis.GLOBAL.GIVEAWAY).users.cache;
+        let winners = [];
+        let resultDesc = ``;
         let pronoms = ["DU", "LUI", ""];
 
         if(giveawayMessage.nbOfWinner > 1){
             pronoms = ["DES", "EUX", "(S)"];
         }
-
-        let resultDesc = ``;
-        giveawayMessage.reactions.cache.get(botEmojis.GLOBAL.GIVEAWAY).users.remove(bot);
-        let participants = giveawayMessage.reactions.cache.get(botEmojis.GLOBAL.GIVEAWAY).users.cache;
-        let winners = [];
 
         for(var i = 0; i < giveawayMessage.nbOfWinner; i++){
             let rdm = Math.floor(Math.random() * (participants.length + 1));

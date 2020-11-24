@@ -43,7 +43,7 @@ module.exports = {
         let resultEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setTitle(`**GAGNANT${pronoms[2]} ${pronoms[0]}${giveawayMessage.nbOfWinner}x ${giveawayMessage.gain.toUpperCase()} !**`)
-            .setDescription(resultEmbed);
+            .setDescription(resultDesc);
 
         message.channel.send(resultEmbed);
     }

@@ -72,8 +72,8 @@ module.exports = async (bot, message) => {
             .setColor(bot.config.COLORS.BASE)
             .setTitle(`${lastMessage.embeds[0].title}`)
             .setDescription(`${lastMessage.embeds[0].description}
-            
-            ***Réponse: ${message.content}***`)
+
+            ${bot.botEmojis.GLOBAL.BULLET} ***Réponse: ${message.content}***`)
             .setFooter(`Type de réponse: Réponse courte`);
 
         lastMessage.edit(questionAnsweredEmbed);

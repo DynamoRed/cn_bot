@@ -15,13 +15,13 @@ module.exports = async (bot, reaction, user) => {
             return;
         }
 
-        const lastMessage = message.channel.messages.cache.last();
-        console.log(lastMessage.content);
-        if(lastMessage.content.startWith("https://")) return;
-        if(lastMessage != message){
-            reaction.users.remove(user);
-            return;
-        }
+        message.channel.messages.fetch({ limit: 1 }).then(messages => {
+            const lastMessage = messages.first();
+            if(lastMessage != message){
+                reaction.users.remove(user);
+                return;
+            }
+        }).catch(err => {console.error(err)})
     }
 
     if(message.channel.id == bot.config.I_CHANNELS.TICKETS){

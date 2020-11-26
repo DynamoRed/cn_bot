@@ -63,7 +63,7 @@ module.exports = async (bot, message) => {
         message.delete();
         
         let lastMessageIsFound = false;
-        message.channel.messages.fetch().forEach(lastMessage => {
+        message.channel.messages.cache.forEach(lastMessage => {
             if(lastMessageIsFound) return;
             if(!lastMessage.embeds[0]) return;
             if(!lastMessage.embeds[0].description || !lastMessage.embeds[0].title) return;

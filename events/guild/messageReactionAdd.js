@@ -42,6 +42,8 @@ module.exports = async (bot, reaction, user) => {
         if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
             if(message.channel.isStarted) return;
             message.channel.staffTestIsOpen = true;
+            message.channel.isStarted = true;
+            reaction.users.remove(bot.user);
             message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
             {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},
             {allow: 'SEND_MESSAGES', id: message.channel.isTested.id},
@@ -177,6 +179,11 @@ module.exports = async (bot, reaction, user) => {
                     msg.react(emojis[y]);
                     y++;
                 })
+
+                message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
+                    {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},
+                    {deny: 'SEND_MESSAGES', id: message.channel.isTested.id},
+                    {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
             }
 
             message.channel.isTested.testQuestion = 1;

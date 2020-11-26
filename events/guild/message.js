@@ -65,17 +65,21 @@ module.exports = async (bot, message) => {
         message.channel.messages.fetch({ limit: 1 }).then(messages => {
             const lastMessage = messages.first();
             if(lastMessage != message){
-                if(!lastMessage.embeds || !lastMessage.embeds.first()) return;
-                if(!lastMessage.embeds.first().description) return;
+                console.log("Answer d1")
+                if(!lastMessage.embeds[0]) return;
+                console.log("Answer d2")
+                if(!lastMessage.embeds[0].description) return;
+                console.log("Answer d3")
 
                 var questionAnsweredEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
-                    .setTitle(`${lastMessage.embeds.first().title}`)
-                    .setDescription(`${lastMessage.embeds.first().description}
+                    .setTitle(`${lastMessage.embeds[0].title}`)
+                    .setDescription(`${lastMessage.embeds[0].description}
                     ***Réponse: ${message.content}***`)
-                    .setFooter(`${lastMessage.embeds.first().footer}`)
+                    .setFooter(`${lastMessage.embeds[0].footer}`)
 
                 lastMessage.edit(questionAnsweredEmbed);
+                console.log("Answer d4")
             }
         }).catch(err => {console.error(err)})
 

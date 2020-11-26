@@ -60,20 +60,31 @@ module.exports = async (bot, message) => {
         if(message.author != message.channel.isTested) return;
         if(!message.channel.testIsStarted) return;
 
-        var answerEmbed = new Discord.MessageEmbed()
-            .setColor(bot.config.COLORS.BASE)
-            .setTitle(`Réponse N°${message.channel.isTested.testQuestion}`)
-            .setDescription(message.content)
-
-        let answerMsg = await message.channel.send(answerEmbed);
-
         message.delete();
 
-        if(message.channel.isTested.testQuestion == 1){
+        message.channel.messages.fetch({ limit: 1 }).then(messages => {
+            const lastMessage = messages.first();
+            if(lastMessage != message){
+                if(!lastMessage.embeds || !lastMessage.embeds.first()) return;
+                if(!lastMessage.embeds.first().description) return;
+
+                var questionAnsweredEmbed = new Discord.MessageEmbed()
+                    .setColor(bot.config.COLORS.BASE)
+                    .setTitle(`${lastMessage.embeds.first().title}`)
+                    .setDescription(`${lastMessage.embeds.first().description}
+                    ***Réponse: ${message.content}***`)
+                    .setFooter(`${lastMessage.embeds.first().footer}`)
+
+                lastMessage.edit(questionAnsweredEmbed);
+            }
+        }).catch(err => {console.error(err)})
+
+        if(message.channel.isTested.testQuestion == 20){
             var testEndEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
                 .setTitle(`📩 Fin de votre Test d'entrée`)
                 .setDescription(`Votre responsable de session (<@${message.channel.staffTestResp.id}>) va vous communiquer vos **résultats** sous peu.
+                
                 ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !
                 ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !`)
 
@@ -95,7 +106,7 @@ module.exports = async (bot, message) => {
         message.channel.answeredQuestions[0] = rdmNumber;
 
         let footerContent = `Type de réponse: `;
-        let descriptionContent = `${rdmQuestion.QUESTION}`;
+        let descriptionContent = `_${rdmQuestion.QUESTION}_`;
 
         if(rdmQuestion.ANSWER){
             let emojis = [bot.botEmojis.NUMBERS._1, 

@@ -117,8 +117,10 @@ module.exports = async (bot, reaction, user) => {
                 while(answeredQuestions.includes(rdmNumber)){
                     rdmNumber = Math.floor(Math.random() * (quizQuestions.length - 0 + (quizQuestions.length - 1)) + 0);
                 }
+                console.log("INT: " + rdmNumber);
                 let rdmQuestion = quizQuestions[rdmNumber];
                 answeredQuestions[i-1] = rdmNumber;
+                console.log(rdmQuestion);
 
                 let footerContent = `Type de réponse: `;
                 let descriptionContent = `**${rdmQuestion.QUESTION}**`;

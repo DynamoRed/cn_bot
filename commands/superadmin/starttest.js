@@ -20,11 +20,16 @@ module.exports = {
                 permissionOverwrites: [
                     {deny: 'VIEW_CHANNEL', id: message.guild.id},
                     {allow: 'VIEW_CHANNEL', id: mention.id},
+                    {allow: 'SEND_MESSAGES', id: mention.id},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
                 ],
             });
 
             testChannel.send(`<@${mention.id}>`);
+            testChannel.isStaffTestChannel = true;
+            testChannel.isTested = mention;
+            testChannel.isStarted = false;
+            testChannel.staffTestIsOpen = false;
 
             let staffTestEmbed1 = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
@@ -37,7 +42,7 @@ module.exports = {
                 ${bot.botEmojis.GLOBAL.BULLET} Vous avez **60** secondes par question.
                 ${bot.botEmojis.GLOBAL.BULLET} Si vous ne comprenez pas, n'hésitez pas à demander au **responsable de la session** de recrutement (<@${message.author.id}>)
                 
-                ${bot.botEmojis.GLOBAL.BULLET} Quand vous êtes prêt a commencer le test, appuyez sur ${bot.botEmojis.GLOBAL.YES} pour lancer le test.`);
+                **QUAND VOUS ÊTES PRET A COMMENCER, APPUYEZ SUR ${bot.botEmojis.GLOBAL.YES} POUR LANCER LE TEST.**`);
             
             let msg = await testChannel.send(staffTestEmbed1);
             msg.react(bot.botEmojis.GLOBAL.YES);

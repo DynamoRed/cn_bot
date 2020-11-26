@@ -24,6 +24,87 @@ module.exports = async (bot, reaction, user) => {
         }).catch(err => {console.error(err)})
     }
 
+    if(message.channel.name.startsWith("test-staff-de-")){
+        if(!message.channel.isStaffTestChannel) return;
+        if(!message.channel.isTested) return;
+
+        reaction.users.remove(user);
+
+        include("./resources/staffquiz.js");
+
+        if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
+            if(message.channel.isStarted) return;
+            message.channel.staffTestIsOpen = true;
+            message.channel.overwritePermissions([{
+                   id: message.channel.isTested.id,
+                   allow: ['SEND_MESSAGES'],
+                },], '');
+            let answeredQuestions = [];
+            for(let i = 1; i <= 20; i++){
+                let rdmNumber = Math.floor(Math.random() * (max - 0 + (quizQuestions.length - 1)) + 0);
+                while(answeredQuestions.includes(rdmNumber)){
+                    rdmNumber = Math.floor(Math.random() * (max - 0 + (quizQuestions.length - 1)) + 0);
+                }
+                let rdmQuestion = quizQuestions[rdmNumber];
+                answeredQuestions[i-1] = rdmNumber;
+
+                let footerContent = `Type de réponse: `;
+                let descriptionContent = `**${rdmQuestion.QUESTION}**`;
+
+                if(rdmQuestion.ANSWER){
+                    let emojis = [bot.botEmojis.NUMBERS._1, 
+                        bot.botEmojis.NUMBERS._2, 
+                        bot.botEmojis.NUMBERS._3, 
+                        bot.botEmojis.NUMBERS._4, 
+                        bot.botEmojis.NUMBERS._5, 
+                        bot.botEmojis.NUMBERS._6, 
+                        bot.botEmojis.NUMBERS._7, 
+                        bot.botEmojis.NUMBERS._8, 
+                        bot.botEmojis.NUMBERS._9];
+
+                    let y = 0;
+                    rdmQuestion.ANSWER.forEach(a => {
+                        descriptionContent += `
+                        
+                        ${emojis[y]} ${a}`;
+                        y++;
+                    })
+                    footerContent += `**QCM**`;
+                } else {
+                    footerContent += `**Réponse courte**`;
+                }
+
+                var questionEmbed = new Discord.MessageEmbed()
+                    .setColor(bot.config.COLORS.DENY)
+                    .setTitle(`Question N°${i}`)
+                    .setDescription(descriptionContent)
+                    .setFooter(footerContent)
+
+                let msg = await message.channel.send(questionEmbed);
+
+                if(rdmQuestion.ANSWER){
+                    let emojis = [bot.botEmojis.NUMBERS._1, 
+                        bot.botEmojis.NUMBERS._2, 
+                        bot.botEmojis.NUMBERS._3, 
+                        bot.botEmojis.NUMBERS._4, 
+                        bot.botEmojis.NUMBERS._5, 
+                        bot.botEmojis.NUMBERS._6, 
+                        bot.botEmojis.NUMBERS._7, 
+                        bot.botEmojis.NUMBERS._8, 
+                        bot.botEmojis.NUMBERS._9];
+
+                    let y = 0;
+                    rdmQuestion.ANSWER.forEach(a => {
+                        msg.react(emojis[y]);
+                        y++;
+                    })
+                }
+            }
+        } else {
+            
+        }
+    }
+
     if(message.channel.id == bot.config.I_CHANNELS.TICKETS){
         if(reaction.emoji.name == "📩"){
             if(user.isInTicket) return;

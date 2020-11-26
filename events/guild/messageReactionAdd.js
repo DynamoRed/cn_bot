@@ -122,7 +122,7 @@ module.exports = async (bot, reaction, user) => {
                 answeredQuestions[i-1] = rdmNumber;
 
                 let footerContent = `Type de réponse: `;
-                let descriptionContent = `**${rdmQuestion.QUESTION}**`;
+                let descriptionContent = `${rdmQuestion.QUESTION}`;
 
                 if(rdmQuestion.ANSWER){
                     let emojis = [bot.botEmojis.NUMBERS._1, 

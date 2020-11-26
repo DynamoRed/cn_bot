@@ -10,7 +10,7 @@ module.exports = {
     run: async (bot, message, args, botEmojis) => {
         let mentionned = message.mentions.users;
         if(!mentionned) return;
-        mentionned.forEach(mention => {
+        mentionned.forEach(async mention => {
             const guildMember = message.guild.members.cache.find(m => m.user.id === mention.id);
             const guildMemberName =  guildMember.nickname ? guildMember.nickname : guildMember.user.username;
 

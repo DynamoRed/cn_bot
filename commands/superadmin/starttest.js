@@ -9,9 +9,8 @@ module.exports = {
     aliases: [""],
     run: async (bot, message, args, botEmojis) => {
         let mentionned = message.mentions.users;
-        console.log(mentionned);
         if(!mentionned) return;
-        for(let i; i < mentionned.length; i++){
+        for(let i = 0; i < mentionned.length; i++){
             const guildMember = message.guild.members.cache.find(m => m.user.id === mentionned.get(i).id);
 
             const testChannel = await reaction.message.guild.channels.create(`test-staff-de-${mentionned.get(i).id}`,{

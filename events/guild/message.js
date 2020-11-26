@@ -66,6 +66,8 @@ module.exports = async (bot, message) => {
         message.channel.messages.cache.forEach(lastMessage => {
             if(lastMessageIsFound) return;
             lastMessage = message.channel.messages.cache.get(message.channel.messages.cache.array().length - i);
+            console.log("ARRAYL: " + message.channel.messages.cache.array().length - i)
+            console.log(lastMessage);
             i++;
             if(!lastMessage.embeds[0]) return;
             if(!lastMessage.embeds[0].description || !lastMessage.embeds[0].title) return;

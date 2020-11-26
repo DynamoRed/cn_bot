@@ -63,20 +63,17 @@ module.exports = async (bot, message) => {
         message.delete();
         message.channel.messages.fetch({ limit: 1 }).then(messages => {
             const lastMessage = messages.first();
-            console.log(lastMessage);
             if(!lastMessage.embeds[0]) return;
             if(!lastMessage.embeds[0].description) return;
-            console.log("Answer d3")
 
             var questionAnsweredEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
                 .setTitle(`${lastMessage.embeds[0].title}`)
                 .setDescription(`${lastMessage.embeds[0].description}
                 ***Réponse: ${message.content}***`)
-                .setFooter(`${lastMessage.embeds[0].footer}`)
+                .setFooter(`Type de réponse: Réponse courte`);
 
             lastMessage.edit(questionAnsweredEmbed);
-            console.log("Answer d4")
         }).catch(err => {console.error(err)}) 
 
         if(message.channel.isTested.testQuestion == 20){
@@ -106,7 +103,7 @@ module.exports = async (bot, message) => {
         message.channel.answeredQuestions[0] = rdmNumber;
 
         let footerContent = `Type de réponse: `;
-        let descriptionContent = `_${rdmQuestion.QUESTION}_`;
+        let descriptionContent = `__${rdmQuestion.QUESTION}__`;
 
         if(rdmQuestion.ANSWER){
             let emojis = [bot.botEmojis.NUMBERS._1, 

@@ -61,6 +61,7 @@ module.exports = async (bot, reaction, user) => {
                 setTimeout(() => {msg.delete()}, 5 * 1000)
                 return;
             }
+            reaction.users.remove(bot.user);
             var replyEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.DENY)
                 .setDescription(`**Fermeture du ticket dans 10 secondes !**`)

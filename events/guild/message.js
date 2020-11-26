@@ -28,7 +28,6 @@ module.exports = async (bot, message) => {
     }
 
     if(message.channel.id == bot.config.I_CHANNELS.BOOSTS){
-        console.log(message.type);
         if(message.type ==  "USER_PREMIUM_GUILD_SUBSCRIPTION"
         || message.type ==  "USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1"
         || message.type ==  "USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2"
@@ -42,6 +41,13 @@ module.exports = async (bot, message) => {
             message.channel.send(boostEmbed);
             message.delete();
             return;
+        }
+    }
+
+    if(message.channel.id == bot.config.I_CHANNELS.REUNION_VOTES){
+        if(message.content.startsWith("https://")){
+            message.react(bot.botEmojis.GLOBAL.NO);
+            message.react(bot.botEmojis.GLOBAL.YES);
         }
     }
 

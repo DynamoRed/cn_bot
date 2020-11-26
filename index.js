@@ -25,6 +25,9 @@ bot.on("message", async (message) => {
 bot.on("messageReactionAdd", (reaction, user) => {
     require("./events/guild/messageReactionAdd")(bot, reaction, user);
 });
+bot.on("messageReactionRemove", (reaction, user) => {
+    require("./events/guild/messageReactionRemove")(bot, reaction, user);
+});
 bot.on("guildMemberAdd", (member) => {
     require("./events/guild/guildMemberAdd")(bot, member);
 });

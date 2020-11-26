@@ -33,7 +33,9 @@ module.exports = async bot => {
             "BLANK_BULLET": baseGuild.emojis.cache.find(e => e.id == "779113847717363722"),
             "SUPPORT": baseGuild.emojis.cache.find(e => e.id == "779142604754911232"),
             "GIVEAWAY": baseGuild.emojis.cache.find(e => e.id == "780590636478889994"),
-            "SIREN": baseGuild.emojis.cache.find(e => e.id == "780596663646421003")
+            "SIREN": baseGuild.emojis.cache.find(e => e.id == "780596663646421003"),
+            "NO": baseGuild.emojis.cache.find(e => e.id == "781544241057890314"),
+            "YES": baseGuild.emojis.cache.find(e => e.id == "781544240890380328")
         },
         "NUMBERS": {
             "_1": baseGuild.emojis.cache.find(e => e.id == "779107503480111145"),

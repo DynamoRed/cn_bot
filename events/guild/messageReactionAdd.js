@@ -54,7 +54,7 @@ module.exports = async (bot, reaction, user) => {
                     "QUESTION": "Le bunnyHop est t-il autorisé sur le serveur ? si oui, dans quel cas ?"
                 },
                 {
-                    "QUESTION": "Définissez la règle du N.L.R ?"
+                    "QUESTION": "Rappelez-nous la règle du N.L.R ?"
                 },
                 {
                     "QUESTION": "Les licence d'arme concerne :",

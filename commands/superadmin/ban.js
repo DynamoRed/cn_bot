@@ -5,7 +5,7 @@ module.exports = {
     category: "staff",
     timeout: 10000,
     enabled: true,
-    restrictions: ["staff"],
+    restrictions: ["staff+"],
     aliases: ["bannissement"],
     run: async (bot, message, args, botEmojis) => {
         let mentionned = message.mentions.users.first();

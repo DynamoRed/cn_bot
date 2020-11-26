@@ -47,7 +47,7 @@ module.exports = async (bot, reaction, user) => {
             {allow: 'SEND_MESSAGES', id: message.channel.isTested.id},
             {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
 
-            const quizQuestions = [
+            message.channel.quizQuestions = [
                 {
                     "QUESTION": "Le bunnyHop est t-il autorisé sur le serveur ? si oui, dans quel cas ?"
                 },
@@ -119,70 +119,68 @@ module.exports = async (bot, reaction, user) => {
                 }
             ]
 
-            let answeredQuestions = [];
-            for(let i = 1; i <= 20; i++){
-                let rdmNumber = Math.floor(Math.random() * (quizQuestions.length + 1));
-                while(answeredQuestions.includes(rdmNumber)){
-                    rdmNumber = Math.floor(Math.random() * (quizQuestions.length + 1));
-                }
+            message.channel.answeredQuestions = [];
+            let rdmNumber = Math.floor(Math.random() * (message.channel.quizQuestions.length + 1));
+            let rdmQuestion = message.channel.quizQuestions[rdmNumber - 1];
+            message.channel.answeredQuestions[0] = rdmNumber;
 
-                let rdmQuestion = quizQuestions[rdmNumber - 1];
-                answeredQuestions[i-1] = rdmNumber;
+            let footerContent = `Type de réponse: `;
+            let descriptionContent = `${rdmQuestion.QUESTION}`;
 
-                let footerContent = `Type de réponse: `;
-                let descriptionContent = `${rdmQuestion.QUESTION}`;
+            if(rdmQuestion.ANSWER){
+                let emojis = [bot.botEmojis.NUMBERS._1, 
+                    bot.botEmojis.NUMBERS._2, 
+                    bot.botEmojis.NUMBERS._3, 
+                    bot.botEmojis.NUMBERS._4, 
+                    bot.botEmojis.NUMBERS._5, 
+                    bot.botEmojis.NUMBERS._6, 
+                    bot.botEmojis.NUMBERS._7, 
+                    bot.botEmojis.NUMBERS._8, 
+                    bot.botEmojis.NUMBERS._9];
 
-                if(rdmQuestion.ANSWER){
-                    let emojis = [bot.botEmojis.NUMBERS._1, 
-                        bot.botEmojis.NUMBERS._2, 
-                        bot.botEmojis.NUMBERS._3, 
-                        bot.botEmojis.NUMBERS._4, 
-                        bot.botEmojis.NUMBERS._5, 
-                        bot.botEmojis.NUMBERS._6, 
-                        bot.botEmojis.NUMBERS._7, 
-                        bot.botEmojis.NUMBERS._8, 
-                        bot.botEmojis.NUMBERS._9];
-
-                    let y = 0;
-                    rdmQuestion.ANSWER.forEach(a => {
-                        descriptionContent += `
-                        
-                        ${emojis[y]} ${a}`;
-                        y++;
-                    })
-                    footerContent += `**QCM**`;
-                } else {
-                    footerContent += `**Réponse courte**`;
-                }
-
-                var questionEmbed = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.BASE)
-                    .setTitle(`Question N°${i}`)
-                    .setDescription(descriptionContent)
-                    .setFooter(footerContent)
-
-                let msg = await message.channel.send(questionEmbed);
-
-                if(rdmQuestion.ANSWER){
-                    let emojis = [bot.botEmojis.NUMBERS._1, 
-                        bot.botEmojis.NUMBERS._2, 
-                        bot.botEmojis.NUMBERS._3, 
-                        bot.botEmojis.NUMBERS._4, 
-                        bot.botEmojis.NUMBERS._5, 
-                        bot.botEmojis.NUMBERS._6, 
-                        bot.botEmojis.NUMBERS._7, 
-                        bot.botEmojis.NUMBERS._8, 
-                        bot.botEmojis.NUMBERS._9];
-
-                    let y = 0;
-                    rdmQuestion.ANSWER.forEach(a => {
-                        msg.react(emojis[y]);
-                        y++;
-                    })
-                }
-
-                sleep(3000);
+                let y = 0;
+                rdmQuestion.ANSWER.forEach(a => {
+                    descriptionContent += `
+                    
+                    ${emojis[y]} ${a}`;
+                    y++;
+                })
+                footerContent += `QCM`;
+            } else {
+                footerContent += `Réponse courte`;
             }
+
+            var questionEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.BASE)
+                .setTitle(`Question N°${1}`)
+                .setDescription(descriptionContent)
+                .setFooter(footerContent)
+
+            let msg = await message.channel.send(questionEmbed);
+
+            message.channel.waitingAnswerType = "RC";
+
+            if(rdmQuestion.ANSWER){
+                message.channel.waitingAnswerType = "QCM";
+                let emojis = [bot.botEmojis.NUMBERS._1, 
+                    bot.botEmojis.NUMBERS._2, 
+                    bot.botEmojis.NUMBERS._3, 
+                    bot.botEmojis.NUMBERS._4, 
+                    bot.botEmojis.NUMBERS._5, 
+                    bot.botEmojis.NUMBERS._6, 
+                    bot.botEmojis.NUMBERS._7, 
+                    bot.botEmojis.NUMBERS._8, 
+                    bot.botEmojis.NUMBERS._9];
+
+                let y = 0;
+                rdmQuestion.ANSWER.forEach(a => {
+                    msg.react(emojis[y]);
+                    y++;
+                })
+            }
+
+            message.channel.isTested.testQuestion = 1;
+            message.channel.waitingAnswer = true;
         } else {
             
         }

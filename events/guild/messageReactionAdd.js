@@ -1,4 +1,6 @@
 const Discord = require("discord.js");
+require("../../resources/staffquiz.js");
+
 module.exports = async (bot, reaction, user) => {
     if(reaction.partial) await reaction.fetch();
     if(reaction.message.partial) await reaction.message.fetch();
@@ -29,8 +31,6 @@ module.exports = async (bot, reaction, user) => {
         if(!message.channel.isTested) return;
 
         reaction.users.remove(user);
-
-        require("./resources/staffquiz.js");
 
         if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
             if(message.channel.isStarted) return;

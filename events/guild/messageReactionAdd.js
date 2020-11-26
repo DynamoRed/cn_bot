@@ -34,10 +34,10 @@ module.exports = async (bot, reaction, user) => {
         if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
             if(message.channel.isStarted) return;
             message.channel.staffTestIsOpen = true;
-            message.channel.overwritePermissions([{
-                   id: message.channel.isTested.id,
-                   allow: ['SEND_MESSAGES'],
-                },], '');
+            message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
+            {allow: 'VIEW_CHANNEL', id: mention.id},
+            {allow: 'SEND_MESSAGES', id: mention.id},
+            {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
 
             const quizQuestions = [
                 {

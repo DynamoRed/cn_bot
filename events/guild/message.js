@@ -124,6 +124,8 @@ module.exports = async (bot, message) => {
             footerContent += `Réponse courte`;
         }
 
+        message.channel.isTested.testQuestion += 1;
+
         var questionEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setTitle(`Question N°${message.channel.isTested.testQuestion}`)
@@ -133,7 +135,6 @@ module.exports = async (bot, message) => {
         let msg = await message.channel.send(questionEmbed);
 
         message.channel.waitingAnswerType = "RC";
-        message.channel.isTested.testQuestion += 1;
 
         if(rdmQuestion.ANSWER){
             message.channel.waitingAnswerType = "QCM";

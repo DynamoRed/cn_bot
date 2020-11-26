@@ -68,12 +68,11 @@ module.exports = async (bot, message) => {
         if(!lastMessage.embeds[0].description || !lastMessage.embeds[0].title) return;
         if(!lastMessage.embeds[0].title.startsWith("Question N°")) return;
 
-        lastMessageIsFound = true;
-
         var questionAnsweredEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setTitle(`${lastMessage.embeds[0].title}`)
             .setDescription(`${lastMessage.embeds[0].description}
+            
             ***Réponse: ${message.content}***`)
             .setFooter(`Type de réponse: Réponse courte`);
 

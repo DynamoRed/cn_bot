@@ -30,7 +30,7 @@ module.exports = async (bot, reaction, user) => {
 
         reaction.users.remove(user);
 
-        include("./resources/staffquiz.js");
+        require("./resources/staffquiz.js");
 
         if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
             if(message.channel.isStarted) return;

@@ -61,14 +61,15 @@ module.exports = async (bot, message) => {
         if(!message.channel.testIsStarted) return;
 
         message.delete();
-        console.log("D0");
-        message.channel.messages.fetch({ limit: 1 }).then(messages => {
-            const lastMessage = messages.first();
-            console.log("DA");
+        
+        let lastMessageIsFound = false;
+        message.channel.messages.fetch().forEach(lastMessage => {
+            if(lastMessageIsFound) return;
             if(!lastMessage.embeds[0]) return;
-            console.log("DC");
-            if(!lastMessage.embeds[0].description) return;
-            console.log("DB");
+            if(!lastMessage.embeds[0].description || !lastMessage.embeds[0].title) return;
+            if(lastMessage.embeds[0].title.startsWith("Question N°"));
+
+            lastMessageIsFound = true;
 
             var questionAnsweredEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
@@ -78,7 +79,6 @@ module.exports = async (bot, message) => {
                 .setFooter(`Type de réponse: Réponse courte`);
 
             lastMessage.edit(questionAnsweredEmbed);
-            console.log("DD");
         }).catch(err => {console.error(err)}) 
 
         if(message.channel.isTested.testQuestion == 20){

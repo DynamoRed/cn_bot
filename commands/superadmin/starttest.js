@@ -6,7 +6,7 @@ module.exports = {
     timeout: 0,
     enabled: true,
     restrictions: ["staff+"],
-    aliases: [""],
+    aliases: ["st"],
     run: async (bot, message, args, botEmojis) => {
         let mentionned = message.mentions.users;
         if(!mentionned) return;

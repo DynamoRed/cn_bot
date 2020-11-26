@@ -15,7 +15,7 @@ module.exports = async (bot, reaction, user) => {
             return;
         }
 
-        message.channel.fetchMessages({ limit: 1 }).then(messages => {
+        message.channel.messages.fetch({ limit: 1 }).then(messages => {
             const lastMessage = messages.first();
             if(lastMessage.content.startWith("https://")) return;
             if(lastMessage != message){

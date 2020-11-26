@@ -14,7 +14,7 @@ module.exports = {
             const guildMember = message.guild.members.cache.find(m => m.user.id === mention.id);
             const guildMemberName =  guildMember.nickname ? guildMember.nickname : guildMember.user.username;
 
-            const testChannel = await reaction.message.guild.channels.create(`test-staff-de-${mention.id}`,{
+            const testChannel = await message.guild.channels.create(`test-staff-de-${mention.id}`,{
                 type: 'text',
                 parent: bot.config.I_CHANNELS.STAFF_TEST_CATEGORY,
                 permissionOverwrites: [

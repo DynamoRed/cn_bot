@@ -61,13 +61,15 @@ module.exports = async (bot, message) => {
         if(!message.channel.testIsStarted) return;
 
         message.delete();
-        
+        let messagesInChannelLength = 0;
+        message.channel.messages.cache.forEach(lastMessage => {
+            messagesInChannelLength++;
+        });
         let lastMessageIsFound = false;
-        let i = 1;
         message.channel.messages.cache.forEach(lastMessage => {
             if(lastMessageIsFound) return;
-            lastMessage = message.channel.messages.cache.get(message.channel.messages.cache.length - i);
-            i++;
+            lastMessage = message.channel.messages.cache.get(messagesInChannelLength - 1);
+            messagesInChannelLength--;
             if(!lastMessage.embeds[0]) return;
             if(!lastMessage.embeds[0].description || !lastMessage.embeds[0].title) return;
             if(!lastMessage.embeds[0].title.startsWith("Question N°")) return;

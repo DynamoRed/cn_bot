@@ -89,6 +89,12 @@ module.exports = async (bot, reaction, user) => {
             }        
             reaction.users.remove(bot.user);
             message.channel.ticketIsClosing = false; 
+            var replyEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.ALLOW)
+                .setDescription(`**Réouverture du ticket !**`)
+                .setFooter("Cliquez sur 🔐 pour refermer le ticket");
+            let msg = await message.channel.send(replyEmbed);
+            msg.react("🔐");
         }
     }
 }

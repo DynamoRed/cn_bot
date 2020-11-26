@@ -162,6 +162,7 @@ module.exports = async (bot, reaction, user) => {
 
             let msg = await message.channel.send(questionEmbed);
 
+            message.channel.lastQuestionEmbed = msg;
             message.channel.waitingAnswerType = "RC";
 
             if(rdmQuestion.ANSWER){

@@ -59,31 +59,25 @@ module.exports = async (bot, message) => {
         if(message.channel.waitingAnswerType != "RC") return;
         if(message.author != message.channel.isTested) return;
         if(!message.channel.testIsStarted) return;
+        if(!message.channel.lastQuestionEmbed) return;
 
         message.delete();
-        let i = 1;
-        let lastMessageIsFound = false;
-        message.channel.messages.cache.forEach(lastMessage => {
-            if(lastMessageIsFound) return;
-            lastMessage = message.channel.messages.cache.get(message.channel.messages.cache.array().length - i);
-            console.log("ARRAYL: " + message.channel.messages.cache.array().length - i)
-            console.log(lastMessage);
-            i++;
-            if(!lastMessage.embeds[0]) return;
-            if(!lastMessage.embeds[0].description || !lastMessage.embeds[0].title) return;
-            if(!lastMessage.embeds[0].title.startsWith("Question N°")) return;
 
-            lastMessageIsFound = true;
+        lastMessage = message.channel.lastQuestionEmbed;
+        if(!lastMessage.embeds[0]) return;
+        if(!lastMessage.embeds[0].description || !lastMessage.embeds[0].title) return;
+        if(!lastMessage.embeds[0].title.startsWith("Question N°")) return;
 
-            var questionAnsweredEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.BASE)
-                .setTitle(`${lastMessage.embeds[0].title}`)
-                .setDescription(`${lastMessage.embeds[0].description}
-                ***Réponse: ${message.content}***`)
-                .setFooter(`Type de réponse: Réponse courte`);
+        lastMessageIsFound = true;
 
-            lastMessage.edit(questionAnsweredEmbed);
-        }).catch(err => {console.error(err)}) 
+        var questionAnsweredEmbed = new Discord.MessageEmbed()
+            .setColor(bot.config.COLORS.BASE)
+            .setTitle(`${lastMessage.embeds[0].title}`)
+            .setDescription(`${lastMessage.embeds[0].description}
+            ***Réponse: ${message.content}***`)
+            .setFooter(`Type de réponse: Réponse courte`);
+
+        lastMessage.edit(questionAnsweredEmbed);
 
         if(message.channel.isTested.testQuestion == 20){
             var testEndEmbed = new Discord.MessageEmbed()
@@ -151,6 +145,7 @@ module.exports = async (bot, message) => {
 
         let msg = await message.channel.send(questionEmbed);
 
+        message.channel.lastQuestionEmbed = msg;
         message.channel.waitingAnswerType = "RC";
 
         if(rdmQuestion.ANSWER){

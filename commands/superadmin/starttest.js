@@ -11,6 +11,7 @@ module.exports = {
         let mentionned = message.mentions.users;
         if(!mentionned) return;
         for(let i = 0; i < mentionned.length; i++){
+            console.log(mentionned.get(i).id);
             const guildMember = message.guild.members.cache.find(m => m.user.id === mentionned.get(i).id);
 
             const testChannel = await reaction.message.guild.channels.create(`test-staff-de-${mentionned.get(i).id}`,{

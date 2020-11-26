@@ -24,9 +24,6 @@ module.exports = {
                 ],
             });
 
-            guildMember.isInStaffTest = true;
-            guildMember.staffTest.question = 0;
-
             channel.send(`<@${mention.id}>`);
 
             let staffTestEmbed1 = new Discord.MessageEmbed()

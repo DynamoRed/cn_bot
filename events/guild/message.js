@@ -52,13 +52,21 @@ module.exports = async (bot, message) => {
     }
 
     if(message.channel.name.startsWith("test-staff-de-")){
+        console.log("answer d1");
         if(!message.channel.isStaffTestChannel) return;
+        console.log("answer d2");
         if(!message.channel.isTested) return;
+        console.log("answer d3");
         if(!message.channel.quizQuestions) return;
+        console.log("answer d4");
         if(!message.channel.isTested.testQuestion) return;
+        console.log("answer d5");
         if(message.channel.waitingAnswerType != "RC") return;
+        console.log("answer d6");
         if(message.author != message.channel.isTested) return;
+        console.log("answer d7");
         if(message.channel.isStarted) return;
+        console.log("answer d8");
 
         var answerEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)

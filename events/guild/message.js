@@ -61,11 +61,10 @@ module.exports = async (bot, message) => {
         if(!message.channel.testIsStarted) return;
 
         message.delete();
-        console.log("Answer d-1");
         message.channel.messages.fetch({ limit: 1 }).then(messages => {
             const lastMessage = messages.first();
+            console.log(lastMessage.embeds);
             if(!lastMessage.embeds[0]) return;
-            console.log("Answer d2")
             if(!lastMessage.embeds[0].description) return;
             console.log("Answer d3")
 

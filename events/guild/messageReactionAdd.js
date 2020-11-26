@@ -113,9 +113,9 @@ module.exports = async (bot, reaction, user) => {
 
             let answeredQuestions = [];
             for(let i = 1; i <= 20; i++){
-                let rdmNumber = Math.floor(Math.random() * (quizQuestions.length - 0 + (quizQuestions.length - 1)) + 0);
+                let rdmNumber = Math.floor(Math.random() * (quizQuestions.length + 1));
                 while(answeredQuestions.includes(rdmNumber)){
-                    rdmNumber = Math.floor(Math.random() * (quizQuestions.length - 0 + (quizQuestions.length - 1)) + 0);
+                    rdmNumber = Math.floor(Math.random() * (quizQuestions.length + 1));
                 }
                 console.log("INT: " + rdmNumber);
                 let rdmQuestion = quizQuestions[rdmNumber];

@@ -61,11 +61,12 @@ module.exports = async (bot, message) => {
         if(!message.channel.testIsStarted) return;
 
         message.delete();
+        let i = 1;
         let lastMessageIsFound = false;
-        console.log(message.channel.messages.cache.array());
-        /*message.channel.messages.cache.forEach(lastMessage => {
+        message.channel.messages.cache.forEach(lastMessage => {
             if(lastMessageIsFound) return;
-            
+            lastMessage = message.channel.messages.cache.get(message.channel.messages.cache.array().length - i);
+            i++;
             if(!lastMessage.embeds[0]) return;
             if(!lastMessage.embeds[0].description || !lastMessage.embeds[0].title) return;
             if(!lastMessage.embeds[0].title.startsWith("Question N°")) return;
@@ -80,8 +81,7 @@ module.exports = async (bot, message) => {
                 .setFooter(`Type de réponse: Réponse courte`);
 
             lastMessage.edit(questionAnsweredEmbed);
-        }).catch(err => {console.error(err)}) */
-        return;
+        }).catch(err => {console.error(err)}) 
 
         if(message.channel.isTested.testQuestion == 20){
             var testEndEmbed = new Discord.MessageEmbed()

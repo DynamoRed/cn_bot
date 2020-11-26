@@ -81,7 +81,7 @@ module.exports = async (bot, message) => {
                 lastMessage.edit(questionAnsweredEmbed);
                 console.log("Answer d4")
             }
-        }).catch(err => {console.error(err)})
+        }).catch(err => {console.error(err)}) 
 
         if(message.channel.isTested.testQuestion == 20){
             var testEndEmbed = new Discord.MessageEmbed()

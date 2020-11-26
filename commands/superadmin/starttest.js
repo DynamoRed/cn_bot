@@ -10,16 +10,16 @@ module.exports = {
     run: async (bot, message, args, botEmojis) => {
         let mentionned = message.mentions.users;
         if(!mentionned) return;
-        for(let i = 0; i < mentionned.length; i++){
-            console.log(mentionned.get(i).id);
-            const guildMember = message.guild.members.cache.find(m => m.user.id === mentionned.get(i).id);
+        mentionned.forEach(mention => {
+            const guildMember = message.guild.members.cache.find(m => m.user.id === mention.id);
+            const guildMemberName =  guildMember.nickname ? guildMember.nickname : guildMember.user.username;
 
-            const testChannel = await reaction.message.guild.channels.create(`test-staff-de-${mentionned.get(i).id}`,{
+            const testChannel = await reaction.message.guild.channels.create(`test-staff-de-${mention.id}`,{
                 type: 'text',
                 parent: bot.config.I_CHANNELS.STAFF_TEST_CATEGORY,
                 permissionOverwrites: [
                     {deny: 'VIEW_CHANNEL', id: reaction.message.guild.id},
-                    {allow: 'VIEW_CHANNEL', id: mentionned.get(i).id},
+                    {allow: 'VIEW_CHANNEL', id: mention.id},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
                 ],
             });
@@ -27,12 +27,12 @@ module.exports = {
             guildMember.isInStaffTest = true;
             guildMember.staffTest.question = 0;
 
-            channel.send(`<@${mentionned.get(i).id}>`);
+            channel.send(`<@${mention.id}>`);
 
             let staffTestEmbed1 = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
-                .setTitle(`📋 Test d'entrée dans le Staff ${mentionned.get(i).id}`)
-                .setDescription(`<@${user.id}> Votre test d'entrée dans le staff vient de commencer !
+                .setTitle(`📋 Test d'entrée dans le Staff ${guildMemberName}`)
+                .setDescription(`<@${mention.id}> Votre test d'entrée dans le staff vient de commencer !
 
                 ${bot.botEmojis.GLOBAL.BULLET} Pour chaque question le **type de réponse** est marqué en bas de la question. ***(QCM ou Réponse écrite)***
                 ${bot.botEmojis.GLOBAL.BULLET} Si vous **éditez** un message, il sera supprimé et votre réponse vaudra **0** !
@@ -44,6 +44,6 @@ module.exports = {
             
             let msg = await channel.send(staffTestEmbed1);
             msg.react(bot.botEmojis.GLOBAL.YES);
-        }
+        });
     }
 }

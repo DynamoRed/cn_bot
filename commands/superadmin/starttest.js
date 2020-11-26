@@ -8,8 +8,8 @@ module.exports = {
     restrictions: ["staff+"],
     aliases: [""],
     run: async (bot, message, args, botEmojis) => {
-        if(args.length < 1) return;
         let mentionned = message.mentions.users;
+        console.log(mentionned);
         if(!mentionned) return;
         for(let i; i < mentionned.length; i++){
             const guildMember = message.guild.members.cache.find(m => m.user.id === mentionned.get(i).id);

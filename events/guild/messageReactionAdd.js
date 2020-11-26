@@ -42,7 +42,7 @@ module.exports = async (bot, reaction, user) => {
         if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
             if(message.channel.isStarted) return;
             message.channel.staffTestIsOpen = true;
-            message.channel.isStarted = true;
+            message.channel.testIsStarted = true;
             reaction.users.remove(bot.user);
             message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
             {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},

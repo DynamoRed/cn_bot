@@ -64,24 +64,20 @@ module.exports = async (bot, message) => {
         console.log("Answer d-1");
         message.channel.messages.fetch({ limit: 1 }).then(messages => {
             const lastMessage = messages.first();
-            console.log("Answer d0");
-            if(lastMessage != message){
-                console.log("Answer d1")
-                if(!lastMessage.embeds[0]) return;
-                console.log("Answer d2")
-                if(!lastMessage.embeds[0].description) return;
-                console.log("Answer d3")
+            if(!lastMessage.embeds[0]) return;
+            console.log("Answer d2")
+            if(!lastMessage.embeds[0].description) return;
+            console.log("Answer d3")
 
-                var questionAnsweredEmbed = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.BASE)
-                    .setTitle(`${lastMessage.embeds[0].title}`)
-                    .setDescription(`${lastMessage.embeds[0].description}
-                    ***Réponse: ${message.content}***`)
-                    .setFooter(`${lastMessage.embeds[0].footer}`)
+            var questionAnsweredEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.BASE)
+                .setTitle(`${lastMessage.embeds[0].title}`)
+                .setDescription(`${lastMessage.embeds[0].description}
+                ***Réponse: ${message.content}***`)
+                .setFooter(`${lastMessage.embeds[0].footer}`)
 
-                lastMessage.edit(questionAnsweredEmbed);
-                console.log("Answer d4")
-            }
+            lastMessage.edit(questionAnsweredEmbed);
+            console.log("Answer d4")
         }).catch(err => {console.error(err)}) 
 
         if(message.channel.isTested.testQuestion == 20){

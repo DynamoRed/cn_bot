@@ -24,7 +24,7 @@ module.exports = {
                 ],
             });
 
-            channel.send(`<@${mention.id}>`);
+            testChannel.send(`<@${mention.id}>`);
 
             let staffTestEmbed1 = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
@@ -39,7 +39,7 @@ module.exports = {
                 
                 ${bot.botEmojis.GLOBAL.BULLET} Quand vous êtes prêt a commencer le test, appuyez sur ${bot.botEmojis.GLOBAL.YES} pour lancer le test.`);
             
-            let msg = await channel.send(staffTestEmbed1);
+            let msg = await testChannel.send(staffTestEmbed1);
             msg.react(bot.botEmojis.GLOBAL.YES);
         });
     }

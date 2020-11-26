@@ -152,9 +152,11 @@ module.exports = async (bot, reaction, user) => {
                 footerContent += `Réponse courte`;
             }
 
+            message.channel.isTested.testQuestion = 1;
+
             var questionEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
-                .setTitle(`Question N°${1}`)
+                .setTitle(`Question N°${message.channel.isTested.testQuestion}`)
                 .setDescription(descriptionContent)
                 .setFooter(footerContent)
 
@@ -185,9 +187,6 @@ module.exports = async (bot, reaction, user) => {
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested.id},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
             }
-
-            message.channel.isTested.testQuestion = 1;
-            message.channel.waitingAnswer = true;
         } else {
             
         }

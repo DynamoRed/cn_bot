@@ -51,6 +51,115 @@ module.exports = async (bot, message) => {
         }
     }
 
+    if(message.channel.name.startsWith("test-staff-de-")){
+        if(!message.channel.isStaffTestChannel) return;
+        if(!message.channel.isTested) return;
+        if(!message.channel.quizQuestions) return;
+        if(!message.channel.isTested.testQuestion) return;
+        if(message.channel.waitingAnswerType != "RC") return;
+        if(message.author != message.channel.isTested) return;
+        if(message.channel.isStarted) return;
+
+        var answerEmbed = new Discord.MessageEmbed()
+            .setColor(bot.config.COLORS.BASE)
+            .setTitle(`Réponse N°${message.channel.isTested.testQuestion}`)
+            .setDescription(message.content)
+
+        let answerMsg = await message.channel.send(answerEmbed);
+
+        message.delete();
+
+        if(message.channel.isTested.testQuestion == 20){
+            var testEndEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.BASE)
+                .setTitle(`📩 Fin de votre Test d'entrée`)
+                .setDescription(`Votre responsable de session (<@${message.channel.staffTestResp.id}>) va vous communiquer vos **résultats** sous peu.
+                ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !
+                ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !`)
+
+            let endMsg = await message.channel.send(testEndEmbed);
+
+            message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
+                {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},
+                {deny: 'SEND_MESSAGES', id: message.channel.isTested.id},
+                {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
+
+            return;
+        }
+
+        let rdmNumber = Math.floor(Math.random() * (message.channel.quizQuestions.length + 1));
+        while(message.channel.answeredQuestions.includes(rdmNumber)){
+            rdmNumber = Math.floor(Math.random() * (message.channel.quizQuestions.length + 1));
+        }
+        let rdmQuestion = message.channel.quizQuestions[rdmNumber - 1];
+        message.channel.answeredQuestions[0] = rdmNumber;
+
+        let footerContent = `Type de réponse: `;
+        let descriptionContent = `${rdmQuestion.QUESTION}`;
+
+        if(rdmQuestion.ANSWER){
+            let emojis = [bot.botEmojis.NUMBERS._1, 
+                bot.botEmojis.NUMBERS._2, 
+                bot.botEmojis.NUMBERS._3, 
+                bot.botEmojis.NUMBERS._4, 
+                bot.botEmojis.NUMBERS._5, 
+                bot.botEmojis.NUMBERS._6, 
+                bot.botEmojis.NUMBERS._7, 
+                bot.botEmojis.NUMBERS._8, 
+                bot.botEmojis.NUMBERS._9];
+
+            let y = 0;
+            rdmQuestion.ANSWER.forEach(a => {
+                descriptionContent += `
+                
+                ${emojis[y]} ${a}`;
+                y++;
+            })
+            footerContent += `QCM`;
+        } else {
+            message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
+                {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},
+                {allow: 'SEND_MESSAGES', id: message.channel.isTested.id},
+                {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
+            footerContent += `Réponse courte`;
+        }
+
+        var questionEmbed = new Discord.MessageEmbed()
+            .setColor(bot.config.COLORS.BASE)
+            .setTitle(`Question N°${message.channel.isTested.testQuestion}`)
+            .setDescription(descriptionContent)
+            .setFooter(footerContent)
+
+        let msg = await message.channel.send(questionEmbed);
+
+        message.channel.waitingAnswerType = "RC";
+        message.channel.isTested.testQuestion += 1;
+
+        if(rdmQuestion.ANSWER){
+            message.channel.waitingAnswerType = "QCM";
+            let emojis = [bot.botEmojis.NUMBERS._1, 
+                bot.botEmojis.NUMBERS._2, 
+                bot.botEmojis.NUMBERS._3, 
+                bot.botEmojis.NUMBERS._4, 
+                bot.botEmojis.NUMBERS._5, 
+                bot.botEmojis.NUMBERS._6, 
+                bot.botEmojis.NUMBERS._7, 
+                bot.botEmojis.NUMBERS._8, 
+                bot.botEmojis.NUMBERS._9];
+
+            let y = 0;
+            rdmQuestion.ANSWER.forEach(a => {
+                msg.react(emojis[y]);
+                y++;
+            })
+
+            message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
+                {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},
+                {deny: 'SEND_MESSAGES', id: message.channel.isTested.id},
+                {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
+        }
+    }
+
     if(!message.content.startsWith(bot.config.PREFIX)) return;
     if(!message.guild) return;
     if(!message.member) message.member = await message.guild.fetchMember(message);

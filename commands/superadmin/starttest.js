@@ -30,6 +30,7 @@ module.exports = {
             testChannel.isTested = mention;
             testChannel.isStarted = false;
             testChannel.staffTestIsOpen = false;
+            testChannel.staffTestResp = message.author;
 
             let staffTestEmbed1 = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)

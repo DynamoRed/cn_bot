@@ -41,9 +41,9 @@ module.exports = async (bot, reaction, user) => {
                 },], '');
             let answeredQuestions = [];
             for(let i = 1; i <= 20; i++){
-                let rdmNumber = Math.floor(Math.random() * (max - 0 + (quizQuestions.length - 1)) + 0);
+                let rdmNumber = Math.floor(Math.random() * (quizQuestions.length - 0 + (quizQuestions.length - 1)) + 0);
                 while(answeredQuestions.includes(rdmNumber)){
-                    rdmNumber = Math.floor(Math.random() * (max - 0 + (quizQuestions.length - 1)) + 0);
+                    rdmNumber = Math.floor(Math.random() * (quizQuestions.length - 0 + (quizQuestions.length - 1)) + 0);
                 }
                 let rdmQuestion = quizQuestions[rdmNumber];
                 answeredQuestions[i-1] = rdmNumber;
@@ -75,7 +75,7 @@ module.exports = async (bot, reaction, user) => {
                 }
 
                 var questionEmbed = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.DENY)
+                    .setColor(bot.config.COLORS.BASE)
                     .setTitle(`Question N°${i}`)
                     .setDescription(descriptionContent)
                     .setFooter(footerContent)

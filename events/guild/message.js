@@ -63,7 +63,7 @@ module.exports = async (bot, message) => {
         message.delete();
         message.channel.messages.fetch({ limit: 1 }).then(messages => {
             const lastMessage = messages.first();
-            console.log(lastMessage.embeds);
+            console.log(lastMessage);
             if(!lastMessage.embeds[0]) return;
             if(!lastMessage.embeds[0].description) return;
             console.log("Answer d3")

@@ -62,13 +62,14 @@ module.exports = async (bot, message) => {
 
         message.delete();
         let messagesInChannelLength = 0;
-        message.channel.messages.cache.forEach(lastMessage => {
+        message.channel.messages.cache.forEach(() => {
             messagesInChannelLength++;
         });
         let lastMessageIsFound = false;
         message.channel.messages.cache.forEach(lastMessage => {
             if(lastMessageIsFound) return;
             lastMessage = message.channel.messages.cache.get(messagesInChannelLength - 1);
+            console.log(messagesInChannelLength);
             messagesInChannelLength--;
             if(!lastMessage.embeds[0]) return;
             if(!lastMessage.embeds[0].description || !lastMessage.embeds[0].title) return;

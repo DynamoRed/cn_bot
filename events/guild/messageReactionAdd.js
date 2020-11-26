@@ -15,7 +15,7 @@ module.exports = async (bot, reaction, user) => {
             return;
         }
 
-        const lastMessage = message.channel.messages.fetch({ limit: 1 }).first();
+        const lastMessage = message.channel.messages.fetch({ limit: 1 });
         if(lastMessage.content.startWith("https://")) return;
         if(lastMessage != message){
             reaction.users.remove(user);

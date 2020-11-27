@@ -98,9 +98,8 @@ module.exports = async (bot, message) => {
 
             message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
                 {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},
-                {deny: 'SEND_MESSAGES', id: message.channel.isTested.id},
+                {deny: ['ADD_REACTIONS','SEND_MESSAGES'], id: message.channel.isTested.id},
                 {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
-                {deny: 'ADD_REACTIONS', id: message.channel.isTested.id},
                 {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
 
             message.channel.staffTestIsOpen = false;
@@ -140,10 +139,9 @@ module.exports = async (bot, message) => {
             footerContent += `QCM`;
         } else {
             message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
-                {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},
-                {allow: 'SEND_MESSAGES', id: message.channel.isTested.id},
-                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
+                {allow: ['VIEW_CHANNEL','SEND_MESSAGES'], id: message.channel.isTested.id},
                 {deny: 'ADD_REACTIONS', id: message.channel.isTested.id},
+                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
                 {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
             footerContent += `Réponse courte`;
         }
@@ -182,9 +180,8 @@ module.exports = async (bot, message) => {
 
             message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
                 {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},
-                {deny: 'SEND_MESSAGES', id: message.channel.isTested.id},
+                {deny: ['ADD_REACTIONS','SEND_MESSAGES'], id: message.channel.isTested.id},
                 {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
-                {deny: 'ADD_REACTIONS', id: message.channel.isTested.id},
                 {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
         }
     }

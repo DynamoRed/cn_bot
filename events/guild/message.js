@@ -90,11 +90,14 @@ module.exports = async (bot, message) => {
 
             let endMsg = await message.channel.send(testEndEmbed);
             
-            message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
-                {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},
-                {deny: ['ADD_REACTIONS','SEND_MESSAGES'], id: message.channel.isTested.id},
-                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
-                {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
+            message.channel.overwritePermissions([
+                {deny: 'VIEW_CHANNEL', id: message.guild.id},
+                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+            ], '');
 
             message.channel.staffTestIsOpen = false;
             message.channel.testIsStarted = false;
@@ -131,11 +134,14 @@ module.exports = async (bot, message) => {
             })
             footerContent += `QCM`;
         } else {
-            message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
-                {allow: ['VIEW_CHANNEL','SEND_MESSAGES'], id: message.channel.isTested.id},
-                {deny: 'ADD_REACTIONS', id: message.channel.isTested.id},
-                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
-                {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
+            message.channel.overwritePermissions([
+                {deny: 'VIEW_CHANNEL', id: message.guild.id},
+                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                {allow: 'SEND_MESSAGES', id: message.channel.isTested},
+                {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+            ], '');
             footerContent += `Réponse courte`;
         }
 
@@ -171,11 +177,14 @@ module.exports = async (bot, message) => {
                 y++;
             })
 
-            message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
-                {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},
-                {deny: ['ADD_REACTIONS','SEND_MESSAGES'], id: message.channel.isTested.id},
-                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
-                {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
+            message.channel.overwritePermissions([
+                {deny: 'VIEW_CHANNEL', id: message.guild.id},
+                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+            ], '');
         }
     }
 

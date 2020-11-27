@@ -226,7 +226,7 @@ module.exports = async (bot, reaction, user) => {
             if(!message.embeds[0].title) return;
             console.log("AG");
             if(!message.embeds[0].title.startsWith("Question N°")) return;
-            console.log("AH");
+            console.log("AH"); 
 
             message.channel.testStaffResult++;
             message.reactions.removeAll();

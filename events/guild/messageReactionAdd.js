@@ -168,6 +168,7 @@ module.exports = async (bot, reaction, user) => {
 
             if(rdmQuestion.ANSWER){
                 message.channel.waitingAnswerType = "QCM";
+                message.channel.lastQuestionEmbed.answer = rdmQuestion.ANSWER;
                 let emojis = [bot.botEmojis.NUMBERS._1, 
                     bot.botEmojis.NUMBERS._2, 
                     bot.botEmojis.NUMBERS._3, 
@@ -191,21 +192,15 @@ module.exports = async (bot, reaction, user) => {
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
             }
         } else {
-            console.log("AA");
             if(!message.channel.quizQuestions) return;
-            console.log("AB");
             if(!message.channel.isTested.testQuestion) return;
-            console.log("AC");
             if(message.channel.waitingAnswerType != "QCM") return;
-            console.log("AD");
             if(user != message.channel.isTested) return;
-            console.log("AE");
             if(!message.channel.testIsStarted) return;
-            console.log("AF");
             if(!message.channel.lastQuestionEmbed) return;
-            console.log("AG");
-            let answer = reaction.emoji.name.replace('_','');
+            if(!message.channel.lastQuestionEmbed.answer) return;
 
+            let answer = reaction.emoji.name.replace('_','');
             message.reactions.removeAll();
 
             lastMessage = message.channel.lastQuestionEmbed;
@@ -213,14 +208,14 @@ module.exports = async (bot, reaction, user) => {
             if(!lastMessage.embeds[0].description || !lastMessage.embeds[0].title) return;
             if(!lastMessage.embeds[0].title.startsWith("Question N°")) return;
 
-            let answerDescription = lastMessage.embeds[0].description.split(/\n*\n/);
+            let answerDescription = `${lastMessage.embeds[0].description}
+            
+            ✅ ***Réponse: ${message.channel.lastQuestionEmbed.answer[answer - 1]}***`;
 
-            console.log(answer + " VS " + answerDescription);
-
-            /*var questionAnsweredEmbed = new Discord.MessageEmbed()
+            var questionAnsweredEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
                 .setTitle(`${lastMessage.embeds[0].title}`)
-                .setDescription(`${}`)
+                .setDescription(`${answerDescription}`)
                 .setFooter(`Type de réponse: QCM`);
 
             lastMessage.edit(questionAnsweredEmbed);
@@ -296,6 +291,7 @@ module.exports = async (bot, reaction, user) => {
 
             if(rdmQuestion.ANSWER){
                 message.channel.waitingAnswerType = "QCM";
+                message.channel.lastQuestionEmbed.answer = rdmQuestion.ANSWER;
                 let emojis = [bot.botEmojis.NUMBERS._1, 
                     bot.botEmojis.NUMBERS._2, 
                     bot.botEmojis.NUMBERS._3, 
@@ -317,7 +313,6 @@ module.exports = async (bot, reaction, user) => {
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested.id},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
             }
-            */
         }
     }
 

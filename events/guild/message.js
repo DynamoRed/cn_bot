@@ -151,6 +151,7 @@ module.exports = async (bot, message) => {
 
         if(rdmQuestion.ANSWER){
             message.channel.waitingAnswerType = "QCM";
+            message.channel.lastQuestionEmbed.answer = rdmQuestion.ANSWER;
             let emojis = [bot.botEmojis.NUMBERS._1, 
                 bot.botEmojis.NUMBERS._2, 
                 bot.botEmojis.NUMBERS._3, 

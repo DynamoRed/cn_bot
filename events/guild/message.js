@@ -82,14 +82,13 @@ module.exports = async (bot, message) => {
         if(message.channel.isTested.testQuestion == message.channel.testTotalQuestions){
             var testEndEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
-                .setTitle(`📩 Fin de votre Test d'entrée`)
+                .setTitle(`📩  Fin de votre Test d'entrée`)
                 .setDescription(`Votre responsable de session (<@${message.channel.staffTestResp.id}>) va vous communiquer vos **résultats** sous peu.
                 
                 ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !
                 ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !`);
 
             let endMsg = await message.channel.send(testEndEmbed);
-            endMsg.react(`${bot.botEmojis.GLOBAL.TEAM}`);
             
             message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
                 {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},

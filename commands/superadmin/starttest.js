@@ -38,7 +38,7 @@ module.exports = {
                 .setDescription(`${bot.botEmojis.GLOBAL.BULLET} Pour chaque question le **type de réponse** est marqué en bas de la question. ***(QCM ou Réponse écrite)***
                 ${bot.botEmojis.GLOBAL.BULLET} Si vous **éditez** un message, il sera supprimé et votre réponse vaudra **0** !
                 ${bot.botEmojis.GLOBAL.BULLET} Vous ne pouvez envoyer **qu'UN seul** message pour les réponses écrites, pensez donc a bien vous **relire avant** d'envoyer votre réponse !
-                ${bot.botEmojis.GLOBAL.BULLET} Vous avez **60** secondes par question.
+                ${bot.botEmojis.GLOBAL.BULLET} Vous avez **20** minutes pour faire ce test.
                 ${bot.botEmojis.GLOBAL.BULLET} Si vous ne comprenez pas, n'hésitez pas à demander au **responsable de la session** de recrutement (<@${message.author.id}>)
                 
                 **QUAND VOUS ÊTES PRET A COMMENCER, APPUYEZ SUR ${bot.botEmojis.GLOBAL.VERIFIED} POUR LANCER LE TEST.**`);

@@ -86,9 +86,15 @@ module.exports = async (bot, message) => {
                 .setDescription(`Votre responsable de session (<@${message.channel.staffTestResp.id}>) va vous communiquer vos **résultats** sous peu.
                 
                 ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !
-                ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !`)
+                ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !
+                
+                ***Reservé au responsable de session:***
+                ${bot.botEmojis.GLOBAL.TEAM} *Pour mettre en place le système de correction*
+                ${bot.botEmojis.GLOBAL.VERIFIED} *Pour obtenir le resultat final du test*`)
 
             let endMsg = await message.channel.send(testEndEmbed);
+            endMsg.react(`${bot.botEmojis.GLOBAL.TEAM}`);
+            endMsg.react(`${bot.botEmojis.GLOBAL.VERIFIED}`);
 
             message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
                 {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},

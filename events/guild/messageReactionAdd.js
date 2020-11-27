@@ -200,11 +200,39 @@ module.exports = async (bot, reaction, user) => {
                     {deny: 'ADD_REACTIONS', id: message.channel.isTested.id},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
             }
+        } else if(reaction.emoji == bot.botEmojis.GLOBAL.TEAM){
+            if(message.channel.testIsStarted) return;
+            if(!message.channel.staffTestResp) return;
+            if(user != message.channel.staffTestResp) return;
+            if(!message.channel.testStaffResult) return;
+            if(!message.embeds) return;
+            if(!message.embeds[0].title) return;
+            if(!message.embeds[0].title.startsWith("Question N°")) return;
+
+            message.channels.messages.cache.forEach(m => {
+                if(!m.embeds) return;
+                if(!m.embeds[0].title) return;
+                if(!m.embeds[0].title.startsWith("📩 Fin")) return;
+                m.react(bot.botEmojis.GLOBAL.YES);
+                m.react(bot.botEmojis.GLOBAL.NO);
+            });
+    
+            var replyEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.ALLOW)
+                .setDescription(`Début de la correction par <@${message.channel.staffTestResp.id}>...`);
+            let msg = await message.channel.send(replyEmbed);
+            msg.react(`${bot.botEmojis.GLOBAL.VERIFIED}`);
+
+            message.channel.testStaffResult = 0;
+
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
             if(message.channel.testIsStarted) return;
             if(!message.channel.staffTestResp) return;
             if(user != message.channel.staffTestResp) return;
             if(!message.channel.testStaffResult) return;
+            if(!message.embeds) return;
+            if(!message.embeds[0].title) return;
+            if(!message.embeds[0].title.startsWith("Question N°")) return;
 
             message.channel.testStaffResult++;
             message.reactions.removeAll();
@@ -214,6 +242,9 @@ module.exports = async (bot, reaction, user) => {
             if(!message.channel.staffTestResp) return;
             if(user != message.channel.staffTestResp) return;
             if(!message.channel.testStaffResult) return;
+            if(!message.embeds) return;
+            if(!message.embeds[0].title) return;
+            if(!message.embeds[0].title.startsWith("Question N°")) return;
 
             message.reactions.removeAll();
             
@@ -253,9 +284,15 @@ module.exports = async (bot, reaction, user) => {
                     .setDescription(`Votre responsable de session (<@${message.channel.staffTestResp.id}>) va vous communiquer vos **résultats** sous peu.
                     
                     ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !
-                    ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !`)
+                    ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !
+                    
+                    ***Reservé au responsable de session:***
+                    ${bot.botEmojis.GLOBAL.TEAM} *Pour mettre en place le système de correction*
+                    ${bot.botEmojis.GLOBAL.VERIFIED} *Pour obtenir le resultat final du test*`)
 
                 let endMsg = await message.channel.send(testEndEmbed);
+                endMsg.react(`${bot.botEmojis.GLOBAL.TEAM}`);
+                endMsg.react(`${bot.botEmojis.GLOBAL.VERIFIED}`);
 
                 message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},

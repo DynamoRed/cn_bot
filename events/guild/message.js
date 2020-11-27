@@ -79,7 +79,7 @@ module.exports = async (bot, message) => {
 
         lastMessage.edit(questionAnsweredEmbed);
 
-        if(message.channel.isTested.testQuestion == 20){
+        if(message.channel.isTested.testQuestion == 5){
             var testEndEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
                 .setTitle(`📩 Fin de votre Test d'entrée`)

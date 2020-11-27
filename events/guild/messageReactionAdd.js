@@ -201,6 +201,7 @@ module.exports = async (bot, reaction, user) => {
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
             }
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.TEAM){
+            console.log("AA");
             if(message.channel.testIsStarted) return;
             if(!message.channel.staffTestResp) return;
             if(user != message.channel.staffTestResp) return;
@@ -208,7 +209,7 @@ module.exports = async (bot, reaction, user) => {
             if(!message.embeds) return;
             if(!message.embeds[0].title) return;
             if(!message.embeds[0].title.startsWith("Question N°")) return;
-
+            console.log("AB");
             message.channels.messages.cache.forEach(m => {
                 if(!m.embeds) return;
                 if(!m.embeds[0].title) return;
@@ -216,13 +217,13 @@ module.exports = async (bot, reaction, user) => {
                 m.react(bot.botEmojis.GLOBAL.YES);
                 m.react(bot.botEmojis.GLOBAL.NO);
             });
-    
+            console.log("AC");
             var replyEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.ALLOW)
                 .setDescription(`Début de la correction par <@${message.channel.staffTestResp.id}>...`);
             let msg = await message.channel.send(replyEmbed);
             msg.react(`${bot.botEmojis.GLOBAL.VERIFIED}`);
-
+            console.log("AD");
             message.channel.testStaffResult = 0;
 
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
@@ -277,7 +278,7 @@ module.exports = async (bot, reaction, user) => {
 
             lastMessage.edit(questionAnsweredEmbed);
 
-            if(message.channel.isTested.testQuestion == 20){
+            if(message.channel.isTested.testQuestion == 5){
                 var testEndEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
                     .setTitle(`📩 Fin de votre Test d'entrée`)

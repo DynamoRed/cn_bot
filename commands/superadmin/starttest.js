@@ -20,7 +20,7 @@ module.exports = {
             });
 
             testChannel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
-                {allow: 'VIEW_CHANNEL', id: mention.id},
+                {allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY'], id: mention.id},
                 {deny: 'SEND_MESSAGES', id: mention.id},
                 {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
                 {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');

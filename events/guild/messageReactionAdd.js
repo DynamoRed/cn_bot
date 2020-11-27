@@ -286,7 +286,7 @@ module.exports = async (bot, reaction, user) => {
                 let endMsg = await message.channel.send(testEndEmbed);
                 endMsg.react(`${bot.botEmojis.GLOBAL.TEAM}`);
 
-                message.channels.messages.cache.forEach(m => {
+                message.channel.messages.cache.forEach(m => {
                     if(!m.embeds) return;
                     if(!m.embeds[0].title) return;
                     if(!m.embeds[0].title.startsWith("Question N°")) return;

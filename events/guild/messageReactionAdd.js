@@ -198,7 +198,7 @@ module.exports = async (bot, reaction, user) => {
             console.log("AC");
             if(message.channel.waitingAnswerType != "QCM") return;
             console.log("AD");
-            if(message.author != message.channel.isTested) return;
+            if(user != message.channel.isTested) return;
             console.log("AE");
             if(!message.channel.testIsStarted) return;
             console.log("AF");

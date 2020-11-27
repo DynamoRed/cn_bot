@@ -89,12 +89,18 @@ module.exports = async (bot, message) => {
                 ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !
                 
                 ***Reservé au responsable de session:***
-                ${bot.botEmojis.GLOBAL.TEAM} *Pour mettre en place le système de correction*
-                ${bot.botEmojis.GLOBAL.VERIFIED} *Pour obtenir le resultat final du test*`)
+                ${bot.botEmojis.GLOBAL.TEAM} *Pour obtenir le resultat final du test après correction*`)
 
             let endMsg = await message.channel.send(testEndEmbed);
             endMsg.react(`${bot.botEmojis.GLOBAL.TEAM}`);
-            endMsg.react(`${bot.botEmojis.GLOBAL.VERIFIED}`);
+
+            message.channels.messages.cache.forEach(m => {
+                if(!m.embeds) return;
+                if(!m.embeds[0].title) return;
+                if(!m.embeds[0].title.startsWith("Question N°")) return;
+                m.react(bot.botEmojis.GLOBAL.YES);
+                m.react(bot.botEmojis.GLOBAL.NO);
+            });
 
             message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
                 {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},

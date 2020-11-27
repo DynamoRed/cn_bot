@@ -162,6 +162,7 @@ module.exports = async (bot, reaction, user) => {
             }
 
             message.channel.isTested.testQuestion = 1;
+            message.channel.testStaffResult = 0;
 
             var questionEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
@@ -203,25 +204,11 @@ module.exports = async (bot, reaction, user) => {
             if(!message.channel.staffTestResp) return;
             if(user != message.channel.staffTestResp) return;
             if(!message.channel.testStaffResult) return;
-            if(!message.embeds) return;
-            if(!message.embeds[0].title) return;
-            if(!message.embeds[0].title.startsWith("📩 Fin")) return;
-            console.log("AB");
-            message.channels.messages.cache.forEach(m => {
-                if(!m.embeds) return;
-                if(!m.embeds[0].title) return;
-                if(!m.embeds[0].title.startsWith("Question N°")) return;
-                m.react(bot.botEmojis.GLOBAL.YES);
-                m.react(bot.botEmojis.GLOBAL.NO);
-            });
-            console.log("AC");
+
             var replyEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.ALLOW)
-                .setDescription(`Début de la correction par <@${message.channel.staffTestResp.id}>...`);
-            let msg = await message.channel.send(replyEmbed);
-            msg.react(`${bot.botEmojis.GLOBAL.VERIFIED}`);
-            console.log("AD VS" + message.embeds[0].title);
-            message.channel.testStaffResult = 0;
+                .setDescription(`Note Finale: ${message.channel.testStaffResult}`);
+            message.channel.send(replyEmbed);
 
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
             if(message.channel.testIsStarted) return;
@@ -285,12 +272,18 @@ module.exports = async (bot, reaction, user) => {
                     ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !
                     
                     ***Reservé au responsable de session:***
-                    ${bot.botEmojis.GLOBAL.TEAM} *Pour mettre en place le système de correction*
-                    ${bot.botEmojis.GLOBAL.VERIFIED} *Pour obtenir le resultat final du test*`)
+                    ${bot.botEmojis.GLOBAL.TEAM} *Pour obtenir le resultat final du test après correction*`)
 
                 let endMsg = await message.channel.send(testEndEmbed);
                 endMsg.react(`${bot.botEmojis.GLOBAL.TEAM}`);
-                endMsg.react(`${bot.botEmojis.GLOBAL.VERIFIED}`);
+
+                message.channels.messages.cache.forEach(m => {
+                    if(!m.embeds) return;
+                    if(!m.embeds[0].title) return;
+                    if(!m.embeds[0].title.startsWith("Question N°")) return;
+                    m.react(bot.botEmojis.GLOBAL.YES);
+                    m.react(bot.botEmojis.GLOBAL.NO);
+                });
 
                 message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},

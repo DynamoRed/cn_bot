@@ -191,13 +191,19 @@ module.exports = async (bot, reaction, user) => {
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
             }
         } else {
+            console.log("AA");
             if(!message.channel.quizQuestions) return;
+            console.log("AB");
             if(!message.channel.isTested.testQuestion) return;
+            console.log("AC");
             if(message.channel.waitingAnswerType != "QCM") return;
+            console.log("AD");
             if(message.author != message.channel.isTested) return;
+            console.log("AE");
             if(!message.channel.testIsStarted) return;
+            console.log("AF");
             if(!message.channel.lastQuestionEmbed) return;
-
+            console.log("AG");
             let answer = reaction.emoji.name.replace('_','');
 
             message.reactions.removeAll();

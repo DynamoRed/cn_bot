@@ -14,25 +14,23 @@ module.exports = {
             const guildMember = message.guild.members.cache.find(m => m.user.id === mention.id);
             const guildMemberName =  guildMember.nickname ? guildMember.nickname : guildMember.user.username;
 
-            const testChannel = await message.guild.channels.create(`test-staff-de-${mention.id}`,{
-                type: 'text',
-                parent: bot.config.I_CHANNELS.STAFF_TEST_CATEGORY
-            });
-
-            testChannel.overwritePermissions([
+            message.guild.channels.get(bot.config.I_CHANNELS.STAFF_TEST_CATEGORY).overwritePermissions([
                 {
                    id: mention.id,
                    allow: ['VIEW_CHANNEL'],
                 },
-                {
-                    id: message.guild.id,
-                    deny: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
-                },
-                {
-                    id: bot.config.I_ROLES.SUPERADMIN,
-                    allow: ['VIEW_CHANNEL'],
-                },
-              ], 'Needed to change permissions');
+            ], 'Needed to change permissions');
+
+            const testChannel = await message.guild.channels.create(`test-staff-de-${mention.id}`,{
+                type: 'text',
+                parent: bot.config.I_CHANNELS.STAFF_TEST_CATEGORY,
+                permissionOverwrites: [
+                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
+                    {allow: 'VIEW_CHANNEL', id: mention.id},
+                    {deny: ['SEND_MESSAGES', 'ADD_REACTIONS'], id: mention.id},
+                    {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                ],
+            });
 
             testChannel.send(`<@${mention.id}>`);
             testChannel.isStaffTestChannel = true;

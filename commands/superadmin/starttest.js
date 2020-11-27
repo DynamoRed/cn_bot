@@ -19,11 +19,20 @@ module.exports = {
                 parent: bot.config.I_CHANNELS.STAFF_TEST_CATEGORY
             });
 
-            testChannel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
-                {deny: 'SEND_MESSAGES', id: mention.id},
-                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
-                {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
-                {allow: 'VIEW_CHANNEL', id: mention.id}], '');
+            testChannel.overwritePermissions([
+                {
+                   id: mention.id,
+                   allow: ['VIEW_CHANNEL'],
+                },
+                {
+                    id: message.guild.id,
+                    deny: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
+                },
+                {
+                    id: bot.config.I_ROLES.SUPERADMIN,
+                    allow: ['VIEW_CHANNEL'],
+                },
+              ], 'Needed to change permissions');
 
             testChannel.send(`<@${mention.id}>`);
             testChannel.isStaffTestChannel = true;

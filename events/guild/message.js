@@ -52,6 +52,7 @@ module.exports = async (bot, message) => {
     }
 
     if(message.channel.name.startsWith("test-staff-de-")){
+        if(message.content.startsWith(bot.config.PREFIX)) return;
         if(!message.channel.isStaffTestChannel) return;
         if(!message.channel.isTested) return;
         if(!message.channel.quizQuestions) return;

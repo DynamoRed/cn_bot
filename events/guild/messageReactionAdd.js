@@ -211,13 +211,22 @@ module.exports = async (bot, reaction, user) => {
             message.channel.send(replyEmbed);
 
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
+            console.log(message.embeds[0].title);
+            console.log("AA");
             if(message.channel.testIsStarted) return;
+            console.log("AB");
             if(!message.channel.staffTestResp) return;
+            console.log("AC");
             if(user != message.channel.staffTestResp) return;
+            console.log("AD");
             if(!message.channel.testStaffResult) return;
+            console.log("AE");
             if(!message.embeds) return;
+            console.log("AF");
             if(!message.embeds[0].title) return;
+            console.log("AG");
             if(!message.embeds[0].title.startsWith("Question N°")) return;
+            console.log("AH");
 
             message.channel.testStaffResult++;
             message.reactions.removeAll();

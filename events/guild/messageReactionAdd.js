@@ -200,19 +200,17 @@ module.exports = async (bot, reaction, user) => {
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
             }
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.TEAM){
-            console.log("AA" + message.channel.testIsStarted);
-            if(message.channel.testIsStarted) return;
             if(!message.channel.staffTestResp) return;
             if(user != message.channel.staffTestResp) return;
             if(!message.channel.testStaffResult) return;
             if(!message.embeds) return;
             if(!message.embeds[0].title) return;
-            if(!message.embeds[0].title.startsWith("Question N°")) return;
+            if(!message.embeds[0].title.startsWith("📩 Fin")) return;
             console.log("AB");
             message.channels.messages.cache.forEach(m => {
                 if(!m.embeds) return;
                 if(!m.embeds[0].title) return;
-                if(!m.embeds[0].title.startsWith("📩 Fin")) return;
+                if(!m.embeds[0].title.startsWith("Question N°")) return;
                 m.react(bot.botEmojis.GLOBAL.YES);
                 m.react(bot.botEmojis.GLOBAL.NO);
             });

@@ -14,7 +14,7 @@ module.exports = {
             const guildMember = message.guild.members.cache.find(m => m.user.id === mention.id);
             const guildMemberName =  guildMember.nickname ? guildMember.nickname : guildMember.user.username;
 
-            message.guild.channels.get(bot.config.I_CHANNELS.STAFF_TEST_CATEGORY).overwritePermissions([
+            message.guild.channels.cache.get(bot.config.I_CHANNELS.STAFF_TEST_CATEGORY).overwritePermissions([
                 {
                    id: mention.id,
                    allow: ['VIEW_CHANNEL'],

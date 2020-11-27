@@ -238,7 +238,7 @@ module.exports = async (bot, reaction, user) => {
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested.id},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
 
-                return;
+                return; 
             }
 
             let rdmNumber = Math.floor((Math.random() * (message.channel.quizQuestions.length - 1)) + 0);

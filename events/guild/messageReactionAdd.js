@@ -193,7 +193,7 @@ module.exports = async (bot, reaction, user) => {
         } else {
             if(!message.channel.quizQuestions) return;
             if(!message.channel.isTested.testQuestion) return;
-            if(message.channel.waitingAnswerType != "RC") return;
+            if(message.channel.waitingAnswerType != "QCM") return;
             if(message.author != message.channel.isTested) return;
             if(!message.channel.testIsStarted) return;
             if(!message.channel.lastQuestionEmbed) return;

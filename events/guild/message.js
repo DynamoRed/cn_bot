@@ -98,6 +98,7 @@ module.exports = async (bot, message) => {
         }
 
         let rdmNumber = Math.floor(Math.random() * (message.channel.quizQuestions.length + 1));
+        console.log(rdmNumber + " VS " + message.channel.answeredQuestions);
         while(message.channel.answeredQuestions.includes(rdmNumber)){
             rdmNumber = Math.floor(Math.random() * (message.channel.quizQuestions.length + 1));
         }

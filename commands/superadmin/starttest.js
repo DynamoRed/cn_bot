@@ -18,6 +18,7 @@ module.exports = {
                 type: 'text',
                 parent: bot.config.I_CHANNELS.STAFF_TEST_CATEGORY,
                 permissionOverwrites: [
+                    {deny: 'SEND_MESSAGES', id: mention.id},
                     {deny: 'VIEW_CHANNEL', id: message.guild.id},
                     {allow: 'VIEW_CHANNEL', id: mention.id},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},

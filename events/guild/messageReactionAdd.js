@@ -44,14 +44,6 @@ module.exports = async (bot, reaction, user) => {
             message.channel.staffTestIsOpen = true;
             message.channel.testIsStarted = true;
             reaction.users.remove(bot.user);
-            message.channel.overwritePermissions([
-                {deny: 'VIEW_CHANNEL', id: message.guild.id},
-                {deny: 'ADD_REACTIONS', id: message.channel.isTested},
-                {allow: 'SEND_MESSAGES', id: message.channel.isTested},
-                {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
-                {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
-            ], '');
-
             message.channel.quizQuestions = [
                 {
                     "QUESTION": "Le BunnyHop est t-il autorisé sur le serveur ? Si oui, dans quels cas ?"
@@ -246,8 +238,8 @@ module.exports = async (bot, reaction, user) => {
                 message.channel.overwritePermissions([
                     {deny: 'VIEW_CHANNEL', id: message.guild.id},
                     {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
-                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
                 ], '');
@@ -290,8 +282,8 @@ module.exports = async (bot, reaction, user) => {
                 message.channel.overwritePermissions([
                     {deny: 'VIEW_CHANNEL', id: message.guild.id},
                     {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
-                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
                     {allow: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
                 ], '');
@@ -333,8 +325,8 @@ module.exports = async (bot, reaction, user) => {
                 message.channel.overwritePermissions([
                     {deny: 'VIEW_CHANNEL', id: message.guild.id},
                     {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
-                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
                 ], '');

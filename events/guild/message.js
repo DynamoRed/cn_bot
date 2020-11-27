@@ -98,12 +98,11 @@ module.exports = async (bot, message) => {
         }
 
         let rdmNumber = Math.floor(Math.random() * (message.channel.quizQuestions.length + 1));
-        console.log(rdmNumber + " VS " + message.channel.answeredQuestions);
         while(message.channel.answeredQuestions.includes(rdmNumber)){
             rdmNumber = Math.floor(Math.random() * (message.channel.quizQuestions.length + 1));
         }
         let rdmQuestion = message.channel.quizQuestions[rdmNumber - 1];
-        message.channel.answeredQuestions[0] = rdmNumber;
+        message.channel.answeredQuestions[message.channel.isTested.testQuestion] = rdmNumber;
 
         let footerContent = `Type de réponse: `;
         let descriptionContent = `__${rdmQuestion.QUESTION}__`;

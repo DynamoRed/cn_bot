@@ -39,7 +39,7 @@ module.exports = async (bot, reaction, user) => {
 
         reaction.users.remove(user);
 
-        if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
+        if(reaction.emoji == bot.botEmojis.GLOBAL.VERIFIED){
             if(message.channel.isStarted) return;
             message.channel.staffTestIsOpen = true;
             message.channel.testIsStarted = true;
@@ -200,6 +200,23 @@ module.exports = async (bot, reaction, user) => {
                     {deny: 'ADD_REACTIONS', id: message.channel.isTested.id},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
             }
+        } else if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
+            if(message.channel.testIsStarted) return;
+            if(!message.channel.staffTestResp) return;
+            if(user != message.channel.staffTestResp) return;
+            if(!message.channel.testStaffResult) return;
+
+            message.channel.testStaffResult++;
+            message.reactions.removeAll();
+
+        } else if(reaction.emoji == bot.botEmojis.GLOBAL.NO){
+            if(message.channel.testIsStarted) return;
+            if(!message.channel.staffTestResp) return;
+            if(user != message.channel.staffTestResp) return;
+            if(!message.channel.testStaffResult) return;
+
+            message.reactions.removeAll();
+            
         } else {
             if(!message.channel.quizQuestions) return;
             if(!message.channel.isTested.testQuestion) return;
@@ -247,6 +264,8 @@ module.exports = async (bot, reaction, user) => {
                     {deny: 'ADD_REACTIONS', id: message.channel.isTested.id},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
 
+                message.channel.staffTestIsOpen = false;
+                message.channel.testIsStarted = false;
                 return; 
             }
 

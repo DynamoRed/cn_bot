@@ -35,7 +35,8 @@ module.exports = async bot => {
             "GIVEAWAY": baseGuild.emojis.cache.find(e => e.id == "780590636478889994"),
             "SIREN": baseGuild.emojis.cache.find(e => e.id == "780596663646421003"),
             "NO": baseGuild.emojis.cache.find(e => e.id == "781544241057890314"),
-            "YES": baseGuild.emojis.cache.find(e => e.id == "781544240890380328")
+            "YES": baseGuild.emojis.cache.find(e => e.id == "781544240890380328"),
+            "VERIFIED": baseGuild.emojis.cache.find(e => e.id == "779430348521996329")
         },
         "NUMBERS": {
             "_1": baseGuild.emojis.cache.find(e => e.id == "779107503480111145"),

@@ -96,6 +96,9 @@ module.exports = async (bot, message) => {
                 {deny: 'ADD_REACTIONS', id: message.channel.isTested.id},
                 {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
 
+            message.channel.staffTestIsOpen = false;
+            message.channel.testIsStarted = false;
+
             return;
         }
 

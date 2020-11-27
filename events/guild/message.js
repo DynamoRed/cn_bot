@@ -99,11 +99,11 @@ module.exports = async (bot, message) => {
             return;
         }
 
-        let rdmNumber = Math.floor(Math.random() * (message.channel.quizQuestions.length + 1));
+        let rdmNumber = Math.floor((Math.random() * (message.channel.quizQuestions.length - 1)) + 0);
         while(message.channel.answeredQuestions.includes(rdmNumber)){
-            rdmNumber = Math.floor(Math.random() * (message.channel.quizQuestions.length + 1));
+            rdmNumber = Math.floor((Math.random() * (message.channel.quizQuestions.length - 1)) + 0);
         }
-        let rdmQuestion = message.channel.quizQuestions[rdmNumber - 1];
+        let rdmQuestion = message.channel.quizQuestions[rdmNumber];
         message.channel.answeredQuestions[message.channel.isTested.testQuestion] = rdmNumber;
 
         let footerContent = `Type de réponse: `;

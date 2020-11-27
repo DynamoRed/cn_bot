@@ -20,7 +20,7 @@ module.exports = {
                 permissionOverwrites: [
                     {deny: 'VIEW_CHANNEL', id: message.guild.id},
                     {allow: 'VIEW_CHANNEL', id: mention.id},
-                    {deny: 'SEND_MESSAGES', id: mention.id},
+                    {deny: ['SEND_MESSAGES', 'ADD_REACTIONS'], id: mention.id},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
                 ],
             });

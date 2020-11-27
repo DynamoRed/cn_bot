@@ -16,14 +16,14 @@ module.exports = {
 
             const testChannel = await message.guild.channels.create(`test-staff-de-${mention.id}`,{
                 type: 'text',
-                parent: bot.config.I_CHANNELS.STAFF_TEST_CATEGORY,
-                permissionOverwrites: [
-                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
-                    {allow: 'VIEW_CHANNEL', id: mention.id},
-                    {deny: ['SEND_MESSAGES', 'ADD_REACTIONS'], id: mention.id},
-                    {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
-                ],
+                parent: bot.config.I_CHANNELS.STAFF_TEST_CATEGORY
             });
+
+            testChannel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
+                {allow: 'VIEW_CHANNEL', id: mention.id},
+                {deny: 'SEND_MESSAGES', id: mention.id},
+                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
+                {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
 
             testChannel.send(`<@${mention.id}>`);
             testChannel.isStaffTestChannel = true;

@@ -213,7 +213,9 @@ module.exports = async (bot, reaction, user) => {
             if(!lastMessage.embeds[0].description || !lastMessage.embeds[0].title) return;
             if(!lastMessage.embeds[0].title.startsWith("Question N°")) return;
 
-            let answerDescription = lastMessage.embeds[0].description.split(`\n\n\n`);
+            let answerDescription = lastMessage.embeds[0].description.split(`
+            
+            `);
 
             console.log(answer + " VS " + answerDescription);
 

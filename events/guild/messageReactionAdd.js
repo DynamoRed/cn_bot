@@ -162,7 +162,7 @@ module.exports = async (bot, reaction, user) => {
             }
 
             message.channel.isTested.testQuestion = 1;
-            message.channel.testStaffResult = 0;
+            message.channel.testTotalQuestions = 20;
 
             var questionEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
@@ -229,7 +229,7 @@ module.exports = async (bot, reaction, user) => {
 
             lastMessage.edit(questionAnsweredEmbed);
 
-            if(message.channel.isTested.testQuestion == 5){
+            if(message.channel.isTested.testQuestion == message.channel.testTotalQuestions){
                 var testEndEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
                     .setTitle(`📩 Fin de votre Test d'entrée`)

@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: "kick",
     description: "Ejecter un membre du serveur",
-    category: "staff",
+    category: "superadmin",
     timeout: 10000,
     enabled: true,
     restrictions: ["staff+"],

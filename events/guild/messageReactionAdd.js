@@ -200,48 +200,6 @@ module.exports = async (bot, reaction, user) => {
                     {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
             }
-        } else if(reaction.emoji == bot.botEmojis.GLOBAL.TEAM){
-            if(!message.channel.staffTestResp) return;
-            if(user != message.channel.staffTestResp) return;
-            if(!message.channel.testStaffResult) return;
-
-            var replyEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.ALLOW)
-                .setDescription(`Note Finale: ${message.channel.testStaffResult}`);
-            message.channel.send(replyEmbed);
-
-        } else if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
-            console.log(message.embeds[0].title);
-            console.log("AA");
-            if(message.channel.testIsStarted) return;
-            console.log("AB");
-            if(!message.channel.staffTestResp) return;
-            console.log("AC");
-            if(user != message.channel.staffTestResp) return;
-            console.log("AD");
-            if(!message.channel.testStaffResult) return;
-            console.log("AE");
-            if(!message.embeds) return;
-            console.log("AF");
-            if(!message.embeds[0].title) return;
-            console.log("AG");
-            if(!message.embeds[0].title.startsWith("Question N°")) return;
-            console.log("AH"); 
-
-            message.channel.testStaffResult++;
-            message.reactions.removeAll();
-
-        } else if(reaction.emoji == bot.botEmojis.GLOBAL.NO){
-            if(message.channel.testIsStarted) return;
-            if(!message.channel.staffTestResp) return;
-            if(user != message.channel.staffTestResp) return;
-            if(!message.channel.testStaffResult) return;
-            if(!message.embeds) return;
-            if(!message.embeds[0].title) return;
-            if(!message.embeds[0].title.startsWith("Question N°")) return;
-
-            message.reactions.removeAll();
-            
         } else {
             if(!message.channel.quizQuestions) return;
             if(!message.channel.isTested.testQuestion) return;
@@ -278,21 +236,10 @@ module.exports = async (bot, reaction, user) => {
                     .setDescription(`Votre responsable de session (<@${message.channel.staffTestResp.id}>) va vous communiquer vos **résultats** sous peu.
                     
                     ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !
-                    ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !
-                    
-                    ***Reservé au responsable de session:***
-                    ${bot.botEmojis.GLOBAL.TEAM} *Pour obtenir le resultat final du test après correction*`)
+                    ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !`)
 
                 let endMsg = await message.channel.send(testEndEmbed);
                 endMsg.react(`${bot.botEmojis.GLOBAL.TEAM}`);
-
-                message.channel.messages.cache.forEach(m => {
-                    if(!m.embeds) return;
-                    if(!m.embeds[0].title) return;
-                    if(!m.embeds[0].title.startsWith("Question N°")) return;
-                    m.react(bot.botEmojis.GLOBAL.YES);
-                    m.react(bot.botEmojis.GLOBAL.NO);
-                });
 
                 message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},

@@ -104,7 +104,6 @@ module.exports = async (bot, message) => {
 
             message.channel.staffTestIsOpen = false;
             message.channel.testIsStarted = false;
-
             return;
         }
 

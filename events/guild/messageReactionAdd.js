@@ -200,7 +200,7 @@ module.exports = async (bot, reaction, user) => {
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
             }
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.TEAM){
-            console.log("AA");
+            console.log("AA" + message.channel.testIsStarted);
             if(message.channel.testIsStarted) return;
             if(!message.channel.staffTestResp) return;
             if(user != message.channel.staffTestResp) return;

@@ -56,7 +56,7 @@ module.exports = async (bot, reaction, user) => {
                     "QUESTION": "Le BunnyHop est t-il autorisé sur le serveur ? Si oui, dans quels cas ?"
                 },
                 {
-                    "QUESTION": "Rappelez-nous la règle du N.L.R ?"
+                    "QUESTION": "Rappelez-nous la règle du N.L.R. ?"
                 },
                 {
                     "QUESTION": "Les licence d'arme concerne :",
@@ -69,7 +69,10 @@ module.exports = async (bot, reaction, user) => {
                     "QUESTION": "Qu'est ce que le \"Use Button\" ?"
                 },
                 {
-                    "QUESTION": "Definissez le Props-Climb:"
+                    "QUESTION": "Rappelez-nous le temps d'attente a respecter entre deux C.A.P. ?"
+                },
+                {
+                    "QUESTION": "Definissez-nous le PropsClimb:"
                 },
                 {
                     "QUESTION": "Les insultes parentales sont autorisées sur le serveur.",
@@ -97,6 +100,10 @@ module.exports = async (bot, reaction, user) => {
                 },
                 {
                     "QUESTION": "Donnez-nous les armes auxquelles a le droit le cuisinier:",
+                    "ANSWER": ["Pistolets", "Snipers", "PM", "Fusil à pompe", "Aucune des réponses ci-dessus"]
+                },
+                {
+                    "QUESTION": "Donnez-nous les armes auxquelles a le droit le SDF:",
                     "ANSWER": ["Pistolets", "Snipers", "PM", "Fusil à pompe", "Aucune des réponses ci-dessus"]
                 },
                 {
@@ -212,7 +219,7 @@ module.exports = async (bot, reaction, user) => {
 
             let answerDescription = `${lastMessage.embeds[0].description}
             
-            ✅ ***Réponse: ${message.channel.lastQuestionEmbed.answer[answer - 1]}***`;
+            ${bot.botEmojis.GLOBAL.BULLET} ***Réponse: ${message.channel.lastQuestionEmbed.answer[answer - 1]}***`;
 
             var questionAnsweredEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
@@ -236,6 +243,8 @@ module.exports = async (bot, reaction, user) => {
                 message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested.id},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested.id},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
 
                 return; 
@@ -274,6 +283,8 @@ module.exports = async (bot, reaction, user) => {
                 message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},
                     {allow: 'SEND_MESSAGES', id: message.channel.isTested.id},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested.id},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
                 footerContent += `Réponse courte`;
             }
@@ -313,6 +324,8 @@ module.exports = async (bot, reaction, user) => {
                 message.channel.overwritePermissions([{deny: 'VIEW_CHANNEL', id: message.guild.id},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested.id},
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested.id},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested.id},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},], '');
             }
         }

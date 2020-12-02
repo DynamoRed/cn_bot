@@ -28,10 +28,10 @@ module.exports = {
             ${botEmojis.GLOBAL.BULLET} __Un pack **Bronze** !__ _(15€)_
 
             :envelope_with_arrow: **TIRAGE AU SORT DU GAGNANT**:
-            ${botEmojis.GLOBAL.BULLET} _Le 25 décembre 2020__
+            ${botEmojis.GLOBAL.BULLET} __Le 25 décembre 2020__
 
             ${botEmojis.GLOBAL.SIREN} **SEULE CONDITION**: 
-            _Ajouter nôtre bot a votre serveur Discord !_ [En cliquant simplement ici](https://discord.com/oauth2/authorize?client_id=778266786130165791&scope=bot&permissions=125953)
+            __Ajouter nôtre bot a votre serveur Discord !__ [En cliquant simplement ici](https://discord.com/oauth2/authorize?client_id=778266786130165791&scope=bot&permissions=125953)
 
             **PS**: _Si vous ajoutez notre bot sur 2 serveurs vous aurez 2x plus de chance de gagner et ainsi de suite..._
             ${botEmojis.GLOBAL.TEAM} **Notre équipe vous souhaite de joyeuses fêtes !**`));   

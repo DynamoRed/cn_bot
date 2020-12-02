@@ -5,7 +5,8 @@
     "PREFIX": "!",
     "OWNER_ID": "324956349353951232",
     "COLORS": {
-        "BASE": "#F28E26",
+        "BASE": "#ff6262",
+        "SAVEBASE": "#F28E26",
         "DENY": "#FF5430",
         "ALLOW": "#79D033"
     },

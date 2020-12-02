@@ -19,7 +19,7 @@ module.exports = {
         let rdmEmoji = xmasEmojis[randomNumber(0, xmasEmojis.length - 1)];
         let name = m.nickname ? m.nickname : m.user.username;
         lastXmasEmojis.forEach(le => {
-            name = name.startsWith(le) ? name.slice(2) : name;
+            name = name.startsWith(le + " ") ? name.slice((le + " ").length) : name;
         });
         m.edit({
             nick: `${rdmEmoji} ${name}`

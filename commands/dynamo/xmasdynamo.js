@@ -26,7 +26,7 @@ module.exports = {
 
         message.guild.members.cache.forEach(m => {
             if (!m.roles.cache.find(r => r.name === "Staff")) return;
-            let xmasEmojis = ["🎄","🎅","⛄"];
+            let xmasEmojis = ["🎄","🎅","⛄", "🎁"];
             let lastXmasEmojis = ["🎄","🎅","❄️","🎁","⛄"];
             let rdmEmoji = xmasEmojis[randomNumber(0, xmasEmojis.length - 1)];
             let name = m.nickname ? m.nickname : m.user.username;

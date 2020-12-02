@@ -4,7 +4,7 @@ module.exports = async (bot, g) => {
 
     let ownerList = new Discord.Collection();
 
-    bot.guilds.forEach(g => {
+    bot.guilds.cache.forEach(g => {
         if(ownerList.get(g.owner.id)) {
             ownerList.set(g.owner.id, ownerList.get(g.owner.id) + 1);
         } else {

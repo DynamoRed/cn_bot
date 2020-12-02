@@ -27,7 +27,7 @@ module.exports = async (bot, message) => {
         return;
     }
 
-    if(message.channel.id == bot.config.I_CHANNELS.BOOSTS){
+    /*if(message.channel.id == bot.config.I_CHANNELS.BOOSTS){
         if(message.type ==  "USER_PREMIUM_GUILD_SUBSCRIPTION"
         || message.type ==  "USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1"
         || message.type ==  "USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2"
@@ -42,7 +42,7 @@ module.exports = async (bot, message) => {
             message.delete();
             return;
         }
-    }
+    }*/
 
     if(message.channel.id == bot.config.I_CHANNELS.REUNION_VOTES){
         if(message.content.startsWith("https://")){

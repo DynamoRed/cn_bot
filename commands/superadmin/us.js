@@ -28,7 +28,7 @@ module.exports = {
             ${botEmojis.SOCIAL_NETWORK.YOUTUBE} __Youtube__: [Cliquez ici](https://www.youtube.com/channel/UCqf4CqxojIcwekxP_J65ETg)
             :family: __Système de Familles Officielles__: [Cliquez ici](https://sites.google.com/view/splife-garrys-mod/famille-officiel?authuser=0)
             :shopping_cart: __Boutique__: [Cliquez ici](https://www.splife.fr/)
-            :clipboard: __Forum__: [Cliquez ici](https://www.splifecommunity.mtxserv.com)`);
+            :clipboard: __Forum__: [Cliquez ici](https://splifecommunity.mtxserv.com/index.php)`);
 
         message.channel.send(usEmbed1);
         message.channel.send(usEmbed2);

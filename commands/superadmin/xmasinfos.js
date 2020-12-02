@@ -24,9 +24,9 @@ module.exports = {
 
             ${botEmojis.GLOBAL.BULLET} On vous a prévu des giveaways **exclusifs** pour vous combler de bonheur ***(Surtout pour nos VIP, VIP+, Premiums et nos Boosters car ils nous soutiennent tous les joueurs ces petits veinards !)***
             
-            ${botEmojis.GLOBAL.BULLET} On a aussi mis a votre disposition la commande ***!xmas*** pour que vous aussi vous ayez dans le style Noël ! 😎
+            ${botEmojis.GLOBAL.BULLET} On a aussi mis a votre disposition la commande ***!xmas*** pour que vous aussi vous ayez un pseudo dans le style Noël ! 😎
 
-            ${botEmojis.GLOBAL.BULLET} Preparez vous a voir des **événements spécial** Noël directement sur le serveur (Merci a nos <@${bot.config.I_ROLES.ANIMS}> pour ça)
+            ${botEmojis.GLOBAL.BULLET} Preparez vous a voir des **événements spécial** Noël directement sur le serveur (Merci a nos <@&${bot.config.I_ROLES.ANIMS}> pour ça)
             
 
             *Pour bien commencer ce mois de décembre et pour les plus rapides:* ||CODE DE REDUCTION SUR LA BOUTIQUE||

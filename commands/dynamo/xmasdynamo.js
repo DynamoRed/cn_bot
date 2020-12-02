@@ -29,10 +29,10 @@ module.exports = {
             let xmasEmojis = ["🎄","🎅","⛄","🎄","🎅","⛄", "🎁"];
             let lastXmasEmojis = ["🎄","🎅","❄️","🎁","⛄"];
             let rdmEmoji = xmasEmojis[randomNumber(0, xmasEmojis.length - 1)];
-            if(m.user.id == "403234325715353613") rdmEmoji = 6;
+            if(m.user.id == "403234325715353613") rdmEmoji = "🎁";
             let name = m.nickname ? m.nickname : m.user.username;
             lastXmasEmojis.forEach(le => {
-                name = name.startsWith(le) ? name.slice(2) : name;
+                name = name.startsWith(le + " ") || name.startsWith("6 ") ? name.slice((le + " ").length) : name;
             });
             m.edit({
                 nick: `${rdmEmoji} ${name}`

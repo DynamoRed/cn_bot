@@ -9,6 +9,10 @@ module.exports = async (bot, reaction, user) => {
 
     if(user.bot) return; 
 
+    if(message.guild.id != "693198481086480544" && message.guild.id != "618855620820336640"){
+        return;
+    }
+
     if(message.channel.id == bot.config.I_CHANNELS.REUNION_VOTES){
         if(!message.content.startsWith("https://")) return;
         message.channel.messages.fetch({ limit: 1 }).then(messages => {

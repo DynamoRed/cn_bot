@@ -18,6 +18,10 @@ module.exports = async (bot, reaction, user) => {
 
     if(user.bot) return; 
 
+    if(message.guild.id != "693198481086480544" && message.guild.id != "618855620820336640"){
+        return;
+    }
+
     if(message.channel.id == bot.config.I_CHANNELS.REUNION_VOTES){
         if(reaction.emoji != bot.botEmojis.GLOBAL.YES && reaction.emoji != bot.botEmojis.GLOBAL.NO){
             reaction.users.remove(user);

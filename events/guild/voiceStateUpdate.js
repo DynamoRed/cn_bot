@@ -3,6 +3,10 @@ const ownsChannels = new Map();
 module.exports = (bot, oldMember, newMember) => {
     let newUserChannel = newMember.voiceChannel
     let oldUserChannel = oldMember.voiceChannel
+
+    if(newUserChannel.guild.id != "693198481086480544" && newUserChannel.guild.id != "618855620820336640"){
+        return;
+    }
   
     if(newUserChannel !== undefined) {
        if(newUserChannel.id == bot.config.I_CHANNELS.CREATE_CHANNEL){

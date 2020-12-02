@@ -52,6 +52,10 @@ module.exports = async (bot, message) => {
     }
 
     if(message.channel.name.startsWith("test-staff-de-")){
+        if(message.guild.id != "693198481086480544" && message.guild.id != "618855620820336640"){
+            return;
+        }
+
         if(message.content.startsWith(bot.config.PREFIX)) return;
         if(!message.channel.isStaffTestChannel) return;
         if(!message.channel.isTested) return;

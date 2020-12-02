@@ -70,6 +70,6 @@ module.exports = async bot => {
             ownerList.set(g.owner.id, 1)
         }
     }) 
-
+ 
     console.log("Initialization finished !");
 }

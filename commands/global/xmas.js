@@ -24,5 +24,11 @@ module.exports = {
         m.edit({
             nick: `${rdmEmoji} ${name}`
         }, "XMas Deco");
+
+        let logEmbed = new Discord.MessageEmbed()
+            .setAuthor(message.author.username, message.author.avatarURL())
+            .setColor(bot.config.COLORS.BASE)
+            .setDescription(`<@${message.author.id}> a utilisé la commande **!xmas** dans <#${message.channel.id}>`);
+        message.guild.channels.cache.find(c => c.id == bot.config.I_CHANNELS.LOGS).send(logEmbed);
     }
 }

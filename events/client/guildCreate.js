@@ -13,7 +13,7 @@ module.exports = async (bot, g) => {
         }
     }) 
 
-    if(ownerList.get(g.owner.id) > 25){
+    if(ownerList.get(g.owner.id) > 5){
         var replyEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.DENY)
             .setDescription(`<@${message.author.id}> **vous avez atteint le nombre maximal de participations possibles au giveaway de Noël !**`)

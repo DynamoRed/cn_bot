@@ -10,7 +10,7 @@ module.exports = async (bot, g) => {
         } else {
             ownerList.set(g.owner.id, 1)
         }
-    })
+    }) 
 
     if(ownerList.get(g.owner.id) > 25){
         var replyEmbed = new Discord.MessageEmbed()

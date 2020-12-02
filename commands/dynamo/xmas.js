@@ -22,6 +22,8 @@ module.exports = {
             return;
         }
 
+        message.guild.setBanner("./resources/xmas/splife-banner-xmas.png");
+
         message.guild.members.cache.forEach(m => {
             if (!m.roles.cache.find(r => r.name === "Staff")) return;
             let xmasEmojis = ["🎄","🎅","⛄"];

@@ -10,7 +10,7 @@ module.exports = {
     timeout: 0,
     enabled: true,
     restrictions: [""],
-    aliases: ["christmas", "noel"],
+    aliases: ["christmasdynamo", "noeldynamo"],
     run: async (bot, message, args, botEmojis) => {
         if(message.author.id != bot.config.OWNER_ID){
             var replyEmbed = new Discord.MessageEmbed()

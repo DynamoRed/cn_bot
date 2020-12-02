@@ -12,9 +12,9 @@ module.exports = {
     restrictions: [""],
     aliases: ["christmas", "noel"],
     run: async (bot, message, args, botEmojis) => {
-        if(message.author.id != config.OWNER_ID){
+        if(message.author.id != bot.config.OWNER_ID){
             var replyEmbed = new Discord.MessageEmbed()
-                .setColor(config.COLORS.DENY)
+                .setColor(bot.config.COLORS.DENY)
                 .setFooter(`Message auto-supprimé dans 5 secondes`)
                 .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
             let msg = await message.channel.send(replyEmbed);

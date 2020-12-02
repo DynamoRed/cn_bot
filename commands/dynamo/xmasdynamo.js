@@ -4,7 +4,7 @@ function randomNumber(min, max) {
 }
 
 module.exports = {
-    name: "xmas",
+    name: "xmasdynamo",
     description: "XMas Mode on Discord",
     category: "dynamo",
     timeout: 0,

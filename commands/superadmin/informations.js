@@ -27,11 +27,11 @@ module.exports = {
             :link: **Utilitaires:**
             
             ${botEmojis.SOCIAL_NETWORK.DISCORD} __Discord__: [Cliquez ici](https://discord.gg/WqsPx3J)
-            ${botEmojis.SOCIAL_NETWORK.STEAM} __Groupe Steam__: [Cliquez ici](https://www.steamcommunity.com/)
             ${botEmojis.SOCIAL_NETWORK.TOP_SERVEUR} __Top-Serveur__: [Cliquez ici](https://top-serveurs.net/garrys-mod/vote/splife)
             ${botEmojis.SOCIAL_NETWORK.YOUTUBE} __Youtube__: [Cliquez ici](https://www.youtube.com/channel/UCqf4CqxojIcwekxP_J65ETg)
             :family: __Système de Familles Officielles__: [Cliquez ici](https://sites.google.com/view/splife-garrys-mod/famille-officiel?authuser=0)
             :shopping_cart: __Boutique__: [Cliquez ici](https://www.splife.fr/)
+            :clipboard: __Forum__: [Cliquez ici](https://www.splifecommunity.mtxserv.com)
             
             ${botEmojis.GLOBAL.TEAM} **Notre équipe vous souhaite la bienvenue !**`));
 
@@ -67,7 +67,7 @@ module.exports = {
             ${botEmojis.SPLIFE.DARK_RP.LOGO} **Notre serveur DarkRP:**
                 ${botEmojis.GLOBAL.BULLET} **Discord**: [Cliquez ici](https://discord.gg/WqsPx3J)
                 ${botEmojis.GLOBAL.BULLET} **Collection Steam**: [Cliquez ici](https://steamcommunity.com/sharedfiles/filedetails/?id=2190229711)
-                ${botEmojis.GLOBAL.BULLET} **IP**: 144.76.199.67
+                ${botEmojis.GLOBAL.BULLET} **IP**: 217.182.189.56
                 ${botEmojis.GLOBAL.BULLET} **Carte de Jeu**: rp_rockford_v2b
 
             ${botEmojis.SPLIFE.PRISON_RP.LOGO} **Notre serveur PrisonRP:**

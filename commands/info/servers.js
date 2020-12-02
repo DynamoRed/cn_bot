@@ -23,7 +23,7 @@ module.exports = {
             ${botEmojis.SPLIFE.DARK_RP.LOGO} **Notre serveur DarkRP:**
                 ${botEmojis.GLOBAL.BULLET} **Discord**: [Cliquez ici](https://discord.gg/WqsPx3J)
                 ${botEmojis.GLOBAL.BULLET} **Collection Steam**: [Cliquez ici](https://steamcommunity.com/sharedfiles/filedetails/?id=2190229711)
-                ${botEmojis.GLOBAL.BULLET} **IP**: 144.76.199.67
+                ${botEmojis.GLOBAL.BULLET} **IP**: 217.182.189.56
                 ${botEmojis.GLOBAL.BULLET} **Carte de Jeu**: rp_rockford_v2b
 
             ${botEmojis.SPLIFE.PRISON_RP.LOGO} **Notre serveur PrisonRP:**

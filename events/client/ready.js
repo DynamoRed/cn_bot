@@ -12,7 +12,8 @@ module.exports = async bot => {
     bot.botEmojis = {
         "SPLIFE": {
             "DARK_RP": {
-                "LOGO": baseGuild.emojis.cache.find(e => e.id == "779090508395315241")
+                "LOGO": baseGuild.emojis.cache.find(e => e.id == "779090508395315241"),
+                "XMAS_LOGO": baseGuild.emojis.cache.find(e => e.id == "783514983836942376")
             },
             "PRISON_RP": {
                 "LOGO": baseGuild.emojis.cache.find(e => e.id == "779090505333604372")

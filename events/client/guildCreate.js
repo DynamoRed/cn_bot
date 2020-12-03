@@ -19,7 +19,7 @@ module.exports = async (bot, g) => {
     if(ownerList.get(g.owner.id) > 2 || g.memberCount < 3){
         var replyEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.DENY)
-            .setDescription(`<@${g.owner.id}> **vous avez atteint le nombre maximal de participations possibles au giveaway de Noël !**`)
+            .setDescription(`<@${g.owner.id}> **notre bot n'a pas pu etre ajouté a votre serveur. Soit vous avez atteints le nombre maximal de participation soit il n'y a pas assez de membres dans votre serveur discord !**`)
         let msg = await g.owner.send(replyEmbed);
         g.leave();
         return;

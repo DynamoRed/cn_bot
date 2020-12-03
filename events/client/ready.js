@@ -64,7 +64,7 @@ module.exports = async bot => {
     bot.guilds.cache.forEach(g => {
         if(ownerList.get(g.owner.id)) {
             ownerList.set(g.owner.id, ownerList.get(g.owner.id) + 1);
-            if(ownerList.get(g.owner.id) > 5){
+            if(ownerList.get(g.owner.id) > 2){
                 g.leave();
             }
         } else {

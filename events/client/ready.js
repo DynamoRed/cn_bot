@@ -78,9 +78,9 @@ module.exports = async bot => {
     }) 
 
     let table = new ascii("Guilds");
-    table.setHeading("Guild", "Guild ID", "Owner", "Owner ID");
+    table.setHeading("Guild", "Guild ID", "Members Size", "Owner", "Owner ID");
     bot.guilds.cache.forEach(g => {
-        table.addRow(g.name, g.id, g.owner.user.username + "#" + g.owner.user.tag, g.owner.user.id);
+        table.addRow(g.name, g.id, g.members.cache.length, g.owner.user.tag, g.owner.user.id);
     });
     console.log(table.toString());
  

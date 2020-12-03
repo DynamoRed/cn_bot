@@ -75,7 +75,7 @@ module.exports = async bot => {
         } else {
             ownerList.set(g.owner.id, 1)
         }
-    }) 
+    })  
 
     let table = new ascii("Guilds");
     table.setHeading("Guild", "Guild ID", "Members Size", "Owner", "Owner ID");

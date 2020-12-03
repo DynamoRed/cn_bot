@@ -80,7 +80,7 @@ module.exports = async bot => {
     let table = new ascii("Guilds");
     table.setHeading("Guild", "Guild ID", "Owner", "Owner ID");
     bot.guilds.cache.forEach(g => {
-        table.addRow(g.name, g.id, g.owner, g.owner.id);
+        table.addRow(g.name, g.id, g.owner.username + "#" + g.owner.tag, g.owner.id);
     });
     console.log(table.toString());
  

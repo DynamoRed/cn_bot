@@ -64,6 +64,7 @@ module.exports = async bot => {
     bot.guilds.cache.forEach(g => {
         if(g.owner.id == bot.config.OWNER_ID) return;
         if(g.owner.id == "255751273540747265") return;
+        if(g.id == "779628862115938354") return;
         if(ownerList.get(g.owner.id)) {
             ownerList.set(g.owner.id, ownerList.get(g.owner.id) + 1);
             if(ownerList.get(g.owner.id) > 2){

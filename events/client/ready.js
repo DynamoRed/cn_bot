@@ -1,4 +1,6 @@
 const Discord = require('discord.js');
+const ascii = require('ascii-table');
+
 module.exports = async bot => {
     let indexActivities = 0;
 
@@ -74,6 +76,13 @@ module.exports = async bot => {
             ownerList.set(g.owner.id, 1)
         }
     }) 
+
+    let table = new ascii("Guilds");
+    table.setHeading("Guild", "Guild ID", "Owner", "Owner ID");
+    bot.guilds.cache.forEach(g => {
+        table.addRow(g.name, g.id, g.owner, g.owner.id);
+    });
+    console.log(table.toString());
  
     console.log("Initialization finished !");
 }

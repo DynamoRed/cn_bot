@@ -205,12 +205,15 @@ module.exports = async (bot, reaction, user) => {
 
             message.channel.messages.cache.forEach(qM => {
                 if(!qM.embeds) return;
+                if(!qM.embeds[0]) return;
                 if(!qM.embeds[0].title) return;
                 if(!qM.embeds[0].title.startsWith("Question N°")) return;
 
                 qM.react(bot.botEmojis.GLOBAL.YES);
                 qM.react(bot.botEmojis.GLOBAL.NO);
             });
+
+            message.reactions.removeAll();
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
             if(message.channel.isStarted) return;
 

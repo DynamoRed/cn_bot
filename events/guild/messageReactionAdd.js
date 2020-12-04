@@ -202,6 +202,7 @@ module.exports = async (bot, reaction, user) => {
         
         } else if(reaction.emoji.name == "🖊️"){
             if(message.channel.isStarted) return;
+            if(user != message.channel.staffTestResp) return;
 
             message.channel.messages.cache.forEach(qM => {
                 if(!qM.embeds) return;
@@ -216,9 +217,27 @@ module.exports = async (bot, reaction, user) => {
             message.reactions.removeAll();
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
             if(message.channel.isStarted) return;
+            if(user != message.channel.staffTestResp) return;
 
-            if(!message.channel.finalScore) message.channel.finalScore = 1
+            if(!message.channel.finalScore) message.channel.finalScore = 1;
             else message.channel.finalScore = message.channel.finalScore + 1;
+            if(!message.channel.correctedQuestion) message.channel.correctedQuestion = 1;
+            else message.channel.correctedQuestion = message.channel.correctedQuestion + 1;
+
+            if(message.channel.correctedQuestion == message.channel.testTotalQuestions){
+
+                let testResult = `${bot.botEmojis.GLOBAL.YES} Reçu(e)`;
+                if(message.channel.correctedQuestion < message.channel.testTotalQuestions/2){
+                    testResult = `${bot.botEmojis.GLOBAL.NO} Non reçu(e)`;
+                }
+
+                var correctionEndEmbed = new Discord.MessageEmbed()
+                    .setColor(bot.config.COLORS.BASE)
+                    .setDescription(`Notation finale: **${message.channel.finalScore}/${message.channel.testTotalQuestions}**
+                    ${bot.botEmojis.GLOBAL.BULLET} Resultat: ${testResult}`);
+
+                let endMsg = await message.channel.send(correctionEndEmbed);
+            }
 
             message.reactions.removeAll();
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.NO){
@@ -226,6 +245,23 @@ module.exports = async (bot, reaction, user) => {
             if(user != message.channel.staffTestResp) return;
 
             if(!message.channel.finalScore) message.channel.finalScore = 0;
+            if(!message.channel.correctedQuestion) message.channel.correctedQuestion = 1;
+            else message.channel.correctedQuestion = message.channel.correctedQuestion + 1;
+
+            if(message.channel.correctedQuestion == message.channel.testTotalQuestions){
+
+                let testResult = `${bot.botEmojis.GLOBAL.YES} Reçu(e)`;
+                if(message.channel.correctedQuestion < message.channel.testTotalQuestions/2){
+                    testResult = `${bot.botEmojis.GLOBAL.NO} Non reçu(e)`;
+                }
+
+                var correctionEndEmbed = new Discord.MessageEmbed()
+                    .setColor(bot.config.COLORS.BASE)
+                    .setDescription(`Notation finale: **${message.channel.finalScore}/${message.channel.testTotalQuestions}**
+                    ${bot.botEmojis.GLOBAL.BULLET} Resultat: ${testResult}`);
+
+                let endMsg = await message.channel.send(correctionEndEmbed);
+            }
 
             message.reactions.removeAll();
         } else {

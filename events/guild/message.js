@@ -54,7 +54,7 @@ module.exports = async (bot, message) => {
     if(message.channel.name.startsWith("test-staff-de-")){
         if(message.guild.id != "693198481086480544" && message.guild.id != "618855620820336640"){
             return;
-        }
+        } 
 
         if(message.content.startsWith(bot.config.PREFIX)) return;
         if(!message.channel.isStaffTestChannel) return;
@@ -90,9 +90,16 @@ module.exports = async (bot, message) => {
                 .setDescription(`Votre responsable de session (<@${message.channel.staffTestResp.id}>) va vous communiquer vos **résultats** sous peu.
                 
                 ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !
-                ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !`);
+                ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !
+                
+                ${bot.botEmojis.GLOBAL.TEAM} _Reservé aux correcteur:_
+                **Cliquez sur 🖊️ pour lancer le processus de correction !**
+                ${bot.botEmojis.GLOBAL.YES} pour une bonne réponse !
+                ${bot.botEmojis.GLOBAL.NO} pour une mauvaise réponse !`);
 
             let endMsg = await message.channel.send(testEndEmbed);
+
+            endMsg.react("🖊️");
             
             message.channel.overwritePermissions([
                 {deny: 'VIEW_CHANNEL', id: message.guild.id},

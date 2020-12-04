@@ -159,7 +159,7 @@ module.exports = async (bot, reaction, user) => {
             }
 
             message.channel.isTested.testQuestion = 1;
-            message.channel.testTotalQuestions = 20;
+            message.channel.testTotalQuestions = 2;
 
             var questionEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
@@ -199,6 +199,31 @@ module.exports = async (bot, reaction, user) => {
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
                 ], '');
             }
+        
+        } else if(reaction.emoji.name == "🖊️"){
+            if(message.channel.isStarted) return;
+
+            message.channel.messages.cache.forEach(qM => {
+                if(!qM.embeds) return;
+                if(!qM.embeds[0].title) return;
+                if(!qM.embeds[0].title.startsWith("Question N°")) return;
+
+                qM.react(bot.botEmojis.GLOBAL.YES);
+                qM.react(bot.botEmojis.GLOBAL.NO);
+            });
+        } else if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
+            if(message.channel.isStarted) return;
+
+            if(!message.channel.finalScore) message.channel = 1
+            else message.channel.finalScore = message.channel.finalScore + 1;
+
+            message.reactions.removeAll();
+        } else if(reaction.emoji == bot.botEmojis.GLOBAL.NO){
+            if(message.channel.isStarted) return;
+
+            if(!message.channel.finalScore) message.channel = 0;
+
+            message.reactions.removeAll();
         } else {
             if(!message.channel.quizQuestions) return;
             if(!message.channel.isTested.testQuestion) return;
@@ -235,9 +260,16 @@ module.exports = async (bot, reaction, user) => {
                     .setDescription(`Votre responsable de session (<@${message.channel.staffTestResp.id}>) va vous communiquer vos **résultats** sous peu.
                     
                     ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !
-                    ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !`)
+                    ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !
+                
+                    ${bot.botEmojis.GLOBAL.TEAM} _Reservé aux correcteur:_
+                    **Cliquez sur 🖊️ pour lancer le processus de correction !**
+                    ${bot.botEmojis.GLOBAL.YES} pour une bonne réponse !
+                    ${bot.botEmojis.GLOBAL.NO} pour une mauvaise réponse !`)
 
                 let endMsg = await message.channel.send(testEndEmbed);
+
+                endMsg.react("🖊️");
 
                 message.channel.overwritePermissions([
                     {deny: 'VIEW_CHANNEL', id: message.guild.id},

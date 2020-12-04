@@ -325,7 +325,23 @@ module.exports = async (bot, reaction, user) => {
                 .setColor(bot.config.COLORS.ALLOW)
                 .setDescription(`<@${user.id}> est désormais le formateur de <@${message.channel.isTested.id}>`);
 
+            message.channel.staffFormer = user;
+
             let adminChoiceMsg = await message.channel.send(adminChoiceEmbed);
+
+            message.channel.overwritePermissions([
+                {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
+                {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
+                {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                {deny: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
+                {allow: 'VIEW_CHANNEL', id: user.id},
+                {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                {deny: 'VIEW_CHANNEL', id: message.guild.id},
+            ], '');
 
             message.reactions.removeAll();
         } else {

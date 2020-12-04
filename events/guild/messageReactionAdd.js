@@ -217,7 +217,6 @@ module.exports = async (bot, reaction, user) => {
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
             if(message.channel.isStarted) return;
 
-            console.log("AB");
             if(!message.channel.finalScore) message.channel = 1
             else message.channel.finalScore = message.channel.finalScore + 1;
 
@@ -225,7 +224,6 @@ module.exports = async (bot, reaction, user) => {
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.NO){
             if(message.channel.isStarted) return;
 
-            console.log("AA");
             if(!message.channel.finalScore) message.channel = 0;
 
             message.reactions.removeAll();

@@ -217,14 +217,15 @@ module.exports = async (bot, reaction, user) => {
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
             if(message.channel.isStarted) return;
 
-            if(!message.channel.finalScore) message.channel = 1
+            if(!message.channel.finalScore) message.channel.finalScore = 1
             else message.channel.finalScore = message.channel.finalScore + 1;
 
             message.reactions.removeAll();
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.NO){
             if(message.channel.isStarted) return;
+            if(user != message.channel.staffTestResp) return;
 
-            if(!message.channel.finalScore) message.channel = 0;
+            if(!message.channel.finalScore) message.channel.finalScore = 0;
 
             message.reactions.removeAll();
         } else {
@@ -371,57 +372,57 @@ module.exports = async (bot, reaction, user) => {
                 ], '');
             }
         }
-    } else {
-        if(message.channel.name.startsWith("ticket-de-")){
-            if(reaction.emoji.name == "🔐"){
-                if(message.channel.ticketIsClosing) return;
-                reaction.users.remove(user);
-                if(message.channel.ticketMember) message.channel.ticketMember.isInTicket = false;
-                if(!message.guild.members.cache.find(m => m.user.id == user.id).roles.cache.find(r => r.id == bot.config.I_ROLES.STAFF)) {
-                    var replyEmbed = new Discord.MessageEmbed()
-                        .setColor(bot.config.COLORS.DENY)
-                        .setFooter(`Message auto-supprimé dans 5 secondes`)
-                        .setDescription(`<@${user.id}> **vous n'avez pas la permission de faire ca**`)
-                    let msg = await message.channel.send(replyEmbed);
-                    setTimeout(() => {msg.delete()}, 5 * 1000)
-                    return;
-                }
-                reaction.users.remove(bot.user);
+    }
+
+    if(message.channel.name.startsWith("ticket-de-")){
+        if(reaction.emoji.name == "🔐"){
+            if(message.channel.ticketIsClosing) return;
+            reaction.users.remove(user);
+            if(message.channel.ticketMember) message.channel.ticketMember.isInTicket = false;
+            if(!message.guild.members.cache.find(m => m.user.id == user.id).roles.cache.find(r => r.id == bot.config.I_ROLES.STAFF)) {
                 var replyEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.DENY)
-                    .setDescription(`**Fermeture du ticket dans 10 secondes !**`)
-                    .setFooter("Cliquez sur 🔓 pour réouvrir le ticket");
+                    .setFooter(`Message auto-supprimé dans 5 secondes`)
+                    .setDescription(`<@${user.id}> **vous n'avez pas la permission de faire ca**`)
                 let msg = await message.channel.send(replyEmbed);
-                msg.react("🔓");
-                message.channel.ticketIsClosing = true;
-                setTimeout(() => {
-                    if(!message.channel.ticketIsClosing) return;
-                    message.channel.delete()
-                }, 10 * 1000)
-               
+                setTimeout(() => {msg.delete()}, 5 * 1000)
+                return;
             }
-            if(reaction.emoji.name == "🔓"){
+            reaction.users.remove(bot.user);
+            var replyEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.DENY)
+                .setDescription(`**Fermeture du ticket dans 10 secondes !**`)
+                .setFooter("Cliquez sur 🔓 pour réouvrir le ticket");
+            let msg = await message.channel.send(replyEmbed);
+            msg.react("🔓");
+            message.channel.ticketIsClosing = true;
+            setTimeout(() => {
                 if(!message.channel.ticketIsClosing) return;
-                reaction.users.remove(user);
-                if(message.channel.ticketMember) message.channel.ticketMember.isInTicket = false;
-                if(!message.guild.members.cache.find(m => m.user.id == user.id).roles.cache.find(r => r.id == bot.config.I_ROLES.STAFF)) {
-                    var replyEmbed = new Discord.MessageEmbed()
-                        .setColor(bot.config.COLORS.DENY)
-                        .setFooter(`Message auto-supprimé dans 5 secondes`)
-                        .setDescription(`<@${user.id}> **vous n'avez pas la permission de faire ca**`)
-                    let msg = await message.channel.send(replyEmbed);
-                    setTimeout(() => {msg.delete()}, 5 * 1000)
-                    return;
-                }        
-                reaction.users.remove(bot.user);
-                message.channel.ticketIsClosing = false; 
+                message.channel.delete()
+            }, 10 * 1000)
+           
+        }
+        if(reaction.emoji.name == "🔓"){
+            if(!message.channel.ticketIsClosing) return;
+            reaction.users.remove(user);
+            if(message.channel.ticketMember) message.channel.ticketMember.isInTicket = false;
+            if(!message.guild.members.cache.find(m => m.user.id == user.id).roles.cache.find(r => r.id == bot.config.I_ROLES.STAFF)) {
                 var replyEmbed = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.ALLOW)
-                    .setDescription(`**Réouverture du ticket !**`)
-                    .setFooter("Cliquez sur 🔐 pour refermer le ticket");
+                    .setColor(bot.config.COLORS.DENY)
+                    .setFooter(`Message auto-supprimé dans 5 secondes`)
+                    .setDescription(`<@${user.id}> **vous n'avez pas la permission de faire ca**`)
                 let msg = await message.channel.send(replyEmbed);
-                msg.react("🔐");
-            }
+                setTimeout(() => {msg.delete()}, 5 * 1000)
+                return;
+            }        
+            reaction.users.remove(bot.user);
+            message.channel.ticketIsClosing = false; 
+            var replyEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.ALLOW)
+                .setDescription(`**Réouverture du ticket !**`)
+                .setFooter("Cliquez sur 🔐 pour refermer le ticket");
+            let msg = await message.channel.send(replyEmbed);
+            msg.react("🔐");
         }
     }
 

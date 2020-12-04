@@ -411,7 +411,7 @@ module.exports = async (bot, reaction, user) => {
         }
     }
 
-    if(message.channel.name.includes("ticket-de-")){
+    if(message.channel.name.startsWith("ticket-de-")){
         if(reaction.emoji.name == "🔐"){
             if(message.channel.ticketIsClosing) return;
             reaction.users.remove(user);

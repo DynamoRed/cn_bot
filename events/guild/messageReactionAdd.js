@@ -159,7 +159,7 @@ module.exports = async (bot, reaction, user) => {
             }
 
             message.channel.isTested.testQuestion = 1;
-            message.channel.testTotalQuestions = 2;
+            message.channel.testTotalQuestions = 20;
 
             var questionEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)

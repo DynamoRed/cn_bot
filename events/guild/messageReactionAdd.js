@@ -318,8 +318,8 @@ module.exports = async (bot, reaction, user) => {
         } else if(reaction.emoji.name == "🔐"){ 
             if(message.channel.testIsStarted) return;
             if(!message.channel.isTested) return;
-            if(!message.member.roles.cache.find(r => r.id == bot.config.I_ROLES.ADMIN)
-            && !message.member.roles.cache.find(r => r.id == bot.config.I_ROLES.SUPERADMIN)) return;
+            if(!guildMember.roles.cache.find(r => r.id == bot.config.I_ROLES.ADMIN)
+            && !guildMember.roles.cache.find(r => r.id == bot.config.I_ROLES.SUPERADMIN)) return;
 
             var adminChoiceEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.ALLOW)

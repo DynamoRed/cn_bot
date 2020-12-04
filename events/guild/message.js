@@ -102,12 +102,16 @@ module.exports = async (bot, message) => {
             endMsg.react("🖊️");
             
             message.channel.overwritePermissions([
-                {deny: 'VIEW_CHANNEL', id: message.guild.id},
-                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
                 {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
                 {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
                 {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                {deny: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
                 {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                {deny: 'VIEW_CHANNEL', id: message.guild.id},
             ], '');
 
             message.channel.staffTestIsOpen = false;
@@ -146,12 +150,16 @@ module.exports = async (bot, message) => {
             footerContent += `QCM`;
         } else {
             message.channel.overwritePermissions([
-                {deny: 'VIEW_CHANNEL', id: message.guild.id},
-                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
                 {allow: 'SEND_MESSAGES', id: message.channel.isTested},
+                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
                 {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
                 {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                {deny: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
                 {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                {deny: 'VIEW_CHANNEL', id: message.guild.id},
             ], '');
             footerContent += `Réponse courte`;
         }
@@ -189,12 +197,16 @@ module.exports = async (bot, message) => {
             })
 
             message.channel.overwritePermissions([
-                {deny: 'VIEW_CHANNEL', id: message.guild.id},
-                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
                 {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
                 {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
                 {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                {deny: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
                 {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                {deny: 'VIEW_CHANNEL', id: message.guild.id},
             ], '');
         }
     }

@@ -192,11 +192,16 @@ module.exports = async (bot, reaction, user) => {
                 })
 
                 message.channel.overwritePermissions([
-                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
                     {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                    {deny: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
                 ], '');
             }
         
@@ -225,14 +230,13 @@ module.exports = async (bot, reaction, user) => {
             else message.channel.correctedQuestion = message.channel.correctedQuestion + 1;
 
             if(message.channel.correctedQuestion == message.channel.testTotalQuestions){
-
                 let testResult = `${bot.botEmojis.GLOBAL.YES} Reçu(e)`;
-                if(message.channel.finalScore < message.channel.testTotalQuestions/2){
+                if(message.channel.correctedQuestion < message.channel.testTotalQuestions/2){
                     testResult = `${bot.botEmojis.GLOBAL.NO} Non reçu(e)`;
                 }
 
                 var correctionEndEmbed = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.BASE)
+                    .setColor(bot.config.COLORS.ALLOW)
                     .setDescription(`Notation finale: **${message.channel.finalScore}/${message.channel.testTotalQuestions}**
                     ${bot.botEmojis.GLOBAL.BULLET} **Resultat:** ${testResult}`);
 
@@ -241,21 +245,22 @@ module.exports = async (bot, reaction, user) => {
                 if(message.channel.finalScore < message.channel.testTotalQuestions/2) return;
 
                 message.channel.overwritePermissions([
-                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
-                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested},
-                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
                     {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
                     {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
                 ], '');
 
                 var adminCallEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
                     .setTitle(`Choix Formateur`)
-                    .setDescription(`Cliquez sur ${bot.botEmojis.GLOBAL.VERIFIED} pour prendre ce joueur en formation.`);
+                    .setDescription(`Cliquez sur 🔐 pour prendre ce joueur en formation.`);
 
                 message.channel.send(`<@&${bot.config.I_ROLES.ADMIN}>`);
                 let adminCallMsg = await message.channel.send(adminCallEmbed);
@@ -272,14 +277,13 @@ module.exports = async (bot, reaction, user) => {
             else message.channel.correctedQuestion = message.channel.correctedQuestion + 1;
 
             if(message.channel.correctedQuestion == message.channel.testTotalQuestions){
-
                 let testResult = `${bot.botEmojis.GLOBAL.YES} Reçu(e)`;
                 if(message.channel.correctedQuestion < message.channel.testTotalQuestions/2){
                     testResult = `${bot.botEmojis.GLOBAL.NO} Non reçu(e)`;
                 }
 
                 var correctionEndEmbed = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.BASE)
+                    .setColor(bot.config.COLORS.ALLOW)
                     .setDescription(`Notation finale: **${message.channel.finalScore}/${message.channel.testTotalQuestions}**
                     ${bot.botEmojis.GLOBAL.BULLET} **Resultat:** ${testResult}`);
 
@@ -288,26 +292,40 @@ module.exports = async (bot, reaction, user) => {
                 if(message.channel.finalScore < message.channel.testTotalQuestions/2) return;
 
                 message.channel.overwritePermissions([
-                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
-                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested},
-                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
                     {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
                     {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
                 ], '');
 
                 var adminCallEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
                     .setTitle(`Choix Formateur`)
-                    .setDescription(`Cliquez sur ${bot.botEmojis.GLOBAL.VERIFIED} pour prendre ce joueur en formation.`);
+                    .setDescription(`Cliquez sur 🔐 pour prendre ce joueur en formation.`);
 
                 message.channel.send(`<@&${bot.config.I_ROLES.ADMIN}>`);
                 let adminCallMsg = await message.channel.send(adminCallEmbed);
                 adminCallMsg.react("🔐");
             }
+
+            message.reactions.removeAll();
+        } else if(reaction.emoji.name == "🔐"){ 
+            if(message.channel.testIsStarted) return;
+            if(!message.channel.isTested) return;
+            if(!message.member.roles.cache.find(r => r.id == bot.config.I_ROLES.ADMIN)
+            && !message.member.roles.cache.find(r => r.id == bot.config.I_ROLES.SUPERADMIN)) return;
+
+            var adminChoiceEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.ALLOW)
+                .setDescription(`<@${user.id}> est désormais le formateur de <@${message.channel.isTested.id}>`);
+
+            let adminChoiceMsg = await message.channel.send(adminChoiceEmbed);
 
             message.reactions.removeAll();
         } else {
@@ -358,12 +376,16 @@ module.exports = async (bot, reaction, user) => {
                 endMsg.react("🖊️");
 
                 message.channel.overwritePermissions([
-                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
-                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
                     {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                    {deny: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
                 ], '');
 
                 message.channel.staffTestIsOpen = false;
@@ -402,12 +424,16 @@ module.exports = async (bot, reaction, user) => {
                 footerContent += `QCM`;
             } else {
                 message.channel.overwritePermissions([
-                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
-                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
                     {allow: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
                     {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                    {deny: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
                 ], '');
                 footerContent += `Réponse courte`;
             }
@@ -445,12 +471,16 @@ module.exports = async (bot, reaction, user) => {
                 })
 
                 message.channel.overwritePermissions([
-                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
-                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
                     {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                    {deny: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
                 ], '');
             }
         }

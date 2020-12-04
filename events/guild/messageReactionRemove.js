@@ -7,6 +7,7 @@ module.exports = async (bot, reaction, user) => {
 
     if(user.bot) return; 
     if(!message) return;
+    if(!message.guild) return;
 
     const guildMember = message.guild.members.cache.find(m => m.user.id === user.id);
     const authorName =  guildMember.nickname ? guildMember.nickname : guildMember.user.username;    

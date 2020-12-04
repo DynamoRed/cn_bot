@@ -227,16 +227,37 @@ module.exports = async (bot, reaction, user) => {
             if(message.channel.correctedQuestion == message.channel.testTotalQuestions){
 
                 let testResult = `${bot.botEmojis.GLOBAL.YES} Reçu(e)`;
-                if(message.channel.correctedQuestion < message.channel.testTotalQuestions/2){
+                if(message.channel.finalScore < message.channel.testTotalQuestions/2){
                     testResult = `${bot.botEmojis.GLOBAL.NO} Non reçu(e)`;
                 }
 
                 var correctionEndEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
                     .setDescription(`Notation finale: **${message.channel.finalScore}/${message.channel.testTotalQuestions}**
-                    ${bot.botEmojis.GLOBAL.BULLET} Resultat: ${testResult}`);
+                    ${bot.botEmojis.GLOBAL.BULLET} **Resultat:** ${testResult}`);
 
                 let endMsg = await message.channel.send(correctionEndEmbed);
+
+                if(message.channel.finalScore < message.channel.testTotalQuestions/2) return;
+
+                message.channel.overwritePermissions([
+                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                    {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
+                    {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                ], '');
+
+                var adminCallEmbed = new Discord.MessageEmbed()
+                    .setColor(bot.config.COLORS.BASE)
+                    .setTitle(`Choix Formateur`)
+                    .setDescription(`Cliquez sur ${bot.botEmojis.GLOBAL.VERIFIED} pour prendre ce joueur en formation.`);
+
+                message.channel.send(`<@&${bot.config.I_ROLES.ADMIN}>`);
+                let adminCallMsg = await message.channel.send(adminCallEmbed);
+                adminCallMsg.react(bot.botEmojis.GLOBAL.VERIFIED);
             }
 
             message.reactions.removeAll();
@@ -258,9 +279,30 @@ module.exports = async (bot, reaction, user) => {
                 var correctionEndEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
                     .setDescription(`Notation finale: **${message.channel.finalScore}/${message.channel.testTotalQuestions}**
-                    ${bot.botEmojis.GLOBAL.BULLET} Resultat: ${testResult}`);
+                    ${bot.botEmojis.GLOBAL.BULLET} **Resultat:** ${testResult}`);
 
                 let endMsg = await message.channel.send(correctionEndEmbed);
+
+                if(message.channel.finalScore < message.channel.testTotalQuestions/2) return;
+
+                message.channel.overwritePermissions([
+                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                    {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
+                    {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                ], '');
+
+                var adminCallEmbed = new Discord.MessageEmbed()
+                    .setColor(bot.config.COLORS.BASE)
+                    .setTitle(`Choix Formateur`)
+                    .setDescription(`Cliquez sur ${bot.botEmojis.GLOBAL.VERIFIED} pour prendre ce joueur en formation.`);
+
+                message.channel.send(`<@&${bot.config.I_ROLES.ADMIN}>`);
+                let adminCallMsg = await message.channel.send(adminCallEmbed);
+                adminCallMsg.react(bot.botEmojis.GLOBAL.VERIFIED);
             }
 
             message.reactions.removeAll();
@@ -300,7 +342,7 @@ module.exports = async (bot, reaction, user) => {
                     .setDescription(`Votre responsable de session (<@${message.channel.staffTestResp.id}>) va vous communiquer vos **résultats** sous peu.
                     
                     ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !
-                    ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **10/20** pour passer dans notre équipe !
+                    ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **${message.channel.testTotalQuestions/2}/${message.channel.testTotalQuestions}** pour passer dans notre équipe !
                 
                     ${bot.botEmojis.GLOBAL.TEAM} _Reservé aux correcteur:_
                     **Cliquez sur 🖊️ pour lancer le processus de correction !**

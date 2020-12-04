@@ -245,6 +245,8 @@ module.exports = async (bot, reaction, user) => {
                     {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested},
                     {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
@@ -257,7 +259,7 @@ module.exports = async (bot, reaction, user) => {
 
                 message.channel.send(`<@&${bot.config.I_ROLES.ADMIN}>`);
                 let adminCallMsg = await message.channel.send(adminCallEmbed);
-                adminCallMsg.react(bot.botEmojis.GLOBAL.VERIFIED);
+                adminCallMsg.react("🔐");
             }
 
             message.reactions.removeAll();
@@ -290,6 +292,8 @@ module.exports = async (bot, reaction, user) => {
                     {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
                     {deny: 'SEND_MESSAGES', id: message.channel.isTested},
                     {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
                     {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
                     {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
@@ -302,7 +306,7 @@ module.exports = async (bot, reaction, user) => {
 
                 message.channel.send(`<@&${bot.config.I_ROLES.ADMIN}>`);
                 let adminCallMsg = await message.channel.send(adminCallEmbed);
-                adminCallMsg.react(bot.botEmojis.GLOBAL.VERIFIED);
+                adminCallMsg.react("🔐");
             }
 
             message.reactions.removeAll();

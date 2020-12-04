@@ -231,7 +231,7 @@ module.exports = async (bot, reaction, user) => {
 
             if(message.channel.correctedQuestion == message.channel.testTotalQuestions){
                 let testResult = `${bot.botEmojis.GLOBAL.YES} Reçu(e)`;
-                if(message.channel.correctedQuestion < message.channel.testTotalQuestions/2){
+                if(message.channel.finalScore < message.channel.testTotalQuestions/2){
                     testResult = `${bot.botEmojis.GLOBAL.NO} Non reçu(e)`;
                 }
 
@@ -278,7 +278,7 @@ module.exports = async (bot, reaction, user) => {
 
             if(message.channel.correctedQuestion == message.channel.testTotalQuestions){
                 let testResult = `${bot.botEmojis.GLOBAL.YES} Reçu(e)`;
-                if(message.channel.correctedQuestion < message.channel.testTotalQuestions/2){
+                if(message.channel.finalScore < message.channel.testTotalQuestions/2){
                     testResult = `${bot.botEmojis.GLOBAL.NO} Non reçu(e)`;
                 }
 

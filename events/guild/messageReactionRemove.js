@@ -4,10 +4,13 @@ module.exports = async (bot, reaction, user) => {
     if(reaction.message.partial) await reaction.message.fetch();
 
     const message = reaction.message;
+    
+    if(user.bot) return; 
+
     const guildMember = message.guild.members.cache.find(m => m.user.id === user.id);
     const authorName =  guildMember.nickname ? guildMember.nickname : guildMember.user.username;
 
-    if(user.bot) return; 
+    
 
     if(message.guild.id != "693198481086480544" && message.guild.id != "618855620820336640"){
         return;

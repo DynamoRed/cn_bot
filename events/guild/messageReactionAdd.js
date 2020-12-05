@@ -314,6 +314,10 @@ module.exports = async (bot, reaction, user) => {
                     {deny: 'VIEW_CHANNEL', id: message.guild.id},
                 ], '');
 
+                message.guild.members.cache.find(m => m.user.id == message.channel.isTested.id).roles.add(bot.config.I_ROLES.STAFF_DARKRP, "");
+                message.guild.members.cache.find(m => m.user.id == message.channel.isTested.id).roles.add(bot.config.I_ROLES.TEST_MODERATOR, "");
+                message.guild.members.cache.find(m => m.user.id == message.channel.isTested.id).roles.add(bot.config.I_ROLES.STAFF, "");
+
                 var adminCallEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
                     .setTitle(`Choix Formateur`)
@@ -336,6 +340,7 @@ module.exports = async (bot, reaction, user) => {
                 .setDescription(`<@${user.id}> est désormais le formateur de <@${message.channel.isTested.id}>`);
 
             message.channel.staffFormer = user;
+            message.guild.members.cache.find(m => m.user.id == message.channel.isTested.id).roles.add(bot.config.I_ROLES.FORMATION, "");
 
             let adminChoiceMsg = await message.channel.send(adminChoiceEmbed);
 

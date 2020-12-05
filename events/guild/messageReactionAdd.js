@@ -208,6 +208,8 @@ module.exports = async (bot, reaction, user) => {
         } else if(reaction.emoji.name == "🖊️"){
             if(message.channel.isStarted) return;
             if(user != message.channel.staffTestResp) return;
+            
+            message.channel.correctedQuestionsArray = [];
 
             message.channel.messages.cache.forEach(qM => {
                 if(!qM.embeds) return;
@@ -223,11 +225,15 @@ module.exports = async (bot, reaction, user) => {
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
             if(message.channel.isStarted) return;
             if(user != message.channel.staffTestResp) return;
+            if(!message.channel.correctedQuestionsArray) return;
+            if(message.channel.correctedQuestionsArray.includes(message.embeds[0].title.replace("Question N° ", ""))) return;
 
             if(!message.channel.finalScore) message.channel.finalScore = 1;
             else message.channel.finalScore = message.channel.finalScore + 1;
             if(!message.channel.correctedQuestion) message.channel.correctedQuestion = 1;
             else message.channel.correctedQuestion = message.channel.correctedQuestion + 1;
+            
+            message.channel.correctedQuestionsArray[Number(message.embeds[0].title.replace("Question N° ", ""))] = message.embeds[0].title.replace("Question N° ", "");
 
             if(message.channel.correctedQuestion == message.channel.testTotalQuestions){
                 let testResult = `${bot.botEmojis.GLOBAL.YES} Reçu(e)`;
@@ -271,10 +277,14 @@ module.exports = async (bot, reaction, user) => {
         } else if(reaction.emoji == bot.botEmojis.GLOBAL.NO){
             if(message.channel.isStarted) return;
             if(user != message.channel.staffTestResp) return;
+            if(!message.channel.correctedQuestionsArray) return;
+            if(message.channel.correctedQuestionsArray.includes(message.embeds[0].title.replace("Question N° ", ""))) return;
 
             if(!message.channel.finalScore) message.channel.finalScore = 0;
             if(!message.channel.correctedQuestion) message.channel.correctedQuestion = 1;
             else message.channel.correctedQuestion = message.channel.correctedQuestion + 1;
+
+            message.channel.correctedQuestionsArray[Number(message.embeds[0].title.replace("Question N° ", ""))] = message.embeds[0].title.replace("Question N° ", "");
 
             if(message.channel.correctedQuestion == message.channel.testTotalQuestions){
                 let testResult = `${bot.botEmojis.GLOBAL.YES} Reçu(e)`;
@@ -530,6 +540,7 @@ module.exports = async (bot, reaction, user) => {
             }, 10 * 1000)
            
         }
+        
         if(reaction.emoji.name == "🔓"){
             if(!message.channel.ticketIsClosing) return;
             reaction.users.remove(user);

@@ -44,6 +44,14 @@ module.exports = async (bot, reaction, user) => {
 
             message.reactions.removeAll();
 
+            var replyEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.DENY)
+                .setDescription(`**Fermeture du channel de formation dans 10 secondes !**`);
+            let msg = await message.channel.send(replyEmbed);
+            setTimeout(() => {
+                message.channel.delete()
+            }, 10 * 1000)
+
             message.channel.messages.cache.forEach(qM => {
                 if(!qM.embeds) return;
                 if(!qM.embeds[0]) return;
@@ -53,14 +61,6 @@ module.exports = async (bot, reaction, user) => {
                 let inFormation = qM.mentions.users.last();
                 message.guild.members.cache.find(m => m.user.id === inFormation.id).roles.remove(bot.config.I_ROLES.FORMATION, "");
             });
-
-            var replyEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.DENY)
-                .setDescription(`**Fermeture du channel de formation dans 10 secondes !**`);
-            let msg = await message.channel.send(replyEmbed);
-            setTimeout(() => {
-                message.channel.delete()
-            }, 10 * 1000)
         }
     }
 
@@ -376,7 +376,7 @@ module.exports = async (bot, reaction, user) => {
             var formationEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
                 .setTitle("📨 Gestion de la formation")
-                .setDescription(`${bot.botEmojis.GLOBAL.TEAM} _Reservé aux correcteur:_
+                .setDescription(`_Reservé au formateur:_
                 🔑 **Mettre fin a la formation**`);
 
             let formationMsg = await message.channel.send(formationEmbed);
@@ -435,7 +435,7 @@ module.exports = async (bot, reaction, user) => {
                     ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !
                     ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **${message.channel.testTotalQuestions/2}/${message.channel.testTotalQuestions}** pour passer dans notre équipe !
                 
-                    ${bot.botEmojis.GLOBAL.TEAM} _Reservé aux correcteur:_
+                    ${bot.botEmojis.GLOBAL.TEAM} _Reservé au correcteur:_
                     **Cliquez sur 🖊️ pour lancer le processus de correction !**
                     ${bot.botEmojis.GLOBAL.YES} pour une bonne réponse !
                     ${bot.botEmojis.GLOBAL.NO} pour une mauvaise réponse !`)

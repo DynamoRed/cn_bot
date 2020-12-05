@@ -37,6 +37,33 @@ module.exports = async (bot, reaction, user) => {
         }).catch(err => {console.error(err)})
     }
 
+    if(message.channel.name.startsWith("formation-de-")){
+        if(reaction.emoji.name == "🔑"){
+            if(!guildMember.roles.cache.find(r => r.id == bot.config.I_ROLES.ADMIN)
+            && !guildMember.roles.cache.find(r => r.id == bot.config.I_ROLES.SUPERADMIN)) return;
+
+            message.reactions.removeAll();
+
+            message.channel.messages.cache.forEach(qM => {
+                if(!qM.embeds) return;
+                if(!qM.embeds[0]) return;
+                if(!qM.embeds[0].description) return;
+                if(!qM.embeds[0].description.includes(" est désormais le formateur de ")) return;
+
+                let inFormation = qM.mentions.users.last();
+                message.guild.members.cache.find(m => m.user.id === inFormation.id).roles.remove(bot.config.I_ROLES.FORMATION, "");
+            });
+
+            var replyEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.DENY)
+                .setDescription(`**Fermeture du channel de formation dans 10 secondes !**`);
+            let msg = await message.channel.send(replyEmbed);
+            setTimeout(() => {
+                message.channel.delete()
+            }, 10 * 1000)
+        }
+    }
+
     if(message.channel.name.startsWith("test-staff-de-")){
         if(!message.channel.isStaffTestChannel) return;
         if(!message.channel.isTested) return;
@@ -251,9 +278,9 @@ module.exports = async (bot, reaction, user) => {
                 if(message.channel.finalScore < message.channel.testTotalQuestions/2) return;
 
                 message.channel.overwritePermissions([
-                    {deny: 'SEND_MESSAGES', id: message.channel.isTested},
-                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
-                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
+                    {allow: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {allow: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                    {allow: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
                     {deny: 'ADD_REACTIONS', id: message.channel.isTested},
                     {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
                     {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
@@ -302,9 +329,9 @@ module.exports = async (bot, reaction, user) => {
                 if(message.channel.finalScore < message.channel.testTotalQuestions/2) return;
 
                 message.channel.overwritePermissions([
-                    {deny: 'SEND_MESSAGES', id: message.channel.isTested},
-                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
-                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
+                    {allow: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {allow: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                    {allow: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
                     {deny: 'ADD_REACTIONS', id: message.channel.isTested},
                     {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
                     {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
@@ -343,6 +370,17 @@ module.exports = async (bot, reaction, user) => {
             message.guild.members.cache.find(m => m.user.id == message.channel.isTested.id).roles.add(bot.config.I_ROLES.FORMATION, "");
 
             let adminChoiceMsg = await message.channel.send(adminChoiceEmbed);
+
+            message.channel.setName(`formation-de-${message.channel.name.replace("test-staff-de-", "")}`,"");
+
+            var formationEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.BASE)
+                .setTitle("📨 Gestion de la formation")
+                .setDescription(`${bot.botEmojis.GLOBAL.TEAM} _Reservé aux correcteur:_
+                🔑 **Mettre fin a la formation**`);
+
+            let formationMsg = await message.channel.send(formationEmbed);
+            formationMsg.react("🔑");
 
             message.channel.overwritePermissions([
                 {deny: 'SEND_MESSAGES', id: message.channel.isTested},

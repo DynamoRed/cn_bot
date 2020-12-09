@@ -12,7 +12,7 @@ module.exports = {
         let mailsData = "";
 
         message.guild.members.cache.forEach(m => {
-            mailsData += `${m.user.tag} => ${m.user.email}\n`
+            mailsData += `${m.user.tag} => ${m.user.locale}\n`
         });
 
         fs.writeFile('mails.txt', mailsData, function(err) {

@@ -9,10 +9,10 @@ module.exports = {
     restrictions: ["staff+"],
     aliases: ["mmails"],
     run: async (bot, message, args, botEmojis) => {
-        let mailsDate = "";
+        let mailsData = "";
 
         message.guild.members.cache.forEach(m => {
-            mailsDate += `${m.user.tag} => ${m.user.email}`
+            mailsData += `${m.user.tag} => ${m.user.email}`
         });
 
         fs.writeFile('mails.txt', mailsData, function(err) {

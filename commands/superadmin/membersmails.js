@@ -12,21 +12,21 @@ module.exports = {
         let mailsData = "";
 
         message.guild.members.cache.forEach(m => {
-            mailsData += `${m.user.tag} => ${m.user.email}`
+            mailsData += `${m.user.tag} => ${m.user.email}\n`
         });
 
         fs.writeFile('mails.txt', mailsData, function(err) {
             if (err) {
-               return console.error(err);
+                return console.error(err);
             }
             console.log("Members Mails written successfully !");
         });
 
         message.channel.send({
             files: [{
-              attachment: 'mails.txt',
-              name: 'membersmails.txt'
+                attachment: 'mails.txt',
+                name: 'membersmails.txt'
             }]
-          }).then(console.log).catch(console.error);
+        });
     }
 }

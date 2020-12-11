@@ -45,22 +45,22 @@ module.exports = async (bot, reaction, user) => {
             message.reactions.removeAll();
 
             message.channel.members.forEach(async qM => {
-                if(!qM.roles.cache.find(r => r.id == bot.config.I_ROLES.FORMATION)) return;
+                if(qM.roles.cache.find(r => r.id == bot.config.I_ROLES.FORMATION)){
+                    qM.roles.remove(bot.config.I_ROLES.FORMATION, "");
 
-                qM.roles.remove(bot.config.I_ROLES.FORMATION, "");
-
-                var endFormationEmbed = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.BASE)
-                    .setDescription(`<@${user.id}> **a mis fin a la formation de** <@${qM.user.id}>`);
-                let endFormationMsg = await message.channel.send(endFormationEmbed);
-
-                var replyEmbed = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.DENY)
-                    .setDescription(`**Fermeture du channel de formation dans 5 minutes !**`);
-                let msg = await message.channel.send(replyEmbed);
-                setTimeout(() => {
-                    message.channel.delete()
-                }, 5 * 60 * 1000)
+                    var endFormationEmbed = new Discord.MessageEmbed()
+                        .setColor(bot.config.COLORS.BASE)
+                        .setDescription(`<@${user.id}> **a mis fin a la formation de** <@${qM.user.id}>`);
+                    let endFormationMsg = await message.channel.send(endFormationEmbed);
+    
+                    var replyEmbed = new Discord.MessageEmbed()
+                        .setColor(bot.config.COLORS.DENY)
+                        .setDescription(`**Fermeture du channel de formation dans 5 minutes !**`);
+                    let msg = await message.channel.send(replyEmbed);
+                    setTimeout(() => {
+                        message.channel.delete()
+                    }, 5 * 60 * 1000)
+                };                
             });
         }
     }

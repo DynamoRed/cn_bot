@@ -578,7 +578,7 @@ module.exports = async (bot, reaction, user) => {
             let msg = await message.channel.send(replyEmbed);
             var logEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
-                .setDescription(`<@${user.id}> **a fermé le ticket ${message.channel.name}>**`)
+                .setDescription(`<@${user.id}> **a fermé le ticket ${message.channel.name.replace("-", " ").replace("ticket", "")}**`)
             let logMsg = await message.guild.channels.cache.find(c => c.id == bot.config.I_CHANNELS.LOGS).send(logEmbed);
             msg.react("🔓");
             message.channel.ticketIsClosing = true;
@@ -611,7 +611,7 @@ module.exports = async (bot, reaction, user) => {
             let msg = await message.channel.send(replyEmbed);
             var logEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.BASE)
-                .setDescription(`<@${user.id}> **a réouvert le ticket ${message.channel.name}>**`)
+                .setDescription(`<@${user.id}> **a réouvert le ticket ${message.channel.name.replace("-", " ").replace("ticket", "")}**`)
             let logMsg = await message.guild.channels.cache.find(c => c.id == bot.config.I_CHANNELS.LOGS).send(logEmbed);
             msg.react("🔐");
         }

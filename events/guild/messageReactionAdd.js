@@ -44,7 +44,7 @@ module.exports = async (bot, reaction, user) => {
 
             message.reactions.removeAll();
 
-            message.channel.members.cache.forEach(async qM => {
+            message.channel.members.forEach(async qM => {
                 if(!qM.roles.cache.find(r => r.id == bot.config.I_ROLES.FORMATION)) return;
 
                 qM.roles.remove(bot.config.I_ROLES.FORMATION, "");

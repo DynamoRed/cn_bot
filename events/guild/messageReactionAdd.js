@@ -595,6 +595,10 @@ module.exports = async (bot, reaction, user) => {
                     .setFooter(`Message auto-supprimé dans 5 secondes`)
                     .setDescription(`<@${user.id}> **vous n'avez pas la permission de faire ca**`)
                 let msg = await message.channel.send(replyEmbed);
+                var logEmbed = new Discord.MessageEmbed()
+                    .setColor(bot.config.COLORS.BASE)
+                    .setDescription(`<@${user.id}> **a fermé le ticket ${message.channel.name}>**`)
+                let logMsg = await message.guild.channels.cache.find(c => c.id == bot.config.I_CHANNELS.LOGS).send(logEmbed);
                 setTimeout(() => {msg.delete()}, 5 * 1000)
                 return;
             }        
@@ -605,6 +609,10 @@ module.exports = async (bot, reaction, user) => {
                 .setDescription(`**Réouverture du ticket !**`)
                 .setFooter("Cliquez sur 🔐 pour refermer le ticket");
             let msg = await message.channel.send(replyEmbed);
+            var logEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.BASE)
+                .setDescription(`<@${user.id}> **a réouvert le ticket ${message.channel.name}>**`)
+            let logMsg = await message.guild.channels.cache.find(c => c.id == bot.config.I_CHANNELS.LOGS).send(logEmbed);
             msg.react("🔐");
         }
     }

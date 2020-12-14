@@ -7,6 +7,7 @@ const bot = new Discord.Client({
 
 bot.config = config;
 bot.commands = new Discord.Collection();
+bot.badges = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 bot.categories = fs.readdirSync("./commands/");
 ["commands"].forEach(handler => { 

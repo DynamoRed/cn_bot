@@ -19,9 +19,23 @@ module.exports = {
         }
 
         let mentionned = message.mentions.users.first();
-        
+
         switch(args.length){
             case 0:
+                if(bot.badgesData[message.author.id]){
+                    for(var i = 0; i < bot.badgesData[message.author.id].badges.length; i++){
+                        let badge = bot.badgesData[message.author.id].badges[i];
+
+                        var badgeEmbed = new Discord.MessageEmbed()
+                            .setColor(config.COLORS.BASE)
+                            .setFooter(`Badge obtenu le ${badge.get_at}`)
+                            .setTitle(`${bot.badges.get(badge.id).name}`)
+                            .setDescription(`${bot.badges.get(badge.id).description}`)
+                        let badgeMessage = await message.channel.send(badgeEmbed);
+                    }
+                } else {
+
+                }
                 break;
         
             case 1:

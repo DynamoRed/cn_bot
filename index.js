@@ -1,11 +1,13 @@
 const Discord = require("discord.js");
 const config = require("./resources/config.json");
+const badgesData = require("./resources/badges.json");
 const fs = require('fs');
 const bot = new Discord.Client({
     "partials": ['CHANNEL', 'MESSAGE', 'REACTION']
 });
 
 bot.config = config;
+bot.badgesData = badgesData;
 bot.commands = new Discord.Collection();
 bot.badges = new Discord.Collection();
 bot.aliases = new Discord.Collection();

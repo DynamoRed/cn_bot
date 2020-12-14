@@ -4,5 +4,5 @@ module.exports = {
     description: "A participé a l'event Noël 2020",
     category: "event",
     enabled: true,
-    icon: "b_event_xmas_2020",
+    icon: "b_event_xmas_2020"
 }

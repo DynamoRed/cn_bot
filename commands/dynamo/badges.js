@@ -18,12 +18,13 @@ module.exports = {
             return;
         }
 
+        let mentionned = message.mentions.users.first();
+        
         switch(args.length){
             case 0:
                 break;
         
             case 1:
-                let mentionned = message.mentions.users.first();
                 if(mentionned){
 
                 } else {
@@ -47,8 +48,6 @@ module.exports = {
                     setTimeout(() => {msg.delete()}, 5 * 1000)
                     return;
                 }
-
-                let mentionned = message.mentions.users.first();
 
                 if(args[0] == "add"){
                     if(mentionned){

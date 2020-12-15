@@ -128,10 +128,7 @@ module.exports = {
 
                         let obtainedDate = new Date();
                         console.log(obtainedDate.toLocaleDateString('fr-FR')); 
-                        let badgeRef = 0;
-                        if(bot.badgesData[mentionned.id] && bot.badgesData[mentionned.id].badges){
-                            badgeRef = bot.badgesData[mentionned.id].badges.length+1
-                        }
+                        let badgeRef = bot.badgesData[mentionned.id].badges.length+1;
                         bot.badgesData[mentionned.id].badges[badgeRef].id = args[2];
                         bot.badgesData[mentionned.id].badges[badgeRef].get_at = "00-00-0000-00-00";
 

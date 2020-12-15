@@ -141,6 +141,12 @@ module.exports = {
                         obtainedDate.split(",")[1].split(":")[0],
                         obtainedDate.split(",")[1].split(":")[1]];
 
+                        if(!bot.badgesData[mentionned.id]){
+                            bot.badgesData[mentionned.id] = {
+                                badges: []
+                            }
+                        }
+
                         let badgeRef = bot.badgesData[mentionned.id].badges.length;
                         bot.badgesData[mentionned.id].badges[badgeRef] = {
                             id: args[2],

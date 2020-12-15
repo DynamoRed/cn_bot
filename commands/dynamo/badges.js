@@ -127,7 +127,7 @@ module.exports = {
                         }
 
                         let obtainedDate = new Date();
-                        console.log(obtainedDate.toLocaleDateString('en-GB')); 
+                        console.log(obtainedDate.toLocaleDateString('fr-FR')); 
                         let badgeRef = 0;
                         if(bot.badgesData[mentionned.id] && bot.badgesData[mentionned.id].badges){
                             badgeRef = bot.badgesData[mentionned.id].badges.length+1

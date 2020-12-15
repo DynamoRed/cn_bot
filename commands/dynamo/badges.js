@@ -126,6 +126,9 @@ module.exports = {
                     return;
                 }
 
+                args[2] = args[2].toLowerCase();
+                args[0] = args[0].toLowerCase();
+
                 if(args[0] == "add"){
                     if(mentionned){
                         if(!bot.badges.get(args[2])){

@@ -38,9 +38,9 @@ module.exports = {
                     badgeMessage.react("▶");
                     badgeMessage.actualPage = 1;
                     setTimeout(() => {
-                        if(badgeMessage.disabledTimer["Page1"]) return;
+                        if(badgeMessage.actualPage != 1) return;
                         badgeMessage.reactions.removeAll();
-                    }, 30 * 1000)
+                    }, 15 * 1000)
                     return;
                 } else {
 

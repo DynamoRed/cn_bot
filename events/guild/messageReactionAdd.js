@@ -45,9 +45,9 @@ module.exports = async (bot, reaction, user) => {
         console.log("P1");
         if(!message.embeds[0]) return;
         console.log("P2");
-        if(!message.embeds[0].title) return;
+        if(!message.embeds[0].author) return;
         console.log("P3");
-        if(!message.embeds[0].title.startsWith("Badges de")) return;
+        if(!message.embeds[0].author.name.startsWith("Badges de")) return;
         console.log("P4");
         if(!message.actualPage) return;
         console.log("P5");

@@ -41,6 +41,7 @@ module.exports = {
                     .setAuthor(`Badges de ${message.author.username}`, message.author.avatarURL())
                     .setDescription(`*${badge.description}*
                     `)
+                console.log(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
                 let badgeMessage = await message.channel.send(badgeEmbed);
                 if(bot.badgesData[message.author.id].badges.length > 1){
                     badgeMessage.react("◀");

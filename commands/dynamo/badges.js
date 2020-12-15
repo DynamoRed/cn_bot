@@ -33,6 +33,10 @@ module.exports = {
                     let badgeMessage = await message.channel.send(badgeEmbed);
                     badgeMessage.react("◀");
                     badgeMessage.react("▶");
+                    setTimeout(() => {
+                        badgeMessage.reactions.removeAll();
+                    }, 10 * 1000)
+                    return;
                 } else {
 
                 }

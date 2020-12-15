@@ -22,10 +22,13 @@ module.exports = {
         if(args.length == 0){
                 if(bot.badgesData[message.author.id]){
                     let badge = bot.badges.get(bot.badgesData[message.author.id].badges[0].id);
+                    let obtainedDate =  bot.badgesData[message.author.id].badges[0].get_at;
+                    obtainedDate = obtainedDate.split("-");
+                    obtainedDate = `${obtainedDate[0]}/${obtainedDate[1]}/${obtainedDate[2]} ${obtainedDate[3]}:${obtainedDate[4]}`
                     var badgeEmbed = new Discord.MessageEmbed()
                         .setColor(bot.config.COLORS.BASE)
                         .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
-                        .setFooter(`Badge 1/${bot.badgesData[message.author.id].badges.length} | Obtenu le ${bot.badgesData[message.author.id].badges[0].get_at}`)
+                        .setFooter(`Badge 1/${bot.badgesData[message.author.id].badges.length} | Obtenu le ${obtainedDate}`)
                         .setTitle(`👉 ${badge.name}`)
                         .setAuthor(`Badges de ${message.author.username}`, message.author.avatarURL())
                         .setDescription(`*${badge.description}*
@@ -33,9 +36,11 @@ module.exports = {
                     let badgeMessage = await message.channel.send(badgeEmbed);
                     badgeMessage.react("◀");
                     badgeMessage.react("▶");
+                    badgeMessage.actualPage = 1;
                     setTimeout(() => {
+                        if(badgeMessage.disabledTimer["Page1"]) return;
                         badgeMessage.reactions.removeAll();
-                    }, 10 * 1000)
+                    }, 30 * 1000)
                     return;
                 } else {
 

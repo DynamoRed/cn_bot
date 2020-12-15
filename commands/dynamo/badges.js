@@ -127,7 +127,7 @@ module.exports = {
                         }
 
                         let obtainedDate = new Date();
-                        console.log(obtainedDate.toLocaleString('en-GB', { timeZone: 'UTC+1' }));
+                        console.log(obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' }));
                         let badgeRef = bot.badgesData[mentionned.id].badges.length;
                         bot.badgesData[mentionned.id].badges[badgeRef] = {
                             id: args[2],

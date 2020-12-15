@@ -37,9 +37,13 @@ module.exports = {
                     badgeMessage.react("◀");
                     badgeMessage.react("▶");
                     badgeMessage.actualPage = 1;
+                    badgeMessage.whoRequest = message.author;
+                    badgeMessage.canChangePage = true;
+                    badgeMessage.whoIsRequest = message.author;
                     setTimeout(() => {
                         if(badgeMessage.actualPage != 1) return;
                         badgeMessage.reactions.removeAll();
+                        badgeMessage.canChangePage = false;
                     }, 15 * 1000)
                     return;
                 } else {

@@ -37,6 +37,49 @@ module.exports = async (bot, reaction, user) => {
         }).catch(err => {console.error(err)})
     }
 
+    if(reaction.emoji.name == "◀"){ 
+        if(!message.embeds[0]) return;
+        if(!message.embeds[0].title) return;
+        if(!message.embeds[0].title.startsWith("Badges de")) return;
+        if(!message.actualPage) return;
+        if(!message.whoRequest) return;
+        reaction.users.remove(user);
+        if(!message.canChangePage) return;
+        if(message.whoRequest != user) return;
+        if(!message.whoIsRequest) return;
+        
+        if(message.actualPage >= bot.badgesData[message.whoIsRequest.id].badges.length){
+            message.actualPage = 1;
+        } else {
+            message.actualPage++;
+        }
+
+        let pageNumber = message.actualPage;
+
+        let badge = bot.badges.get(bot.badgesData[message.whoIsRequest.id].badges[pageNumber - 1].id);
+        let obtainedDate =  bot.badgesData[message.whoIsRequest.id].badges[pageNumber - 1].get_at;
+        obtainedDate = obtainedDate.split("-");
+        obtainedDate = `${obtainedDate[0]}/${obtainedDate[1]}/${obtainedDate[2]} ${obtainedDate[3]}:${obtainedDate[4]}`
+        var badgeEmbed = new Discord.MessageEmbed()
+            .setColor(bot.config.COLORS.BASE)
+            .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
+            .setFooter(`Badge 1/${bot.badgesData[message.whoIsRequest.id].badges.length} | Obtenu le ${obtainedDate}`)
+            .setTitle(`👉 ${badge.name}`)
+            .setAuthor(`Badges de ${message.whoIsRequest.username}`, message.whoIsRequest.avatarURL())
+            .setDescription(`*${badge.description}*
+            `)
+
+        setTimeout(() => {
+            if(message.actualPage != pageNumber) return;
+            message.reactions.removeAll();
+            message.canChangePage = false;
+        }, 15 * 1000) 
+
+        message.edit(badgeEmbed);  
+    } else if(reaction.emoji.name == "▶"){
+
+    }
+
     if(message.channel.name.startsWith("formation-de-")){
         if(reaction.emoji.name == "🔑"){
             if(!guildMember.roles.cache.find(r => r.id == bot.config.I_ROLES.ADMIN)

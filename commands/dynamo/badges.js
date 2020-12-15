@@ -28,7 +28,7 @@ module.exports = {
                             .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
                             .setFooter(`Page 1/7 | Obtenu le ${bot.badgesData[message.author.id].badges[i].get_at}`)
                             .setTitle(`${badge.name}`)
-                            .setAuthor(`Badges de ${message.author.username}`, message.author.avatarURL)
+                            .setAuthor(`Badges de ${message.author.username}`, message.author.avatarURL())
                             .setDescription(`${badge.description}`)
                         let badgeMessage = await message.channel.send(badgeEmbed);
                     }

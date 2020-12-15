@@ -42,25 +42,16 @@ module.exports = async (bot, reaction, user) => {
     }
     
     if(reaction.emoji.name == "▶"){
-        console.log("P1");
         if(!message.embeds[0]) return;
-        console.log("P2");
         if(!message.embeds[0].author) return;
-        console.log("P3");
         if(!message.embeds[0].author.name.startsWith("Badges de")) return;
-        console.log("P4");
         if(!message.actualPage) return;
-        console.log("P5");
         if(!message.whoRequest) return;
-        console.log("P6");
         reaction.users.remove(user);
-        console.log("P7");
         if(!message.canChangePage) return;
-        console.log("P8");
         if(message.whoRequest != user) return;
-        console.log("P9");
         if(!message.whoIsRequest) return;
-        console.log("P10");
+
         if(message.actualPage >= bot.badgesData[message.whoIsRequest.id].badges.length){
             message.actualPage = 1;
         } else {
@@ -76,7 +67,7 @@ module.exports = async (bot, reaction, user) => {
         var badgeEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
-            .setFooter(`Badge 1/${bot.badgesData[message.whoIsRequest.id].badges.length} | Obtenu le ${obtainedDate}`)
+            .setFooter(`Badge ${pageNumber}/${bot.badgesData[message.whoIsRequest.id].badges.length} | Obtenu le ${obtainedDate}`)
             .setTitle(`👉 ${badge.name}`)
             .setAuthor(`Badges de ${message.whoIsRequest.username}`, message.whoIsRequest.avatarURL())
             .setDescription(`*${badge.description}*

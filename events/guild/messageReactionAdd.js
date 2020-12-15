@@ -68,7 +68,6 @@ module.exports = async (bot, reaction, user) => {
             .setAuthor(`Badges de ${message.whoIsRequest.username}`, message.whoIsRequest.avatarURL())
             .setDescription(`*${badge.description}*
             `)
-        console.log(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
         setTimeout(() => {
             if(message.actualPage != pageNumber) return;
             message.reactions.removeAll();
@@ -107,7 +106,6 @@ module.exports = async (bot, reaction, user) => {
             .setAuthor(`Badges de ${message.whoIsRequest.username}`, message.whoIsRequest.avatarURL())
             .setDescription(`*${badge.description}*
             `)
-        console.log(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
         setTimeout(() => {
             if(message.actualPage != pageNumber) return;
             message.reactions.removeAll();

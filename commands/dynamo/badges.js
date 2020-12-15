@@ -41,7 +41,6 @@ module.exports = {
                     .setAuthor(`Badges de ${message.author.username}`, message.author.avatarURL())
                     .setDescription(`*${badge.description}*
                     `)
-                console.log(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
                 let badgeMessage = await message.channel.send(badgeEmbed);
                 if(bot.badgesData[message.author.id].badges.length > 1){
                     badgeMessage.react("◀");
@@ -151,6 +150,16 @@ module.exports = {
                             bot.badgesData[mentionned.id] = {
                                 badges: []
                             }
+                        }
+
+                        if(bot.badgesData[mentionned.id].badges.forEach(b => b.id == args[2])){
+                            var replyEmbed = new Discord.MessageEmbed()
+                                .setColor(bot.config.COLORS.DENY)
+                                .setFooter(`Message auto-supprimé dans 5 secondes`)
+                                .setDescription(`<@${message.author.id}> **ce membre a déjà ce badge !**`)
+                            let msg = await message.channel.send(replyEmbed);
+                            setTimeout(() => {msg.delete()}, 5 * 1000)
+                            return;
                         }
 
                         let badgeRef = bot.badgesData[mentionned.id].badges.length;

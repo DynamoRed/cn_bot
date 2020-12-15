@@ -127,9 +127,13 @@ module.exports = {
                         }
 
                         let obtainedDate = new Date();
-                        console.log(obtainedDate.toLocaleDateString('en-GB'));
-                        bot.badgesData[mentionned.id].badges[bot.badgesData[mentionned.id].badges.length+1].id = args[2];
-                        bot.badgesData[mentionned.id].badges[bot.badgesData[mentionned.id].badges.length+1].get_at = "00-00-0000-00-00";
+                        console.log(obtainedDate.toLocaleDateString('en-GB')); 
+                        let badgeRef = 0;
+                        if(bot.badgesData[mentionned.id] && bot.badgesData[mentionned.id].badges){
+                            badgeRef = bot.badgesData[mentionned.id].badges.length+1
+                        }
+                        bot.badgesData[mentionned.id].badges[badgeRef].id = args[2];
+                        bot.badgesData[mentionned.id].badges[badgeRef].get_at = "00-00-0000-00-00";
 
                         fs.writeFileSync('../../resources/badges.json', bot.badgesData, err => {
                             if(err) throw err;

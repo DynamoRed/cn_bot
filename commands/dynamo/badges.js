@@ -25,7 +25,7 @@ module.exports = {
                         let badge = bot.badges.get(bot.badgesData[message.author.id].badges[i].id);
                         var badgeEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.BASE)
-                            .setThumbnail(`../../resources/badges/${badge.category}/${badge.id}.png`)
+                            .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
                             .setFooter(`Badge obtenu le ${bot.badgesData[message.author.id].badges[i].get_at}`)
                             .setTitle(`${badge.name}`)
                             .setDescription(`${badge.description}`)

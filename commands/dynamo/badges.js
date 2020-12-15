@@ -17,7 +17,7 @@ module.exports = {
             setTimeout(() => {msg.delete()}, 5 * 1000)
             return;
         }
-
+ 
         let mentionned = message.mentions.users.first();
         if(args.length == 0){
                 if(bot.badgesData[message.author.id]){
@@ -26,8 +26,9 @@ module.exports = {
                         var badgeEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.BASE)
                             .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
-                            .setFooter(`Badge obtenu le ${bot.badgesData[message.author.id].badges[i].get_at}`)
+                            .setFooter(`Page 1/7 | Obtenu le ${bot.badgesData[message.author.id].badges[i].get_at}`)
                             .setTitle(`${badge.name}`)
+                            .setAuthor(`Badges de ${message.author.username}`, message.author.avatarURL)
                             .setDescription(`${badge.description}`)
                         let badgeMessage = await message.channel.send(badgeEmbed);
                     }

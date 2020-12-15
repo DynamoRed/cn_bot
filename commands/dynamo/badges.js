@@ -8,9 +8,9 @@ module.exports = {
     restrictions: [""],
     aliases: ["b"],
     run: async (bot, message, args, botEmojis) => {
-        if(message.author.id != config.OWNER_ID){
+        if(message.author.id != bot.config.OWNER_ID){
             var replyEmbed = new Discord.MessageEmbed()
-                .setColor(config.COLORS.DENY)
+                .setColor(bot.config.COLORS.DENY)
                 .setFooter(`Message auto-supprimé dans 5 secondes`)
                 .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
             let msg = await message.channel.send(replyEmbed);
@@ -27,7 +27,7 @@ module.exports = {
                         let badge = bot.badgesData[message.author.id].badges[i];
 
                         var badgeEmbed = new Discord.MessageEmbed()
-                            .setColor(config.COLORS.BASE)
+                            .setColor(bot.config.COLORS.BASE)
                             .setFooter(`Badge obtenu le ${badge.get_at}`)
                             .setTitle(`${bot.badges.get(badge.id).name}`)
                             .setDescription(`${bot.badges.get(badge.id).description}`)

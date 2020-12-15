@@ -128,7 +128,7 @@ module.exports = {
 
                         let obtainedDate = new Date();
                         console.log(obtainedDate.toLocaleDateString('fr-FR')); 
-                        let badgeRef = bot.badgesData[mentionned.id].badges.length+1;
+                        let badgeRef = bot.badgesData[mentionned.id].badges.length;
                         bot.badgesData[mentionned.id].badges[badgeRef] = {
                             id: args[2],
                             get_at: "00-00-0000-00-00",

@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const fs = require('fs');
 module.exports = {
     name: "badges",
     description: "Parcourir ces badges ou ceux d'un autre",
@@ -115,7 +116,32 @@ module.exports = {
 
                 if(args[0] == "add"){
                     if(mentionned){
+                        if(!bot.badges.get(args[2])){
+                            var replyEmbed = new Discord.MessageEmbed()
+                                .setColor(bot.config.COLORS.DENY)
+                                .setFooter(`Message auto-supprimé dans 5 secondes`)
+                                .setDescription(`<@${message.author.id}> **ce badge n'a pas pu être trouvé !**`)
+                            let msg = await message.channel.send(replyEmbed);
+                            setTimeout(() => {msg.delete()}, 5 * 1000)
+                            return;
+                        }
 
+                        let obtainedDate = new Date();
+                        console.log(obtainedDate.toLocaleDateString('en-GB'));
+                        bot.badgesData[mentionned.id].badges[bot.badgesData[mentionned.id].badges.length+1].id = args[2];
+                        bot.badgesData[mentionned.id].badges[bot.badgesData[mentionned.id].badges.length+1].get_at = "00-00-0000-00-00";
+
+                        fs.writeFileSync('../../resources/badges.json', bot.badgesData, err => {
+                            if(err) throw err;
+                        })
+
+                        var replyEmbed = new Discord.MessageEmbed()
+                            .setColor(bot.config.COLORS.ALLOW)
+                            .setFooter(`Message auto-supprimé dans 5 secondes`)
+                            .setDescription(`<@${message.author.id}> **badge ajouté avec succès !**`)
+                        let msg = await message.channel.send(replyEmbed);
+                        setTimeout(() => {msg.delete()}, 5 * 1000)
+                        return;
                     } else {
                         var replyEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.DENY)
@@ -126,9 +152,25 @@ module.exports = {
                         return;
                     }
                 } else if(args[0] == "remove"){
+                    if(mentionned){
 
+                    } else {
+                        var replyEmbed = new Discord.MessageEmbed()
+                            .setColor(bot.config.COLORS.DENY)
+                            .setFooter(`Message auto-supprimé dans 5 secondes`)
+                            .setDescription(`<@${message.author.id}> **le membre spécifié n'a pas pu être trouvé !**`)
+                        let msg = await message.channel.send(replyEmbed);
+                        setTimeout(() => {msg.delete()}, 5 * 1000)
+                        return;
+                    }
                 } else {
-
+                    var replyEmbed = new Discord.MessageEmbed()
+                        .setColor(bot.config.COLORS.DENY)
+                        .setFooter(`Message auto-supprimé dans 5 secondes`)
+                        .setDescription(`<@${message.author.id}> **cette commande est incorrecte !**`)
+                    let msg = await message.channel.send(replyEmbed);
+                    setTimeout(() => {msg.delete()}, 5 * 1000)
+                    return;
                 }
         } else {
 

@@ -151,7 +151,7 @@ module.exports = {
                             if(err) throw err;
                         })
 
-                        bot.badgesData = require("./resources/badges.json");
+                        bot.badgesData = require("../../resources/badges.json");
 
                         var replyEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.ALLOW)
@@ -197,7 +197,7 @@ module.exports = {
                             if(err) throw err;
                         })
 
-                        bot.badgesData = require("./resources/badges.json");
+                        bot.badgesData = require("../../resources/badges.json");
 
                         var replyEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.ALLOW)

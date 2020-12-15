@@ -22,15 +22,13 @@ module.exports = {
         if(args.length == 0){
                 if(bot.badgesData[message.author.id]){
                     for(var i = 0; i < bot.badgesData[message.author.id].badges.length; i++){
-                        let badge = bot.badgesData[message.author.id].badges[i];
-                        console.log(badge.id);
-                        console.log(bot.badges.get(badge.id));
-                        console.log(bot.badges.get(badge.id).name);
+                        let badge = bot.badges.get(bot.badgesData[message.author.id].badges[i].id);
                         var badgeEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.BASE)
-                            .setFooter(`Badge obtenu le ${badge.get_at}`)
-                            .setTitle(`${bot.badges.get(badge.id).name}`)
-                            .setDescription(`${bot.badges.get(badge.id).description}`)
+                            .setThumbnail(`../../resources/badges/${badge.category}/${badge.id}.png`)
+                            .setFooter(`Badge obtenu le ${bot.badgesData[message.author.id].badges[i].get_at}`)
+                            .setTitle(`${badge.name}`)
+                            .setDescription(`${badge.description}`)
                         let badgeMessage = await message.channel.send(badgeEmbed);
                     }
                 } else {

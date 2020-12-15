@@ -127,11 +127,17 @@ module.exports = {
                         }
 
                         let obtainedDate = new Date();
-                        console.log(obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' }));
+                        obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
+                        obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
+                        obtainedDate.split(",")[0].split("/")[0],
+                        obtainedDate.split(",")[0].split("/")[2],
+                        obtainedDate.split(",")[1].split(":")[0],
+                        obtainedDate.split(",")[1].split(":")[1]];
+
                         let badgeRef = bot.badgesData[mentionned.id].badges.length;
                         bot.badgesData[mentionned.id].badges[badgeRef] = {
                             id: args[2],
-                            get_at: "00-00-0000-00-00",
+                            get_at: obtainedDate.join('-'),
                         }
 
                         fs.writeFileSync('./resources/badges.json', bot.badgesData, err => {

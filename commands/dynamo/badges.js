@@ -134,8 +134,7 @@ module.exports = {
                             get_at: "00-00-0000-00-00",
                         }
 
-
-                        fs.writeFileSync('../../resources/badges.json', bot.badgesData, err => {
+                        fs.writeFileSync('./resources/badges.json', bot.badgesData, err => {
                             if(err) throw err;
                         })
 

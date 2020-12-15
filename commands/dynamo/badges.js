@@ -42,7 +42,7 @@ module.exports = {
                     .setDescription(`*${badge.description}*
                     `)
                 let badgeMessage = await message.channel.send(badgeEmbed);
-                if(bot.badgesData[mentionned.id].badges.length > 1){
+                if(bot.badgesData[message.author.id].badges.length > 1){
                     badgeMessage.react("◀");
                     badgeMessage.react("▶");
                     badgeMessage.actualPage = 1;

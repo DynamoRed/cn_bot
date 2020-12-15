@@ -79,17 +79,19 @@ module.exports = {
                             .setDescription(`*${badge.description}*
                             `)
                         let badgeMessage = await message.channel.send(badgeEmbed);
-                        badgeMessage.react("◀");
-                        badgeMessage.react("▶");
-                        badgeMessage.actualPage = 1;
-                        badgeMessage.whoRequest = message.author;
-                        badgeMessage.canChangePage = true;
-                        badgeMessage.whoIsRequest = mentionned;
-                        setTimeout(() => {
-                            if(badgeMessage.actualPage != 1) return;
-                            badgeMessage.reactions.removeAll();
-                            badgeMessage.canChangePage = false;
-                        }, 15 * 1000)
+                        if(bot.badgesData[mentionned.id].badges.length>1){
+                            badgeMessage.react("◀");
+                            badgeMessage.react("▶");
+                            badgeMessage.actualPage = 1;
+                            badgeMessage.whoRequest = message.author;
+                            badgeMessage.canChangePage = true;
+                            badgeMessage.whoIsRequest = mentionned;
+                            setTimeout(() => {
+                                if(badgeMessage.actualPage != 1) return;
+                                badgeMessage.reactions.removeAll();
+                                badgeMessage.canChangePage = false;
+                            }, 15 * 1000)
+                        }
                         return;
                     } else {
                         var replyEmbed = new Discord.MessageEmbed()

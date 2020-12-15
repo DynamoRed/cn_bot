@@ -1,5 +1,12 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+
+function arrayRemove(arr, value) { 
+    return arr.filter(function(ele){ 
+        return ele.id != value; 
+    });
+}
+
 module.exports = {
     name: "badges",
     description: "Parcourir ces badges ou ceux d'un autre",
@@ -164,7 +171,41 @@ module.exports = {
                     }
                 } else if(args[0] == "remove"){
                     if(mentionned){
+                        if(!bot.badges.get(args[2])){
+                            var replyEmbed = new Discord.MessageEmbed()
+                                .setColor(bot.config.COLORS.DENY)
+                                .setFooter(`Message auto-supprimé dans 5 secondes`)
+                                .setDescription(`<@${message.author.id}> **ce badge n'a pas pu être trouvé !**`)
+                            let msg = await message.channel.send(replyEmbed);
+                            setTimeout(() => {msg.delete()}, 5 * 1000)
+                            return;
+                        }
 
+                        if(!bot.badgesData[mentionned.id].badges.filter(b => {b.id == args[2]})){
+                            var replyEmbed = new Discord.MessageEmbed()
+                                .setColor(bot.config.COLORS.DENY)
+                                .setFooter(`Message auto-supprimé dans 5 secondes`)
+                                .setDescription(`<@${message.author.id}> **ce badge n'a pas pu être trouvé chez ce joueur !**`)
+                            let msg = await message.channel.send(replyEmbed);
+                            setTimeout(() => {msg.delete()}, 5 * 1000)
+                            return;
+                        }
+
+                        bot.badgesData[mentionned.id].badges = arrayRemove(bot.badgesData[mentionned.id].badges, args[2]);
+
+                        fs.writeFileSync('./resources/badges.json', bot.badgesData, err => {
+                            if(err) throw err;
+                        })
+
+                        bot.badgesData = require("./resources/badges.json");
+
+                        var replyEmbed = new Discord.MessageEmbed()
+                            .setColor(bot.config.COLORS.ALLOW)
+                            .setFooter(`Message auto-supprimé dans 5 secondes`)
+                            .setDescription(`<@${message.author.id}> **badge retiré avec succès !**`)
+                        let msg = await message.channel.send(replyEmbed);
+                        setTimeout(() => {msg.delete()}, 5 * 1000)
+                        return;
                     } else {
                         var replyEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.DENY)

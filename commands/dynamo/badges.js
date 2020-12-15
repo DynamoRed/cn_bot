@@ -145,7 +145,7 @@ module.exports = {
                         let obtainedDate = new Date();
                         obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
                         let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
-                        if(obtainedDate.split(",")[1].split(":")[2] == "AM"){
+                        if(obtainedDate.split(",")[1].split(":")[2] == "PM"){
                             hours = hours + 12;
                             if(hours == 24){
                                 hours = 0;

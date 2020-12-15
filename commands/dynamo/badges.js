@@ -21,17 +21,18 @@ module.exports = {
         let mentionned = message.mentions.users.first();
         if(args.length == 0){
                 if(bot.badgesData[message.author.id]){
-                    for(var i = 0; i < bot.badgesData[message.author.id].badges.length; i++){
-                        let badge = bot.badges.get(bot.badgesData[message.author.id].badges[i].id);
-                        var badgeEmbed = new Discord.MessageEmbed()
-                            .setColor(bot.config.COLORS.BASE)
-                            .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
-                            .setFooter(`Page 1/7 | Obtenu le ${bot.badgesData[message.author.id].badges[i].get_at}`)
-                            .setTitle(`${badge.name}`)
-                            .setAuthor(`Badges de ${message.author.username}`, message.author.avatarURL())
-                            .setDescription(`${badge.description}`)
-                        let badgeMessage = await message.channel.send(badgeEmbed);
-                    }
+                    let badge = bot.badges.get(bot.badgesData[message.author.id].badges[0].id);
+                    var badgeEmbed = new Discord.MessageEmbed()
+                        .setColor(bot.config.COLORS.BASE)
+                        .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
+                        .setFooter(`Badge 1/${bot.badgesData[message.author.id].badges.length} | Obtenu le ${bot.badgesData[message.author.id].badges[0].get_at}`)
+                        .setTitle(`👉 ${badge.name}`)
+                        .setAuthor(`Badges de ${message.author.username}`, message.author.avatarURL())
+                        .setDescription(`*${badge.description}*
+                        `)
+                    let badgeMessage = await message.channel.send(badgeEmbed);
+                    badgeMessage.react("◀");
+                    badgeMessage.react("▶");
                 } else {
 
                 }

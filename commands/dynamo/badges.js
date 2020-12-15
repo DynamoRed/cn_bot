@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const { isBuffer } = require('util');
 
 function arrayRemove(arr, value) { 
     return arr.filter(function(ele){ 
@@ -143,10 +144,17 @@ module.exports = {
 
                         let obtainedDate = new Date();
                         obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
+                        let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
+                        if(obtainedDate.split(",")[1].split(":")[2] == "AM"){
+                            hours = hours + 12;
+                            if(hours == 24){
+                                hours = 0;
+                            }
+                        }
                         obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
                         obtainedDate.split(",")[0].split("/")[0],
                         obtainedDate.split(",")[0].split("/")[2],
-                        obtainedDate.split(",")[1].split(":")[0],
+                        hours,
                         obtainedDate.split(",")[1].split(":")[1]];
 
                         if(!bot.badgesData[mentionned.id]){

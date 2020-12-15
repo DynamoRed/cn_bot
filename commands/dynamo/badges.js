@@ -35,24 +35,26 @@ module.exports = {
                 obtainedDate = `${obtainedDate[0]}/${obtainedDate[1]}/${obtainedDate[2]} ${obtainedDate[3]}:${obtainedDate[4]}`
                 var badgeEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
-                    .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}_V2.png`)
+                    .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
                     .setFooter(`Badge 1/${bot.badgesData[message.author.id].badges.length} | Obtenu le ${obtainedDate}`)
                     .setTitle(`👉 ${badge.name}`)
                     .setAuthor(`Badges de ${message.author.username}`, message.author.avatarURL())
                     .setDescription(`*${badge.description}*
                     `)
                 let badgeMessage = await message.channel.send(badgeEmbed);
-                badgeMessage.react("◀");
-                badgeMessage.react("▶");
-                badgeMessage.actualPage = 1;
-                badgeMessage.whoRequest = message.author;
-                badgeMessage.canChangePage = true;
-                badgeMessage.whoIsRequest = message.author;
-                setTimeout(() => {
-                    if(badgeMessage.actualPage != 1) return;
-                    badgeMessage.reactions.removeAll();
-                    badgeMessage.canChangePage = false;
-                }, 15 * 1000)
+                if(bot.badgesData[mentionned.id].badges.length > 1){
+                    badgeMessage.react("◀");
+                    badgeMessage.react("▶");
+                    badgeMessage.actualPage = 1;
+                    badgeMessage.whoRequest = message.author;
+                    badgeMessage.canChangePage = true;
+                    badgeMessage.whoIsRequest = message.author;
+                    setTimeout(() => {
+                        if(badgeMessage.actualPage != 1) return;
+                        badgeMessage.reactions.removeAll();
+                        badgeMessage.canChangePage = false;
+                    }, 15 * 1000)
+                }
                 return;
             } else {
                 var replyEmbed = new Discord.MessageEmbed()
@@ -79,7 +81,8 @@ module.exports = {
                             .setDescription(`*${badge.description}*
                             `)
                         let badgeMessage = await message.channel.send(badgeEmbed);
-                        if(bot.badgesData[mentionned.id].badges.length>1){
+
+                        if(bot.badgesData[mentionned.id].badges.length > 1){
                             badgeMessage.react("◀");
                             badgeMessage.react("▶");
                             badgeMessage.actualPage = 1;

@@ -144,6 +144,8 @@ module.exports = {
                             if(err) throw err;
                         })
 
+                        bot.badgesData = require("./resources/badges.json");
+
                         var replyEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.ALLOW)
                             .setFooter(`Message auto-supprimé dans 5 secondes`)

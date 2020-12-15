@@ -7,11 +7,11 @@ module.exports = (bot) => {
         const badges = readdirSync(`./badges/${dir}`).filter(file => file.endsWith('.js'));
         for(let file of badges){
             let pull = require(`../badges/${dir}/${file}`);
-            if(pull.name){
-                bot.badges.set(pull.name, pull);
-                table.addRow(pull.name, pull.category, '✅', `./resources/badges/${dir}/${pull.icon}.png`);
+            if(pull.id){
+                bot.badges.set(pull.id, pull);
+                table.addRow(pull.id, pull.category, '✅', `./resources/badges/${dir}/${pull.id}.png`);
             } else {
-                table.addRow(file, '-----', '❌ -> Missing name or name is incorrect', '-----');
+                table.addRow(file, '-----', '❌ -> Missing id or id is incorrect', '-----');
                 continue;
             }
         }

@@ -4,5 +4,5 @@ module.exports = {
     description: "A joué plus de 50h sur nos serveurs",
     category: "hours",
     enabled: true,
-    icon: "b_50h"
+    id: "b_50h"
 }

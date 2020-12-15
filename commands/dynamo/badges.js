@@ -129,8 +129,11 @@ module.exports = {
                         let obtainedDate = new Date();
                         console.log(obtainedDate.toLocaleDateString('fr-FR')); 
                         let badgeRef = bot.badgesData[mentionned.id].badges.length+1;
-                        bot.badgesData[mentionned.id].badges[badgeRef].id = args[2];
-                        bot.badgesData[mentionned.id].badges[badgeRef].get_at = "00-00-0000-00-00";
+                        bot.badgesData[mentionned.id].badges[badgeRef] = {
+                            id: args[2],
+                            get_at: "00-00-0000-00-00",
+                        }
+
 
                         fs.writeFileSync('../../resources/badges.json', bot.badgesData, err => {
                             if(err) throw err;

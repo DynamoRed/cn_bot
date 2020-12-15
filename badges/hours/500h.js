@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 module.exports = {
-    name: "+50h",
-    description: "A joué plus de 50h sur nos serveurs",
+    name: "+500h",
+    description: "A joué plus de 500h sur nos serveurs",
     category: "hours",
     enabled: true,
-    id: "b_50h"
+    id: "500h"
 }

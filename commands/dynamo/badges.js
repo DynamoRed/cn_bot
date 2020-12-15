@@ -21,7 +21,7 @@ module.exports = {
         let mentionned = message.mentions.users.first();
         if(args.length == 0){
                 if(bot.badgesData[message.author.id]){
-                    console.log(`ppp ${bot.badgesData[message.author.id]}`)
+                    console.log(bot.badgesData[message.author.id])
                     for(var i = 0; i < bot.badgesData[message.author.id]["badges"].length; i++){
                         let badge = bot.badgesData[message.author.id]["badges"][i];
                         console.log(`ppp222 ${bot.badges.get(badge.id).name}`)

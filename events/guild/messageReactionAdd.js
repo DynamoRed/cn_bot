@@ -38,6 +38,8 @@ module.exports = async (bot, reaction, user) => {
     }
 
     if(reaction.emoji.name == "◀"){ 
+
+    } else if(reaction.emoji.name == "▶"){
         if(!message.embeds[0]) return;
         if(!message.embeds[0].title) return;
         if(!message.embeds[0].title.startsWith("Badges de")) return;
@@ -76,8 +78,6 @@ module.exports = async (bot, reaction, user) => {
         }, 15 * 1000) 
 
         message.edit(badgeEmbed);  
-    } else if(reaction.emoji.name == "▶"){
-
     }
 
     if(message.channel.name.startsWith("formation-de-")){

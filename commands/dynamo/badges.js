@@ -19,9 +19,8 @@ module.exports = {
         }
 
         let mentionned = message.mentions.users.first();
-
-        switch(args.length){
-            case 0:
+        console.log(`ppp ${args.length}`)
+        if(args.length == 0){
                 if(bot.badgesData[message.author.id]){
                     for(var i = 0; i < bot.badgesData[message.author.id].badges.length; i++){
                         let badge = bot.badgesData[message.author.id].badges[i];
@@ -36,9 +35,8 @@ module.exports = {
                 } else {
 
                 }
-                break;
         
-            case 1:
+        } else if(args.length == 1){
                 if(mentionned){
 
                 } else {
@@ -50,9 +48,8 @@ module.exports = {
                     setTimeout(() => {msg.delete()}, 5 * 1000)
                     return;
                 }
-                break;
 
-            case 3:
+        } else if(args.length == 3){
                 if(!message.member.roles.cache.find(r => r.name.toLowerCase().includes("superadmin"))) {
                     var replyEmbed = new Discord.MessageEmbed()
                         .setColor(bot.config.COLORS.DENY)
@@ -80,10 +77,8 @@ module.exports = {
                 } else {
 
                 }
-                break;
+        } else {
 
-            default:
-                break;
         }
     }
 }

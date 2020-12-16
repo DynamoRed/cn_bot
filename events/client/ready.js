@@ -127,6 +127,8 @@ module.exports = async bot => {
     bot.getBadges = function getBadges(owner_id){
         bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner="${owner_id}"`, function(err, results){
             if (err) throw err;
+            console.log("Erreur:")
+            console.log(results);
             return results;
         })
     }

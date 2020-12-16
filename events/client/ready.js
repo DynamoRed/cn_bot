@@ -117,7 +117,7 @@ module.exports = async bot => {
                             throw err
                         } else {
                             var confirmEmbed = new Discord.MessageEmbed()
-                                .setColor(bot.config.COLORS.DENY)
+                                .setColor(bot.config.COLORS.ALLOW)
                                 .setFooter(`Message auto-supprimé dans 5 secondes`)
                                 .setDescription(`<@${m.user.id}> **vous venez d'acquerir le badge STAFF**`)
                             let confirmMessage = await m.user.send(confirmEmbed);

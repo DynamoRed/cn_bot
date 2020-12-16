@@ -56,6 +56,13 @@ module.exports = async (bot, message) => {
                     bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('booster', '${obtainedDate}', '${message.author.id}')`, async function(err, results){
                         if (err){
                             throw err
+                        } else {
+                            var confirmEmbed = new Discord.MessageEmbed()
+                                .setColor(bot.config.COLORS.DENY)
+                                .setFooter(`Message auto-supprimé dans 5 secondes`)
+                                .setDescription(`<@${mentionned.id}> **vous venez d'acquerir le badge ${args[2].toUpperCase()}**`)
+                            let confirmMessage = await mentionned.send(confirmEmbed);
+                            return;
                         }
                     })
                 }

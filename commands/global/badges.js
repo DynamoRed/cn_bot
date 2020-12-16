@@ -171,6 +171,12 @@ module.exports = {
                                             .setDescription(`<@${message.author.id}> **badge ajouté avec succès !**`)
                                         let msg = await message.channel.send(replyEmbed);
                                         setTimeout(() => {msg.delete()}, 5 * 1000)
+
+                                        var confirmEmbed = new Discord.MessageEmbed()
+                                            .setColor(bot.config.COLORS.DENY)
+                                            .setFooter(`Message auto-supprimé dans 5 secondes`)
+                                            .setDescription(`<@${mentionned.id}> **vous venez d'acquerir le badge ${args[2].toUpperCase()}**`)
+                                        let confirmMessage = await mentionned.send(confirmEmbed);
                                         return;
                                     }
                                 })

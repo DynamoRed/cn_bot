@@ -4,5 +4,5 @@ module.exports = {
     description: "A écrit plus de 500 messages sur notre serveur discord",
     category: "messages",
     enabled: true,
-    id: "500_m"
+    id: "500_m_v2"
 }

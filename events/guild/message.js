@@ -240,7 +240,7 @@ module.exports = async (bot, message) => {
             return;
         }
         if(command.timeout){
-            if(Timeout.has(`${message.author.id}${command.name}`)){
+            if(Timeout.has(`${message.author.id}${command.name}`) && !message.member.roles.cache.find(r => r.name.toLowerCase().includes("staff+"))){
                 var replyEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.DENY)
                     .setFooter(`Message auto-supprimé dans 5 secondes`)

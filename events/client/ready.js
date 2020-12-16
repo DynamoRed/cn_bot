@@ -85,13 +85,13 @@ module.exports = async bot => {
     console.log(table.toString());
 
     bot.db = bot.mysql.createConnection({
-        host: "https://www.raphael-biron.fr:3306",
+        host: "89.234.180.33",
         user: "johnny",
         password: "7olPv44^",
         database : "splife"
     });
      
-    bot.db.connect(function(err) {
+    db.connect(function(err) {
         if (err) throw err;
         console.log("Connecté à la base de données MySQL!");
     });

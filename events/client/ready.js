@@ -125,12 +125,10 @@ module.exports = async bot => {
     }
 
     bot.getBadges = function getBadges(owner_id){
-        let badges;
         bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner="${owner_id}"`, function(err, results){
             if (err) throw err;
-            badges = results
+            return results;
         })
-        return badges;
     }
  
     console.log("Initialization finished !");

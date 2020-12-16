@@ -23,7 +23,7 @@ module.exports = {
  
         let mentionned = message.mentions.users.first();
         if(args.length == 0){
-            bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner="${message.author.id}"`, async function(err, results){
+            bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}'`, async function(err, results){
                 if (err) throw err;
                 if(results != undefined && results.length != 0){
                     let badge = bot.badges.get(results[0].badge_name);
@@ -66,7 +66,7 @@ module.exports = {
             })
         } else if(args.length == 1){
                 if(mentionned){
-                    bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner="${mentionned.id}"`, async function(err, results){
+                    bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${mentionned.id}'`, async function(err, results){
                         if (err) throw err;
                         if(results != undefined && results.length != 0){
                             let badge = bot.badges.get(results[0].badge_name);
@@ -143,7 +143,7 @@ module.exports = {
                             return;
                         }
 
-                        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner="${mentionned.id}", badge_name="${args[2]}"`, async function(err, results){
+                        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${mentionned.id}', badge_name='${args[2]}'`, async function(err, results){
                             if (err) throw err;
                             if(results != undefined && results.length != 0){
                                 var replyEmbed = new Discord.MessageEmbed()
@@ -206,7 +206,7 @@ module.exports = {
                             return;
                         }
 
-                        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner="${mentionned.id}", badge_name="${args[2]}"`, async function(err, results){
+                        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${mentionned.id}', badge_name='${args[2]}'`, async function(err, results){
                             if (err) throw err;
                             if(results === undefined || results.length == 0){
                                 var replyEmbed = new Discord.MessageEmbed()
@@ -217,7 +217,7 @@ module.exports = {
                                 setTimeout(() => {msg.delete()}, 5 * 1000)
                                 return;
                             } else {
-                                bot.db.query(`DELETE FROM discord_badges WHERE badge_name="${args[2]}", badge_owner="${mentionned.id}"`, async function(err, results){
+                                bot.db.query(`DELETE FROM discord_badges WHERE badge_name='${args[2]}', badge_owner='${mentionned.id}'`, async function(err, results){
                                     if (err){
                                         throw err
                                     } else {

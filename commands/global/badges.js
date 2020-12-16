@@ -5,8 +5,8 @@ const { isBuffer } = require('util');
 module.exports = {
     name: "badges",
     description: "Parcourir ces badges ou ceux d'un autre",
-    category: "dynamo",
-    timeout: 0,
+    category: "global",
+    timeout: 60000,
     enabled: true,
     restrictions: [""],
     aliases: ["b"],

@@ -11,6 +11,16 @@ module.exports = {
     restrictions: [""],
     aliases: ["b", "badge"],
     run: async (bot, message, args, botEmojis) => {
+        if(message.id != bot.config.I_CHANNELS.COMMANDS){
+            var replyEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.DENY)
+                .setFooter(`Message auto-supprimé dans 5 secondes`)
+                .setDescription(`<@${message.author.id}> **cette commande n'est utilisable que dans le salon <#${bot.config.I_CHANNELS.COMMANDS}>**`)
+            let msg = await message.channel.send(replyEmbed);
+            setTimeout(() => {msg.delete()}, 5 * 1000)
+            return;
+        }
+
         let mentionned = message.mentions.users.first();
         if(args.length == 0){
             console.log(message.author.mfa_enabled);

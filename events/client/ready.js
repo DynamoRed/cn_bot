@@ -85,7 +85,7 @@ module.exports = async bot => {
     console.log(table.toString());
 
     bot.db = bot.mysql.createConnection({
-        host: "http://89.234.180.33:3306",
+        host: "https://www.raphael-biron.fr:3306",
         user: "johnny",
         password: "7olPv44^",
         database : "splife"

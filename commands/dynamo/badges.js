@@ -2,12 +2,6 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const { isBuffer } = require('util');
 
-function arrayRemove(arr, value) { 
-    return arr.filter(function(ele){ 
-        return ele.id != value; 
-    });
-}
-
 module.exports = {
     name: "badges",
     description: "Parcourir ces badges ou ceux d'un autre",
@@ -29,7 +23,9 @@ module.exports = {
  
         let mentionned = message.mentions.users.first();
         if(args.length == 0){
-            if(bot.badgesData[message.author.id]){
+            console.log(bot.getBadges(message.author.id));
+            return;
+            /*if(bot.badgesData[message.author.id]){
                 let badge = bot.badges.get(bot.badgesData[message.author.id].badges[0].id);
                 let obtainedDate =  bot.badgesData[message.author.id].badges[0].get_at;
                 obtainedDate = obtainedDate.split("-");
@@ -65,7 +61,7 @@ module.exports = {
                 let msg = await message.channel.send(replyEmbed);
                 setTimeout(() => {msg.delete()}, 5 * 1000)
                 return;
-            }
+            }*/
         } else if(args.length == 1){
                 if(mentionned){
                     if(bot.badgesData[mentionned.id]){
@@ -142,27 +138,6 @@ module.exports = {
                             return;
                         }
 
-                        let obtainedDate = new Date();
-                        obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
-                        let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
-                        if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
-                            hours = hours + 12;
-                            if(hours == 24){
-                                hours = 0;
-                            }
-                        }
-                        obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
-                        obtainedDate.split(",")[0].split("/")[0],
-                        obtainedDate.split(",")[0].split("/")[2],
-                        hours,
-                        obtainedDate.split(",")[1].split(":")[1]];
-
-                        if(!bot.badgesData[mentionned.id]){
-                            bot.badgesData[mentionned.id] = {
-                                badges: []
-                            }
-                        }
-
                         if(bot.badgesData[mentionned.id].badges.forEach(b => b.id == args[2])){
                             var replyEmbed = new Discord.MessageEmbed()
                                 .setColor(bot.config.COLORS.DENY)
@@ -172,18 +147,6 @@ module.exports = {
                             setTimeout(() => {msg.delete()}, 5 * 1000)
                             return;
                         }
-
-                        let badgeRef = bot.badgesData[mentionned.id].badges.length;
-                        bot.badgesData[mentionned.id].badges[badgeRef] = {
-                            id: args[2],
-                            get_at: obtainedDate.join('-'),
-                        }
-
-                        fs.writeFileSync('./resources/badges.json', bot.badgesData, err => {
-                            if(err) throw err;
-                        })
-
-                        bot.badgesData = require("../../resources/badges.json");
 
                         var replyEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.ALLOW)
@@ -222,14 +185,6 @@ module.exports = {
                             setTimeout(() => {msg.delete()}, 5 * 1000)
                             return;
                         }
-
-                        bot.badgesData[mentionned.id].badges = arrayRemove(bot.badgesData[mentionned.id].badges, args[2]);
-
-                        fs.writeFileSync('./resources/badges.json', bot.badgesData, err => {
-                            if(err) throw err;
-                        })
-
-                        bot.badgesData = require("../../resources/badges.json");
 
                         var replyEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.ALLOW)

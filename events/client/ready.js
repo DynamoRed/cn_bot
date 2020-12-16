@@ -95,6 +95,43 @@ module.exports = async bot => {
         if (err) throw err;
         console.log("Connecté à la base de données MySQL!");
     });
+
+    bot.addBadge = function addBadge(owner_id, badge_name){
+        let obtainedDate = new Date();
+        obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
+        let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
+        if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
+            hours = hours + 12;
+            if(hours == 24){
+                hours = 0;
+            }
+        }
+        obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
+        obtainedDate.split(",")[0].split("/")[0],
+        obtainedDate.split(",")[0].split("/")[2],
+        hours,
+        obtainedDate.split(",")[1].split(":")[1]];
+        obtainedDate = obtainedDate.join("-");
+
+        bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES (${badge_name}, ${obtainedDate}, ${owner_id})`, function(err, results){
+            if (err) throw err;
+        })
+    }
+
+    bot.removeBadge = function removeBadge(owner_id, badge_name){
+        bot.db.query(`DELETE FROM discord_badges WHERE badge_name="${badge_name}", badge_owner="${owner_id}"`, function(err, results){
+            if (err) throw err;
+        })
+    }
+
+    bot.getBadges = function getBadges(owner_id){
+        let badges;
+        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner="${owner_id}"`, function(err, results){
+            if (err) throw err;
+            badges = result
+        })
+        return badges;
+    }
  
     console.log("Initialization finished !");
 }

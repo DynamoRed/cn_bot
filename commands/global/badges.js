@@ -185,7 +185,7 @@ module.exports = {
                                         var confirmEmbed = new Discord.MessageEmbed()
                                             .setColor(bot.config.COLORS.ALLOW)
                                             .setFooter("Consultez vos badges avec !badges")
-                                            .setDescription(`<@${mentionned.id}> **vous venez d'acquerir le badge ${args[2].toUpperCase()}**`)
+                                            .setDescription(`<@${mentionned.id}> **vous venez d'acquerir le badge __${bot.badges.get(args[2]).name}__**`)
                                         let confirmMessage = await mentionned.send(confirmEmbed);
                                         return;
                                     }
@@ -237,7 +237,7 @@ module.exports = {
                                         var confirmEmbed = new Discord.MessageEmbed()
                                             .setColor(bot.config.COLORS.DENY)
                                             .setFooter("Consultez vos badges avec !badges")
-                                            .setDescription(`<@${mentionned.id}> **vous venez de perdre le badge ${args[2].toUpperCase()}**`)
+                                            .setDescription(`<@${mentionned.id}> **vous venez de perdre le badge __${bot.badges.get(args[2]).name}__**`)
                                         let confirmMessage = await mentionned.send(confirmEmbed);
                                         return;
                                     }

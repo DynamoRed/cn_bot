@@ -119,7 +119,7 @@ module.exports = async bot => {
                             var confirmEmbed = new Discord.MessageEmbed()
                                 .setColor(bot.config.COLORS.ALLOW)
                                 .setFooter("Consultez vos badges avec !badges")
-                                .setDescription(`<@${m.user.id}> **vous venez d'acquerir le badge STAFF**`)
+                                .setDescription(`<@${m.user.id}> **vous venez d'acquerir le badge __Staff__**`)
                             let confirmMessage = await m.user.send(confirmEmbed);
                             return;
                         }
@@ -157,7 +157,7 @@ module.exports = async bot => {
                             var confirmEmbed = new Discord.MessageEmbed()
                                 .setColor(bot.config.COLORS.ALLOW)
                                 .setFooter("Consultez vos badges avec !badges")
-                                .setDescription(`<@${m.user.id}> **vous venez d'acquerir le badge YOUTUBER**`)
+                                .setDescription(`<@${m.user.id}> **vous venez d'acquerir le badge __Vidéaste__**`)
                             let confirmMessage = await m.user.send(confirmEmbed);
                             return;
                         }
@@ -195,7 +195,7 @@ module.exports = async bot => {
                             var confirmEmbed = new Discord.MessageEmbed()
                                 .setColor(bot.config.COLORS.ALLOW)
                                 .setFooter("Consultez vos badges avec !badges")
-                                .setDescription(`<@${m.user.id}> **vous venez d'acquerir le badge VIEUX CROULANT**`)
+                                .setDescription(`<@${m.user.id}> **vous venez d'acquerir le badge __Vieux Croulant__**`)
                             let confirmMessage = await m.user.send(confirmEmbed);
                             return;
                         }
@@ -233,7 +233,7 @@ module.exports = async bot => {
                             var confirmEmbed = new Discord.MessageEmbed()
                                 .setColor(bot.config.COLORS.ALLOW)
                                 .setFooter("Consultez vos badges avec !badges")
-                                .setDescription(`<@${m.user.id}> **vous venez d'acquerir le badge BOOSTER**`)
+                                .setDescription(`<@${m.user.id}> **vous venez d'acquerir le badge __Booster__**`)
                             let confirmMessage = await m.user.send(confirmEmbed);
                             return;
                         }

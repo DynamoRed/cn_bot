@@ -23,45 +23,47 @@ module.exports = {
  
         let mentionned = message.mentions.users.first();
         if(args.length == 0){
-            console.log(bot.getBadges(message.author.id));
-            return;
-            /*if(bot.badgesData[message.author.id]){
-                let badge = bot.badges.get(bot.badgesData[message.author.id].badges[0].id);
-                let obtainedDate =  bot.badgesData[message.author.id].badges[0].get_at;
-                obtainedDate = obtainedDate.split("-");
-                obtainedDate = `${obtainedDate[0]}/${obtainedDate[1]}/${obtainedDate[2]} ${obtainedDate[3]}:${obtainedDate[4]}`
-                var badgeEmbed = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.BASE)
-                    .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
-                    .setFooter(`Badge 1/${bot.badgesData[message.author.id].badges.length} | Obtenu le ${obtainedDate}`)
-                    .setTitle(`👉 ${badge.name}`)
-                    .setAuthor(`Badges de ${message.author.username}`, message.author.avatarURL())
-                    .setDescription(`*${badge.description}*
-                    `)
-                let badgeMessage = await message.channel.send(badgeEmbed);
-                if(bot.badgesData[message.author.id].badges.length > 1){
-                    badgeMessage.react("◀");
-                    badgeMessage.react("▶");
-                    badgeMessage.actualPage = 1;
-                    badgeMessage.whoRequest = message.author;
-                    badgeMessage.canChangePage = true;
-                    badgeMessage.whoIsRequest = message.author;
-                    setTimeout(() => {
-                        if(badgeMessage.actualPage != 1) return;
-                        badgeMessage.reactions.removeAll();
-                        badgeMessage.canChangePage = false;
-                    }, 15 * 1000)
+            bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner="${message.author.id}"`, function(err, results){
+                if (err) throw err;
+                if(results){
+                    let badge = bot.badges.get(results[0].badge_name);
+                    let obtainedDate =  results[0].badge_get_at;
+                    obtainedDate = obtainedDate.split("-");
+                    obtainedDate = `${obtainedDate[0]}/${obtainedDate[1]}/${obtainedDate[2]} ${obtainedDate[3]}:${obtainedDate[4]}`
+                    var badgeEmbed = new Discord.MessageEmbed()
+                        .setColor(bot.config.COLORS.BASE)
+                        .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
+                        .setFooter(`Badge 1/${results.length} | Obtenu le ${obtainedDate}`)
+                        .setTitle(`👉 ${badge.name}`)
+                        .setAuthor(`Badges de ${message.author.username}`, message.author.avatarURL())
+                        .setDescription(`*${badge.description}*
+                        `)
+                    let badgeMessage = await message.channel.send(badgeEmbed);
+                    if(results.length > 1){
+                        badgeMessage.react("◀");
+                        badgeMessage.react("▶");
+                        badgeMessage.results = results;
+                        badgeMessage.actualPage = 1;
+                        badgeMessage.whoRequest = message.author;
+                        badgeMessage.canChangePage = true;
+                        badgeMessage.whoIsRequest = message.author;
+                        setTimeout(() => {
+                            if(badgeMessage.actualPage != 1) return;
+                            badgeMessage.reactions.removeAll();
+                            badgeMessage.canChangePage = false;
+                        }, 15 * 1000)
+                    }
+                    return;
+                } else {
+                    var replyEmbed = new Discord.MessageEmbed()
+                        .setColor(bot.config.COLORS.DENY)
+                        .setFooter(`Message auto-supprimé dans 5 secondes`)
+                        .setDescription(`<@${message.author.id}> **vous n'avez aucun badge !**`)
+                    let msg = await message.channel.send(replyEmbed);
+                    setTimeout(() => {msg.delete()}, 5 * 1000)
+                    return;
                 }
-                return;
-            } else {
-                var replyEmbed = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.DENY)
-                    .setFooter(`Message auto-supprimé dans 5 secondes`)
-                    .setDescription(`<@${message.author.id}> **vous n'avez aucun badge !**`)
-                let msg = await message.channel.send(replyEmbed);
-                setTimeout(() => {msg.delete()}, 5 * 1000)
-                return;
-            }*/
+            })
         } else if(args.length == 1){
                 if(mentionned){
                     if(bot.badgesData[mentionned.id]){

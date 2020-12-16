@@ -77,6 +77,46 @@ module.exports = async bot => {
         }
     })  
 
+    bot.guilds.cache.find(g => g.id == "693198481086480544").members.cache.forEach(m => {
+        if(m.roles.cache.find(r => r.name.toLowerCase().includes("staff") || r.name.toLowerCase().includes("staff+"))){
+            bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${m.user.id}' AND badge_name='staff'`, async function(err, results){
+                if (err) throw err;
+                if(results != undefined && results.length != 0){
+                    return;
+                } else {
+                    let obtainedDate = new Date();
+                    obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
+                    let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
+                    if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
+                        hours = hours + 12;
+                        if(hours == 24){
+                            hours = 0;
+                        }
+                    }
+                    obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
+                    obtainedDate.split(",")[0].split("/")[0],
+                    obtainedDate.split(",")[0].split("/")[2],
+                    hours,
+                    obtainedDate.split(",")[1].split(":")[1]];
+                    obtainedDate = obtainedDate.join("-");
+
+                    bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('staff', '${obtainedDate}', '${m.user.id}')`, async function(err, results){
+                        if (err){
+                            throw err
+                        } else {
+                            var confirmEmbed = new Discord.MessageEmbed()
+                                .setColor(bot.config.COLORS.DENY)
+                                .setFooter(`Message auto-supprimé dans 5 secondes`)
+                                .setDescription(`<@${m.user.id}> **vous venez d'acquerir le badge STAFF**`)
+                            let confirmMessage = await m.user.send(confirmEmbed);
+                            return;
+                        }
+                    })
+                }
+            })
+        }
+    })
+
     let table = new ascii("Guilds");
     table.setHeading("Guild", "Guild ID", "Members Size", "Owner", "Owner ID");
     bot.guilds.cache.forEach(g => {

@@ -60,7 +60,7 @@ module.exports = async (bot, message) => {
                             var confirmEmbed = new Discord.MessageEmbed()
                                 .setColor(bot.config.COLORS.DENY)
                                 .setFooter(`Message auto-supprimé dans 5 secondes`)
-                                .setDescription(`<@${mentionned.id}> **vous venez d'acquerir le badge ${args[2].toUpperCase()}**`)
+                                .setDescription(`<@${mentionned.id}> **vous venez d'acquerir le badge BOOSTER**`)
                             let confirmMessage = await mentionned.send(confirmEmbed);
                             return;
                         }

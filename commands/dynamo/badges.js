@@ -170,7 +170,7 @@ module.exports = {
                                 obtainedDate.split(",")[1].split(":")[1]];
                                 obtainedDate = obtainedDate.join("-");
 
-                                bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES (${args[2]}, ${obtainedDate}, ${mentionned.id})`, function(err, results){
+                                bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES (${args[2]}, ${obtainedDate}, ${mentionned.id})`, async function(err, results){
                                     if (err){
                                         throw err
                                     } else {
@@ -217,7 +217,7 @@ module.exports = {
                                 setTimeout(() => {msg.delete()}, 5 * 1000)
                                 return;
                             } else {
-                                bot.db.query(`DELETE FROM discord_badges WHERE badge_name="${args[2]}", badge_owner="${mentionned.id}"`, function(err, results){
+                                bot.db.query(`DELETE FROM discord_badges WHERE badge_name="${args[2]}", badge_owner="${mentionned.id}"`, async function(err, results){
                                     if (err){
                                         throw err
                                     } else {

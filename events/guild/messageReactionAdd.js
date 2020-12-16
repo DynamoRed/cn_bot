@@ -41,6 +41,7 @@ module.exports = async (bot, reaction, user) => {
         if(!message.embeds[0]) return;
         if(!message.embeds[0].author) return;
         if(!message.embeds[0].author.name.startsWith("Badges de")) return;
+        if(!message.results) return;
         if(!message.actualPage) return;
         if(!message.whoRequest) return;
         reaction.users.remove(user);
@@ -49,21 +50,21 @@ module.exports = async (bot, reaction, user) => {
         if(!message.whoIsRequest) return;
 
         if(message.actualPage <= 1){
-            message.actualPage = bot.badgesData[message.whoIsRequest.id].badges.length;
+            message.actualPage = message.results.length;
         } else {
             message.actualPage--;
         }
 
         let pageNumber = message.actualPage;
 
-        let badge = bot.badges.get(bot.badgesData[message.whoIsRequest.id].badges[pageNumber - 1].id);
-        let obtainedDate =  bot.badgesData[message.whoIsRequest.id].badges[pageNumber - 1].get_at;
+        let badge = bot.badges.get(message.results[pageNumber - 1].id);
+        let obtainedDate =  message.results[pageNumber - 1].get_at;
         obtainedDate = obtainedDate.split("-");
         obtainedDate = `${obtainedDate[0]}/${obtainedDate[1]}/${obtainedDate[2]} ${obtainedDate[3]}:${obtainedDate[4]}`
         var badgeEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
-            .setFooter(`Badge ${pageNumber}/${bot.badgesData[message.whoIsRequest.id].badges.length} | Obtenu le ${obtainedDate}`)
+            .setFooter(`Badge ${pageNumber}/${message.results.length} | Obtenu le ${obtainedDate}`)
             .setTitle(`👉 ${badge.name}`)
             .setAuthor(`Badges de ${message.whoIsRequest.username}`, message.whoIsRequest.avatarURL())
             .setDescription(`*${badge.description}*
@@ -79,6 +80,7 @@ module.exports = async (bot, reaction, user) => {
         if(!message.embeds[0]) return;
         if(!message.embeds[0].author) return;
         if(!message.embeds[0].author.name.startsWith("Badges de")) return;
+        if(!message.results) return;
         if(!message.actualPage) return;
         if(!message.whoRequest) return;
         reaction.users.remove(user);
@@ -86,7 +88,7 @@ module.exports = async (bot, reaction, user) => {
         if(message.whoRequest != user) return;
         if(!message.whoIsRequest) return;
 
-        if(message.actualPage >= bot.badgesData[message.whoIsRequest.id].badges.length){
+        if(message.actualPage >= message.results.length){
             message.actualPage = 1;
         } else {
             message.actualPage++;
@@ -94,14 +96,14 @@ module.exports = async (bot, reaction, user) => {
 
         let pageNumber = message.actualPage;
 
-        let badge = bot.badges.get(bot.badgesData[message.whoIsRequest.id].badges[pageNumber - 1].id);
-        let obtainedDate =  bot.badgesData[message.whoIsRequest.id].badges[pageNumber - 1].get_at;
+        let badge = bot.badges.get(message.results[pageNumber - 1].id);
+        let obtainedDate =  message.results[pageNumber - 1].get_at;
         obtainedDate = obtainedDate.split("-");
         obtainedDate = `${obtainedDate[0]}/${obtainedDate[1]}/${obtainedDate[2]} ${obtainedDate[3]}:${obtainedDate[4]}`
         var badgeEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
-            .setFooter(`Badge ${pageNumber}/${bot.badgesData[message.whoIsRequest.id].badges.length} | Obtenu le ${obtainedDate}`)
+            .setFooter(`Badge ${pageNumber}/${message.results.length} | Obtenu le ${obtainedDate}`)
             .setTitle(`👉 ${badge.name}`)
             .setAuthor(`Badges de ${message.whoIsRequest.username}`, message.whoIsRequest.avatarURL())
             .setDescription(`*${badge.description}*

@@ -90,7 +90,7 @@ module.exports = async bot => {
     });
 
     bot.guilds.cache.find(g => g.id == "693198481086480544").members.cache.forEach(m => {
-        if(m.roles.cache.find(r => r.name.toLowerCase().includes("staff") || r.name.toLowerCase().includes("staff+"))){
+        if(m.roles.cache.find(r => r.name.toLowerCase() == "staff" || r.name.toLowerCase().includes("staff+"))){
             bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${m.user.id}' AND badge_name='staff'`, async function(err, results){
                 if (err) throw err;
                 if(results != undefined && results.length != 0){
@@ -118,7 +118,6 @@ module.exports = async bot => {
                         } else {
                             var confirmEmbed = new Discord.MessageEmbed()
                                 .setColor(bot.config.COLORS.ALLOW)
-                                .setFooter(`Message auto-supprimé dans 5 secondes`)
                                 .setDescription(`<@${m.user.id}> **vous venez d'acquerir le badge STAFF**`)
                             let confirmMessage = await m.user.send(confirmEmbed);
                             return;

@@ -173,7 +173,7 @@ module.exports = {
                                         setTimeout(() => {msg.delete()}, 5 * 1000)
 
                                         var confirmEmbed = new Discord.MessageEmbed()
-                                            .setColor(bot.config.COLORS.DENY)
+                                            .setColor(bot.config.COLORS.ALLOW)
                                             .setFooter(`Message auto-supprimé dans 5 secondes`)
                                             .setDescription(`<@${mentionned.id}> **vous venez d'acquerir le badge ${args[2].toUpperCase()}**`)
                                         let confirmMessage = await mentionned.send(confirmEmbed);
@@ -224,6 +224,11 @@ module.exports = {
                                             .setDescription(`<@${message.author.id}> **badge supprimé avec succès !**`)
                                         let msg = await message.channel.send(replyEmbed);
                                         setTimeout(() => {msg.delete()}, 5 * 1000)
+                                        var confirmEmbed = new Discord.MessageEmbed()
+                                            .setColor(bot.config.COLORS.DENY)
+                                            .setFooter(`Message auto-supprimé dans 5 secondes`)
+                                            .setDescription(`<@${mentionned.id}> **vous venez de perdre le badge ${args[2].toUpperCase()}**`)
+                                        let confirmMessage = await mentionned.send(confirmEmbed);
                                         return;
                                     }
                                 })

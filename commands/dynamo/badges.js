@@ -25,7 +25,7 @@ module.exports = {
         if(args.length == 0){
             bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner="${message.author.id}"`, async function(err, results){
                 if (err) throw err;
-                if(results){
+                if(results && results != []){
                     let badge = bot.badges.get(results[0].badge_name);
                     let obtainedDate =  results[0].badge_get_at;
                     obtainedDate = obtainedDate.split("-");
@@ -68,7 +68,7 @@ module.exports = {
                 if(mentionned){
                     bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner="${mentionned.id}"`, async function(err, results){
                         if (err) throw err;
-                        if(results){
+                        if(results && results != []){
                             let badge = bot.badges.get(results[0].badge_name);
                             let obtainedDate =  results[0].badge_get_at;
                             obtainedDate = obtainedDate.split("-");

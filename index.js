@@ -19,7 +19,7 @@ bot.categories = fs.readdirSync("./commands/");
 })
 
 var db = mysql.createConnection({
-    host: "https://frweb5.pulseheberg.net:8443/phpMyAdmin",
+    host: "http://89.234.180.33:3306",
     user: "johnny",
     password: "7olPv44^"
 });

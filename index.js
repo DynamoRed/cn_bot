@@ -18,21 +18,6 @@ bot.categories = fs.readdirSync("./commands/");
     require(`./handlers/${handler}`)(bot);
 })
 
-var db = mysql.createConnection({
-    host: "http://89.234.180.33:3306",
-    user: "johnny",
-    password: "7olPv44^"
-});
- 
-db.connect(function(err) {
-    if (err) throw err;
-    console.log("Connecté à la base de données MySQL!");
-});
-
-bot.addBadge = function addBadge(owner_id, badge_name){
-
-}
-
 bot.on("ready", () => {
     require("./events/client/ready")(bot);
 });

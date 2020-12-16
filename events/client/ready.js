@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const Discord = require('discord.js');
 const ascii = require('ascii-table');
 
 module.exports = async bot => {
@@ -83,6 +84,18 @@ module.exports = async bot => {
         table.addRow(g.name, g.id, g.memberCount, g.owner.user.tag, g.owner.user.id);
     });
     console.log(table.toString());
+
+    bot.db = bot.mysql.createConnection({
+        host: "http://89.234.180.33:3306",
+        user: "johnny",
+        password: "7olPv44^",
+        database : "splife"
+    });
+     
+    db.connect(function(err) {
+        if (err) throw err;
+        console.log("Connecté à la base de données MySQL!");
+    });
  
     console.log("Initialization finished !");
 }

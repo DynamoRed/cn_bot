@@ -11,16 +11,6 @@ module.exports = {
     restrictions: [""],
     aliases: ["b"],
     run: async (bot, message, args, botEmojis) => {
-        if(message.author.id != bot.config.OWNER_ID){
-            var replyEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.DENY)
-                .setFooter(`Message auto-supprimé dans 5 secondes`)
-                .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
-            let msg = await message.channel.send(replyEmbed);
-            setTimeout(() => {msg.delete()}, 5 * 1000)
-            return;
-        }
- 
         let mentionned = message.mentions.users.first();
         if(args.length == 0){
             bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}'`, async function(err, results){

@@ -143,23 +143,48 @@ module.exports = {
                             return;
                         }
 
-                        if(bot.badgesData[mentionned.id].badges.forEach(b => b.id == args[2])){
-                            var replyEmbed = new Discord.MessageEmbed()
-                                .setColor(bot.config.COLORS.DENY)
-                                .setFooter(`Message auto-supprimé dans 5 secondes`)
-                                .setDescription(`<@${message.author.id}> **ce membre a déjà ce badge !**`)
-                            let msg = await message.channel.send(replyEmbed);
-                            setTimeout(() => {msg.delete()}, 5 * 1000)
-                            return;
-                        }
+                        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner="${mentionned.id}", badge_name="${args[2]}"`, async function(err, results){
+                            if (err) throw err;
+                            if(results != undefined && results.length != 0){
+                                var replyEmbed = new Discord.MessageEmbed()
+                                    .setColor(bot.config.COLORS.DENY)
+                                    .setFooter(`Message auto-supprimé dans 5 secondes`)
+                                    .setDescription(`<@${message.author.id}> **ce membre a déjà ce badge !**`)
+                                let msg = await message.channel.send(replyEmbed);
+                                setTimeout(() => {msg.delete()}, 5 * 1000)
+                                return;
+                            } else {
+                                let obtainedDate = new Date();
+                                obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
+                                let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
+                                if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
+                                    hours = hours + 12;
+                                    if(hours == 24){
+                                        hours = 0;
+                                    }
+                                }
+                                obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
+                                obtainedDate.split(",")[0].split("/")[0],
+                                obtainedDate.split(",")[0].split("/")[2],
+                                hours,
+                                obtainedDate.split(",")[1].split(":")[1]];
+                                obtainedDate = obtainedDate.join("-");
 
-                        var replyEmbed = new Discord.MessageEmbed()
-                            .setColor(bot.config.COLORS.ALLOW)
-                            .setFooter(`Message auto-supprimé dans 5 secondes`)
-                            .setDescription(`<@${message.author.id}> **badge ajouté avec succès !**`)
-                        let msg = await message.channel.send(replyEmbed);
-                        setTimeout(() => {msg.delete()}, 5 * 1000)
-                        return;
+                                bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES (${args[2]}, ${obtainedDate}, ${mentionned.id})`, function(err, results){
+                                    if (err){
+                                        throw err
+                                    } else {
+                                        var replyEmbed = new Discord.MessageEmbed()
+                                            .setColor(bot.config.COLORS.ALLOW)
+                                            .setFooter(`Message auto-supprimé dans 5 secondes`)
+                                            .setDescription(`<@${message.author.id}> **badge ajouté avec succès !**`)
+                                        let msg = await message.channel.send(replyEmbed);
+                                        setTimeout(() => {msg.delete()}, 5 * 1000)
+                                        return;
+                                    }
+                                })
+                            }
+                        })
                     } else {
                         var replyEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.DENY)
@@ -181,23 +206,32 @@ module.exports = {
                             return;
                         }
 
-                        if(!bot.badgesData[mentionned.id].badges.filter(b => {b.id == args[2]})){
-                            var replyEmbed = new Discord.MessageEmbed()
-                                .setColor(bot.config.COLORS.DENY)
-                                .setFooter(`Message auto-supprimé dans 5 secondes`)
-                                .setDescription(`<@${message.author.id}> **ce badge n'a pas pu être trouvé chez ce joueur !**`)
-                            let msg = await message.channel.send(replyEmbed);
-                            setTimeout(() => {msg.delete()}, 5 * 1000)
-                            return;
-                        }
-
-                        var replyEmbed = new Discord.MessageEmbed()
-                            .setColor(bot.config.COLORS.ALLOW)
-                            .setFooter(`Message auto-supprimé dans 5 secondes`)
-                            .setDescription(`<@${message.author.id}> **badge retiré avec succès !**`)
-                        let msg = await message.channel.send(replyEmbed);
-                        setTimeout(() => {msg.delete()}, 5 * 1000)
-                        return;
+                        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner="${mentionned.id}", badge_name="${args[2]}"`, async function(err, results){
+                            if (err) throw err;
+                            if(results === undefined || results.length == 0){
+                                var replyEmbed = new Discord.MessageEmbed()
+                                    .setColor(bot.config.COLORS.DENY)
+                                    .setFooter(`Message auto-supprimé dans 5 secondes`)
+                                    .setDescription(`<@${message.author.id}> **ce membre n'a pas ce badge !**`)
+                                let msg = await message.channel.send(replyEmbed);
+                                setTimeout(() => {msg.delete()}, 5 * 1000)
+                                return;
+                            } else {
+                                bot.db.query(`DELETE FROM discord_badges WHERE badge_name="${args[2]}", badge_owner="${mentionned.id}"`, function(err, results){
+                                    if (err){
+                                        throw err
+                                    } else {
+                                        var replyEmbed = new Discord.MessageEmbed()
+                                            .setColor(bot.config.COLORS.ALLOW)
+                                            .setFooter(`Message auto-supprimé dans 5 secondes`)
+                                            .setDescription(`<@${message.author.id}> **badge supprimé avec succès !**`)
+                                        let msg = await message.channel.send(replyEmbed);
+                                        setTimeout(() => {msg.delete()}, 5 * 1000)
+                                        return;
+                                    }
+                                })
+                            }
+                        })
                     } else {
                         var replyEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.DENY)

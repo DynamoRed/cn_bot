@@ -77,6 +77,18 @@ module.exports = async bot => {
         }
     })  
 
+    bot.db = bot.mysql.createConnection({
+        host: "89.234.180.33",
+        user: "johnny",
+        password: "7olPv44^",
+        database : "splife"
+    });
+     
+    bot.db.connect(function(err) {
+        if (err) throw err;
+        console.log("Connecté à la base de données MySQL!");
+    });
+
     bot.guilds.cache.find(g => g.id == "693198481086480544").members.cache.forEach(m => {
         if(m.roles.cache.find(r => r.name.toLowerCase().includes("staff") || r.name.toLowerCase().includes("staff+"))){
             bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${m.user.id}' AND badge_name='staff'`, async function(err, results){
@@ -123,18 +135,6 @@ module.exports = async bot => {
         table.addRow(g.name, g.id, g.memberCount, g.owner.user.tag, g.owner.user.id);
     });
     console.log(table.toString());
-
-    bot.db = bot.mysql.createConnection({
-        host: "89.234.180.33",
-        user: "johnny",
-        password: "7olPv44^",
-        database : "splife"
-    });
-     
-    bot.db.connect(function(err) {
-        if (err) throw err;
-        console.log("Connecté à la base de données MySQL!");
-    });
  
     console.log("Initialization finished !");
 }

@@ -91,7 +91,7 @@ module.exports = async bot => {
         database : "splife"
     });
      
-    db.connect(function(err) {
+    bot.db.connect(function(err) {
         if (err) throw err;
         console.log("Connecté à la base de données MySQL!");
     });

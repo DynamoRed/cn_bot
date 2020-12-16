@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const Discord = require('discord.js');
 const ascii = require('ascii-table');
 
 module.exports = async bot => {

@@ -57,8 +57,8 @@ module.exports = async (bot, reaction, user) => {
 
         let pageNumber = message.actualPage;
 
-        let badge = bot.badges.get(message.results[pageNumber - 1].id);
-        let obtainedDate =  message.results[pageNumber - 1].get_at;
+        let badge = bot.badges.get(message.results[pageNumber - 1].badge_name);
+        let obtainedDate =  message.results[pageNumber - 1].badge_get_at;
         obtainedDate = obtainedDate.split("-");
         obtainedDate = `${obtainedDate[0]}/${obtainedDate[1]}/${obtainedDate[2]} ${obtainedDate[3]}:${obtainedDate[4]}`
         var badgeEmbed = new Discord.MessageEmbed()
@@ -96,8 +96,8 @@ module.exports = async (bot, reaction, user) => {
 
         let pageNumber = message.actualPage;
 
-        let badge = bot.badges.get(message.results[pageNumber - 1].id);
-        let obtainedDate =  message.results[pageNumber - 1].get_at;
+        let badge = bot.badges.get(message.results[pageNumber - 1].badge_name);
+        let obtainedDate =  message.results[pageNumber - 1].badge_get_at;
         obtainedDate = obtainedDate.split("-");
         obtainedDate = `${obtainedDate[0]}/${obtainedDate[1]}/${obtainedDate[2]} ${obtainedDate[3]}:${obtainedDate[4]}`
         var badgeEmbed = new Discord.MessageEmbed()

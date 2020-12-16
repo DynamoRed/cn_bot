@@ -27,22 +27,42 @@ module.exports = async (bot, message) => {
         return;
     }
 
-    /*if(message.channel.id == bot.config.I_CHANNELS.BOOSTS){
+    if(message.channel.id == bot.config.I_CHANNELS.BOOSTS){
         if(message.type ==  "USER_PREMIUM_GUILD_SUBSCRIPTION"
         || message.type ==  "USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1"
         || message.type ==  "USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2"
         || message.type ==  "USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3"){
-            //BOOST EMBEDS
-            let boostEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.BASE)
-                .setTitle(`${bot.botEmojis.BOOST.HAND}${bot.botEmojis.BOOST.BOOST}${bot.botEmojis.BOOST.HAND_REVERSE} Nouveau BOOOOOOOOOOOOST !`)
-                .setDescription(`${bot.botEmojis.GLOBAL.BULLET} <@${message.author.id}> vient de **booster** notre discord ! **Quel BG !** Merci a lui :tada:`);
+            bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}' AND badge_name='booster'`, async function(err, results){
+                if (err) throw err;
+                if(results != undefined && results.length != 0){
+                    return;
+                } else {
+                    let obtainedDate = new Date();
+                    obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
+                    let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
+                    if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
+                        hours = hours + 12;
+                        if(hours == 24){
+                            hours = 0;
+                        }
+                    }
+                    obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
+                    obtainedDate.split(",")[0].split("/")[0],
+                    obtainedDate.split(",")[0].split("/")[2],
+                    hours,
+                    obtainedDate.split(",")[1].split(":")[1]];
+                    obtainedDate = obtainedDate.join("-");
 
-            message.channel.send(boostEmbed);
-            message.delete();
+                    bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('booster', '${obtainedDate}', '${message.author.id}')`, async function(err, results){
+                        if (err){
+                            throw err
+                        }
+                    })
+                }
+            })
             return;
         }
-    }*/
+    }
 
     if(message.channel.id == bot.config.I_CHANNELS.REUNION_VOTES){
         if(message.content.startsWith("https://")){

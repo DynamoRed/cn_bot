@@ -5,131 +5,133 @@ const Discord = require("discord.js");
 module.exports = async (bot, message) => {
     if(message.author.bot) return;
 
-    bot.db.query(`SELECT * FROM messages_stats WHERE author_id='${message.author.id}'`, async function(err, results){
-        if (err) throw err;
-        if(results != undefined && results.length != 0){
-            bot.db.query(`UPDATE messages_stats SET count=${results[0].count + 1} WHERE author_id='${message.author.id}'`, async function(err, results){
-                if (err) throw err;
-            })
-            if(results[0].count + 1 == 500){
-                bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}' AND badge_name='500_m_v2'`, async function(err, results){
+    if(message.guild.id == "693198481086480544" || message.guild.id == "618855620820336640"){
+        bot.db.query(`SELECT * FROM messages_stats WHERE author_id='${message.author.id}'`, async function(err, results){
+            if (err) throw err;
+            if(results != undefined && results.length != 0){
+                bot.db.query(`UPDATE messages_stats SET count=${results[0].count + 1} WHERE author_id='${message.author.id}'`, async function(err, results){
                     if (err) throw err;
-                    if(results != undefined && results.length != 0){
-                        return;
-                    } else {
-                        let obtainedDate = new Date();
-                        obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
-                        let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
-                        if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
-                            hours = hours + 12;
-                            if(hours == 24){
-                                hours = 0;
+                })
+                if(results[0].count + 1 == 500){
+                    bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}' AND badge_name='500_m_v2'`, async function(err, results){
+                        if (err) throw err;
+                        if(results != undefined && results.length != 0){
+                            return;
+                        } else {
+                            let obtainedDate = new Date();
+                            obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
+                            let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
+                            if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
+                                hours = hours + 12;
+                                if(hours == 24){
+                                    hours = 0;
+                                }
                             }
+                            obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
+                            obtainedDate.split(",")[0].split("/")[0],
+                            obtainedDate.split(",")[0].split("/")[2],
+                            hours,
+                            obtainedDate.split(",")[1].split(":")[1]];
+                            obtainedDate = obtainedDate.join("-");
+    
+                            bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('500_m_v2', '${obtainedDate}', '${message.author.id}')`, async function(err, results){
+                                if (err){
+                                    throw err
+                                } else {
+                                    var confirmEmbed = new Discord.MessageEmbed()
+                                        .setColor(bot.config.COLORS.ALLOW)
+                                        .setFooter("Consultez vos badges avec !badges")
+                                        .setDescription(`<@${message.author.id}> **vous venez d'acquerir le badge __${bot.badges.get("500_m_v2").name}__**`)
+                                    let confirmMessage = await message.author.send(confirmEmbed);
+                                    return;
+                                }
+                            })
                         }
-                        obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
-                        obtainedDate.split(",")[0].split("/")[0],
-                        obtainedDate.split(",")[0].split("/")[2],
-                        hours,
-                        obtainedDate.split(",")[1].split(":")[1]];
-                        obtainedDate = obtainedDate.join("-");
-
-                        bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('500_m_v2', '${obtainedDate}', '${message.author.id}')`, async function(err, results){
-                            if (err){
-                                throw err
-                            } else {
-                                var confirmEmbed = new Discord.MessageEmbed()
-                                    .setColor(bot.config.COLORS.ALLOW)
-                                    .setFooter("Consultez vos badges avec !badges")
-                                    .setDescription(`<@${message.author.id}> **vous venez d'acquerir le badge __${bot.badges.get("500_m_v2").name}__**`)
-                                let confirmMessage = await message.author.send(confirmEmbed);
-                                return;
+                    })
+                }
+    
+                if(results[0].count + 1 == 1000){
+                    bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}' AND badge_name='1000_m_v2'`, async function(err, results){
+                        if (err) throw err;
+                        if(results != undefined && results.length != 0){
+                            return;
+                        } else {
+                            let obtainedDate = new Date();
+                            obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
+                            let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
+                            if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
+                                hours = hours + 12;
+                                if(hours == 24){
+                                    hours = 0;
+                                }
                             }
-                        })
-                    }
+                            obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
+                            obtainedDate.split(",")[0].split("/")[0],
+                            obtainedDate.split(",")[0].split("/")[2],
+                            hours,
+                            obtainedDate.split(",")[1].split(":")[1]];
+                            obtainedDate = obtainedDate.join("-");
+    
+                            bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('1000_m_v2', '${obtainedDate}', '${message.author.id}')`, async function(err, results){
+                                if (err){
+                                    throw err
+                                } else {
+                                    var confirmEmbed = new Discord.MessageEmbed()
+                                        .setColor(bot.config.COLORS.ALLOW)
+                                        .setFooter("Consultez vos badges avec !badges")
+                                        .setDescription(`<@${message.author.id}> **vous venez d'acquerir le badge __${bot.badges.get("1000_m_v2").name}__**`)
+                                    let confirmMessage = await message.author.send(confirmEmbed);
+                                    return;
+                                }
+                            })
+                        }
+                    })
+                }
+    
+                if(results[0].count + 1 == 2000){
+                    bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}' AND badge_name='2000_m_v2'`, async function(err, results){
+                        if (err) throw err;
+                        if(results != undefined && results.length != 0){
+                            return;
+                        } else {
+                            let obtainedDate = new Date();
+                            obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
+                            let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
+                            if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
+                                hours = hours + 12;
+                                if(hours == 24){
+                                    hours = 0;
+                                }
+                            }
+                            obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
+                            obtainedDate.split(",")[0].split("/")[0],
+                            obtainedDate.split(",")[0].split("/")[2],
+                            hours,
+                            obtainedDate.split(",")[1].split(":")[1]];
+                            obtainedDate = obtainedDate.join("-");
+    
+                            bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('2000_m_v2', '${obtainedDate}', '${message.author.id}')`, async function(err, results){
+                                if (err){
+                                    throw err
+                                } else {
+                                    var confirmEmbed = new Discord.MessageEmbed()
+                                        .setColor(bot.config.COLORS.ALLOW)
+                                        .setFooter("Consultez vos badges avec !badges")
+                                        .setDescription(`<@${message.author.id}> **vous venez d'acquerir le badge __${bot.badges.get("2000_m_v2").name}__**`)
+                                    let confirmMessage = await message.author.send(confirmEmbed);
+                                    return;
+                                }
+                            })
+                        }
+                    })
+                }
+            } else {
+                bot.db.query(`INSERT INTO messages_stats (author_id, count) VALUES ('${message.author.id}', '1')`, async function(err, results){
+                    if (err) throw err;
                 })
             }
-
-            if(results[0].count + 1 == 1000){
-                bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}' AND badge_name='1000_m_v2'`, async function(err, results){
-                    if (err) throw err;
-                    if(results != undefined && results.length != 0){
-                        return;
-                    } else {
-                        let obtainedDate = new Date();
-                        obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
-                        let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
-                        if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
-                            hours = hours + 12;
-                            if(hours == 24){
-                                hours = 0;
-                            }
-                        }
-                        obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
-                        obtainedDate.split(",")[0].split("/")[0],
-                        obtainedDate.split(",")[0].split("/")[2],
-                        hours,
-                        obtainedDate.split(",")[1].split(":")[1]];
-                        obtainedDate = obtainedDate.join("-");
-
-                        bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('1000_m_v2', '${obtainedDate}', '${message.author.id}')`, async function(err, results){
-                            if (err){
-                                throw err
-                            } else {
-                                var confirmEmbed = new Discord.MessageEmbed()
-                                    .setColor(bot.config.COLORS.ALLOW)
-                                    .setFooter("Consultez vos badges avec !badges")
-                                    .setDescription(`<@${message.author.id}> **vous venez d'acquerir le badge __${bot.badges.get("1000_m_v2").name}__**`)
-                                let confirmMessage = await message.author.send(confirmEmbed);
-                                return;
-                            }
-                        })
-                    }
-                })
-            }
-
-            if(results[0].count + 1 == 2000){
-                bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}' AND badge_name='2000_m_v2'`, async function(err, results){
-                    if (err) throw err;
-                    if(results != undefined && results.length != 0){
-                        return;
-                    } else {
-                        let obtainedDate = new Date();
-                        obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
-                        let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
-                        if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
-                            hours = hours + 12;
-                            if(hours == 24){
-                                hours = 0;
-                            }
-                        }
-                        obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
-                        obtainedDate.split(",")[0].split("/")[0],
-                        obtainedDate.split(",")[0].split("/")[2],
-                        hours,
-                        obtainedDate.split(",")[1].split(":")[1]];
-                        obtainedDate = obtainedDate.join("-");
-
-                        bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('2000_m_v2', '${obtainedDate}', '${message.author.id}')`, async function(err, results){
-                            if (err){
-                                throw err
-                            } else {
-                                var confirmEmbed = new Discord.MessageEmbed()
-                                    .setColor(bot.config.COLORS.ALLOW)
-                                    .setFooter("Consultez vos badges avec !badges")
-                                    .setDescription(`<@${message.author.id}> **vous venez d'acquerir le badge __${bot.badges.get("2000_m_v2").name}__**`)
-                                let confirmMessage = await message.author.send(confirmEmbed);
-                                return;
-                            }
-                        })
-                    }
-                })
-            }
-        } else {
-            bot.db.query(`INSERT INTO messages_stats (author_id, count) VALUES ('${message.author.id}', '1')`, async function(err, results){
-                if (err) throw err;
-            })
-        }
-    })
+        })
+    }
 
     if(message.channel.id == bot.config.I_CHANNELS.PATCH_NOTES){
         //PATCH-NOTE EMBEDS

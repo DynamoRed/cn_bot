@@ -230,7 +230,7 @@ module.exports = async bot => {
     })
 
     bot.guilds.cache.forEach(g => {
-        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${g.owner.id}' AND badge_name='event_xmas_2020_v2'`, async function(err, results){
+        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${g.owner.user.id}' AND badge_name='event_xmas_2020_v2'`, async function(err, results){
             if (err) throw err;
             if(results === undefined || results.length == 0){
                 let obtainedDate = new Date();
@@ -249,15 +249,15 @@ module.exports = async bot => {
                 obtainedDate.split(",")[1].split(":")[1]];
                 obtainedDate = obtainedDate.join("-");
 
-                bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('event_xmas_2020_v2', '${obtainedDate}', '${g.owner.id}')`, async function(err, results){
+                bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('event_xmas_2020_v2', '${obtainedDate}', '${g.owner.user.id}')`, async function(err, results){
                     if (err){
                         throw err
                     } else {
                         let confirmEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.ALLOW)
                             .setFooter("Consultez vos badges avec !badges")
-                            .setDescription(`<@${g.owner.id}> **vous venez d'acquerir le badge __Event Noël 2020__**`)
-                        let confirmMessage = await g.owner.send(confirmEmbed);
+                            .setDescription(`<@${g.owner.user.id}> **vous venez d'acquerir le badge __Event Noël 2020__**`)
+                        let confirmMessage = await g.owner.user.send(confirmEmbed);
                     }
                 })
             }

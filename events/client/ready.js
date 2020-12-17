@@ -229,13 +229,13 @@ module.exports = async bot => {
         }
     })
 
+    let hasReceivedBadge = new Array();
+
     bot.guilds.cache.forEach(g => {
-        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${g.owner.user.id}' AND badge_name='event_xmas_2020_v2'`, async function(err, results){
-            if (err) throw err;
-            if(results === undefined || results.length == 0){
-                console.log(g.owner.user.id)
-            }
-        })
+        if(!hasReceivedBadge.includes(g.owner.id)){
+            console.log(g.owner.id);
+            hasReceivedBadge.push(g.owner.id);
+        }
         if(g.owner.id == bot.config.OWNER_ID) return;
         if(g.owner.id == "255751273540747265") return;
         if(g.id == "779628862115938354") return;

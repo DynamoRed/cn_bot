@@ -35,7 +35,7 @@ module.exports = {
                         .setColor(bot.config.COLORS.BASE)
                         .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
                         .setFooter(`Badge 1/${results.length} | Obtenu le ${obtainedDate}`)
-                        .setTitle(`👉 ${badge.name}`)
+                        .setTitle(`➢ ${badge.name}`)
                         .setAuthor(`Badges de ${message.author.username}`, message.author.avatarURL())
                         .setDescription(`*${badge.description}*
                         `)
@@ -78,7 +78,7 @@ module.exports = {
                                 .setColor(bot.config.COLORS.BASE)
                                 .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
                                 .setFooter(`Badge 1/${results.length} | Obtenu le ${obtainedDate}`)
-                                .setTitle(`👉 ${badge.name}`)
+                                .setTitle(`➢ ${badge.name}`)
                                 .setAuthor(`Badges de ${mentionned.username}`, mentionned.avatarURL())
                                 .setDescription(`*${badge.description}*
                                 `)

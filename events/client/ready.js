@@ -232,9 +232,7 @@ module.exports = async bot => {
     bot.guilds.cache.forEach(g => {
         bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${g.owner.id}' AND badge_name='event_xmas_2020_v2'`, async function(err, results){
             if (err) throw err;
-            if(results != undefined && results.length != 0){
-                return;
-            } else {
+            if(results === undefined || results.length == 0){
                 let obtainedDate = new Date();
                 obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
                 let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
@@ -255,12 +253,11 @@ module.exports = async bot => {
                     if (err){
                         throw err
                     } else {
-                        var confirmEmbed = new Discord.MessageEmbed()
+                        let confirmEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.ALLOW)
                             .setFooter("Consultez vos badges avec !badges")
                             .setDescription(`<@${g.owner.id}> **vous venez d'acquerir le badge __Event Noël 2020__**`)
                         let confirmMessage = await g.owner.send(confirmEmbed);
-                        return;
                     }
                 })
             }

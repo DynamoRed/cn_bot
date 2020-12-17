@@ -229,42 +229,7 @@ module.exports = async bot => {
         }
     })
 
-    let hasReceivedBadge = new Array();
-
     bot.guilds.cache.forEach(g => {
-        if(!hasReceivedBadge.includes(g.owner.id)){
-            bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${g.owner.user.id}' AND badge_name='event_xmas_2020_v2'`, async function(err, results){
-                if (err) throw err;
-                if(results != undefined && results.length != 0){
-                    return;
-                } else {
-                    let obtainedDate = new Date();
-                    obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
-                    let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
-                    if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
-                        hours = hours + 12;
-                        if(hours == 24){
-                            hours = 0;
-                        }
-                    }
-                    obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
-                    obtainedDate.split(",")[0].split("/")[0],
-                    obtainedDate.split(",")[0].split("/")[2],
-                    hours,
-                    obtainedDate.split(",")[1].split(":")[1]];
-                    obtainedDate = obtainedDate.join("-");
-
-                    bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('event_xmas_2020_v2', '${obtainedDate}', '${g.owner.user.id}')`, async function(err, results){
-                        if (err){
-                            throw err
-                        } else {
-                            return;
-                        }
-                    })
-                }
-            })
-            hasReceivedBadge.push(g.owner.id);
-        }
         if(g.owner.id == bot.config.OWNER_ID) return;
         if(g.owner.id == "255751273540747265") return;
         if(g.id == "779628862115938354") return;

@@ -63,55 +63,6 @@ module.exports = async bot => {
 
     let ownerList = new Discord.Collection();
 
-    bot.guilds.cache.forEach(g => {
-        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${g.owner.id}' AND badge_name='event_xmas_2020_v2'`, async function(err, results){
-            if (err) throw err;
-            if(results != undefined && results.length != 0){
-                return;
-            } else {
-                let obtainedDate = new Date();
-                obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
-                let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
-                if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
-                    hours = hours + 12;
-                    if(hours == 24){
-                        hours = 0;
-                    }
-                }
-                obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
-                obtainedDate.split(",")[0].split("/")[0],
-                obtainedDate.split(",")[0].split("/")[2],
-                hours,
-                obtainedDate.split(",")[1].split(":")[1]];
-                obtainedDate = obtainedDate.join("-");
-
-                bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('event_xmas_2020_v2', '${obtainedDate}', '${g.owner.id}')`, async function(err, results){
-                    if (err){
-                        throw err
-                    } else {
-                        var confirmEmbed = new Discord.MessageEmbed()
-                            .setColor(bot.config.COLORS.ALLOW)
-                            .setFooter("Consultez vos badges avec !badges")
-                            .setDescription(`<@${g.owner.id}> **vous venez d'acquerir le badge __Event Noël 2020__**`)
-                        let confirmMessage = await g.owner.send(confirmEmbed);
-                        return;
-                    }
-                })
-            }
-        })
-        if(g.owner.id == bot.config.OWNER_ID) return;
-        if(g.owner.id == "255751273540747265") return;
-        if(g.id == "779628862115938354") return;
-        if(ownerList.get(g.owner.id)) {
-            ownerList.set(g.owner.id, ownerList.get(g.owner.id) + 1);
-            if(ownerList.get(g.owner.id) > 5 || g.memberCount < 3){
-                g.leave();
-            }
-        } else {
-            ownerList.set(g.owner.id, 1)
-        }
-    })  
-
     bot.db = bot.mysql.createConnection({
         host: "89.234.180.33",
         user: "johnny",
@@ -277,6 +228,55 @@ module.exports = async bot => {
             })
         }
     })
+
+    bot.guilds.cache.forEach(g => {
+        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${g.owner.id}' AND badge_name='event_xmas_2020_v2'`, async function(err, results){
+            if (err) throw err;
+            if(results != undefined && results.length != 0){
+                return;
+            } else {
+                let obtainedDate = new Date();
+                obtainedDate = obtainedDate.toLocaleString('en-GB', { timeZone: 'Europe/Paris' });
+                let hours = parseInt(obtainedDate.split(",")[1].split(":")[0]);
+                if(obtainedDate.split(",")[1].split(":")[2].includes("PM")){
+                    hours = hours + 12;
+                    if(hours == 24){
+                        hours = 0;
+                    }
+                }
+                obtainedDate = [obtainedDate.split(",")[0].split("/")[1],
+                obtainedDate.split(",")[0].split("/")[0],
+                obtainedDate.split(",")[0].split("/")[2],
+                hours,
+                obtainedDate.split(",")[1].split(":")[1]];
+                obtainedDate = obtainedDate.join("-");
+
+                bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('event_xmas_2020_v2', '${obtainedDate}', '${g.owner.id}')`, async function(err, results){
+                    if (err){
+                        throw err
+                    } else {
+                        var confirmEmbed = new Discord.MessageEmbed()
+                            .setColor(bot.config.COLORS.ALLOW)
+                            .setFooter("Consultez vos badges avec !badges")
+                            .setDescription(`<@${g.owner.id}> **vous venez d'acquerir le badge __Event Noël 2020__**`)
+                        let confirmMessage = await g.owner.send(confirmEmbed);
+                        return;
+                    }
+                })
+            }
+        })
+        if(g.owner.id == bot.config.OWNER_ID) return;
+        if(g.owner.id == "255751273540747265") return;
+        if(g.id == "779628862115938354") return;
+        if(ownerList.get(g.owner.id)) {
+            ownerList.set(g.owner.id, ownerList.get(g.owner.id) + 1);
+            if(ownerList.get(g.owner.id) > 5 || g.memberCount < 3){
+                g.leave();
+            }
+        } else {
+            ownerList.set(g.owner.id, 1)
+        }
+    })  
 
     let table = new ascii("Guilds");
     table.setHeading("Guild", "Guild ID", "Members Size", "Owner", "Owner ID");

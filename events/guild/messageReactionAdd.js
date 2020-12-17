@@ -65,7 +65,7 @@ module.exports = async (bot, reaction, user) => {
             .setColor(bot.config.COLORS.BASE)
             .setThumbnail(`https://www.raphael-biron.fr/projets/splife/badges/${badge.category}/${badge.id}.png`)
             .setFooter(`Badge ${pageNumber}/${message.results.length} | Obtenu le ${obtainedDate}`)
-            .setTitle(`👉 ${badge.name}`)
+            .setTitle(`➢ ${badge.name}`)
             .setAuthor(`Badges de ${message.whoIsRequest.username}`, message.whoIsRequest.avatarURL())
             .setDescription(`*${badge.description}*
             `)

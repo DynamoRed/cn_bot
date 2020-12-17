@@ -5,10 +5,10 @@ const Discord = require("discord.js");
 module.exports = async (bot, message) => {
     if(message.author.bot) return;
 
-    bot.db.query(`SELECT * FROM messages_stats WHERE author_id='${args[2]}'`, async function(err, results){
+    bot.db.query(`SELECT * FROM messages_stats WHERE author_id='${message.author.id}'`, async function(err, results){
         if (err) throw err;
         if(results != undefined && results.length != 0){
-            bot.db.query(`INSERT INTO messages_stats (author_id, count) VALUES ('${args[2]}', '${results[0].count + 1}')`, async function(err, results){
+            bot.db.query(`INSERT INTO messages_stats (author_id, count) VALUES ('${message.author.id}', '${results[0].count + 1}')`, async function(err, results){
                 if (err) throw err;
             })
             if(results[0].count + 1 == 500){
@@ -125,7 +125,7 @@ module.exports = async (bot, message) => {
                 })
             }
         } else {
-            bot.db.query(`INSERT INTO messages_stats (author_id, count) VALUES ('${args[2]}', '1')`, async function(err, results){
+            bot.db.query(`INSERT INTO messages_stats (author_id, count) VALUES ('${message.author.id}', '1')`, async function(err, results){
                 if (err) throw err;
             })
         }

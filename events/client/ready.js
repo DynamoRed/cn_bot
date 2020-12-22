@@ -235,7 +235,7 @@ module.exports = async bot => {
         if(g.id == "779628862115938354") return;
         if(ownerList.get(g.owner.id)) {
             ownerList.set(g.owner.id, ownerList.get(g.owner.id) + 1);
-            if(ownerList.get(g.owner.id) > 3 || g.memberCount < 3){
+            if(ownerList.get(g.owner.id) > 1 || g.memberCount < 3){
                 if(g.memberCount < 10){
                     g.leave();
                 }

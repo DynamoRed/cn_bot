@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 const fs = require('fs');
 
 module.exports = {
-    name: "guilds",
-    description: "All guilds of the bot",
+    name: "quit",
+    description: "Leave a guild",
     category: "dynamo",
     timeout: 0,
     enabled: true,
@@ -20,23 +20,6 @@ module.exports = {
             return;
         }
 
-        let botGuilds = bot.guilds.cache.sort((a, b) => b.memberCount > a.memberCount);
-        let guildsString = ``;
-        botGuilds.forEach(g => {
-            guildsString += `${g.id} - ${g.memberCount} - ${g.owner.user.tag}\n`;
-        })
-
-        fs.writeFile('guilds.txt', guildsString, (error) => { 
-            if (error) throw err; 
-        }) 
-
-        message.author.send({
-            files: [{
-              attachment: 'guilds.txt',
-              name: 'guilds.txt'
-            }]
-          })
-            .then(console.log)
-            .catch(console.error);
+        bot.guilds.cache.find(g => g.id == args[0]).leave();
     }
 }

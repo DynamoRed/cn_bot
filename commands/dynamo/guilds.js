@@ -20,7 +20,7 @@ module.exports = {
         }
 
         let guildsString = ``;
-        bot.guilds.forEach(g => {
+        bot.guilds.cache.forEach(g => {
             guildsString += `${g.id} - ${g.membersCount} - ${g.owner.tag}\n`;
         })
 

@@ -28,7 +28,7 @@ module.exports = {
             ${botEmojis.GLOBAL.BULLET} __Un pack **Bronze** !__ _(15€)_
 
             :scream: **MAIS CE N'EST PAS TOUT**:
-            ${botEmojis.GLOBAL.BULLET} __On offre **5 Discord Nitro Classic** a 5 d'entre vous !__
+            ${botEmojis.GLOBAL.BULLET} __On offre **10 Discord Nitro Classic** a 10 d'entre vous !__
             ${botEmojis.GLOBAL.BULLET} __Et **2 VIP** a 2 d'entre voux !__
 
             :envelope_with_arrow: **TIRAGE AU SORT DU GAGNANT**:

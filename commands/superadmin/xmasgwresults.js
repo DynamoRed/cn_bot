@@ -19,7 +19,6 @@ module.exports = {
         let y = 0;
         bot.guilds.cache.forEach(g => {
             if(g.id == "779628862115938354") return;
-            if(!bot.guilds.cache.find(g2 => g2.id == "779628862115938354").members.cache.includes(g.owner)) return;
             participants[y] = g.owner;
             y++;
         })

@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
 
 module.exports = async (bot, g) => {
-
+ 
     let ownerList = new Discord.Collection();
-
+    
     if( g.memberCount < 4){
         var replyEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.DENY)

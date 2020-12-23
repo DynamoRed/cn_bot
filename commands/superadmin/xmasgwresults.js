@@ -44,9 +44,7 @@ module.exports = {
                 winnersEmbed += `:gift: <@${participants[rdm].id}> remporte **1 Grâde VIP** !\n`;
             }
         }
-
-        console.log(winners)
-
+        
         let resultEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setTitle(`${botEmojis.GLOBAL.GIVEAWAY}  Résultats du Grand Giveaways de Noël`)

@@ -29,7 +29,7 @@ module.exports = {
 
             :scream: **MAIS CE N'EST PAS TOUT**:
             ${botEmojis.GLOBAL.BULLET} __On offre **10 Discord Nitro Classic** a 10 d'entre vous !__
-            ${botEmojis.GLOBAL.BULLET} __Et **2 VIP** a 2 d'entre voux !__
+            ${botEmojis.GLOBAL.BULLET} __Et **2 VIP** a 2 d'entre vous !__
 
             :envelope_with_arrow: **TIRAGE AU SORT DU GAGNANT**:
             ${botEmojis.GLOBAL.BULLET} __Le 25 décembre 2020__

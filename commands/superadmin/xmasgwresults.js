@@ -32,17 +32,17 @@ module.exports = {
             if(i == 0){
                 let resultEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
-                    .setDescription(`:gift: @**${participants[rdm].user.tag}** remporte le **GRAND PACK DE NOËL**`);
+                    .setDescription(`:gift: **<@${participants[rdm].user.id}>** remporte le **GRAND PACK DE NOËL**`);
                 message.channel.send(resultEmbed);
             } else if(i <= 10){
                 let resultEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
-                    .setDescription(`:gift: @**${participants[rdm].user.tag}** remporte **1 Discord Nitro Classic**`);
+                    .setDescription(`:gift: **<@${participants[rdm].user.id}>** remporte **1 Discord Nitro Classic**`);
                 message.channel.send(resultEmbed);
             } else {
                 let resultEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
-                    .setDescription(`:gift: **<@${participants[rdm].user.tag}>** remporte **1 Grâde VIP**`);
+                    .setDescription(`:gift: **<@${participants[rdm].user.id}>** remporte **1 Grâde VIP**`);
                 message.channel.send(resultEmbed);
             }
         }

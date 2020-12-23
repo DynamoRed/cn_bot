@@ -23,8 +23,6 @@ module.exports = {
             y++;
         })
 
-        let winnersEmbed = ``;
-
         for(var i = 0; i < 13; i++){
             let rdm = randomNumber(0, participants.length - 1);
             while(winners.includes(participants[rdm].id)){
@@ -32,28 +30,21 @@ module.exports = {
             }
             winners[i] = participants[rdm].id;
             if(i == 0){
-                winnersEmbed += `:gift: **${participants[rdm].user.tag}** remporte le **GRAND PACK DE NOËL** !\n\n`;
+                let resultEmbed = new Discord.MessageEmbed()
+                    .setColor(bot.config.COLORS.BASE)
+                    .setDescription(`:gift: @**${participants[rdm].user.tag}** remporte le **GRAND PACK DE NOËL**`);
+                message.channel.send(resultEmbed);
             } else if(i <= 10){
-                winnersEmbed += `:gift: **${participants[rdm].user.tag}** remporte **1 Discord Nitro Classic** !\n`;
-                if(i == 10){
-                    winnersEmbed += `\n`;
-                }
+                let resultEmbed = new Discord.MessageEmbed()
+                    .setColor(bot.config.COLORS.BASE)
+                    .setDescription(`:gift: @**${participants[rdm].user.tag}** remporte **1 Discord Nitro Classic**`);
+                message.channel.send(resultEmbed);
             } else {
-                winnersEmbed += `:gift: **${participants[rdm].user.tag}** remporte **1 Grâde VIP** !\n`;
+                let resultEmbed = new Discord.MessageEmbed()
+                    .setColor(bot.config.COLORS.BASE)
+                    .setDescription(`:gift: @**${participants[rdm].user.tag}** remporte **1 Grâde VIP**`);
+                message.channel.send(resultEmbed);
             }
         }
-
-        console.log(winners)
-
-        let resultEmbed = new Discord.MessageEmbed()
-            .setColor(bot.config.COLORS.BASE)
-            .setTitle(`${botEmojis.GLOBAL.GIVEAWAY}  Résultats du Grand Giveaways de Noël`)
-            .setDescription(`${winnersEmbed}
-
-            __*Nous invitons les gagnants a venir contacter <@${bot.config.OWNER_ID}> ou <@255751273540747265> pour récuperer leur(s) gain(s)*__
-
-            ${botEmojis.GLOBAL.TEAM} **Notre équipe vous souhaite a tous de joyeuses fêtes !**`);
-
-        message.channel.send(resultEmbed);
     }
 }

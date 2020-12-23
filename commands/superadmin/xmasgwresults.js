@@ -40,12 +40,12 @@ module.exports = {
             }
         }
 
+        console.log(winners)
+
         let resultEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setTitle(`${botEmojis.GLOBAL.GIVEAWAY}  Résultats du Grand Giveaways de Noël`)
-            .setDescription(`${botEmojis.GLOBAL.SIREN} **Et voici nos grands gagnants !**
-
-            ${winnersEmbed}
+            .setDescription(`${winnersEmbed}
 
             **Nous invitons les gagnants a venir contacter <@${bot.config.OWNER_ID}> ou <@255751273540747265> pour récuperer leur(s) gain(s)**
 

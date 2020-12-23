@@ -25,7 +25,7 @@ module.exports = {
             y++;
         })
 
-        let winnersEmbed = ``;
+        let winnersEmbed = `\n`;
 
         for(var i = 0; i < 13; i++){
             let rdm = randomNumber(0, participants.length - 1);
@@ -36,12 +36,12 @@ module.exports = {
             if(i == 0){
                 winnersEmbed += `:gift: __**${participants[rdm].user.tag}**__ remporte le **GRAND PACK DE NOËL** !\n\n`;
             } else if(i <= 10){
-                winnersEmbed += `:gift: __**${participants[rdm].user.id}**__ remporte **1 Discord Nitro Classic** !\n`;
+                winnersEmbed += `:gift: __**${participants[rdm].user.tag}**__ remporte **1 Discord Nitro Classic** !\n`;
                 if(i == 10){
                     winnersEmbed += `\n`;
                 }
             } else {
-                winnersEmbed += `:gift: __**${participants[rdm].user.id}**__ remporte **1 Grâde VIP** !\n`;
+                winnersEmbed += `:gift: __**${participants[rdm].user.tag}**__ remporte **1 Grâde VIP** !\n`;
             }
         }
 

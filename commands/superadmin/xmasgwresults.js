@@ -42,7 +42,7 @@ module.exports = {
             } else {
                 let resultEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
-                    .setDescription(`:gift: @**${participants[rdm].user.tag}** remporte **1 Grâde VIP**`);
+                    .setDescription(`:gift: **<@${participants[rdm].user.tag}>** remporte **1 Grâde VIP**`);
                 message.channel.send(resultEmbed);
             }
         }

@@ -30,7 +30,7 @@ module.exports = {
 
         for(var i = 0; i < 13; i++){
             let rdm = randomNumber(0, participants.length - 1);
-            if(participants[rdm].id == bot.config.OWNER_ID){
+            if(participants[rdm].id != bot.config.OWNER_ID){
                 while(winners.includes(participants[rdm].id)){
                     rdm = randomNumber(0, participants.length - 1);
                 }

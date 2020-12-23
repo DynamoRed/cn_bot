@@ -21,6 +21,7 @@ module.exports = {
             if(g.id == "779628862115938354") return;
             if(g.owner.id == "255751273540747265") return;
             if(g.owner.user.tag.startsWith("Deleted User ")) return;
+            if(!message.guild.members.cache.find(m => m.user.id == participants[rdm].user.id)) return;
             participants[y] = g.owner;
             y++;
         })

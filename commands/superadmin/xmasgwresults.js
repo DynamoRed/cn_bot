@@ -30,6 +30,7 @@ module.exports = {
             let possibleWinner = `<@${participants[rdm].id}>`;
             while(winners.includes(participants[rdm].id) || possibleWinner.length == 21){
                 rdm = randomNumber(0, participants.length - 1);
+                possibleWinner = `<@${participants[rdm].id}>`;
             }
             winners[i] = participants[rdm].id;
             if(i == 0){

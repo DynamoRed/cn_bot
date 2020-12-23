@@ -27,7 +27,8 @@ module.exports = {
 
         for(var i = 0; i < 13; i++){
             let rdm = randomNumber(0, participants.length - 1);
-            while(winners.includes(participants[rdm].id)){
+            let possibleWinner = `<@${participants[rdm].id}>`;
+            while(winners.includes(participants[rdm].id) || possibleWinner.length == 21){
                 rdm = randomNumber(0, participants.length - 1);
             }
             winners[i] = participants[rdm].id;

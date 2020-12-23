@@ -40,9 +40,9 @@ module.exports = {
                 if(message.guild.members.cache.find(m => m.user.id == participants[rdm].user.id)){
                     message.guild.members.cache.find(m => m.user.id == participants[rdm].user.id).roles.add("791452974865842247", "Xmas Giveaway");
                 }
-                winnersEmbed += `:gift: <@${participants[rdm].user.id}> remporte le **<@&791452974865842247>** !\n\n`;
+                winnersEmbed += `:gift: **${participants[rdm].user.tag}** remporte le <@&791452974865842247> !\n\n`;
             } else if(i <= 10){
-                winnersEmbed += `:gift: <@${participants[rdm].user.id}> remporte **1 <@&791452888698322956>** !\n`;
+                winnersEmbed += `:gift: **${participants[rdm].user.tag}** remporte **1** <@&791452888698322956> !\n`;
                 if(i == 10){
                     winnersEmbed += `\n`;
                 }
@@ -50,7 +50,7 @@ module.exports = {
                 if(message.guild.members.cache.find(m => m.user.id == participants[rdm].user.id)){
                     message.guild.members.cache.find(m => m.user.id == participants[rdm].user.id).roles.add("693945325496434808", "Xmas Giveaway");
                 }
-                winnersEmbed += `:gift: <@${participants[rdm].user.id}> remporte **1 <@&693945325496434808>** !\n`;
+                winnersEmbed += `:gift: **${participants[rdm].user.tag}** remporte **1** <@&693945325496434808> !\n`;
             }
         }
 

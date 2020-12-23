@@ -4,7 +4,7 @@ module.exports = async (bot, g) => {
 
     let ownerList = new Discord.Collection();
 
-    if( g.memberCount < 5){
+    if( g.memberCount < 4){
         var replyEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.DENY)
             .setDescription(`<@${g.owner.id}> **notre bot n'a pas pu etre ajouté a votre serveur car il n'y a pas assez de membres dans votre serveur discord !**`)

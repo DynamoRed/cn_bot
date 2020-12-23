@@ -14,6 +14,7 @@ module.exports = {
     aliases: ["xmasgwr"],
     run: async (bot, message, args, botEmojis) => {
         let participants = [];
+        let winners = [];
 
         let y = 0;
         bot.guilds.cache.forEach(g => {
@@ -29,6 +30,7 @@ module.exports = {
             while(winners.includes(participants[rdm])){
                 rdm = randomNumber(0, participants.length - 1);
             }
+            winners[i] = participants[rdm];
             if(i == 0){
                 winnersEmbed += `:gift: <@${participants[rdm].id}> remporte le **GRAND PACK DE NOËL** !\n`;
             } else if(i <= 10){

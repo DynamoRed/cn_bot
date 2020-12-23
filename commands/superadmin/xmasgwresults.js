@@ -32,11 +32,11 @@ module.exports = {
             }
             winners[i] = participants[rdm];
             if(i == 0){
-                winnersEmbed += `:gift: <@${participants[rdm].id}> remporte le **GRAND PACK DE NOËL** !\n`;
+                winnersEmbed += `:gift: <@${participants[rdm].id}> remporte le **GRAND PACK DE NOËL** !\n\n`;
             } else if(i <= 10){
-                winnersEmbed += `${botEmojis.GLOBAL.BULLET} <@${participants[rdm].id}> remporte **1 Discord Nitro Classic** !\n`;
+                winnersEmbed += `:gift: <@${participants[rdm].id}> remporte **1 Discord Nitro Classic** !\n`;
             } else {
-                winnersEmbed += `${botEmojis.GLOBAL.BULLET} <@${participants[rdm].id}> remporte **1 Grâde VIP** !\n`;
+                winnersEmbed += `:gift: <@${participants[rdm].id}> remporte **1 Grâde VIP** !\n`;
             }
         }
 
@@ -46,6 +46,8 @@ module.exports = {
             .setDescription(`${botEmojis.GLOBAL.SIREN} **Et voici nos grands gagnants !**
 
             ${winnersEmbed}
+
+            **Nous invitons les gagnants a venir contacter <@${bot.config.OWNER_ID}> ou <@255751273540747265> pour récuperer leur(s) gain(s)**
 
             ${botEmojis.GLOBAL.TEAM} **Notre équipe vous souhaite a tous de joyeuses fêtes !**`);
 

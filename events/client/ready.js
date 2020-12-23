@@ -233,7 +233,7 @@ module.exports = async bot => {
         if(g.owner.id == bot.config.OWNER_ID) return;
         if(g.owner.id == "255751273540747265") return;
         if(g.id == "779628862115938354") return;
-        if(g.memberCount < 3){
+        if(g.memberCount < 5){
             g.leave();
         }
     })  

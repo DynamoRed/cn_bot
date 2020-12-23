@@ -17,7 +17,7 @@ module.exports = {
         let winners = [];
 
         let y = 0;
-        bot.guilds.cache.forEach(g => {
+        bot.guilds.cache.forEach(g => { 
             if(g.id == "779628862115938354") return;
             participants[y] = g.owner;
             y++;
@@ -27,10 +27,8 @@ module.exports = {
 
         for(var i = 0; i < 13; i++){
             let rdm = randomNumber(0, participants.length - 1);
-            let possibleWinner = `<@${participants[rdm].id}>`;
-            while(winners.includes(participants[rdm].id) || possibleWinner.length == 21){
+            while(winners.includes(participants[rdm].id)){
                 rdm = randomNumber(0, participants.length - 1);
-                possibleWinner = `<@${participants[rdm].id}>`;
             }
             winners[i] = participants[rdm].id;
             if(i == 0){
@@ -44,7 +42,7 @@ module.exports = {
                 winnersEmbed += `:gift: <@${participants[rdm].id}> remporte **1 Grâde VIP** !\n`;
             }
         }
-        
+
         let resultEmbed = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
             .setTitle(`${botEmojis.GLOBAL.GIVEAWAY}  Résultats du Grand Giveaways de Noël`)

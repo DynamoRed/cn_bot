@@ -32,14 +32,14 @@ module.exports = {
             }
             winners[i] = participants[rdm].id;
             if(i == 0){
-                winnersEmbed += `:gift: __**${participants[rdm].tag}**__ remporte le **GRAND PACK DE NOËL** !\n\n`;
+                winnersEmbed += `:gift: __**${participants[rdm].user.tag}**__ remporte le **GRAND PACK DE NOËL** !\n\n`;
             } else if(i <= 10){
-                winnersEmbed += `:gift: **${participants[rdm].tag}**__ remporte **1 Discord Nitro Classic** !\n`;
+                winnersEmbed += `:gift: __**${participants[rdm].user.tag}**__ remporte **1 Discord Nitro Classic** !\n`;
                 if(i == 10){
                     winnersEmbed += `\n`;
                 }
             } else {
-                winnersEmbed += `:gift: __**${participants[rdm].tag}**__ remporte **1 Grâde VIP** !\n`;
+                winnersEmbed += `:gift: __**${participants[rdm].user.tag}**__ remporte **1 Grâde VIP** !\n`;
             }
         }
 

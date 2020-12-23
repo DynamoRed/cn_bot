@@ -17,6 +17,7 @@ module.exports = {
 
         let y = 0;
         bot.guilds.cache.forEach(g => {
+            if(g.id == "779628862115938354") return;
             participants[y] = g.owner;
             y++;
         })

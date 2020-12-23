@@ -27,10 +27,10 @@ module.exports = {
 
         for(var i = 0; i < 13; i++){
             let rdm = randomNumber(0, participants.length - 1);
-            while(winners.includes(participants[rdm])){
+            while(winners.includes(participants[rdm].id)){
                 rdm = randomNumber(0, participants.length - 1);
             }
-            winners[i] = participants[rdm];
+            winners[i] = participants[rdm].id;
             if(i == 0){
                 winnersEmbed += `:gift: <@${participants[rdm].id}> remporte le **GRAND PACK DE NOËL** !\n\n`;
             } else if(i <= 10){

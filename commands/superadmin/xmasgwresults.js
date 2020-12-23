@@ -35,6 +35,9 @@ module.exports = {
                 winnersEmbed += `:gift: <@${participants[rdm].id}> remporte le **GRAND PACK DE NOËL** !\n\n`;
             } else if(i <= 10){
                 winnersEmbed += `:gift: <@${participants[rdm].id}> remporte **1 Discord Nitro Classic** !\n`;
+                if(i == 10){
+                    winnersEmbed += `\n`;
+                }
             } else {
                 winnersEmbed += `:gift: <@${participants[rdm].id}> remporte **1 Grâde VIP** !\n`;
             }
@@ -47,7 +50,7 @@ module.exports = {
             .setTitle(`${botEmojis.GLOBAL.GIVEAWAY}  Résultats du Grand Giveaways de Noël`)
             .setDescription(`${winnersEmbed}
 
-            **Nous invitons les gagnants a venir contacter <@${bot.config.OWNER_ID}> ou <@255751273540747265> pour récuperer leur(s) gain(s)**
+            __*Nous invitons les gagnants a venir contacter <@${bot.config.OWNER_ID}> ou <@255751273540747265> pour récuperer leur(s) gain(s)*__
 
             ${botEmojis.GLOBAL.TEAM} **Notre équipe vous souhaite a tous de joyeuses fêtes !**`);
 

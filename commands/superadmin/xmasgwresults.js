@@ -26,7 +26,7 @@ module.exports = {
             y++;
         })
 
-        let winnersEmbed = `\n`;
+        let winnersEmbed = `${botEmojis.GLOBAL.BLANK_BULLET}\n\n`;
 
         for(var i = 0; i < 13; i++){
             let rdm = randomNumber(0, participants.length - 1);

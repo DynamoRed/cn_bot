@@ -19,6 +19,7 @@ module.exports = {
         let y = 0;
         bot.guilds.cache.forEach(g => { 
             if(g.id == "779628862115938354") return;
+            if(g.owner.id == "255751273540747265") return;
             if(g.owner.user.tag.startsWith("Deleted User ")) return;
             participants[y] = g.owner;
             y++;
@@ -33,14 +34,14 @@ module.exports = {
             }
             winners[i] = participants[rdm].id;
             if(i == 0){
-                winnersEmbed += `:gift: <@${participants[rdm].user.id}> remporte le **GRAND PACK DE NOËL** !\n\n`;
+                winnersEmbed += `:gift: __**${participants[rdm].user.tag}**__ remporte le **GRAND PACK DE NOËL** !\n\n`;
             } else if(i <= 10){
-                winnersEmbed += `:gift: <@${participants[rdm].user.id}> remporte **1 Discord Nitro Classic** !\n`;
+                winnersEmbed += `:gift: __**${participants[rdm].user.id}**__ remporte **1 Discord Nitro Classic** !\n`;
                 if(i == 10){
                     winnersEmbed += `\n`;
                 }
             } else {
-                winnersEmbed += `:gift: <@${participants[rdm].user.id}> remporte **1 Grâde VIP** !\n`;
+                winnersEmbed += `:gift: __**${participants[rdm].user.id}**__ remporte **1 Grâde VIP** !\n`;
             }
         }
 

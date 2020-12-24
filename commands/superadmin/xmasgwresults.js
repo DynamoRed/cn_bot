@@ -59,7 +59,7 @@ module.exports = {
             .setTitle(`${botEmojis.GLOBAL.GIVEAWAY}  Résultats du Grand Giveaways de Noël`)
             .setDescription(`${winnersEmbed}
 
-            *Nous invitons les gagnants a venir contacter <@${bot.config.OWNER_ID}> ou <@255751273540747265> pour récuperer leur(s) gain(s)*
+            *Nous invitons les gagnants a venir contacter <@255751273540747265> pour récuperer leur(s) gain(s)*
 
             ${botEmojis.GLOBAL.TEAM} **Notre équipe vous souhaite a tous de joyeuses fêtes !**`);
 

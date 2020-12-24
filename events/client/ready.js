@@ -64,9 +64,9 @@ module.exports = async bot => {
     let ownerList = new Discord.Collection();
 
     bot.db = bot.mysql.createConnection({
-        host: "89.234.180.33",
-        user: "johnny",
-        password: "7olPv44^",
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
         database : "splife"
     });
      

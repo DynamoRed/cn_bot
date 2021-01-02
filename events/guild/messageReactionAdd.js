@@ -161,6 +161,9 @@ module.exports = async (bot, reaction, user) => {
                     "QUESTION": "Le BunnyHop est t-il autorisé sur le serveur ? Si oui, dans quels cas ?"
                 },
                 {
+                    "QUESTION": "Est il autorisé de braquer en centre ville ?"
+                },
+                {
                     "QUESTION": "Rappelez-nous la règle du N.L.R. ?"
                 },
                 {
@@ -188,6 +191,14 @@ module.exports = async (bot, reaction, user) => {
                     "ANSWER": ["Vrai", "Faux"]
                 },
                 {
+                    "QUESTION": "L'armurier a le droit d'arnaquer",
+                    "ANSWER": ["Vrai", "Faux"]
+                },
+                {
+                    "QUESTION": "Les policiers ont le droit de poser des printers",
+                    "ANSWER": ["Vrai", "Faux"]
+                },
+                {
                     "QUESTION": "Combien de forces de l'ordre doivent être présentes en ville pour un braquage de banque ?"
                 },
                 {
@@ -204,12 +215,23 @@ module.exports = async (bot, reaction, user) => {
                     "QUESTION": "Rappelez-nous le règlement du métier de Psycopathe:"
                 },
                 {
+                    "QUESTION": "Rappelez-nous le règlement du métier de Fabricant de drogues:"
+                },
+                {
                     "QUESTION": "Donnez-nous les armes auxquelles a le droit le cuisinier:",
+                    "ANSWER": ["Pistolets", "Snipers", "PM", "Fusil à pompe", "Aucune des réponses ci-dessus"]
+                },
+                {
+                    "QUESTION": "Donnez-nous les armes auxquelles a le droit le Tueur a gages:",
                     "ANSWER": ["Pistolets", "Snipers", "PM", "Fusil à pompe", "Aucune des réponses ci-dessus"]
                 },
                 {
                     "QUESTION": "Donnez-nous les armes auxquelles a le droit le SDF:",
                     "ANSWER": ["Pistolets", "Snipers", "PM", "Fusil à pompe", "Aucune des réponses ci-dessus"]
+                },
+                {
+                    "QUESTION": "A combien est la limite de keypad sur le serveur:",
+                    "ANSWER": ["4", "8", "10", "12", "Aucune des réponses ci-dessus"]
                 },
                 {
                     "QUESTION": "Les gendarmes ont le droit aux armes personnelles.",

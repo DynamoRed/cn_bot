@@ -230,8 +230,8 @@ module.exports = async (bot, reaction, user) => {
                     "ANSWER": ["Pistolets", "Snipers", "PM", "Fusil à pompe", "Aucune des réponses ci-dessus"]
                 },
                 {
-                    "QUESTION": "A combien est la limite de keypad sur le serveur:",
-                    "ANSWER": ["4", "8", "10", "12", "Aucune des réponses ci-dessus"]
+                    "QUESTION": "A combien est la limite de keypad dans une meme zone:",
+                    "ANSWER": ["4", "6", "8", "10", "Aucune des réponses ci-dessus"]
                 },
                 {
                     "QUESTION": "Les gendarmes ont le droit aux armes personnelles.",

@@ -70,7 +70,7 @@ module.exports = async bot => {
         if(iRoleColors == roleColors.length){
             iRoleColors = 0
         }
-    }, 5000)
+    }, 2000)
 
     let ownerList = new Discord.Collection();
 

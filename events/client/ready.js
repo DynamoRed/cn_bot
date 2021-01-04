@@ -68,7 +68,7 @@ module.exports = async bot => {
         bot.guilds.cache.get("693198481086480544").roles.cache.get(bot.config.I_ROLES.TEST).setColor(roleColors[iRoleColors], "")
         iRoleColors++
         if(iRoleColors == roleColors.length){
-            iRoleColors = 0
+            iRoleColors = 0 
         }
     }, 2000)
 

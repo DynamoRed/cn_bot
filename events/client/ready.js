@@ -61,17 +61,6 @@ module.exports = async bot => {
         }
     }
 
-    let roleColors = ["#fffd00","#fa46f5","#22d448","#d7342a","#4b89ff","#ffffff"]
-    let iRoleColors = 0
-
-    setInterval(() => {
-        bot.guilds.cache.get("693198481086480544").roles.cache.get("795704428341493780").setColor(roleColors[iRoleColors], "")
-        iRoleColors++
-        if(iRoleColors == roleColors.length){
-            iRoleColors = 0 
-        }
-    }, 2000)
-
     let ownerList = new Discord.Collection();
 
     bot.db = bot.mysql.createConnection({

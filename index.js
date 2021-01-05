@@ -7,7 +7,6 @@ const bot = new Discord.Client({
 const mysql = require('mysql');
 
 bot.config = config;
-bot.badgesData = badgesData;
 bot.mysql = mysql;
 bot.commands = new Discord.Collection();
 bot.badges = new Discord.Collection();

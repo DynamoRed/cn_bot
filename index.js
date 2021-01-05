@@ -52,4 +52,10 @@ bot.on("messageUpdate", (oldMessage, newMessage) => {
 bot.on("voiceStateUpdate", (oldState, newState) => {
     require("./events/guild/voiceStateUpdate")(bot, oldState, newState);
 });
+bot.on("channelDelete", (oldChannel) => {
+    require("./events/guild/channelDelete")(bot, oldChannel);
+});
+bot.on("channelCreate", (newChannel) => {
+    require("./events/guild/channelCreate")(bot, newChannel);
+});
 bot.login(process.env.TOKEN);

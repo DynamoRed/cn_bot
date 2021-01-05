@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const config = require("./resources/config.json");
-const badgesData = require("./resources/badges.json");
 const fs = require('fs');
 const bot = new Discord.Client({
     "partials": ['CHANNEL', 'MESSAGE', 'REACTION']

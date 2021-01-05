@@ -8,6 +8,6 @@ module.exports = async (bot, newC) => {
 
     var logEmbed = new Discord.MessageEmbed()
         .setColor(bot.config.COLORS.BASE)
-        .setDescription(`Création du channel **<#${newC.id}>**`)
+        .setDescription(`Création du channel **${newC.name}**`)
     let logMsg = await bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.LOGS).send(logEmbed);
 }

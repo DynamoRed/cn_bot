@@ -23,7 +23,6 @@ module.exports = {
 
         let mentionned = message.mentions.users.first();
         if(args.length == 0){
-            console.log(message.author.mfa_enabled);
             bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}'`, async function(err, results){
                 if (err) throw err;
                 if(results != undefined && results.length != 0){

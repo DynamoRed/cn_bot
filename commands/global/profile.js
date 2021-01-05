@@ -19,6 +19,8 @@ module.exports = {
                 .addField('GitHub', `[DynamoRed](https://www.google.com/)`, true)
                 .addField('Youtube', `[DynamoRed](https://www.google.com/)`, true)
                 .setTimestamp(2)
+
+            message.channel.send(profileEmbed)
         } else if(args.length == 1){
             if(mentionned){
                 

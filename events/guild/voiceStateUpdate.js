@@ -1,9 +1,8 @@
 module.exports = (bot, oldState, newState) => {
-    console.log(newState.channelID)
     if(newState.channelID != undefined) {
        if(newState.channelID == bot.config.I_CHANNELS.CREATE_CHANNEL){
            var name = newState.member.nickname ? newState.member.nickname : newState.member.user.username;
-            newState.channel.guild.createChannel(`🔊・Canal de ` + name, {
+            newState.channel.guild.channels.create(`🔊・Canal de ` + name, {
                 type: 'voice',
                 permissionOverwrites: [
                     {

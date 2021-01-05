@@ -4,5 +4,5 @@ module.exports = {
     description: "D'après ce que l'on dit, c'est un secret bien gardé",
     category: "other", 
     enabled: true,
-    id: "secret_phrase" 
+    id: "secret_phrase_v2" 
 }

@@ -43,13 +43,13 @@ module.exports = async (bot, message) => {
     }
 
     if(message.guild.id == "693198481086480544" || message.guild.id == "618855620820336640"){
-        bot.db.query(`SELECT * FROM messages_stats WHERE author_id='${message.author.id}'`, async function(err, results){
+        bot.db.query(`SELECT * FROM players_stats WHERE player_id='${message.author.id}'`, async function(err, results){
             if (err) throw err;
             if(results != undefined && results.length != 0){
-                bot.db.query(`UPDATE messages_stats SET count=${results[0].count + 1} WHERE author_id='${message.author.id}'`, async function(err, results){
+                bot.db.query(`UPDATE players_stats SET messages_count=${results[0].messages_count + 1} WHERE player_id='${message.author.id}'`, async function(err, results){
                     if (err) throw err;
                 })
-                if(results[0].count + 1 == 500){
+                if(results[0].messages_count + 1 == 500){
                     bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}' AND badge_name='500_m_v2'`, async function(err, results){
                         if (err) throw err;
                         if(results != undefined && results.length != 0){
@@ -87,7 +87,7 @@ module.exports = async (bot, message) => {
                     })
                 }
     
-                if(results[0].count + 1 == 1000){
+                if(results[0].messages_count + 1 == 1000){
                     bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}' AND badge_name='1000_m_v2'`, async function(err, results){
                         if (err) throw err;
                         if(results != undefined && results.length != 0){
@@ -125,7 +125,7 @@ module.exports = async (bot, message) => {
                     })
                 }
     
-                if(results[0].count + 1 == 2000){
+                if(results[0].messages_count + 1 == 2000){
                     bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}' AND badge_name='2000_m_v2'`, async function(err, results){
                         if (err) throw err;
                         if(results != undefined && results.length != 0){
@@ -163,7 +163,7 @@ module.exports = async (bot, message) => {
                     })
                 }
             } else {
-                bot.db.query(`INSERT INTO messages_stats (author_id, count) VALUES ('${message.author.id}', '1')`, async function(err, results){
+                bot.db.query(`INSERT INTO players_stats (player_id, messages_count) VALUES ('${message.author.id}', '1')`, async function(err, results){
                     if (err) throw err;
                 })
             }

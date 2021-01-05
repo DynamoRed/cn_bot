@@ -9,11 +9,6 @@ module.exports = async (bot, newM) => {
 
     if(newM.content == bot.config.SECRET_PHRASE) return;
 
-    const args = newM.content.slice(bot.config.PREFIX.length).trim().split(" ");
-    const cmd = args.shift().toLowerCase();
-    let command = bot.commands.get(cmd);
-    if(command) return;
-
     var logEmbed = new Discord.MessageEmbed()
         .setAuthor(newM.client.user.username, newM.client.user.avatarURL())
         .setColor(bot.config.COLORS.BASE)

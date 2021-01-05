@@ -10,7 +10,11 @@ module.exports = async bot => {
         if(indexActivities == bot.config.ACTIVITIES.length + 1) indexActivities = 0;
     }, 3000);
 
+    let onlineCountMembers = bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).members.cache.filter(m => m.presence.status == "online").length;
+    onlineCountMembers += bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).members.cache.filter(m => m.presence.status == "idle").length
+    onlineCountMembers += bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).members.cache.filter(m => m.presence.status == "dnd").length
     bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.MEMBERS_STATS).setName(`👥 Membres: ${bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).memberCount}`, "Actualisation Stats")
+    bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.MEMBERS_STATS).setName(`🟢 En Ligne: ${onlineCountMembers}`, "Actualisation Stats")
 
     let baseGuild = bot.guilds.cache.find(g => g.id == "618855620820336640");
 

@@ -4,11 +4,13 @@ module.exports = (bot, oldMember, newMember) => {
     let newUserChannel = newMember.voiceChannel
     let oldUserChannel = oldMember.voiceChannel
 
+    console.log("00")
     if(newUserChannel.guild.id != "693198481086480544" && newUserChannel.guild.id != "618855620820336640"){
         return;
     }
-  
+    console.log("11")
     if(newUserChannel !== undefined) {
+        console.log("22")
        if(newUserChannel.id == bot.config.I_CHANNELS.CREATE_CHANNEL){
            var name = newMember.nickname ? newMember.nickname : newMember.user.username;
             newUserChannel.guild.createChannel(`🔊・Canal de ` + name, {

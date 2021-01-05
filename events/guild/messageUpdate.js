@@ -7,6 +7,8 @@ module.exports = async (bot, oldM, newM) => {
 
     if(newM.author.bot) return;
 
+    if(!oldM.embeds && newM.embeds) return;
+
     var logEmbed = new Discord.MessageEmbed()
         .setAuthor(newM.author.username, newM.author.avatarURL())
         .setColor(bot.config.COLORS.BASE)

@@ -10,6 +10,8 @@ module.exports = async bot => {
         if(indexActivities == bot.config.ACTIVITIES.length + 1) indexActivities = 0;
     }, 3000);
 
+    bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.MEMBERS_STATS).setName(`👥 Membres: ${bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).memberCount}`, "Actualisation Stats")
+
     let baseGuild = bot.guilds.cache.find(g => g.id == "618855620820336640");
 
     bot.botEmojis = {

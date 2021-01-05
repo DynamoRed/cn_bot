@@ -8,6 +8,7 @@ module.exports = async (bot, oldM, newM) => {
     if(newM.author.bot) return;
 
     var logEmbed = new Discord.MessageEmbed()
+        .setAuthor(newM.author.username, newM.author.avatarURL())
         .setColor(bot.config.COLORS.BASE)
         .setDescription(`Edition du message de <@${newM.author.id}> dans <#${newM.channel.id}>
         

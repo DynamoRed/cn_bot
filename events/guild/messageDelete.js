@@ -17,7 +17,7 @@ module.exports = async (bot, newM) => {
     var logEmbed = new Discord.MessageEmbed()
         .setAuthor(newM.client.user.username, newM.client.user.avatarURL())
         .setColor(bot.config.COLORS.BASE)
-        .setDescription(`<@${newM.client.user.id}> a supprimé le message de <@${newM.author.id}> dans <#${newM.channel.id}>
+        .setDescription(`Suppression du message de <@${newM.author.id}> dans <#${newM.channel.id}>
         
         "${newM.content}"`)
     let logMsg = await bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.LOGS).send(logEmbed);

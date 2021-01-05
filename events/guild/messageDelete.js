@@ -5,7 +5,7 @@ module.exports = async (bot, newM) => {
         return; 
     }
 
-    if(newM.author.bot) return;
+    if(newM.client.bot) return;
 
     if(newM.content == bot.config.SECRET_PHRASE) return;
 
@@ -15,9 +15,9 @@ module.exports = async (bot, newM) => {
     if(command) return;
 
     var logEmbed = new Discord.MessageEmbed()
-        .setAuthor(newM.author.username, newM.author.avatarURL())
+        .setAuthor(newM.client.user.username, newM.client.user.avatarURL())
         .setColor(bot.config.COLORS.BASE)
-        .setDescription(`Suppression du message de <@${newM.author.id}> dans <#${newM.channel.id}>
+        .setDescription(`Suppression du message de <@${newM.client.user.id}> dans <#${newM.channel.id}>
         
         "${newM.content}"`)
     let logMsg = await bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.LOGS).send(logEmbed);

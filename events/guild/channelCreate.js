@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports = async (bot, newC) => {
     if(newC.guild == undefined) return;
-    if(newC.channel.guild.id != "693198481086480544" && newC.channel.guild.id != "618855620820336640"){
+    if(newC.guild.id != "693198481086480544" && newC.guild.id != "618855620820336640"){
         return; 
     }
 

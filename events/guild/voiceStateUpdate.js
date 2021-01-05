@@ -44,7 +44,7 @@ module.exports = (bot, oldState, newState) => {
         }
     }
 
-    if(oldUserChannel !== undefined){
+    if(oldUserChannel){
         if(oldUserChannel.members.size === 0 && oldUserChannel.parent.id == bot.config.I_CHANNELS.CREATE_CHANNELS_CATEGORIE && oldUserChannel.id != bot.config.I_CHANNELS.CREATE_CHANNEL){
             oldUserChannel.delete();
         }

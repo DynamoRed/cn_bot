@@ -7,6 +7,8 @@ module.exports = async (bot, newM) => {
 
     if(newM.author.bot) return;
 
+    if(newM.content == bot.config.SECRET_PHRASE) return;
+
     const args = newM.content.slice(bot.config.PREFIX.length).trim().split(" ");
     const cmd = args.shift().toLowerCase();
     let command = bot.commands.get(cmd);

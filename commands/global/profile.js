@@ -15,10 +15,9 @@ module.exports = {
                 .setThumbnail(message.author.avatarURL())
                 .setTitle(`➢ Profil de ${message.author.tag}`)
                 .setDescription("**:link: Profils liés:**")
-                .addField('Steam', `[DynamoRed](https://www.google.com/)`, true)
-                .addField('GitHub', `[DynamoRed](https://www.google.com/)`, true)
-                .addField('Youtube', `[DynamoRed](https://www.google.com/)`, true)
-                .setTimestamp(2)
+                .addField(`${botEmojis.SOCIAL_NETWORK.STEAM} Steam`, `[DynamoRed](https://www.google.com/)`, true)
+                .addField(`${botEmojis.SOCIAL_NETWORK.GITHUB} GitHub`, `[DynamoRed](https://www.google.com/)`, true)
+                .addField(`${botEmojis.SOCIAL_NETWORK.YOUTUBE} Youtube`, `[DynamoRed](https://www.google.com/)`, true)
 
             message.channel.send(profileEmbed)
         } else if(args.length == 1){

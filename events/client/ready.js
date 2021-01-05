@@ -39,7 +39,8 @@ module.exports = async bot => {
             "TOP_SERVEUR": baseGuild.emojis.cache.find(e => e.id == "779097325154992198"),
             "DISCORD": baseGuild.emojis.cache.find(e => e.id == "779096837034082325"),
             "STEAM": baseGuild.emojis.cache.find(e => e.id == "779097848355880980"),
-            "YOUTUBE": baseGuild.emojis.cache.find(e => e.id == "779096840405909544")
+            "YOUTUBE": baseGuild.emojis.cache.find(e => e.id == "779096840405909544"),
+            "GITHUB": baseGuild.emojis.cache.find(e => e.id == "796137519544533029")
         },
         "GLOBAL": {
             "TEAM": baseGuild.emojis.cache.find(e => e.id == "779100120464752660"),

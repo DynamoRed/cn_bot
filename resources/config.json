@@ -4,6 +4,7 @@
     "CLIENT_ID": "778266786130165791",
     "PREFIX": "!",
     "OWNER_ID": "324956349353951232",
+    "SECRET_PHRASE": "rooms25",
     "COLORS": {
         "BASE": "#ff6262",
         "SAVEBASE": "#F28E26",

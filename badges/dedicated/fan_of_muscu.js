@@ -4,5 +4,5 @@ module.exports = {
     description: "A part bouffer des protéines on sait pas trop ce qu'ils font de leur vie",
     category: "dedicated", 
     enabled: true,
-    id: "fan_of_muscu"
+    id: "fan_of_muscu" 
 }

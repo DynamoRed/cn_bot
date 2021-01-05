@@ -132,14 +132,16 @@ module.exports = {
                 args[2] = args[2].toLowerCase();
                 args[0] = args[0].toLowerCase();
 
-                if(args[2] == "bot_creator" && message.author.id != bot.config.OWNER_ID){
-                    var replyEmbed = new Discord.MessageEmbed()
-                        .setColor(bot.config.COLORS.DENY)
-                        .setFooter(`Message auto-supprimé dans 5 secondes`)
-                        .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
-                    let msg = await message.channel.send(replyEmbed);
-                    setTimeout(() => {msg.delete()}, 5 * 1000)
-                    return;
+                if(message.author.id != bot.config.OWNER_ID){
+                    if(args[2] == "bot_creator" || args[2] == "secret_phrase"){
+                        var replyEmbed = new Discord.MessageEmbed()
+                            .setColor(bot.config.COLORS.DENY)
+                            .setFooter(`Message auto-supprimé dans 5 secondes`)
+                            .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
+                        let msg = await message.channel.send(replyEmbed);
+                        setTimeout(() => {msg.delete()}, 5 * 1000)
+                        return;
+                    }
                 }
 
                 if(args[0] == "add"){

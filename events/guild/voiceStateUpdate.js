@@ -4,6 +4,7 @@ module.exports = (bot, oldState, newState) => {
            var name = newState.member.nickname ? newState.member.nickname : newState.member.user.username;
             newState.channel.guild.channels.create(`🔊・Canal de ` + name, {
                 type: 'voice',
+                parent: newState.channel.parent,
                 permissionOverwrites: [
                     {
                         allow: 'KICK_MEMBERS',
@@ -31,8 +32,7 @@ module.exports = (bot, oldState, newState) => {
                     }
                 ]
             }).then(ch => {
-                ch.setParent(newState.channel.parent)
-                newState.member.setVoiceChannel(ch)
+                newState.member.voice.setChannel(ch)
             })
         }
     }

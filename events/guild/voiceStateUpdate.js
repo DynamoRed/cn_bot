@@ -1,5 +1,3 @@
-const ownsChannels = new Map();
-
 module.exports = (bot, oldState, newState) => {
     let newUserChannel = newState.channel
     let oldUserChannel = oldState.channel
@@ -42,15 +40,13 @@ module.exports = (bot, oldState, newState) => {
             }).then(ch => {
                 ch.setParent(newUserChannel.parent)
                 newState.member.setVoiceChannel(ch)
-                ownsChannels.set(ch.id, newState.member.user.id);
             })
         }
     }
 
     if(oldUserChannel !== undefined){
-        if(oldUserChannel.members.size === 0 && ownsChannels.get(oldUserChannel.id)){
+        if(oldUserChannel.members.size === 0 && oldUserChannel.parent.id == bot.config.I_CHANNELS.CREATE_CHANNELS_CATEGORIE && oldUserChannel.id != bot.config.I_CHANNELS.CREATE_CHANNEL){
             oldUserChannel.delete();
-            ownsChannels.set(oldUserChannel.id, null);
         }
     }
 }

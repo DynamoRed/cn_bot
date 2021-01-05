@@ -7,7 +7,6 @@ module.exports = async (bot, oldC) => {
     }
 
     var logEmbed = new Discord.MessageEmbed()
-    .setAuthor(oldC.client.user.username, oldC.client.user.avatarURL())
         .setColor(bot.config.COLORS.BASE)
         .setDescription(`Suppression du channel **${oldC.name}**`)
     let logMsg = await bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.LOGS).send(logEmbed);

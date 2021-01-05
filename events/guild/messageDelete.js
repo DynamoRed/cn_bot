@@ -15,7 +15,7 @@ module.exports = async (bot, newM) => {
     if(command) return;
 
     var logEmbed = new Discord.MessageEmbed()
-        .setAuthor(newM.client.user.username, newM.client.user.avatarURL())
+        .setAuthor(newM.author.username, newM.author.avatarURL())
         .setColor(bot.config.COLORS.BASE)
         .setDescription(`Suppression du message de <@${newM.author.id}> dans <#${newM.channel.id}>
         

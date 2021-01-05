@@ -9,7 +9,7 @@ module.exports = async (bot, oldM, newM) => {
 
     var logEmbed = new Discord.MessageEmbed()
         .setColor(bot.config.COLORS.BASE)
-        .setDescription(`Edition du message de <@${newM.author.id}>
+        .setDescription(`Edition du message de <@${newM.author.id}> dans <#${newM.channel.id}>
         
         "${oldM.content}"
         

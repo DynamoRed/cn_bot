@@ -7,9 +7,14 @@ module.exports = async (bot, newM) => {
 
     if(newM.author.bot) return;
 
+    const args = newM.content.slice(bot.config.PREFIX.length).trim().split(" ");
+    const cmd = args.shift().toLowerCase();
+    let command = bot.commands.get(cmd);
+    if(command) return;
+
     var logEmbed = new Discord.MessageEmbed()
         .setColor(bot.config.COLORS.BASE)
-        .setDescription(`Suppression du message de <@${newM.author.id}>
+        .setDescription(`Suppression du message de <@${newM.author.id} dans <#${newM.channel.id}>
         
         "${newM.content}"`)
     let logMsg = await bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.LOGS).send(logEmbed);

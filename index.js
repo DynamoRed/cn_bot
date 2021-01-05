@@ -49,7 +49,7 @@ bot.on("messageDelete", (message) => {
 bot.on("messageUpdate", (oldMessage, newMessage) => {
     require("./events/guild/messageUpdate")(bot, oldMessage, newMessage);
 });
-bot.on("voiceStateUpdate", (oldMember, newMember) => {
-    require("./events/guild/voiceStateUpdate")(bot, oldMember, newMember);
+bot.on("voiceStateUpdate", (oldState, newState) => {
+    require("./events/guild/voiceStateUpdate")(bot, oldState, newState);
 });
 bot.login(process.env.TOKEN);

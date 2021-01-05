@@ -1,50 +1,48 @@
 const ownsChannels = new Map();
 
-module.exports = (bot, oldMember, newMember) => {
-    let newUserChannel = newMember.voiceChannel
-    let oldUserChannel = oldMember.voiceChannel
+module.exports = (bot, oldState, newState) => {
+    let newUserChannel = newState.channel
+    let oldUserChannel = oldState.channel
 
-    console.log("00")
     if(newUserChannel.guild.id != "693198481086480544" && newUserChannel.guild.id != "618855620820336640"){
         return;
     }
-    console.log("11")
+    
     if(newUserChannel !== undefined) {
-        console.log("22")
        if(newUserChannel.id == bot.config.I_CHANNELS.CREATE_CHANNEL){
-           var name = newMember.nickname ? newMember.nickname : newMember.user.username;
+           var name = newState.member.nickname ? newState.member.nickname : newState.member.user.username;
             newUserChannel.guild.createChannel(`🔊・Canal de ` + name, {
                 type: 'voice',
                 permissionOverwrites: [
                     {
                         allow: 'KICK_MEMBERS',
-                        id: newMember.id
+                        id: newState.member.id
                     }, 
                     {
                         allow: 'MANAGE_CHANNELS',
-                        id: newMember.id
+                        id: newState.member.id
                     },
                     {
                         allow: 'CONNECT',
-                        id: newMember.id
+                        id: newState.member.id
                     },
                     {
                         allow: 'SPEAK',
-                        id: newMember.id
+                        id: newState.member.id
                     },
                     {
                         allow: 'PRIORITY_SPEAKER',
-                        id: newMember.id
+                        id: newState.member.id
                     },
                     {
                         allow: 'VIEW_CHANNEL',
-                        id: newMember.id
+                        id: newState.member.id
                     }
                 ]
             }).then(ch => {
                 ch.setParent(newUserChannel.parent)
-                newMember.setVoiceChannel(ch)
-                ownsChannels.set(ch.id, newMember.user.id);
+                newState.member.setVoiceChannel(ch)
+                ownsChannels.set(ch.id, newState.member.user.id);
             })
         }
     }

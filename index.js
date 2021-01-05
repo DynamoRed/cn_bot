@@ -45,5 +45,10 @@ bot.on("guildCreate", (g) => {
 bot.on("guildDelete", (g) => {
     require("./events/client/guildDelete")(bot, g);
 });
-
+bot.on("messageDelete", (message) => {
+    require("./events/guild/messageDelete")(bot, message);
+});
+bot.on("messageUpdate", (oldMessage, newMessage) => {
+    require("./events/guild/messageUpdate")(bot, oldMessage, newMessage);
+});
 bot.login(process.env.TOKEN);

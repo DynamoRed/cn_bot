@@ -10,11 +10,4 @@ module.exports = (bot, m) => {
     onlineCountMembers += bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).members.cache.filter(m => m.presence.status == "dnd").array().length;
     bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.MEMBERS_STATS).setName(`👥 Membres: ${bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).memberCount}`, "Actualisation Stats");
     bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.ONLINE_STATS).setName(`🟢 En Ligne: ${onlineCountMembers}`, "Actualisation Stats");
-
-    let memberAddEmbed = new Discord.MessageEmbed()
-        .setColor(bot.config.COLORS.BASE)
-        .setTitle(`:inbox_tray: Nouveau Membre !`)
-        .setDescription(`<@${m.user.id}> vient d'arriver sur notre discord ! :fire:`);
-
-    m.guild.channels.cache.find(c => c.id == bot.config.I_CHANNELS.WELCOME).send(memberAddEmbed);
 }

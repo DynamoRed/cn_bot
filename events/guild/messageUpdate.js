@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports = (bot, oldM, newM) => {
+module.exports = async (bot, oldM, newM) => {
     if(oldM.channel.guild.id != "693198481086480544" && oldM.channel.guild.id != "618855620820336640"){
         return; 
     }

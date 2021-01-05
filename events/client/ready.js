@@ -10,6 +10,8 @@ module.exports = async bot => {
         if(indexActivities == bot.config.ACTIVITIES.length + 1) indexActivities = 0;
     }, 3000);
 
+    bot.user.setPresence({ status: 'online' });
+
     setInterval(() => {
         let onlineCountMembers = bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).members.cache.filter(m => m.presence.status == "online").array().length;
         onlineCountMembers += bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).members.cache.filter(m => m.presence.status == "idle").array().length;

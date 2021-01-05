@@ -15,15 +15,16 @@ module.exports = {
                 .setThumbnail(message.author.avatarURL())
                 .setTitle(`➢ Profil de ${message.author.tag}`)
                 .setDescription(`**:bookmark_tabs: Statistiques sur nos serveurs:**
-                ${botEmojis.SPLIFE.DARK_RP.LOGO} 519h passées sur le DarkRP
-                ${botEmojis.SPLIFE.SCP_RP.LOGO} 19h passées sur le ScpRP
-                ${botEmojis.SPLIFE.PRISON_RP.LOGO} 98h passées sur le PrisonRP
+                ◌ **519h** passées sur le DarkRP ${botEmojis.SPLIFE.DARK_RP.LOGO}
+                ◌ **19h** passées sur le ScpRP ${botEmojis.SPLIFE.SCP_RP.LOGO}
+                ◌ **98h** passées sur le PrisonRP ${botEmojis.SPLIFE.PRISON_RP.LOGO}
+
                 
                 **:bookmark_tabs: Statistiques Discord:**
-                Messages envoyés: 409
-                Heures passées en vocal: 509h
-                Premiere connexion au discord: 00/00/0000
-                Création du compte: 00/00/00
+                ◌ Messages envoyés: **409**
+                ◌ Heures passées en vocal: **509h**
+                ◌ Premiere connexion au discord: **00/00/0000**
+                ◌ Création du compte: **00/00/00**
                 
                 
                 **:link: Profils liés:**`)

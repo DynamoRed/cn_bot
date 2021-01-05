@@ -7,7 +7,7 @@ module.exports = async (bot, message) => {
 
     if(message.content.toLowerCase() == bot.config.SECRET_PHRASE){
         message.delete();
-        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}' AND badge_name='${args[2]}'`, async function(err, results){
+        bot.db.query(`SELECT * FROM discord_badges WHERE badge_owner='${message.author.id}' AND badge_name='secret_phrase'`, async function(err, results){
             if (err) throw err;
             if(results == undefined || results.length == 0){
                 let obtainedDate = new Date();
@@ -26,14 +26,14 @@ module.exports = async (bot, message) => {
                 obtainedDate.split(",")[1].split(":")[1]];
                 obtainedDate = obtainedDate.join("-");
 
-                bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('${args[2]}', '${obtainedDate}', '${message.author.id}')`, async function(err, results){
+                bot.db.query(`INSERT INTO discord_badges (badge_name, badge_get_at, badge_owner) VALUES ('secret_phrase', '${obtainedDate}', '${message.author.id}')`, async function(err, results){
                     if (err){
                         throw err
                     } else {
                         var confirmEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.ALLOW)
                             .setFooter("Consultez vos badges avec !badges")
-                            .setDescription(`<@${message.author.id}> **vous venez d'acquerir le badge __${bot.badges.get(args[2]).name}__**`)
+                            .setDescription(`<@${message.author.id}> **vous venez d'acquerir le badge __${bot.badges.get("secret_phrase").name}__**`)
                         let confirmMessage = await message.author.send(confirmEmbed);
                         return;
                     }

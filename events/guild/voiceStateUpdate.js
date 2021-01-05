@@ -1,8 +1,11 @@
 module.exports = (bot, oldState, newState) => {
     console.log(newState.channelID)
-    if(newState.channelID) {
+    if(newState.channelID != undefined) {
+        console.log("11")
        if(newState.channelID == bot.config.I_CHANNELS.CREATE_CHANNEL){
+        console.log("22")
            var name = newState.member.nickname ? newState.member.nickname : newState.member.user.username;
+           console.log("33")
             newState.channel.guild.createChannel(`🔊・Canal de ` + name, {
                 type: 'voice',
                 permissionOverwrites: [
@@ -38,7 +41,7 @@ module.exports = (bot, oldState, newState) => {
         }
     }
 
-    if(oldState.channelID){
+    if(oldState.channelID != undefined){
         if(oldState.channel.members.size === 0 && oldState.channel.parent.id == bot.config.I_CHANNELS.CREATE_CHANNELS_CATEGORIE && oldState.channelID != bot.config.I_CHANNELS.CREATE_CHANNEL){
             oldState.channel.delete();
         }

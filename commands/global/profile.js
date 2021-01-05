@@ -16,8 +16,8 @@ module.exports = {
                 .setTitle(`➢ Profil de ${message.author.tag}`)
                 .setDescription(`**:bookmark_tabs: Statistiques sur nos serveurs:**
                 ${botEmojis.SPLIFE.DARK_RP.LOGO} 519h passées sur le DarkRP
-                ${botEmojis.SPLIFE.DARK_RP.LOGO} 19h passées sur le ScpRP
-                ${botEmojis.SPLIFE.DARK_RP.LOGO} 98h passées sur le PrisonRP
+                ${botEmojis.SPLIFE.SCP_RP.LOGO} 19h passées sur le ScpRP
+                ${botEmojis.SPLIFE.PRISON_RP.LOGO} 98h passées sur le PrisonRP
                 
                 **:bookmark_tabs: Statistiques Discord:**
                 Messages envoyés: 409

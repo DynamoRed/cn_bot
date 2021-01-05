@@ -5,6 +5,7 @@ module.exports = async (bot, newM) => {
         return; 
     }
 
+    console.log(newM)
     var logEmbed = new Discord.MessageEmbed()
         .setColor(bot.config.COLORS.BASE)
         .setDescription(`Suppression du message de <@${newM.author.id}>

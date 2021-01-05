@@ -1,15 +1,9 @@
 module.exports = (bot, oldState, newState) => {
-    let newUserChannel = newState.channel
-    let oldUserChannel = oldState.channel
-
-    if(newUserChannel.guild.id != "693198481086480544" && newUserChannel.guild.id != "618855620820336640"){
-        return;
-    }
-    
-    if(newUserChannel !== undefined) {
-       if(newUserChannel.id == bot.config.I_CHANNELS.CREATE_CHANNEL){
+    console.log(newState.channelID)
+    if(newState.channelID) {
+       if(newState.channelID == bot.config.I_CHANNELS.CREATE_CHANNEL){
            var name = newState.member.nickname ? newState.member.nickname : newState.member.user.username;
-            newUserChannel.guild.createChannel(`🔊・Canal de ` + name, {
+            newState.channel.guild.createChannel(`🔊・Canal de ` + name, {
                 type: 'voice',
                 permissionOverwrites: [
                     {
@@ -38,15 +32,15 @@ module.exports = (bot, oldState, newState) => {
                     }
                 ]
             }).then(ch => {
-                ch.setParent(newUserChannel.parent)
+                ch.setParent(newState.channel.parent)
                 newState.member.setVoiceChannel(ch)
             })
         }
     }
 
-    if(oldUserChannel){
-        if(oldUserChannel.members.size === 0 && oldUserChannel.parent.id == bot.config.I_CHANNELS.CREATE_CHANNELS_CATEGORIE && oldUserChannel.id != bot.config.I_CHANNELS.CREATE_CHANNEL){
-            oldUserChannel.delete();
+    if(oldState.channelID){
+        if(oldState.channel.members.size === 0 && oldState.channel.parent.id == bot.config.I_CHANNELS.CREATE_CHANNELS_CATEGORIE && oldState.channelID != bot.config.I_CHANNELS.CREATE_CHANNEL){
+            oldState.channel.delete();
         }
     }
 }

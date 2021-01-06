@@ -743,7 +743,7 @@ module.exports = async (bot, reaction, user) => {
                 .setColor(bot.config.COLORS.BASE)
                 .setTitle(`🎫 Ticket Support de ${authorName}`)
                 .setDescription(`${bot.botEmojis.GLOBAL.BULLET} <@${user.id}> un membre de notre équipe arrive pour vous aider.
-                Merci de décrire clairement et avec détails votre soucis afin que la résolution de votre problème se fasse avec le plus rapidement possible !`);
+                Merci de décrire clairement et avec détails votre soucis afin que la résolution de votre problème se fasse le plus rapidement possible !`);
             let msg = await channel.send(ticketEmbed1);
             msg.react(`🔐`);
 

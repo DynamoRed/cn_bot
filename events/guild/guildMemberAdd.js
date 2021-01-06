@@ -14,7 +14,7 @@ module.exports = (bot, m) => {
     var logEmbed = new Discord.MessageEmbed()
         .setColor(bot.config.COLORS.BASE)
         .setDescription(`<@${m.id}> a rejoint le serveur`)
-    let logMsg = await bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.LOGS).send(logEmbed);
+    bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.LOGS).send(logEmbed);
 
     let memberAddEmbed = new Discord.MessageEmbed()
         .setColor(bot.config.COLORS.BASE)

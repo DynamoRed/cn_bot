@@ -22,7 +22,7 @@ module.exports = async bot => {
     bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.MEMBERS_STATS).setName(`👥 Membres: ${bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).memberCount}`, "Actualisation Stats")
     let baseGuild = bot.guilds.cache.find(g => g.id == "618855620820336640");
 
-    bot.botEmojis = {
+    bot.botEmojis = { 
         "SPLIFE": {
             "DARK_RP": {
                 "LOGO": baseGuild.emojis.cache.find(e => e.id == "779090508395315241"),

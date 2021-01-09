@@ -367,7 +367,7 @@ module.exports = async (bot, reaction, user) => {
 
             if(message.channel.correctedQuestion == message.channel.testTotalQuestions){
                 let testResult = `${bot.botEmojis.GLOBAL.YES} Reçu(e)`;
-                if(message.channel.finalScore < message.channel.testTotalQuestions/2){
+                if(message.channel.finalScore < Math.round((message.channel.testTotalQuestions/3)*2)){
                     testResult = `${bot.botEmojis.GLOBAL.NO} Non reçu(e)`;
                 }
 
@@ -378,7 +378,7 @@ module.exports = async (bot, reaction, user) => {
 
                 let endMsg = await message.channel.send(correctionEndEmbed);
 
-                if(message.channel.finalScore < message.channel.testTotalQuestions/2) return;
+                if(message.channel.finalScore < Math.round((message.channel.testTotalQuestions/3)*2)) return;
 
                 message.channel.overwritePermissions([
                     {allow: 'SEND_MESSAGES', id: message.channel.isTested},
@@ -418,7 +418,7 @@ module.exports = async (bot, reaction, user) => {
 
             if(message.channel.correctedQuestion == message.channel.testTotalQuestions){
                 let testResult = `${bot.botEmojis.GLOBAL.YES} Reçu(e)`;
-                if(message.channel.finalScore < message.channel.testTotalQuestions/2){
+                if(message.channel.finalScore < Math.round((message.channel.testTotalQuestions/3)*2)){
                     testResult = `${bot.botEmojis.GLOBAL.NO} Non reçu(e)`;
                 }
 
@@ -429,7 +429,7 @@ module.exports = async (bot, reaction, user) => {
 
                 let endMsg = await message.channel.send(correctionEndEmbed);
 
-                if(message.channel.finalScore < message.channel.testTotalQuestions/2) return;
+                if(message.channel.finalScore < Math.round((message.channel.testTotalQuestions/3)*2)) return;
 
                 message.channel.overwritePermissions([
                     {allow: 'SEND_MESSAGES', id: message.channel.isTested},
@@ -536,7 +536,7 @@ module.exports = async (bot, reaction, user) => {
                     .setDescription(`Votre responsable de session (<@${message.channel.staffTestResp.id}>) va vous communiquer vos **résultats** sous peu.
                     
                     ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !
-                    ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **${message.channel.testTotalQuestions/2}/${message.channel.testTotalQuestions}** pour passer dans notre équipe !
+                    ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **${Math.round((message.channel.testTotalQuestions/3)*2)}/${message.channel.testTotalQuestions}** pour passer dans notre équipe !
                 
                     ${bot.botEmojis.GLOBAL.TEAM} _Reservé au correcteur:_
                     **Cliquez sur 🖊️ pour lancer le processus de correction !**

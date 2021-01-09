@@ -282,7 +282,7 @@ module.exports = async (bot, message) => {
                 .setDescription(`Votre responsable de session (<@${message.channel.staffTestResp.id}>) va vous communiquer vos **résultats** sous peu.
                 
                 ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !
-                ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **${message.channel.testTotalQuestions/2}/${message.channel.testTotalQuestions}** pour passer dans notre équipe !
+                ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **${Math.round((message.channel.testTotalQuestions/3)*2)}/${message.channel.testTotalQuestions}** pour passer dans notre équipe !
                 
                 ${bot.botEmojis.GLOBAL.TEAM} _Reservé aux correcteur:_
                 **Cliquez sur 🖊️ pour lancer le processus de correction !**

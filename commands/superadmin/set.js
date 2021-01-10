@@ -1,4 +1,12 @@
 const Discord = require('discord.js');
+
+function JSONArrayInclude(array, value){
+    let result = false;
+    for(v in array){
+        if(v == value) result = true;
+    }
+    return result;
+}
 module.exports = {
     name: "set",
     description: "Permet de parametrer son serveur",
@@ -34,7 +42,7 @@ module.exports = {
                 
                 message.channel.send(setHelpEmbed);
             } else {
-                if(bot.config.CONFIGURABLE_CHANNELS.includes(args[0])){
+                if(JSONArrayInclude(bot.config.CONFIGURABLE_CHANNELS, args[0])){
 
                 } else {
                     var replyEmbed = new Discord.MessageEmbed()

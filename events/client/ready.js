@@ -72,8 +72,6 @@ module.exports = async bot => {
         }
     }
 
-    let ownerList = new Discord.Collection();
-
     bot.db = bot.mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
@@ -85,6 +83,57 @@ module.exports = async bot => {
         if (err) throw err;
         console.log("Connecté à la base de données MySQL!");
     });
+
+    bot.getServerColor = function(id){
+        let result;
+        bot.db.query(`SELECT * FROM servers_config WHERE server_id='${id}'`, async function(err, results){
+            if (err) throw err;
+            if(results != undefined && results.length == 1){
+                result = results[0].server_color;
+            } else {
+                result = bot.config.COLORS.BASE;
+            }
+        })
+        return result;
+    }
+
+    bot.getServerChannel = function(id, referTo){
+        let result;
+        bot.db.query(`SELECT * FROM servers_channels_config WHERE server_id='${id}' and refer_to='${referTo}'`, async function(err, results){
+            if (err) throw err;
+            if(results != undefined && results.length == 1){
+                result = results[0].channel_id;
+            } else {
+                result = undefined;
+            }
+        })
+        return result;
+    }
+
+    bot.setServerChannel = function(id, referTo, channelId){
+        let result = false;
+        bot.db.query(`SELECT * FROM servers_channels_config WHERE server_id='${id}' and refer_to='${referTo}'`, async function(err, results){
+            if (err) throw err;
+            if(results != undefined && results.length == 1){
+                bot.db.query(`UPDATE servers_channels_config SET channel_id=${channelId} WHERE server_id='${id}' and refer_to='${referTo}'`, async function(err, results){
+                    if (err){
+                        throw err;
+                    } else {
+                        result = true;
+                    }
+                })
+            } else {
+                bot.db.query(`INSERT INTO servers_channels_config (server_id, channel_id, refer_to) VALUES ('${id}', '${channelId}', '${referTo}')`, async function(err, results){
+                    if (err){
+                        throw err;
+                    } else {
+                        result = true;
+                    }
+                })
+            }
+        })
+        return result;
+    }
 
     bot.guilds.cache.find(g => g.id == "693198481086480544").members.cache.forEach(m => {
         if(m.roles.cache.find(r => r.name.toLowerCase() == "staff" || r.name.toLowerCase().includes("staff+"))){

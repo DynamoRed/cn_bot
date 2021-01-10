@@ -15,6 +15,63 @@
         "SCPRP": "768572431946219582",
         "PRISONRP": "748230902450094181"
     },
+    "CONFIGURABLE_CHANNELS": {
+        "tickets": {
+            "description": "Channel dans lequel les gens doivent réagir a un message pour creer un ticket",
+            "name": "tickets",
+            "type": "text"
+        },
+        "patch_notes": {
+            "description": "Channel dans lequel sont diffusés les patchs-notes",
+            "name": "patch_notes",
+            "type": "text"
+        },
+        "create_channel": {
+            "description": "Channel vocal dans lequel une personne doit se connecter pour creer son propre canal vocal",
+            "name": "create_channel",
+            "type": "voice"
+        },
+        "logs": {
+            "description": "Channel de logs",
+            "name": "logs",
+            "type": "text"
+        },
+        "verification": {
+            "description": "Channel dans lequel les personnes doivent réagir avec l'emoji ✅ pour entrer sur le serveur",
+            "name": "verification",
+            "type": "text"
+        },
+        "welcome": {
+            "description": "Channel d'arrivée où seront mis les messages de bienvenue",
+            "name": "welcome",
+            "type": "text"
+        },
+        "boosts": {
+            "description": "Channel dans lequel sont envoyés les messages de boosts discord",
+            "name": "boosts",
+            "type": "text"
+        },
+        "reunions_votes": {
+            "description": "Channel de vote de candidatures lors de réunion",
+            "name": "reunions_votes",
+            "type": "text"
+        },
+        "commands": {
+            "description": "Channel dans lequel certaines commandes devront être spécifiquement envoyées",
+            "name": "commands",
+            "type": "text"
+        },
+        "members_stat": {
+            "description": "Channel vocal affichant le nombre de membres sur le discord",
+            "name": "members_stat",
+            "type": "voice"
+        },
+        "staff_stat": {
+            "description": "Channel vocal affichant le nombre de staff présent sur le discord",
+            "name": "staff_stat",
+            "type": "voice"
+        }
+    },
     "I_CHANNELS": {
         "GIVEAWAYS": "745220977423548456",
         "TICKETS": "746112226527805501",

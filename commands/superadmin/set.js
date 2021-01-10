@@ -7,6 +7,7 @@ function JSONArrayInclude(array, value){
     }
     return result;
 }
+
 module.exports = {
     name: "set",
     description: "Permet de parametrer son serveur",

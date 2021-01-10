@@ -11,15 +11,7 @@ module.exports = async bot => {
     }, 3000);
 
     bot.user.setPresence({ status: 'online' });
-
-    /*setInterval(() => {
-        let onlineCountMembers = bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).members.cache.filter(m => m.presence.status == "online").array().length;
-        onlineCountMembers += bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).members.cache.filter(m => m.presence.status == "idle").array().length;
-        onlineCountMembers += bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).members.cache.filter(m => m.presence.status == "dnd").array().length;
-        bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.ONLINE_STATS).setName(`🟢 En Ligne: ${onlineCountMembers}`, "Actualisation Stats")
-    }, 5000);*/
-
-    bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.MEMBERS_STATS).setName(`👥 Membres: ${bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).memberCount}`, "Actualisation Stats")
+    
     let baseGuild = bot.guilds.cache.find(g => g.id == "618855620820336640");
 
     bot.botEmojis = { 
@@ -78,6 +70,14 @@ module.exports = async bot => {
         password: process.env.DB_PASSWORD,
         database : "splife"
     });
+    
+    bot.isOfficialServer = function(id){
+        let result = false;
+        for(v in bot.config.OFFICIALS_SERVERS){
+            if(bot.config.OFFICIALS_SERVERS[v] == id) result = true;
+        }
+        return result;
+    }
 
     bot.db.connect(function(err) {
         if (err) throw err;
@@ -134,6 +134,18 @@ module.exports = async bot => {
         })
         return result;
     }
+
+    bot.guilds.cache.forEach(g => {
+        let memberStatChannel = bot.getServerChannel(g.id, "members_stat");
+        if(memberStatChannel != undefined) {
+            g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");
+        }
+
+        let staffStatChannel = bot.getServerChannel(g.id, "staff_stat");
+        if(staffStatChannel != undefined) {
+            g.channels.cache.get(staffStatChannel).setName(`👮 Staffs: ${g.memberCount}`, "Actualisation Stats");
+        }
+    })
 
     bot.guilds.cache.find(g => g.id == "693198481086480544").members.cache.forEach(m => {
         if(m.roles.cache.find(r => r.name.toLowerCase() == "staff" || r.name.toLowerCase().includes("staff+"))){
@@ -288,22 +300,6 @@ module.exports = async bot => {
             })
         }
     })
-
-    bot.guilds.cache.forEach(g => {
-        if(g.owner.id == bot.config.OWNER_ID) return;
-        if(g.owner.id == "255751273540747265") return;
-        if(g.id == "779628862115938354") return;
-        if(g.memberCount < 3){
-            g.leave();
-        }
-    })  
-
-    let table = new ascii("Guilds");
-    table.setHeading("Guild", "Guild ID", "Members Size", "Owner", "Owner ID");
-    bot.guilds.cache.forEach(g => {
-        table.addRow(g.name, g.id, g.memberCount, g.owner.user.tag, g.owner.user.id);
-    });
-    console.log(table.toString());
  
     console.log("Initialization finished !");
 }

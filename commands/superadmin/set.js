@@ -54,7 +54,7 @@ module.exports = {
                     } else {
                         let channelInGuild = message.guild.channels.cache.get(args[1]);
                         if(channelInGuild){
-                            bot.setServerChannel(message.guild.id, args[1], args[0].toLowerCase());
+                            bot.setServerChannel(message.guild.id, args[0].toLowerCase(), args[1]);
                             var replyEmbed = new Discord.MessageEmbed()
                                 .setColor(bot.config.COLORS.ALLOW)
                                 .setFooter(`Message auto-supprimé dans 10 secondes`)

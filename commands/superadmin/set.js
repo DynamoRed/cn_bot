@@ -43,7 +43,28 @@ module.exports = {
                 message.channel.send(setHelpEmbed);
             } else {
                 if(JSONArrayInclude(bot.config.CONFIGURABLE_CHANNELS, args[0])){
-
+                    if(args[1].length != 18){
+                        var replyEmbed = new Discord.MessageEmbed()
+                            .setColor(bot.config.COLORS.DENY)
+                            .setFooter(`Message auto-supprimé dans 10 secondes`)
+                            .setDescription(`<@${message.author.id}> **cet ID n'est pas valide !**`)
+                        let msg = await message.channel.send(replyEmbed);
+                        setTimeout(() => {msg.delete()}, 10 * 1000)
+                        return;
+                    } else {
+                        let channelInGuild = message.guild.channels.cache.get(args[1]);
+                        if(channelInGuild){
+                            bot.setServerChannel(message.guild.id, args[1], args[0].toLowerCase());
+                        } else {
+                            var replyEmbed = new Discord.MessageEmbed()
+                                .setColor(bot.config.COLORS.DENY)
+                                .setFooter(`Message auto-supprimé dans 10 secondes`)
+                                .setDescription(`<@${message.author.id}> **cet ID ne correspond a aucun channel sur ce serveur !**`)
+                            let msg = await message.channel.send(replyEmbed);
+                            setTimeout(() => {msg.delete()}, 10 * 1000)
+                            return;
+                        }
+                    }
                 } else {
                     var replyEmbed = new Discord.MessageEmbed()
                         .setColor(bot.config.COLORS.DENY)

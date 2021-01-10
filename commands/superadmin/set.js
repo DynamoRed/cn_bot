@@ -17,21 +17,18 @@ module.exports = {
             setTimeout(() => {msg.delete()}, 10 * 1000)
             return;
         } else {
-            console.log("11")
             if(args[0].toLowerCase() == "help"){
-                console.log("22")
                 let setHelpEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
                     .setTitle(`Paramètres`)
                     .setThumbnail(`http://icons.iconarchive.com/icons/dtafalonso/android-l/512/Settings-L-icon.png`);
 
-                bot.config.CONFIGURABLE_CHANNELS.forEach(c => {
+                for(c in bot.config.CONFIGURABLE_CHANNELS){
                     setHelpEmbed.addField(`${c.name}`, `${c.description}`);
-                })
+                }
                 
                 message.channel.send(setHelpEmbed);
             } else {
-                console.log("22")
                 if(bot.config.CONFIGURABLE_CHANNELS.includes(args[0])){
 
                 } else {

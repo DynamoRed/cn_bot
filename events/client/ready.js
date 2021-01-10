@@ -86,10 +86,10 @@ module.exports = async bot => {
 
     bot.getServerColor = function(id){
         let result;
-        bot.db.query(`SELECT * FROM servers_config WHERE server_id='${id}'`, async function(err, results){
+        bot.db.query(`SELECT server_color FROM servers_config WHERE server_id='${id}'`, async function(err, results){
             if (err) throw err;
             if(results != undefined && results.length == 1){
-                result = results[0].server_color;
+                result = results[0];
             } else {
                 result = bot.config.COLORS.BASE;
             }
@@ -99,11 +99,11 @@ module.exports = async bot => {
 
     bot.getServerChannel = function(id, referTo){
         let result;
-        bot.db.query(`SELECT * FROM servers_channels_config WHERE server_id='${id}' and refer_to='${referTo}'`, async function(err, results){
+        bot.db.query(`SELECT channel_id FROM servers_channels_config WHERE server_id='${id}' and refer_to='${referTo}'`, async function(err, results){
             if (err) throw err;
             console.log(results)
             if(results != undefined && results.length == 1){
-                result = results[0].channel_id;
+                result = results[0];
             } else {
                 result = undefined;
             }

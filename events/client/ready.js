@@ -138,6 +138,7 @@ module.exports = async bot => {
     }
 
     bot.guilds.cache.forEach(g => {
+        if(!g.name.includes("DarkRP")) return
         let memberStatChannel = bot.getServerChannel(g.id, "members_stat");
         console.log(memberStatChannel + " POUR " + g.name)
         if(memberStatChannel != undefined) {

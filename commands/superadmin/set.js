@@ -54,7 +54,24 @@ module.exports = {
                     } else {
                         let channelInGuild = message.guild.channels.cache.get(args[1]);
                         if(channelInGuild){
-                            bot.setServerChannel(message.guild.id, args[1], args[0].toLowerCase());
+                            let configureChannel = bot.setServerChannel(message.guild.id, args[1], args[0].toLowerCase());
+                            if(configureChannel){
+                                var replyEmbed = new Discord.MessageEmbed()
+                                    .setColor(bot.config.COLORS.ALLOW)
+                                    .setFooter(`Message auto-supprimé dans 10 secondes`)
+                                    .setDescription(`<@${message.author.id}> **paramètre enregistré avec succès !**`)
+                                let msg = await message.channel.send(replyEmbed);
+                                setTimeout(() => {msg.delete()}, 10 * 1000)
+                                return;
+                            } else {
+                                var replyEmbed = new Discord.MessageEmbed()
+                                    .setColor(bot.config.COLORS.DENY)
+                                    .setFooter(`Message auto-supprimé dans 10 secondes`)
+                                    .setDescription(`<@${message.author.id}> **une erreur est survenue, veuillez contacter le developpeur de ce bot !**`)
+                                let msg = await message.channel.send(replyEmbed);
+                                setTimeout(() => {msg.delete()}, 10 * 1000)
+                                return;
+                            }
                         } else {
                             var replyEmbed = new Discord.MessageEmbed()
                                 .setColor(bot.config.COLORS.DENY)

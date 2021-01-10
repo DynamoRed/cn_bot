@@ -24,6 +24,7 @@ module.exports = {
                     .setThumbnail(`http://icons.iconarchive.com/icons/dtafalonso/android-l/512/Settings-L-icon.png`);
 
                 for(c in bot.config.CONFIGURABLE_CHANNELS){
+                    console.log(c)
                     setHelpEmbed.addField(`${c.name}`, `${c.description}`);
                 }
                 

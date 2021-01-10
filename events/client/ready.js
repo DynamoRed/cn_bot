@@ -101,8 +101,8 @@ module.exports = async bot => {
         let result;
         bot.db.query(`SELECT channel_id FROM servers_channels_config WHERE server_id="${id}" AND refer_to="${referTo}"`, async function(err, results){
             if (err) throw err;
-            console.log(results[0] + "VS" + results)
             if(results != undefined && results.length == 1){
+                console.log(results[0] + "VS" + results)
                 result = results[0];
             } else {
                 result = undefined;
@@ -113,7 +113,7 @@ module.exports = async bot => {
 
     bot.setServerChannel = function(id, referTo, channelId){
         let result = false;
-        bot.db.query(`SELECT * FROM servers_channels_config WHERE server_id='${id}' and refer_to='${referTo}'`, async function(err, results){
+        bot.db.query(`SELECT * FROM servers_channels_config WHERE server_id='${id}' and refer_to=${referTo}`, async function(err, results){
             if (err) throw err;
             if(results != undefined && results.length == 1){
                 bot.db.query(`UPDATE servers_channels_config SET channel_id='${channelId}' WHERE server_id='${id}' and refer_to='${referTo}'`, async function(err, results){

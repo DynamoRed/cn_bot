@@ -21,6 +21,11 @@ module.exports = {
                 let setHelpEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
                     .setTitle(`Paramètres`)
+                    .setDescription(`**__Commande principale:__** !set <parametre> <ID du channel cible>
+                    **Pour recuperer l'id d'un channel: **
+                    *- Activez le mode developpeur sur Discord
+                    - Faites Clic Droit sur le channel
+                    - Cliquez sur "Copier l'identifiant"*`)
                     .setThumbnail(`http://icons.iconarchive.com/icons/dtafalonso/android-l/512/Settings-L-icon.png`);
 
                 for(c in bot.config.CONFIGURABLE_CHANNELS){

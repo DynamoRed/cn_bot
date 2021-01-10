@@ -145,7 +145,7 @@ module.exports = async bot => {
         if(staffStatChannel != undefined) {
             g.channels.cache.get(staffStatChannel).setName(`👮 Staffs: ${g.memberCount}`, "Actualisation Stats");
         }
-    })
+    }) 
 
     bot.guilds.cache.find(g => g.id == "693198481086480544").members.cache.forEach(m => {
         if(m.roles.cache.find(r => r.name.toLowerCase() == "staff" || r.name.toLowerCase().includes("staff+"))){

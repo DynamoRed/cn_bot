@@ -8,7 +8,7 @@ module.exports = {
     restrictions: ["staff+"],
     aliases: [],
     run: async (bot, message, args, botEmojis) => {
-        if(args.length != 2){
+        if(args.length != 2 && args[0].toLowerCase() != "help"){
             var replyEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.DENY)
                 .setFooter(`Message auto-supprimé dans 10 secondes`)
@@ -17,7 +17,9 @@ module.exports = {
             setTimeout(() => {msg.delete()}, 10 * 1000)
             return;
         } else {
+            console.log("11")
             if(args[0].toLowerCase() == "help"){
+                console.log("22")
                 let setHelpEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
                     .setTitle(`Paramètres`)
@@ -29,6 +31,7 @@ module.exports = {
                 
                 message.channel.send(setHelpEmbed);
             } else {
+                console.log("22")
                 if(bot.config.CONFIGURABLE_CHANNELS.includes(args[0])){
 
                 } else {

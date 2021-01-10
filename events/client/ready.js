@@ -137,6 +137,7 @@ module.exports = async bot => {
 
     bot.guilds.cache.forEach(g => {
         let memberStatChannel = bot.getServerChannel(g.id, "members_stat");
+        console.log(memberStatChannel + " POUR " + g.name)
         if(memberStatChannel != undefined) {
             console.log(memberStatChannel + " 11")
             g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");

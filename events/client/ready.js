@@ -127,12 +127,13 @@ module.exports = async bot => {
 
     bot.guilds.cache.forEach(g => {
         if(!g.name.includes("DarkRP")) return
-        bot.updateCacheServersConfigs();
-        let memberStatChannel = serversCacheConfig["channels"][g.id]["members_stat"];
-        console.log(memberStatChannel + " POUR " + g.name)
-        if(memberStatChannel != undefined) {
-            g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");
-        }
+        bot.updateCacheServersConfigs().then(() => {
+            let memberStatChannel = serversCacheConfig["channels"][g.id]["members_stat"];
+            console.log(memberStatChannel + " POUR " + g.name)
+            if(memberStatChannel != undefined) {
+                g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");
+            }
+        });
     }) 
 
     bot.guilds.cache.find(g => g.id == "693198481086480544").members.cache.forEach(m => {

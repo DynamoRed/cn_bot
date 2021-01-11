@@ -99,7 +99,7 @@ module.exports = async bot => {
 
     bot.getServerChannel = function getServerChannel(id, referTo){
         return new Promise((resolve, reject) => 
-            bot.db.query(`SELECT channel_id FROM servers_channels_config WHERE server_id='${id}' AND refer_to=${referTo}`, async function(err, results){
+            bot.db.query(`SELECT channel_id FROM 'servers_channels_config' WHERE server_id='${id}' AND refer_to='${referTo}'`, async function(err, results){
                 if (err) reject(err);
                 if(results != undefined && results.length == 1){
                     resolve(result[0].channel_id);
@@ -132,9 +132,8 @@ module.exports = async bot => {
     bot.guilds.cache.forEach(g => {
         if(!g.name.includes("DarkRP")) return
         let memberStatChannel = bot.getServerChannel(g.id, "members_stat");
-        console.log(memberStatChannel + " POUR " + g.name)
+        console.log(memberStatChannel)
         if(memberStatChannel != undefined) {
-            console.log(memberStatChannel + " 11")
             g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");
         }
 

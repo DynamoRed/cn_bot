@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
 
-module.exports = async (bot, oldC) => {
-    if(oldC.guild == undefined) return;
-    if(oldC.guild.id != "693198481086480544" && oldC.guild.id != "618855620820336640"){
-        return; 
-    }
+module.exports = async (bot, newC) => {
+    if(newC.guild == undefined) return;
 
-    var logEmbed = new Discord.MessageEmbed()
-        .setColor(bot.config.COLORS.BASE)
-        .setDescription(`Suppression du channel **${oldC.name}**`)
-    let logMsg = await bot.guilds.cache.get(bot.config.OFFICIALS_SERVERS.DARKRP).channels.cache.get(bot.config.I_CHANNELS.LOGS).send(logEmbed);
+    let logsChannel = await bot.getServerChannel(newC.guild.id, "logs");
+    if(logsChannel != undefined) {
+        var logEmbed = new Discord.MessageEmbed()
+            .setColor(await bot.getServerColor(newC.guild.id))
+            .setDescription(`Suppression du channel **${newC.name}**`)
+        newC.guild.channels.cache.get(logsChannel).send(logEmbed);
+    }
 }

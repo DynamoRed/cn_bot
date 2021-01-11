@@ -109,6 +109,7 @@ module.exports = async bot => {
                 serversChannelsConfig.set(id, undefined);
             }
         })
+        console.log("33")
         return serversChannelsConfig.get(id);
     }
 

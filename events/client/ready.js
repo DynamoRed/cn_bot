@@ -89,7 +89,7 @@ module.exports = async bot => {
             bot.db.query(`SELECT server_color FROM servers_config WHERE server_id='${id}'`, async function(err, results){
                 if (err) reject(err);
                 if(results != undefined && results.length == 1){
-                    resolve(result[0].server_color);
+                    resolve(results[0].server_color);
                 } else {
                     resolve(bot.config.COLORS.BASE);
                 }

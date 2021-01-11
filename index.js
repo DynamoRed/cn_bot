@@ -37,12 +37,6 @@ bot.on("guildMemberAdd", (member) => {
 bot.on("guildMemberRemove", (member) => {
     require("./events/guild/guildMemberRemove")(bot, member);
 });
-bot.on("guildCreate", (g) => {
-    require("./events/client/guildCreate")(bot, g);
-});
-bot.on("guildDelete", (g) => {
-    require("./events/client/guildDelete")(bot, g);
-});
 bot.on("messageDelete", (message) => {
     require("./events/guild/messageDelete")(bot, message);
 });

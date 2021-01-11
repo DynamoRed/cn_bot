@@ -99,9 +99,10 @@ module.exports = async bot => {
 
     bot.getServerChannel = function getServerChannel(id, referTo){
         return new Promise((resolve, reject) => 
-            bot.db.query(`SELECT channel_id FROM 'servers_channels_config' WHERE server_id='${id}' AND refer_to='${referTo}'`, async function(err, results){
+            bot.db.query(`SELECT channel_id FROM servers_channels_config WHERE server_id='${id}' AND refer_to='${referTo}'`, async function(err, results){
                 if (err) reject(err);
                 if(results != undefined && results.length == 1){
+                    console.log("Result found !")
                     resolve(result[0].channel_id);
                 } else {
                     resolve(undefined);
@@ -111,7 +112,7 @@ module.exports = async bot => {
     }
 
     bot.setServerChannel = function(id, referTo, channelId){
-        bot.db.query(`SELECT * FROM servers_channels_config WHERE server_id='${id}' and refer_to=${referTo}`, async function(err, results){
+        bot.db.query(`SELECT * FROM servers_channels_config WHERE server_id='${id}' and refer_to='${referTo}'`, async function(err, results){
             if (err) throw err;
             if(results != undefined && results.length == 1){
                 bot.db.query(`UPDATE servers_channels_config SET channel_id='${channelId}' WHERE server_id='${id}' and refer_to='${referTo}'`, async function(err, results){
@@ -129,17 +130,12 @@ module.exports = async bot => {
         })
     }
 
-    bot.guilds.cache.forEach(g => {
+    bot.guilds.cache.forEach(async g => {
         if(!g.name.includes("DarkRP")) return
-        let memberStatChannel = bot.getServerChannel(g.id, "members_stat");
+        let memberStatChannel = await bot.getServerChannel(g.id, "members_stat");
         console.log(memberStatChannel)
         if(memberStatChannel != undefined) {
             g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");
-        }
-
-        let staffStatChannel = bot.getServerChannel(g.id, "staff_stat");
-        if(staffStatChannel != undefined) {
-            g.channels.cache.get(staffStatChannel).setName(`👮 Staffs: ${g.memberCount}`, "Actualisation Stats");
         }
     }) 
 

@@ -84,7 +84,7 @@ module.exports = async bot => {
         console.log("Connecté à la base de données MySQL!");
     });
 
-    let serversCacheConfig = {};
+    let serversCacheConfig = {"colors": {}, "channels":{}};
 
     bot.updateCacheServersConfigs = function(){
         bot.db.query(`SELECT * FROM servers_config`, async function(err, results){

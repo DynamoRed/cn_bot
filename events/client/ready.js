@@ -84,17 +84,18 @@ module.exports = async bot => {
         console.log("Connecté à la base de données MySQL!");
     });
 
+    let serversColors = new Discord.Collection();
+
     bot.getServerColor = function(id){
-        let result;
         bot.db.query(`SELECT server_color FROM servers_config WHERE server_id='${id}'`, async function(err, results){
             if (err) throw err;
             if(results != undefined && results.length == 1){
-                result = results[0];
+                serversColors.set(id, results[0].channel_id);
             } else {
-                result = bot.config.COLORS.BASE;
+                serversColors.set(id, bot.config.COLORS.BASE);
             }
         })
-        return result;
+        return serversColors.get(id);
     }
 
     let serversChannelsConfig = new Discord.Collection();
@@ -103,36 +104,31 @@ module.exports = async bot => {
         bot.db.query(`SELECT channel_id FROM servers_channels_config WHERE server_id="${id}" AND refer_to="${referTo}"`, async function(err, results){
             if (err) throw err;
             if(results != undefined && results.length == 1){
-                console.log(results[0].channel_id);
+                serversChannelsConfig.set(id, results[0].channel_id);
             } else {
-                return undefined;
+                serversChannelsConfig.set(id, undefined);
             }
         })
+        return serversChannelsConfig.get(id);
     }
 
     bot.setServerChannel = function(id, referTo, channelId){
-        let result = false;
         bot.db.query(`SELECT * FROM servers_channels_config WHERE server_id='${id}' and refer_to=${referTo}`, async function(err, results){
             if (err) throw err;
             if(results != undefined && results.length == 1){
                 bot.db.query(`UPDATE servers_channels_config SET channel_id='${channelId}' WHERE server_id='${id}' and refer_to='${referTo}'`, async function(err, results){
                     if (err){
                         throw err;
-                    } else {
-                        result = true;
                     }
                 })
             } else {
                 bot.db.query(`INSERT INTO servers_channels_config (server_id, channel_id, refer_to) VALUES ('${id}', '${channelId}', '${referTo}')`, async function(err, results){
                     if (err){
                         throw err;
-                    } else {
-                        result = true;
                     }
                 })
             }
         })
-        return result;
     }
 
     bot.guilds.cache.forEach(g => {
@@ -140,7 +136,6 @@ module.exports = async bot => {
         let memberStatChannel = bot.getServerChannel(g.id, "members_stat");
         console.log(memberStatChannel + " POUR " + g.name)
         if(memberStatChannel != undefined) {
-            console.log(memberStatChannel + " 11")
             g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");
         }
 

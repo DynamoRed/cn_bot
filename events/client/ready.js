@@ -84,26 +84,30 @@ module.exports = async bot => {
         console.log("Connecté à la base de données MySQL!");
     });
 
-    let serversCacheConfig = {"colors": {}, "channels":{}};
-
-    bot.updateCacheServersConfigs = function updateCacheServersConfigs(){
-        console.log("11")
-        bot.db.query(`SELECT * FROM servers_config`, async function(err, results){
-            if (err) throw err;
-            results.forEach(r => {
-                serversCacheConfig["colors"][r.server_id] = r.server_color;
+    bot.getServerColor = function(id){
+        return new Promise((resolve, reject) => 
+            bot.db.query(`SELECT server_color FROM servers_config WHERE server_id='${id}'`, async function(err, results){
+                if (err) reject(err);
+                if(results != undefined && results.length == 1){
+                    resolve(result[0].server_color);
+                } else {
+                    resolve(bot.config.COLORS.BASE);
+                }
             })
-        })
+        )
+    }
 
-        bot.db.query(`SELECT * FROM servers_channels_config`, async function(err, results){
-            console.log("22")
-            if (err) throw err;
-            results.forEach(r => {
-                console.log("33")
-                if(serversCacheConfig["channels"][r.server_id] == undefined) serversCacheConfig["channels"][r.server_id] = {};
-                serversCacheConfig["channels"][r.server_id][r.refer_to] = r.channel_id;
+    bot.getServerChannel = function getServerChannel(id, referTo){
+        return new Promise((resolve, reject) => 
+            bot.db.query(`SELECT channel_id FROM servers_channels_config WHERE server_id='${id}' AND refer_to=${referTo}`, async function(err, results){
+                if (err) reject(err);
+                if(results != undefined && results.length == 1){
+                    resolve(result[0].channel_id);
+                } else {
+                    resolve(undefined);
+                }
             })
-        })
+        )
     }
 
     bot.setServerChannel = function(id, referTo, channelId){
@@ -120,18 +124,23 @@ module.exports = async bot => {
                     if (err){
                         throw err;
                     }
-                }) 
+                })
             }
         })
     }
 
     bot.guilds.cache.forEach(g => {
         if(!g.name.includes("DarkRP")) return
-        bot.updateCacheServersConfigs();
-        let memberStatChannel = serversCacheConfig["channels"][g.id]["members_stat"];
+        let memberStatChannel = bot.getServerChannel(g.id, "members_stat");
         console.log(memberStatChannel + " POUR " + g.name)
         if(memberStatChannel != undefined) {
+            console.log(memberStatChannel + " 11")
             g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");
+        }
+
+        let staffStatChannel = bot.getServerChannel(g.id, "staff_stat");
+        if(staffStatChannel != undefined) {
+            g.channels.cache.get(staffStatChannel).setName(`👮 Staffs: ${g.memberCount}`, "Actualisation Stats");
         }
     }) 
 

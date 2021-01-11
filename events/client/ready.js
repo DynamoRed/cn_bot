@@ -86,25 +86,18 @@ module.exports = async bot => {
 
     let serversCacheConfig = {};
 
-    bot.getServerColor = function(id){
-        bot.db.query(`SELECT server_color FROM servers_config WHERE server_id='${id}'`, async function(err, results){
-            if (err) throw err;
-            if(results != undefined && results.length == 1){
-                serversColors.set(id, results[0].channel_id);
-            } else {
-                serversColors.set(id, bot.config.COLORS.BASE);
-            }
-        })
-        return serversColors.get(id);
-    }
-
-    let serversCacheConfig = {};
-
     bot.updateCacheServersConfigs = function(){
+        bot.db.query(`SELECT * FROM servers_config`, async function(err, results){
+            if (err) throw err;
+            results.forEach(r => {
+                serversCacheConfig["colors"][r.server_id] = r.server_color;
+            })
+        })
+
         bot.db.query(`SELECT * FROM servers_channels_config`, async function(err, results){
             if (err) throw err;
             results.forEach(r => {
-                serversCacheConfig[r.server_id][r.refer_to] = r.channel_id;
+                serversCacheConfig["channels"][r.server_id][r.refer_to] = r.channel_id;
             })
         })
     }
@@ -130,14 +123,10 @@ module.exports = async bot => {
 
     bot.guilds.cache.forEach(g => {
         if(!g.name.includes("DarkRP")) return
-        let memberStatChannel = serversCacheConfig[g.id]["members_stat"];
+        let memberStatChannel = serversCacheConfig["channels"][g.id]["members_stat"];
         console.log(memberStatChannel + " POUR " + g.name)
         if(memberStatChannel != undefined) {
             g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");
-        }
-
-        if(staffStatChannel != undefined) {
-            g.channels.cache.get(staffStatChannel).setName(`👮 Staffs: ${g.memberCount}`, "Actualisation Stats");
         }
     }) 
 

@@ -102,8 +102,7 @@ module.exports = async bot => {
             bot.db.query(`SELECT channel_id FROM servers_channels_config WHERE server_id='${id}' AND refer_to='${referTo}'`, async function(err, results){
                 if (err) reject(err);
                 if(results != undefined && results.length == 1){
-                    console.log("Result found !")
-                    resolve(result[0].channel_id);
+                    resolve(results[0].channel_id);
                 } else {
                     resolve(undefined);
                 }

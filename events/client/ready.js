@@ -87,16 +87,21 @@ module.exports = async bot => {
     let serversCacheConfig = {"colors": {}, "channels":{}};
 
     bot.updateCacheServersConfigs = function(){
+        console.log("11")
         bot.db.query(`SELECT * FROM servers_config`, async function(err, results){
+            console.log("22")
             if (err) throw err;
             results.forEach(r => {
+                console.log("33")
                 serversCacheConfig["colors"][r.server_id] = r.server_color;
             })
         })
 
         bot.db.query(`SELECT * FROM servers_channels_config`, async function(err, results){
+            console.log("22")
             if (err) throw err;
             results.forEach(r => {
+                console.log("33")
                 serversCacheConfig["channels"][r.server_id][r.refer_to] = r.channel_id;
             })
         })
@@ -123,6 +128,7 @@ module.exports = async bot => {
 
     bot.guilds.cache.forEach(g => {
         if(!g.name.includes("DarkRP")) return
+        bot.updateCacheServersConfigs();
         let memberStatChannel = serversCacheConfig["channels"][g.id]["members_stat"];
         console.log(memberStatChannel + " POUR " + g.name)
         if(memberStatChannel != undefined) {

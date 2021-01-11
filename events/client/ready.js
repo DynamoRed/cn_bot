@@ -89,10 +89,8 @@ module.exports = async bot => {
     bot.updateCacheServersConfigs = function(){
         console.log("11")
         bot.db.query(`SELECT * FROM servers_config`, async function(err, results){
-            console.log("22")
             if (err) throw err;
             results.forEach(r => {
-                console.log("33")
                 serversCacheConfig["colors"][r.server_id] = r.server_color;
             })
         })
@@ -102,6 +100,7 @@ module.exports = async bot => {
             if (err) throw err;
             results.forEach(r => {
                 console.log("33")
+                if(serversCacheConfig["channels"][r.server_id] == undefined) serversCacheConfig["channels"][r.server_id] = {};
                 serversCacheConfig["channels"][r.server_id][r.refer_to] = r.channel_id;
             })
         })

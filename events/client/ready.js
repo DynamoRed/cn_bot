@@ -84,27 +84,28 @@ module.exports = async bot => {
         console.log("Connecté à la base de données MySQL!");
     });
 
-    let serversColors = new Discord.Collection();
+    let serversCacheConfig = {};
 
     bot.getServerColor = function(id){
-        return bot.db.query(`SELECT server_color FROM servers_config WHERE server_id='${id}'`, async function(err, results){
+        bot.db.query(`SELECT server_color FROM servers_config WHERE server_id='${id}'`, async function(err, results){
             if (err) throw err;
             if(results != undefined && results.length == 1){
-                return results[0].server_color;
+                serversColors.set(id, results[0].channel_id);
             } else {
-                return bot.config.COLORS.BASE;
+                serversColors.set(id, bot.config.COLORS.BASE);
             }
         })
+        return serversColors.get(id);
     }
 
-    bot.getServerChannel = function(id, referTo){
-        return bot.db.query(`SELECT channel_id FROM servers_channels_config WHERE server_id="${id}" AND refer_to="${referTo}"`, async function(err, results){
+    let serversCacheConfig = {};
+
+    bot.updateCacheServersConfigs = function(){
+        bot.db.query(`SELECT * FROM servers_channels_config`, async function(err, results){
             if (err) throw err;
-            if(results != undefined && results.length == 1){
-                return results[0].channel_id;
-            } else {
-                return undefined;
-            }
+            results.forEach(r => {
+                serversCacheConfig[r.server_id][r.refer_to] = r.channel_id;
+            })
         })
     }
 
@@ -129,9 +130,9 @@ module.exports = async bot => {
 
     bot.guilds.cache.forEach(g => {
         if(!g.name.includes("DarkRP")) return
-        let memberStatChannel = bot.getServerChannel(g.id, "members_stat");
+        let memberStatChannel = serversCacheConfig[g.id]["members_stat"];
+        console.log(memberStatChannel + " POUR " + g.name)
         if(memberStatChannel != undefined) {
-            console.log(memberStatChannel)
             g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");
         }
 

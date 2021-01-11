@@ -87,24 +87,21 @@ module.exports = async bot => {
     let serversColors = new Discord.Collection();
 
     bot.getServerColor = function(id){
-        bot.db.query(`SELECT server_color FROM servers_config WHERE server_id='${id}'`, async function(err, results){
+        return bot.db.query(`SELECT server_color FROM servers_config WHERE server_id='${id}'`, async function(err, results){
             if (err) throw err;
             if(results != undefined && results.length == 1){
-                serversColors.set(id, results[0].channel_id);
+                return results[0].server_color;
             } else {
-                serversColors.set(id, bot.config.COLORS.BASE);
+                return bot.config.COLORS.BASE;
             }
         })
-        return serversColors.get(id);
     }
-
-    let serversChannelsConfig = new Discord.Collection();
 
     bot.getServerChannel = function(id, referTo){
         return bot.db.query(`SELECT channel_id FROM servers_channels_config WHERE server_id="${id}" AND refer_to="${referTo}"`, async function(err, results){
             if (err) throw err;
             if(results != undefined && results.length == 1){
-                return id, results[0].channel_id;
+                return results[0].channel_id;
             } else {
                 return undefined;
             }
@@ -133,8 +130,8 @@ module.exports = async bot => {
     bot.guilds.cache.forEach(g => {
         if(!g.name.includes("DarkRP")) return
         let memberStatChannel = bot.getServerChannel(g.id, "members_stat");
-        console.log(memberStatChannel + " POUR " + g.name)
         if(memberStatChannel != undefined) {
+            console.log(memberStatChannel)
             g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");
         }
 

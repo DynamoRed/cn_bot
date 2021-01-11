@@ -97,11 +97,13 @@ module.exports = async bot => {
         return result;
     }
 
+    let serversChannelsConfig = new Discord.Collection();
+
     bot.getServerChannel = function(id, referTo){
         bot.db.query(`SELECT channel_id FROM servers_channels_config WHERE server_id="${id}" AND refer_to="${referTo}"`, async function(err, results){
             if (err) throw err;
             if(results != undefined && results.length == 1){
-                return results[0];
+                console.log(results[0].channel_id);
             } else {
                 return undefined;
             }

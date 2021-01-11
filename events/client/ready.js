@@ -84,7 +84,7 @@ module.exports = async bot => {
         console.log("Connecté à la base de données MySQL!");
     });
 
-    bot.getServerColor = function(id){
+    bot.getServerColor = function getServerColor(id){
         return new Promise((resolve, reject) => 
             bot.db.query(`SELECT server_color FROM servers_config WHERE server_id='${id}'`, async function(err, results){
                 if (err) reject(err);
@@ -130,7 +130,6 @@ module.exports = async bot => {
     }
 
     bot.guilds.cache.forEach(async g => {
-        if(!g.name.includes("DarkRP")) return
         let memberStatChannel = await bot.getServerChannel(g.id, "members_stat");
         if(memberStatChannel != undefined) {
             g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");

@@ -138,7 +138,7 @@ module.exports = async bot => {
 
         let staffStatChannel = await bot.getServerChannel(g.id, "staff_stat");
         if(staffStatChannel != undefined) {
-            let staffCount = g.members.cache.find(m => m.roles.cache.find(r => r.name.toLowerCase() == "staff")).length;
+            let staffCount = g.members.cache.filter(m => m.roles.cache.find(r => r.name.toLowerCase() == "staff")).array().length;
             g.channels.cache.get(staffStatChannel).setName(`👮 Staffs: ${staffCount}`, "Actualisation Stats");
         } 
     }) 

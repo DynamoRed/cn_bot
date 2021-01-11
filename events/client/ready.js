@@ -136,7 +136,6 @@ module.exports = async bot => {
             g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");
         }
 
-        let staffStatChannel = bot.getServerChannel(g.id, "staff_stat");
         if(staffStatChannel != undefined) {
             g.channels.cache.get(staffStatChannel).setName(`👮 Staffs: ${g.memberCount}`, "Actualisation Stats");
         }

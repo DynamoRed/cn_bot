@@ -132,9 +132,14 @@ module.exports = async bot => {
     bot.guilds.cache.forEach(async g => {
         if(!g.name.includes("DarkRP")) return
         let memberStatChannel = await bot.getServerChannel(g.id, "members_stat");
-        console.log(memberStatChannel)
         if(memberStatChannel != undefined) {
             g.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${g.memberCount}`, "Actualisation Stats");
+        }
+
+        let staffStatChannel = await bot.getServerChannel(g.id, "staff_stat");
+        if(staffStatChannel != undefined) {
+            let staffCount = g.members.cache.find(m => m.roles.cache.find(r => r.name.toLowerCase() == "staff")).length;
+            g.channels.cache.get(staffStatChannel).setName(`👮 Staffs: ${staffCount}`, "Actualisation Stats");
         }
     }) 
 

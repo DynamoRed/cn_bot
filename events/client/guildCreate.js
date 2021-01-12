@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports = async (bot, g) => {
-    let firstChannel = g.channels.cache.first();
+    let firstChannel = g.channels.cache.filter(c => c.type == "text").first();
     if(firstChannel) {
         let newGuildEmbed = new Discord.MessageEmbed() 
             .setColor(await bot.getServerColor(g.id))

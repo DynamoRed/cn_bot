@@ -22,6 +22,9 @@ bot.on("ready", () => {
 bot.on("raw", (packet) => {
     require("./events/client/raw")(bot, packet);
 }); 
+bot.on("guildCreate", (g) => {
+    require("./events/client/guildCreate")(bot, g);
+}); 
 bot.on("message", async (message) => {
     require("./events/guild/message")(bot, message);
 });

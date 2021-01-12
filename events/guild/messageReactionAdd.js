@@ -752,9 +752,11 @@ module.exports = async (bot, reaction, user) => {
     }
 
     let verificationChannel = await bot.getServerChannel(message.guild.id, "verification");
-    if(message.channel.id == verificationChannel){
-        if(reaction.emoji.name == "✅"){
-            message.guild.members.cache.find(m => m.user.id == user.id).roles.add(bot.config.I_ROLES.MEMBER, "");
+    if(verificationChannel) {
+        if(message.channel.id == verificationChannel){
+            if(reaction.emoji.name == "✅"){
+                message.guild.members.cache.find(m => m.user.id == user.id).roles.add(bot.config.I_ROLES.MEMBER, "");
+            }
         }
     }
 }

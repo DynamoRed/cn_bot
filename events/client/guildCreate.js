@@ -9,7 +9,7 @@ module.exports = async (bot, g) => {
             .setDescription(`Il semblerait que vous veniez d'ajouter le bot **SPLife Community** a votre serveur ! :fire:
             Bonne Nouvelle ! Nous vous avons fait un systeme de configuration simple et rapide. __Utilisez la commande__ **!set help**
             
-            ${botEmojis.GLOBAL.TEAM} **Bienvenue dans la grande famille d'SPLife et bon jeu a vous !**`);
+            ${bot.botEmojis.GLOBAL.TEAM} **Bienvenue dans la grande famille d'SPLife et bon jeu a vous !**`);
         firstChannel.send(newGuildEmbed)
     }
 }

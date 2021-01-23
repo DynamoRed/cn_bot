@@ -446,7 +446,7 @@ module.exports = async (bot, reaction, user) => {
             if(message.channel.isTested.testQuestion == message.channel.testTotalQuestions){
                 var testEndEmbed = new Discord.MessageEmbed()
                     .setColor(bot.config.COLORS.BASE)
-                    .setTitle(`📩  Fin de votre Test de connaissance`)
+                    .setTitle(`📩  Fin de votre Test de Connaissances`)
                     .setDescription(`Votre responsable de session (<@${message.channel.staffTestResp.id}>) va vous communiquer vos **résultats** sous peu.
                     
                     ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !

@@ -145,6 +145,433 @@ module.exports = async (bot, reaction, user) => {
         }
     }
 
+    if(message.channel.name.startsWith("test-connaissances-de-")){
+        if(!message.channel.isStaffRulesTestChannel) return;
+        if(!message.channel.isTested) return;
+
+        reaction.users.remove(user);
+
+        if(reaction.emoji == bot.botEmojis.GLOBAL.VERIFIED){
+            if(message.channel.isStarted) return;
+            message.channel.staffTestIsOpen = true;
+            message.channel.testIsStarted = true;
+            reaction.users.remove(bot.user);
+            message.channel.quizQuestions = [
+                {
+                    "QUESTION": "Rappelez-nous le temps d'attente a respecter entre deux C.A.P. ?"
+                },
+                {
+                    "QUESTION": "Definissez-nous le PropsClimb:"
+                },
+                {
+                    "QUESTION": "Assommer quelqu'un sans /me est autorisé.",
+                    "ANSWER": ["Vrai", "Faux"]
+                },
+                {
+                    "QUESTION": "L'armurier a le droit d'arnaquer",
+                    "ANSWER": ["Vrai", "Faux"]
+                },
+                {
+                    "QUESTION": "Les policiers ont le droit de poser des printers",
+                    "ANSWER": ["Vrai", "Faux"]
+                },
+                {
+                    "QUESTION": "Combien de forces de l'ordre doivent être présentes en ville pour un braquage de banque ?"
+                },
+                {
+                    "QUESTION": "Combien faut-il être de braqueurs au minimum pour une prise d'otage ?"
+                },
+                {
+                    "QUESTION": "Rappelez-nous le règlement du métier de Solitaire:"
+                },
+                {
+                    "QUESTION": "Faire un contre braquage sur un braquage de commissariat est autorisé.",
+                    "ANSWER": ["Vrai", "Faux"]
+                },
+                {
+                    "QUESTION": "Rappelez-nous le règlement du métier de Psycopathe:"
+                },
+                {
+                    "QUESTION": "Rappelez-nous le règlement du métier de Fabricant de drogues:"
+                },
+                {
+                    "QUESTION": "Donnez-nous les armes auxquelles a le droit le cuisinier:",
+                    "ANSWER": ["Pistolets", "Snipers", "PM", "Fusil à pompe", "Aucune des réponses ci-dessus"]
+                },
+                {
+                    "QUESTION": "Donnez-nous les armes auxquelles a le droit le Tueur a gages:",
+                    "ANSWER": ["Pistolets", "Snipers", "PM", "Fusil à pompe", "Aucune des réponses ci-dessus"]
+                },
+                {
+                    "QUESTION": "Donnez-nous les armes auxquelles a le droit le SDF:",
+                    "ANSWER": ["Pistolets", "Snipers", "PM", "Fusil à pompe", "Aucune des réponses ci-dessus"]
+                },
+                {
+                    "QUESTION": "A combien est la limite de keypad dans une meme zone:",
+                    "ANSWER": ["4", "6", "8", "10", "Aucune des réponses ci-dessus"]
+                },
+                {
+                    "QUESTION": "Les gendarmes ont le droit aux armes personnelles.",
+                    "ANSWER": ["Vrai", "Faux"]
+                },
+                {
+                    "QUESTION": "Dites-nous dans quel contexte le vol de véhicule de gendarmerie est autorisé:"
+                },
+                {
+                    "QUESTION": "Les constructions dans lesquelles tous les murs, plafond et sol sont recouvert de noir sont autorisées.",
+                    "ANSWER": ["Vrai", "Faux"]
+                },
+                {
+                    "QUESTION": "Quelles conditions doivent être respectées pour tuer le Maire ?"
+                },
+                {
+                    "QUESTION": "Le jumpshoot est-il autorisé ? Si oui, dans quels cas ?"
+                },
+                {
+                    "QUESTION": "Citez les types de textscreen qui n'ont pas le droit d'être posés:"
+                },
+                {
+                    "QUESTION": "Il est autorisé de mettre un keypad donnant accès a un autre keypad",
+                    "ANSWER": ["Vrai", "Faux"]
+                },
+                {
+                    "QUESTION": "Citez les metiers qui ne peuvent pas être braqués:"
+                },
+                {
+                    "QUESTION": "Dites nous les armes auxquelles ont le droit les chomeurs:",
+                    "ANSWER": ["Pistolets", "Snipers", "PM", "Fusil à pompe", "Aucune des réponses ci-dessus"]
+                },
+                {
+                    "QUESTION": "Rappellez nous le reglement du metier d'Armurier:"
+                },
+                {
+                    "QUESTION": "Rappellez nous le reglement du metier du Garde du Maire:"
+                },
+                {
+                    "QUESTION": "Donnez nous les raisons qui peuvent entrainer une dissolution de famille:"
+                },
+                {
+                    "QUESTION": "Comment sait-on qui est le patron de la banque lorsque plusieurs banquiers sont présent en ville ?"
+                },
+                {
+                    "QUESTION": "Citez les categories de métiers qui n'ont pas le droit de faire une prise d'otage:"
+                },
+                {
+                    "QUESTION": "Definissez le PowerGaming:"
+                },
+                {
+                    "QUESTION": "Dites nous les armes auxquelles ont le droit les agents de la BAC:",
+                    "ANSWER": ["Pistolets", "Snipers", "PM", "Fusil à pompe", "Aucune des réponses ci-dessus"]
+                },
+                {
+                    "QUESTION": "2 Cripz prennent en otage un bloodz et un armurier avec une rançon de 75000$, est-ce que le réglement est enfrain ?",
+                    "ANSWER": ["Oui", "Non"]
+                },
+                {
+                    "QUESTION": "Combien de portes minimum sont nécessaires pour revendiquer la possession d'une propriété ?"
+                },
+                {
+                    "QUESTION": "Je me nomme Jean Foutisme ais-je le droit ?",
+                    "ANSWER": ["Oui", "Non"]
+                }
+            ]
+
+            message.channel.answeredQuestions = [];
+            let rdmNumber = Math.floor((Math.random() * (message.channel.quizQuestions.length - 1)) + 0);
+            let rdmQuestion = message.channel.quizQuestions[rdmNumber];
+            message.channel.answeredQuestions[0] = rdmNumber;
+
+            let footerContent = `Type de réponse: `;
+            let descriptionContent = `__${rdmQuestion.QUESTION}__`;
+
+            if(rdmQuestion.ANSWER){
+                let emojis = [bot.botEmojis.NUMBERS._1, 
+                    bot.botEmojis.NUMBERS._2, 
+                    bot.botEmojis.NUMBERS._3, 
+                    bot.botEmojis.NUMBERS._4, 
+                    bot.botEmojis.NUMBERS._5, 
+                    bot.botEmojis.NUMBERS._6, 
+                    bot.botEmojis.NUMBERS._7, 
+                    bot.botEmojis.NUMBERS._8, 
+                    bot.botEmojis.NUMBERS._9];
+
+                let y = 0;
+                rdmQuestion.ANSWER.forEach(a => {
+                    descriptionContent += `
+                    
+                    ${emojis[y]} ${a}`;
+                    y++;
+                })
+                footerContent += `QCM`;
+            } else {
+                footerContent += `Réponse courte`;
+            }
+
+            message.channel.isTested.testQuestion = 1;
+            message.channel.testTotalQuestions = 20;
+
+            var questionEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.BASE)
+                .setTitle(`Question N°${message.channel.isTested.testQuestion}`)
+                .setDescription(descriptionContent)
+                .setFooter(footerContent)
+
+            let msg = await message.channel.send(questionEmbed);
+
+            message.channel.lastQuestionEmbed = msg;
+            message.channel.waitingAnswerType = "RC";
+
+            if(rdmQuestion.ANSWER){
+                message.channel.waitingAnswerType = "QCM";
+                message.channel.lastQuestionEmbed.answer = rdmQuestion.ANSWER;
+                let emojis = [bot.botEmojis.NUMBERS._1, 
+                    bot.botEmojis.NUMBERS._2, 
+                    bot.botEmojis.NUMBERS._3, 
+                    bot.botEmojis.NUMBERS._4, 
+                    bot.botEmojis.NUMBERS._5, 
+                    bot.botEmojis.NUMBERS._6, 
+                    bot.botEmojis.NUMBERS._7, 
+                    bot.botEmojis.NUMBERS._8, 
+                    bot.botEmojis.NUMBERS._9];
+
+                let y = 0;
+                rdmQuestion.ANSWER.forEach(a => {
+                    msg.react(emojis[y]);
+                    y++;
+                })
+
+                message.channel.overwritePermissions([
+                    {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
+                    {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                    {deny: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
+                    {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
+                ], '');
+            }
+        
+        } else if(reaction.emoji.name == "🖊️"){
+            if(message.channel.isStarted) return;
+            if(user != message.channel.staffTestResp) return;
+            
+            message.channel.correctedQuestionsArray = [];
+
+            message.channel.messages.cache.forEach(qM => {
+                if(!qM.embeds) return;
+                if(!qM.embeds[0]) return;
+                if(!qM.embeds[0].title) return;
+                if(!qM.embeds[0].title.startsWith("Question N°")) return;
+
+                qM.react(bot.botEmojis.GLOBAL.YES);
+                qM.react(bot.botEmojis.GLOBAL.NO);
+            });
+
+            message.reactions.removeAll();
+        } else if(reaction.emoji == bot.botEmojis.GLOBAL.YES){
+            if(message.channel.isStarted) return;
+            if(user != message.channel.staffTestResp) return;
+            if(!message.channel.correctedQuestionsArray) return;
+            if(message.channel.correctedQuestionsArray.includes(message.embeds[0].title.replace("Question N° ", ""))) return;
+
+            if(!message.channel.finalScore) message.channel.finalScore = 1;
+            else message.channel.finalScore = message.channel.finalScore + 1;
+            if(!message.channel.correctedQuestion) message.channel.correctedQuestion = 1;
+            else message.channel.correctedQuestion = message.channel.correctedQuestion + 1;
+            
+            message.channel.correctedQuestionsArray[Number(message.embeds[0].title.replace("Question N° ", ""))] = message.embeds[0].title.replace("Question N° ", "");
+
+            if(message.channel.correctedQuestion == message.channel.testTotalQuestions){
+                var correctionEndEmbed = new Discord.MessageEmbed()
+                    .setColor(bot.config.COLORS.ALLOW)
+                    .setDescription(`Notation finale: **${message.channel.finalScore}/${message.channel.testTotalQuestions}**`);
+
+                let endMsg = await message.channel.send(correctionEndEmbed);
+            }
+
+            message.reactions.removeAll();
+        } else if(reaction.emoji == bot.botEmojis.GLOBAL.NO){
+            if(message.channel.isStarted) return;
+            if(user != message.channel.staffTestResp) return;
+            if(!message.channel.correctedQuestionsArray) return;
+            if(message.channel.correctedQuestionsArray.includes(message.embeds[0].title.replace("Question N° ", ""))) return;
+
+            if(!message.channel.finalScore) message.channel.finalScore = 0;
+            if(!message.channel.correctedQuestion) message.channel.correctedQuestion = 1;
+            else message.channel.correctedQuestion = message.channel.correctedQuestion + 1;
+
+            message.channel.correctedQuestionsArray[Number(message.embeds[0].title.replace("Question N° ", ""))] = message.embeds[0].title.replace("Question N° ", "");
+
+            if(message.channel.correctedQuestion == message.channel.testTotalQuestions){
+                var correctionEndEmbed = new Discord.MessageEmbed()
+                    .setColor(bot.config.COLORS.ALLOW)
+                    .setDescription(`Notation finale: **${message.channel.finalScore}/${message.channel.testTotalQuestions}**`);
+
+                let endMsg = await message.channel.send(correctionEndEmbed);
+            }
+
+            message.reactions.removeAll();
+        } else {
+            if(!message.channel.quizQuestions) return;
+            if(!message.channel.isTested.testQuestion) return;
+            if(message.channel.waitingAnswerType != "QCM") return;
+            if(user != message.channel.isTested) return;
+            if(!message.channel.testIsStarted) return;
+            if(!message.channel.lastQuestionEmbed) return;
+            if(!message.channel.lastQuestionEmbed.answer) return;
+
+            let answer = reaction.emoji.name.replace('_','');
+            message.reactions.removeAll();
+
+            lastMessage = message.channel.lastQuestionEmbed;
+            if(!lastMessage.embeds[0]) return;
+            if(!lastMessage.embeds[0].description || !lastMessage.embeds[0].title) return;
+            if(!lastMessage.embeds[0].title.startsWith("Question N°")) return;
+
+            let answerDescription = `${lastMessage.embeds[0].description}
+            
+            ${bot.botEmojis.GLOBAL.BULLET} ***Réponse: ${message.channel.lastQuestionEmbed.answer[answer - 1]}***`;
+
+            var questionAnsweredEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.BASE)
+                .setTitle(`${lastMessage.embeds[0].title}`)
+                .setDescription(`${answerDescription}`)
+                .setFooter(`Type de réponse: QCM`);
+
+            lastMessage.edit(questionAnsweredEmbed);
+
+            if(message.channel.isTested.testQuestion == message.channel.testTotalQuestions){
+                var testEndEmbed = new Discord.MessageEmbed()
+                    .setColor(bot.config.COLORS.BASE)
+                    .setTitle(`📩  Fin de votre Test de connaissance`)
+                    .setDescription(`Votre responsable de session (<@${message.channel.staffTestResp.id}>) va vous communiquer vos **résultats** sous peu.
+                    
+                    ${bot.botEmojis.GLOBAL.BULLET} **Ne discutez pas** du test tant que les autres n'ont **pas fini**. Sous peine de **retrait de points** !
+                    ${bot.botEmojis.GLOBAL.BULLET} Pour rappel: Il faut minimum **${Math.round((message.channel.testTotalQuestions/3)*2)}/${message.channel.testTotalQuestions}** réussir l'examen !
+                
+                    ${bot.botEmojis.GLOBAL.TEAM} _Reservé au correcteur:_
+                    **Cliquez sur 🖊️ pour lancer le processus de correction !**
+                    ${bot.botEmojis.GLOBAL.YES} pour une bonne réponse !
+                    ${bot.botEmojis.GLOBAL.NO} pour une mauvaise réponse !`)
+
+                let endMsg = await message.channel.send(testEndEmbed);
+
+                endMsg.react("🖊️");
+
+                message.channel.overwritePermissions([
+                    {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
+                    {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                    {deny: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
+                    {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
+                ], '');
+
+                message.channel.staffTestIsOpen = false;
+                message.channel.testIsStarted = false;
+                return; 
+            }
+
+            let rdmNumber = Math.floor((Math.random() * (message.channel.quizQuestions.length - 1)) + 0);
+            while(message.channel.answeredQuestions.includes(rdmNumber)){
+                rdmNumber = Math.floor((Math.random() * (message.channel.quizQuestions.length - 1)) + 0);
+            }
+            let rdmQuestion = message.channel.quizQuestions[rdmNumber];
+            message.channel.answeredQuestions[message.channel.isTested.testQuestion] = rdmNumber;
+
+            let footerContent = `Type de réponse: `;
+            let descriptionContent = `__${rdmQuestion.QUESTION}__`;
+
+            if(rdmQuestion.ANSWER){
+                let emojis = [bot.botEmojis.NUMBERS._1, 
+                    bot.botEmojis.NUMBERS._2, 
+                    bot.botEmojis.NUMBERS._3, 
+                    bot.botEmojis.NUMBERS._4, 
+                    bot.botEmojis.NUMBERS._5, 
+                    bot.botEmojis.NUMBERS._6, 
+                    bot.botEmojis.NUMBERS._7, 
+                    bot.botEmojis.NUMBERS._8, 
+                    bot.botEmojis.NUMBERS._9];
+
+                let y = 0;
+                rdmQuestion.ANSWER.forEach(a => {
+                    descriptionContent += `
+                    
+                    ${emojis[y]} ${a}`;
+                    y++;
+                })
+                footerContent += `QCM`;
+            } else {
+                message.channel.overwritePermissions([
+                    {allow: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
+                    {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                    {deny: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
+                    {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
+                ], '');
+                footerContent += `Réponse courte`;
+            }
+
+            message.channel.isTested.testQuestion += 1;
+
+            var questionEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.BASE)
+                .setTitle(`Question N°${message.channel.isTested.testQuestion}`)
+                .setDescription(descriptionContent)
+                .setFooter(footerContent)
+
+            let msg = await message.channel.send(questionEmbed);
+
+            message.channel.lastQuestionEmbed = msg;
+            message.channel.waitingAnswerType = "RC";
+
+            if(rdmQuestion.ANSWER){
+                message.channel.waitingAnswerType = "QCM";
+                message.channel.lastQuestionEmbed.answer = rdmQuestion.ANSWER;
+                let emojis = [bot.botEmojis.NUMBERS._1, 
+                    bot.botEmojis.NUMBERS._2, 
+                    bot.botEmojis.NUMBERS._3, 
+                    bot.botEmojis.NUMBERS._4, 
+                    bot.botEmojis.NUMBERS._5, 
+                    bot.botEmojis.NUMBERS._6, 
+                    bot.botEmojis.NUMBERS._7, 
+                    bot.botEmojis.NUMBERS._8, 
+                    bot.botEmojis.NUMBERS._9];
+
+                let y = 0;
+                rdmQuestion.ANSWER.forEach(a => {
+                    msg.react(emojis[y]);
+                    y++;
+                })
+
+                message.channel.overwritePermissions([
+                    {deny: 'SEND_MESSAGES', id: message.channel.isTested},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'SEND_MESSAGES', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: message.channel.isTested},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.ADMIN},
+                    {deny: 'ADD_REACTIONS', id: bot.config.I_ROLES.SUPERADMIN},
+                    {allow: 'VIEW_CHANNEL', id: message.channel.isTested},
+                    {deny: 'VIEW_CHANNEL', id: bot.config.I_ROLES.ADMIN},
+                    {allow: 'VIEW_CHANNEL', id: bot.config.I_ROLES.SUPERADMIN},
+                    {deny: 'VIEW_CHANNEL', id: message.guild.id},
+                ], '');
+            }
+        }
+    }
+
     if(message.channel.name.startsWith("test-staff-de-")){
         if(!message.channel.isStaffTestChannel) return;
         if(!message.channel.isTested) return;
@@ -254,6 +681,32 @@ module.exports = async (bot, reaction, user) => {
                 },
                 {
                     "QUESTION": "Quelles conditions doivent être respectées pour tuer le Maire ?"
+                },
+                {
+                    "QUESTION": "Le jumpshoot est-il autorisé ? Si oui, dans quels cas ?"
+                },
+                {
+                    "QUESTION": "Citez les types de textscreen qui n'ont pas le droit d'être posés:"
+                },
+                {
+                    "QUESTION": "Il est autorisé de mettre un keypad donnant accès a un autre keypad",
+                    "ANSWER": ["Vrai", "Faux"]
+                },
+                {
+                    "QUESTION": "Citez les metiers qui ne peuvent pas être braqués:"
+                },
+                {
+                    "QUESTION": "Donnez les armes auxquelles ont le droit les chomeurs",
+                    "ANSWER": ["Pistolets", "Snipers", "PM", "Fusil à pompe", "Aucune des réponses ci-dessus"]
+                },
+                {
+                    "QUESTION": "Rappellez nous le reglement du metier d'Armurier:"
+                },
+                {
+                    "QUESTION": "Rappellez nous le reglement du metier du Garde du Maire:"
+                },
+                {
+                    "QUESTION": "Donnez nous les raisons qui peuvent entrainer une dissolution de famille:"
                 }
             ]
 

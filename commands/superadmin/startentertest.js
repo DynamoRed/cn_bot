@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 module.exports = {
-    name: "starttest",
+    name: "startentertest",
     description: "Demarrer le test d'entrée dans le staff d'un joueur",
     category: "superadmin",
     timeout: 0,
     enabled: true,
     restrictions: ["staff+"],
-    aliases: ["st"],
+    aliases: ["set"],
     run: async (bot, message, args, botEmojis) => {
         let mentionned = message.mentions.users;
         if(!mentionned) return;

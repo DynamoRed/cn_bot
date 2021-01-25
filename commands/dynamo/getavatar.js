@@ -22,6 +22,6 @@ module.exports = {
 
         let mentionned = message.mentions.users.first();
 
-        message.reply(mentionned.avatarURL())
+        message.reply(mentionned.displayAvatarURL())
     }
 }

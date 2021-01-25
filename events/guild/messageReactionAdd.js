@@ -235,7 +235,7 @@ module.exports = async (bot, reaction, user) => {
                     "ANSWER": ["Vrai", "Faux"]
                 },
                 {
-                    "QUESTION": "Citez les metiers qui ne peuvent pas être braqués:"
+                    "QUESTION": "Citez les metiers qui ne peuvent pas être pris en otages:"
                 },
                 {
                     "QUESTION": "Dites nous les armes auxquelles ont le droit les chomeurs:",
@@ -264,7 +264,7 @@ module.exports = async (bot, reaction, user) => {
                     "ANSWER": ["Pistolets", "Snipers", "PM", "Fusil à pompe", "Aucune des réponses ci-dessus"]
                 },
                 {
-                    "QUESTION": "2 Cripz prennent en otage un bloodz et un armurier avec une rançon de 75000$, est-ce que le réglement est enfrain ?",
+                    "QUESTION": "2 Cripz prennent en otage un bloodz et un armurier avec une rançon de 50.000$, est-ce que le réglement est enfrain ?",
                     "ANSWER": ["Oui", "Non"]
                 },
                 {

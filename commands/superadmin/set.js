@@ -13,7 +13,7 @@ module.exports = {
     description: "Permet de parametrer son serveur",
     category: "superadmin",
     timeout: 0,
-    enabled: true,
+    enabled: false,
     restrictions: ["staff+"],
     aliases: [],
     run: async (bot, message, args, botEmojis) => {

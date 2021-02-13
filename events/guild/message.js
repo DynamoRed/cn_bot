@@ -607,6 +607,7 @@ module.exports = async (bot, message) => {
                 }, command.timeout);
             }
         }
+        var hasNoTheRight = false;
         if(message.author.id != bot.config.OWNER_ID){
             if(command.restrictions != [""]){
                 command.restrictions.forEach(async restriction => {
@@ -617,11 +618,12 @@ module.exports = async (bot, message) => {
                             .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
                         let msg = await message.channel.send(replyEmbed);
                         setTimeout(() => {msg.delete()}, 5 * 1000)
-                        return;
+                        hasNoTheRight = true;
                     }
                 })
             } 
         }
+        if(hasNoTheRight) return;
         command.run(bot, message, args, bot.botEmojis);
     }
 }

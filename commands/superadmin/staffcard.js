@@ -9,6 +9,17 @@ module.exports = {
     restrictions: ["staff+"],
     aliases: ["sc", "staffc", "scard"],
     run: async (bot, message, args, botEmojis) => {
+
+        if(!message.member.roles.cache.find(r => r.name.toLowerCase() == "staff+")) {
+            var replyEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.DENY)
+                .setFooter(`Message auto-supprimé dans 5 secondes`)
+                .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
+            let msg = await message.channel.send(replyEmbed);
+            setTimeout(() => {msg.delete()}, 5 * 1000)
+            return;
+        }
+        
         if(!args[0]){
             var replyEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.DENY)

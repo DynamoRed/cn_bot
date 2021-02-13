@@ -9,6 +9,17 @@ module.exports = {
     aliases: ["xmasinformations"],
     run: async (bot, message, args, botEmojis) => {
 
+        if(!message.member.roles.cache.find(r => r.name.toLowerCase() == "staff+")) {
+            var replyEmbed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.DENY)
+                .setFooter(`Message auto-supprimé dans 5 secondes`)
+                .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
+            let msg = await message.channel.send(replyEmbed);
+            setTimeout(() => {msg.delete()}, 5 * 1000)
+            return;
+        }
+        
+
         let informationsMessages = new Discord.Collection();
 
         informationsMessages.set("xmas_1", new Discord.MessageEmbed()

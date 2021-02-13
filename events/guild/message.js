@@ -611,7 +611,7 @@ module.exports = async (bot, message) => {
         if(message.author.id != bot.config.OWNER_ID){
             if(command.restrictions != [""]){
                 command.restrictions.forEach(async restriction => {
-                    if(!message.member.roles.cache.find(r => r.name.toLowerCase().includes(restriction))) {
+                    if(!message.member.roles.cache.find(r => r.name.toLowerCase() == restriction)) {
                         var replyEmbed = new Discord.MessageEmbed()
                             .setColor(bot.config.COLORS.DENY)
                             .setFooter(`Message auto-supprimé dans 5 secondes`)

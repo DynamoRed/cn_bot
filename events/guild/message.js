@@ -573,15 +573,6 @@ module.exports = async (bot, message) => {
     if(!command) command = bot.commands.get(bot.aliases.get(cmd));
     if(command){
         message.delete();
-        if(command.name != "setac" && message.guild.id != "693198481086480544" && message.guild.id != "618855620820336640"){
-            var replyEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.DENY)
-                .setFooter(`Message auto-supprimé dans 5 secondes`)
-                .setDescription(`<@${message.author.id}> **cette commande n'est pas disponible sur ce serveur !**`)
-            let msg = await message.channel.send(replyEmbed);
-            setTimeout(() => {msg.delete()}, 5 * 1000)
-            return;
-        }
         if(!command.enabled){
             var replyEmbed = new Discord.MessageEmbed()
                 .setColor(bot.config.COLORS.DENY)

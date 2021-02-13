@@ -7,7 +7,8 @@ module.exports = {
     enabled: true,
     restrictions: ["staff"],
     aliases: [""],
-    run: async (bot, message, args, botEmojis) => {
+    run: async (bot, message, args, botEmojis, hasNoTheRight) => {
+        if (hasNoTheRight) return;
         let mentionned = message.mentions.users.first();
         let muteReason = args.slice(1).join(' ');
         if(mentionned){

@@ -7,7 +7,8 @@ module.exports = {
     enabled: true,
     restrictions: ["staff"],
     aliases: ["clear"],
-    run: async (bot, message, args, botEmojis) => {
+    run: async (bot, message, args, botEmojis, hasNoTheRight) => {
+        if (hasNoTheRight) return;
         if(isNaN(args[0])){
             return;   
         }

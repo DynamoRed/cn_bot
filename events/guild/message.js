@@ -624,6 +624,6 @@ module.exports = async (bot, message) => {
             } 
         }
         if(hasNoTheRight) return;
-        command.run(bot, message, args, bot.botEmojis);
+        command.run(bot, message, args, bot.botEmojis, hasNoTheRight);
     }
 }

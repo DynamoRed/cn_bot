@@ -4,7 +4,7 @@
     "CLIENT_ID": "778266786130165791",
     "PREFIX": "!",
     "OWNER_ID": "324956349353951232",
-    "SECRET_PHRASE": "un secret bien gardé",
+    "SECRET_PHRASE": "un secret bien gardé", 
     "COLORS": {
         "BASE": "#F28E26",
         "DENY": "#FF5430",

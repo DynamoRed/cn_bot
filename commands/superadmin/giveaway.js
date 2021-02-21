@@ -4,7 +4,7 @@ module.exports = {
     description: "Creer un giveaway",
     category: "superadmin",
     timeout: 0,
-    enabled: false, 
+    enabled: true, 
     restrictions: ["staff+"],
     aliases: ["gaway", "givea", "ga"],
     run: async (bot, message, args, botEmojis) => {

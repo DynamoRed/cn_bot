@@ -18,14 +18,13 @@ module.exports = {
             setTimeout(() => {msg.delete()}, 5 * 1000)
             return;
         }
-        
 
         let informationsMessages = new Discord.Collection();
 
         //WELCOME EMBEDS
         informationsMessages.set("welcome_1", new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
-            .setImage("https://i.imgur.com/co5rC3Q.png"));
+            .setImage("https://www.raphael-biron.fr/projets/splife/images/splife-darkrp-welcome-banner.png"));
  
         informationsMessages.set("welcome_2", new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
@@ -49,7 +48,7 @@ module.exports = {
         //RULES EMBEDS
         informationsMessages.set("rules_1", new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
-            .setImage("https://i.imgur.com/lUnhcZx.png"));
+            .setImage("https://www.raphael-biron.fr/projets/splife/images/splife-darkrp-rules-banner.png"));
 
         informationsMessages.set("rules_2", new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
@@ -69,7 +68,7 @@ module.exports = {
         //SERVERS EMBEDS
         informationsMessages.set("servers_1", new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
-            .setImage("https://i.imgur.com/KWaYHPb.png"));
+            .setImage("https://www.raphael-biron.fr/projets/splife/images/splife-darkrp-servers-banner.png"));
 
         informationsMessages.set("servers_2", new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
@@ -88,9 +87,9 @@ module.exports = {
                 ${botEmojis.GLOBAL.BULLET} **Carte de Jeu**: Indisponible
 
             ${botEmojis.SPLIFE.SCP_RP.LOGO} **Notre serveur SCP RP:**
-                ${botEmojis.GLOBAL.BULLET} **Discord**: [Cliquez ici](https://discord.gg/7pxQjJC)
-                ${botEmojis.GLOBAL.BULLET} **Collection Steam**: Indisponible
-                ${botEmojis.GLOBAL.BULLET} **IP**: Indisponible
+            ${botEmojis.GLOBAL.BULLET} **Discord**: [Cliquez ici](https://discord.gg/7pxQjJC)
+            ${botEmojis.GLOBAL.BULLET} **Collection Steam**: [Cliquez ici](https://steamcommunity.com/sharedfiles/filedetails/?id=2264209604)
+            ${botEmojis.GLOBAL.BULLET} **IP**: 151.80.230.233 [Se Connecter](https://splife.fr/index.php?t=servers)
                 ${botEmojis.GLOBAL.BULLET} **Carte de Jeu**: rp_site65
             
             ${botEmojis.GLOBAL.TEAM} **Notre règlement s'applique sur tous nos serveurs**`));
@@ -98,7 +97,7 @@ module.exports = {
         //PARTNER EMBEDS
         informationsMessages.set("partners_1", new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
-            .setImage("https://i.imgur.com/8iDiGbZ.png"));
+            .setImage("https://www.raphael-biron.fr/projets/splife/images/splife-darkrp-partners-banner.png"));
 
         informationsMessages.set("partners_2", new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
@@ -116,7 +115,7 @@ module.exports = {
         //BOOSTER EMBEDS
         informationsMessages.set("booster_1", new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
-            .setImage("https://i.imgur.com/O6ROpXC.png"));
+            .setImage("https://www.raphael-biron.fr/projets/splife/images/splife-darkrp-boosters-banner.png"));
 
         informationsMessages.set("booster_2", new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)

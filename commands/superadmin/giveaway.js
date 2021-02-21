@@ -33,7 +33,7 @@ module.exports = {
         //GIVEAWAY EMBEDS
         let giveawayEmbed1 = new Discord.MessageEmbed()
             .setColor(bot.config.COLORS.BASE)
-            .setImage("https://i.imgur.com/PCqkkuN.png");
+            .setImage("https://www.raphael-biron.fr/projets/splife/images/splife-darkrp-giveaway-banner.png");
 
         let giveawayDesc = `
         ${bot.botEmojis.GLOBAL.BULLET} Tirage le **${giveawayEnd}**

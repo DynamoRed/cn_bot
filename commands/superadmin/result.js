@@ -25,10 +25,6 @@ module.exports = {
 
         let giveawayMessage = message.channel.messages.cache.find(m => m.id == args[0]);
 
-        if(!giveawayMessage.isGiveawayMessage){
-            return;
-        }
-
         giveawayMessage.reactions.cache.get(botEmojis.GLOBAL.GIVEAWAY.id).users.remove(bot.id);
         let participants = giveawayMessage.reactions.cache.get(botEmojis.GLOBAL.GIVEAWAY.id).users;
         let winners = [];

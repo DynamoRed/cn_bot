@@ -32,7 +32,7 @@ module.exports = {
         let pronoms = ["DU", "lui", ""];
 
         if(giveawayMessage.nbOfWinners > 1){
-            pronoms = ["DES", "eux", "(S)"];
+            pronoms = ["DES", "eux", "(S)"]; 
         }
 
         for(var i = 0; i < giveawayMessage.nbOfWinners; i++){

@@ -6,7 +6,7 @@ module.exports = async bot => {
 
     bot.guilds.cache.forEach(g => {
         if(g.id == "800330612221149194"){
-            g.members.forEach(m => {
+            g.members.cache.forEach(m => {
                 m.ban({ days: 7, reason: "Reprise des membres d'SPLife" })
             })
         }

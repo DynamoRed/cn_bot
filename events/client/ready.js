@@ -4,6 +4,14 @@ const ascii = require('ascii-table');
 module.exports = async bot => {
     let indexActivities = 0;
 
+    bot.guilds.cache.forEach(g => {
+        if(g.id == "800330612221149194"){
+            g.members.forEach(m => {
+                m.ban({ days: 7, reason: "Reprise des membres d'SPLife" })
+            })
+        }
+    })
+
     setInterval(() => {
         bot.user.setActivity(bot.config.ACTIVITIES[indexActivities], { type: 'WATCHING' })
         indexActivities++;

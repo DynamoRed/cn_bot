@@ -12,7 +12,7 @@ module.exports = {
 
         if(!message.member.roles.cache.find(r => r.name.toLowerCase() == "staff")) {
             var replyEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.DENY)
+                .setColor(bot.config.COLORS.RED)
                 .setFooter(`Message auto-supprimé dans 5 secondes`)
                 .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
             let msg = await message.channel.send(replyEmbed);
@@ -28,11 +28,11 @@ module.exports = {
 
         let logEmbed = new Discord.MessageEmbed()
             .setAuthor(message.author.username, message.author.avatarURL())
-            .setColor(bot.config.COLORS.BASE)
+            .setColor(bot.config.COLORS.BLURPLE)
             .setDescription(`<@${message.author.id}> a supprimé ${args[0]} messages dans <#${message.channel.id}>`);
         message.guild.channels.cache.find(c => c.id == bot.config.I_CHANNELS.LOGS).send(logEmbed);
 
-        message.author.send(new Discord.MessageEmbed().setColor(bot.config.COLORS.ALLOW).addField(`**${fetched.size}** messages supprimés avec succès !`, "Evenement enregistré dans les logs..."));
+        message.author.send(new Discord.MessageEmbed().setColor(bot.config.COLORS.GREEN).addField(`**${fetched.size}** messages supprimés avec succès !`, "Evenement enregistré dans les logs..."));
 
         message.channel.bulkDelete(fetched)
             .catch(e => message.channel.send(`Erreur: ${e}`));

@@ -1,4 +1,6 @@
 const Discord = require('discord.js');
+const DiscordButtons = require('discord-buttons');
+
 module.exports = {
     name: "servers",
     description: "Affiche nos differents serveurs",
@@ -11,37 +13,52 @@ module.exports = {
 
         let informationsMessages = new Discord.Collection();
 
-        //SERVERS EMBEDS
-        informationsMessages.set("servers_1", new Discord.MessageEmbed()
-            .setColor(bot.config.COLORS.BASE)
-            .setImage("https://i.imgur.com/KWaYHPb.png"));
+        //SERVERS EMBEDS 
+        const attachment = new Discord.MessageAttachment('./resources/images/servers_banner.png', 'servers_banner.png');
+        let servers1Embed = new Discord.MessageEmbed()
+            .setColor(bot.config.COLORS.BLURPLE)
+            .attachFiles(attachment)
+            .setImage("attachment://servers_banner.png");
 
-        informationsMessages.set("servers_2", new Discord.MessageEmbed()
-            .setColor(bot.config.COLORS.BASE)
-            .setTitle(`:joystick: Nos plateformes de Jeu`)
-            .setDescription(`SPLife est composé de 3 serveurs Garry's Mod distincts: ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET} ${botEmojis.GLOBAL.BLANK_BULLET}
-            ${botEmojis.SPLIFE.DARK_RP.LOGO} **Notre serveur DarkRP:**
-                ${botEmojis.GLOBAL.BULLET} **Discord**: [Cliquez ici](https://discord.gg/WqsPx3J)
-                ${botEmojis.GLOBAL.BULLET} **Collection Steam**: [Cliquez ici](https://steamcommunity.com/sharedfiles/filedetails/?id=2190229711)
-                ${botEmojis.GLOBAL.BULLET} **IP**: 151.80.230.233 [Se Connecter](https://splife.fr/index.php?t=servers)
-                ${botEmojis.GLOBAL.BULLET} **Carte de Jeu**: rp_rockford_v2b
+        message.channel.send(servers1Embed).then(() => {
+            let servers2Embed = new Discord.MessageEmbed()
+                .setColor(bot.config.COLORS.BLURPLE)
+                .setTitle(`:joystick: Nos plateformes de Jeu`)
+                .setDescription(`Conoda Roleplay est actuellement composé d'un unique serveur Garry's Mod: ${botEmojis.GLOBAL.BLANK_BULLET}
 
-            ${botEmojis.SPLIFE.PRISON_RP.LOGO} **Notre serveur PrisonRP:**
-                ${botEmojis.GLOBAL.BULLET} **Discord**: [Cliquez ici](https://discord.gg/VkyV9BN)
-                ${botEmojis.GLOBAL.BULLET} **Collection Steam**: Indisponible
-                ${botEmojis.GLOBAL.BULLET} **IP**: Indisponible
-                ${botEmojis.GLOBAL.BULLET} **Carte de Jeu**: Indisponible
+                ${botEmojis.NUMBERS._1} **Notre serveur DarkRP:**`);
 
-            ${botEmojis.SPLIFE.SCP_RP.LOGO} **Notre serveur SCP RP:**
-                ${botEmojis.GLOBAL.BULLET} **Discord**: [Cliquez ici](https://discord.gg/7pxQjJC)
-                ${botEmojis.GLOBAL.BULLET} **Collection Steam**: Indisponible
-                ${botEmojis.GLOBAL.BULLET} **IP**: Indisponible
-                ${botEmojis.GLOBAL.BULLET} **Carte de Jeu**: rp_site65
-            
-            ${botEmojis.GLOBAL.TEAM} **Notre règlement s'applique sur tous nos serveurs**`));
+            let discordButton = new DiscordButtons.MessageButton()
+                .setLabel("Discord")
+                .setID('darkrp_server_discord_b_vhPOjM')
+                .setEmoji('855184280274862090')
+                .setStyle('blurple')
+            let workshopButton = new DiscordButtons.MessageButton()
+                .setLabel("Collection Steam")
+                .setStyle("url")
+                .setEmoji('854493775577350174')
+                .setURL(`https://steamcommunity.com/sharedfiles/filedetails/?id=2448603132`)
+            let ipButton = new DiscordButtons.MessageButton()
+                .setLabel("IP")
+                .setStyle("url")
+                .setEmoji('854493775577350174')
+                .setURL(`https://conoda-roleplay.fr/api/connect/164.132.206.138:27075`)
+            let mapButton = new DiscordButtons.MessageButton()
+                .setLabel("rp_conoda_alpha")
+                .setStyle("grey")
+                .setEmoji('🗺️')
+                .setID('darkrp_server_map_b_SxkzeV')
 
-        for(let msg of informationsMessages){
-            message.channel.send(msg);
-        } 
+            let row = new DiscordButtons.MessageActionRow()
+                .addComponent(discordButton)
+                .addComponent(workshopButton)
+                .addComponent(ipButton)
+                .addComponent(mapButton);
+
+            message.channel.send('', {
+                component: row,
+                embed: servers2Embed
+            });
+        })
     }
 }

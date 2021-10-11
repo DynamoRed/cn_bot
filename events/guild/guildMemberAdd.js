@@ -1,26 +1,14 @@
 const Discord = require("discord.js");
+const DiscordButtons = require('discord-buttons');
 
 module.exports = async (bot, m) => {
 
-    let memberStatChannel = await bot.getServerChannel(m.guild.id, "members_stat");
-    if(memberStatChannel != undefined) {
-        m.guild.channels.cache.get(memberStatChannel).setName(`👥 Membres: ${m.guild.memberCount}`, "Actualisation Stats");
-    }
+    m.guild.channels.cache.get("701635851725176875").setName(`👥・𝗠𝗲𝗺𝗯𝗿𝗲𝘀: ${m.guild.memberCount}`, "Actualisation Stats");
 
-    let welcomeChannel = await bot.getServerChannel(m.guild.id, "welcome");
-    if(welcomeChannel != undefined) {
-        let memberAddEmbed = new Discord.MessageEmbed() 
-            .setColor(await bot.getServerColor(m.guild.id))
-            .setTitle(`:inbox_tray: Nouveau Membre !`)
-            .setDescription(`<@${m.user.id}> vient d'arriver sur notre discord ! :fire:`);
-        m.guild.channels.cache.get(welcomeChannel).send(memberAddEmbed);
-    }
+    m.roles.add(bot.config.I_ROLES.MEMBER, "");
+    m.roles.add(bot.config.I_ROLES.FIRST_SEPARATOR, "");
+    m.roles.add(bot.config.I_ROLES.NOTIFICATIONS_ADVERTS, "");
 
-    let logsChannel = await bot.getServerChannel(m.guild.id, "logs");
-    if(logsChannel != undefined) {
-        var logEmbed = new Discord.MessageEmbed()
-            .setColor(await bot.getServerColor(m.guild.id))
-            .setDescription(`<@${m.id}> a rejoint le serveur`)
-        m.guild.channels.cache.get(logsChannel).send(logEmbed);
-    }
+    let mentionMessage = await m.guild.channels.cache.get("815036677655101481").send(`<@${m.id}>`);
+    setTimeout(function(){ mentionMessage.delete(); }, 1000);
 }

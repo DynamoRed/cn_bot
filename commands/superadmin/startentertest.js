@@ -11,7 +11,7 @@ module.exports = {
 
         if(!message.member.roles.cache.find(r => r.name.toLowerCase() == "staff+")) {
             var replyEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.DENY)
+                .setColor(bot.config.COLORS.RED)
                 .setFooter(`Message auto-supprimé dans 5 secondes`)
                 .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
             let msg = await message.channel.send(replyEmbed);
@@ -44,7 +44,7 @@ module.exports = {
             testChannel.staffTestResp = message.author;
 
             let staffTestEmbed1 = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.BASE)
+                .setColor(bot.config.COLORS.BLURPLE)
                 .setTitle(`📋 Test d'entrée dans le Staff ${guildMemberName}`)
                 .setDescription(`${bot.botEmojis.GLOBAL.BULLET} Pour chaque question le **type de réponse** est marqué en bas de la question. ***(QCM ou Réponse écrite)***
                 ${bot.botEmojis.GLOBAL.BULLET} Si vous **éditez** un message, il sera supprimé et votre réponse vaudra **0** !

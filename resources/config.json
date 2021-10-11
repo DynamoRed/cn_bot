@@ -1,107 +1,21 @@
 {
-    "ACTIVITIES": ["https://www.splife.fr/", "https://discord.gg/56CN36dmYy", "Serveurs Garry's Mod", "1 serveur DarkRP", "1 serveur PrisonRP", "1 serveur SCP RP", "+900 Membres", "Des addons exclusifs", "Un staff a l'écoute", "Des giveaways réguliers", "Des events innovants"],
-    "CLIENT_SECRET": "ZYykTcv0WG5OVtQ3tFQM131Y1hCSvPFO",
-    "CLIENT_ID": "778266786130165791",
+    "ACTIVITIES": ["https://www.conoda-roleplay.fr/", "https://discord.gg/wcPEjuUtfZ", "Serveurs Garry's Mod", "1 serveur DarkRP", "Des addons exclusifs", "Un staff a l'écoute", "Des giveaways réguliers", "Des events innovants"],
+    "CLIENT_SECRET": "*******",
+    "CLIENT_ID": "761165607852572682",
     "PREFIX": "!",
     "OWNER_ID": "324956349353951232",
-    "SECRET_PHRASE": "un secret bien gardé", 
     "COLORS": {
-        "BASE": "#F28E26",
-        "DENY": "#FF5430",
-        "ALLOW": "#79D033"
-    },
-    "OFFICIALS_SERVERS": {
-        "DARKRP": "693198481086480544",
-        "SCPRP": "768572431946219582",
-        "PRISONRP": "748230902450094181"
-    },
-    "CONFIGURABLE_CHANNELS": {
-        "tickets": {
-            "description": "Channel dans lequel les gens doivent réagir a un message pour creer un ticket",
-            "name": "tickets",
-            "type": "text"
-        },
-        "patch_notes": {
-            "description": "Channel dans lequel sont diffusés les patchs-notes",
-            "name": "patch_notes",
-            "type": "text"
-        },
-        "create_channel": {
-            "description": "Channel vocal dans lequel une personne doit se connecter pour creer son propre canal vocal",
-            "name": "create_channel",
-            "type": "voice"
-        },
-        "logs": {
-            "description": "Channel de logs",
-            "name": "logs",
-            "type": "text"
-        },
-        "verification": {
-            "description": "Channel dans lequel les personnes doivent réagir avec l'emoji ✅ pour entrer sur le serveur",
-            "name": "verification",
-            "type": "text"
-        },
-        "welcome": {
-            "description": "Channel d'arrivée où seront mis les messages de bienvenue",
-            "name": "welcome",
-            "type": "text"
-        },
-        "boosts": {
-            "description": "Channel dans lequel sont envoyés les messages de boosts discord",
-            "name": "boosts",
-            "type": "text"
-        },
-        "reunions_votes": {
-            "description": "Channel de vote de candidatures lors de réunion",
-            "name": "reunions_votes",
-            "type": "text"
-        },
-        "commands": {
-            "description": "Channel dans lequel certaines commandes devront être spécifiquement envoyées",
-            "name": "commands",
-            "type": "text"
-        },
-        "members_stat": {
-            "description": "Channel vocal affichant le nombre de membres sur le discord",
-            "name": "members_stat",
-            "type": "voice"
-        },
-        "staff_stat": {
-            "description": "Channel vocal affichant le nombre de staff présent sur le discord",
-            "name": "staff_stat",
-            "type": "voice"
-        }
-    },
-    "I_CHANNELS": {
-        "GIVEAWAYS": "745220977423548456",
-        "TICKETS": "746112226527805501",
-        "PATCH_NOTES": "697538351678488726",
-        "BUG_HUNTER": "697540145746018365",
-        "CREATE_CHANNEL": "699727733592162304",
-        "TICKET_CATEGORY": "779478955120001066",
-        "STAFF_CHAT": "742305817876889671",
-        "LOGS": "779707085096353813",
-        "VERIFICATION": "693607070829772901",
-        "WELCOME": "695357623599366246",
-        "BOOSTS": "765525228369477652",
-        "REUNION_VOTES": "767138230625501184",
-        "STAFF_TEST_CATEGORY": "781574814758469704",
-        "COMMANDS": "695402665722642472",
-        "MEMBERS_STATS": "796027572936769544",
-        "ONLINE_STATS": "796027693606371399",
-        "CREATE_CHANNELS_CATEGORIE": "697540247818338335"
+        "BLURPLE": "#5865F2",
+        "YELLOW": "#FEE75C",
+        "GREEN": "#57F287",
+        "RED": "#ED4245",
+        "FUCHSIA": "#EB459E"
     },
     "I_ROLES":{
-        "STAFF": "693947514906214480",
-        "STAFFPLUS": "779077577352282124",
-        "TEST_MODERATOR": "693945924145250315",
-        "MUTE": "746733922532196353",
-        "MEMBER": "693943099285700678",
-        "SUPERADMIN": "697497909385756754",
-        "ANIMS": "764579863818010624",
-        "ADMIN": "693945803965988924",
-        "FORMATION": "742673915926806549",
-        "STAFF_DARKRP": "774630130164432926",
-        "TEST": "795704428341493780"
+        "VERIFIED": "761144115752206356",
+        "MEMBER": "701635848164081689",
+        "NOTIFICATIONS_ADVERTS": "701635848164081687",
+        "FIRST_SEPARATOR": "701635848164081688",
+        "STAFF": "701635848512340075"
     }
 }

@@ -11,7 +11,7 @@ module.exports = {
 
         if(!message.member.roles.cache.find(r => r.name.toLowerCase() == "staff+")) {
             var replyEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.DENY)
+                .setColor(bot.config.COLORS.RED)
                 .setFooter(`Message auto-supprimé dans 5 secondes`)
                 .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
             let msg = await message.channel.send(replyEmbed);
@@ -32,7 +32,7 @@ module.exports = {
 
         //GIVEAWAY EMBEDS
         let giveawayEmbed1 = new Discord.MessageEmbed()
-            .setColor(bot.config.COLORS.BASE)
+            .setColor(bot.config.COLORS.BLURPLE)
             .setImage("https://www.raphael-biron.fr/projets/splife/images/splife-darkrp-giveaway-banner.png");
 
         let giveawayDesc = `
@@ -49,7 +49,7 @@ module.exports = {
         - Pour participer **réagissez** avec ${botEmojis.GLOBAL.GIVEAWAY} !`;
         
         let giveawayEmbed2 = new Discord.MessageEmbed()
-            .setColor(bot.config.COLORS.BASE)
+            .setColor(bot.config.COLORS.BLURPLE)
             .setTitle(`**${args[0]}x ${giveawayGain.toUpperCase()} !   ${botEmojis.SPLIFE.DARK_RP.LOGO}**`)
             .setDescription(giveawayDesc);
 

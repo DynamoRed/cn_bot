@@ -20,7 +20,7 @@ module.exports = {
             }
             
             let categoryHelpEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.BASE)
+                .setColor(bot.config.COLORS.BLURPLE)
                 .setTitle(`${categoryConfig.CATEGORY_TITLE}`)
                 .setThumbnail(`${categoryConfig.CATEGORY_THUMBNAIL}`);
 

@@ -11,7 +11,7 @@ module.exports = {
 
         if(!message.member.roles.cache.find(r => r.name.toLowerCase() == "staff+")) {
             var replyEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.DENY)
+                .setColor(bot.config.COLORS.RED)
                 .setFooter(`Message auto-supprimé dans 5 secondes`)
                 .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
             let msg = await message.channel.send(replyEmbed);
@@ -50,7 +50,7 @@ module.exports = {
         ${bot.botEmojis.GLOBAL.GIVEAWAY} **Bravo a ${pronoms[1]} !**`
         
         let resultEmbed = new Discord.MessageEmbed()
-            .setColor(bot.config.COLORS.BASE)
+            .setColor(bot.config.COLORS.BLURPLE)
             .setTitle(`**GAGNANT${pronoms[2]} ${pronoms[0]}${giveawayMessage.nbOfWinners}x ${giveawayMessage.gain.toUpperCase()} !**`)
             .setDescription(resultDesc);
 

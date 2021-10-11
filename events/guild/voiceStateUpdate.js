@@ -1,6 +1,6 @@
 module.exports = (bot, oldState, newState) => {
     if(newState.channelID != undefined) {
-       if(newState.channelID == bot.config.I_CHANNELS.CREATE_CHANNEL){
+       if(newState.channelID == "701635852228624491"){
            var name = newState.member.nickname ? newState.member.nickname : newState.member.user.username;
             newState.channel.guild.channels.create(`🔊・Canal de ` + name, {
                 type: 'voice',
@@ -29,6 +29,14 @@ module.exports = (bot, oldState, newState) => {
                     {
                         allow: 'VIEW_CHANNEL',
                         id: newState.member.id
+                    },
+                    {
+                        deny: 'CONNECT',
+                        id: "701635848164081685"
+                    },
+                    {
+                        allow: 'CONNECT',
+                        id: "761144115752206356"
                     }
                 ]
             }).then(ch => {
@@ -38,7 +46,7 @@ module.exports = (bot, oldState, newState) => {
     }
 
     if(oldState.channelID != undefined){
-        if(oldState.channel.members.size === 0 && oldState.channel.parent.id == bot.config.I_CHANNELS.CREATE_CHANNELS_CATEGORIE && oldState.channelID != bot.config.I_CHANNELS.CREATE_CHANNEL){
+        if(oldState.channel.members.size === 0 && oldState.channel.parent.id == "701635852228624490" && oldState.channelID != "701635852228624491" && oldState.channelID != "701635852719095962" && oldState.channelID != "701635852723290113" && oldState.channelID != "701635853168017449"){
             oldState.channel.delete();
         }
     }

@@ -5,14 +5,19 @@ const bot = new Discord.Client({
     "partials": ['CHANNEL', 'MESSAGE', 'REACTION']
 });
 const mysql = require('mysql');
+const DiscordButtons = require('discord-buttons')(bot);
 
+process.on('unhandledRejection', (reason, promise) => {
+    console.log('Unhandled Rejection at:', reason.stack || reason)
+});
+
+bot.DiscordButtons = DiscordButtons;
 bot.config = config;
 bot.mysql = mysql;
 bot.commands = new Discord.Collection();
-bot.badges = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 bot.categories = fs.readdirSync("./commands/");
-["commands", "badges"].forEach(handler => { 
+["commands"].forEach(handler => { 
     require(`./handlers/${handler}`)(bot);
 })
 
@@ -22,9 +27,10 @@ bot.on("ready", () => {
 bot.on("raw", (packet) => {
     require("./events/client/raw")(bot, packet);
 }); 
-bot.on("guildCreate", (g) => {
-    require("./events/client/guildCreate")(bot, g);
+bot.on("clickButton", (button) => {
+    require("./events/client/clickButton")(bot, button);
 }); 
+
 bot.on("message", async (message) => {
     require("./events/guild/message")(bot, message);
 });
@@ -55,4 +61,4 @@ bot.on("channelDelete", (oldChannel) => {
 bot.on("channelCreate", (newChannel) => {
     require("./events/guild/channelCreate")(bot, newChannel);
 });
-bot.login(process.env.TOKEN);
+bot.login("*******");

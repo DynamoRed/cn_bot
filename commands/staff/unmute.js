@@ -12,7 +12,7 @@ module.exports = {
 
         if(!message.member.roles.cache.find(r => r.name.toLowerCase() == "staff")) {
             var replyEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.DENY)
+                .setColor(bot.config.COLORS.RED)
                 .setFooter(`Message auto-supprimé dans 5 secondes`)
                 .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
             let msg = await message.channel.send(replyEmbed);
@@ -26,7 +26,7 @@ module.exports = {
             try{
                 let logEmbed = new Discord.MessageEmbed()
                     .setAuthor(message.author.username, message.author.avatarURL())
-                    .setColor(bot.config.COLORS.BASE)
+                    .setColor(bot.config.COLORS.BLURPLE)
                     .setDescription(mentionning + ' a rendu la parole à <@' + mentionned + '>\nDepuis le channel: <#' + message.channel.id + '>');
                 message.guild.channels.cache.find(c => c.id == bot.config.I_CHANNELS.LOGS).send(logEmbed);
 
@@ -34,7 +34,7 @@ module.exports = {
 
                 let confirmationEmbed = new Discord.MessageEmbed()
                     .setAuthor(message.author.username, message.author.avatarURL())
-                    .setColor(bot.config.COLORS.ALLOW)
+                    .setColor(bot.config.COLORS.GREEN)
                     .setTitle("Mute effectué !")
                     .setDescription('Vous avez bien rendu la parole à <@' + mentionned + '>\nDepuis le channel: <#' + message.channel.id + '>');
                 message.author.send(confirmationEmbed);
@@ -43,7 +43,7 @@ module.exports = {
             }
         } else {
             var replyEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.DENY)
+                .setColor(bot.config.COLORS.RED)
                 .setFooter(`Message auto-supprimé dans 5 secondes`)
                 .setDescription(`<@${message.author.id}> **ce joueur est introuvable !**`)
             let msg = await message.channel.send(replyEmbed);

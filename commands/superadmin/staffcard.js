@@ -12,7 +12,7 @@ module.exports = {
 
         if(!message.member.roles.cache.find(r => r.name.toLowerCase() == "staff+")) {
             var replyEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.DENY)
+                .setColor(bot.config.COLORS.RED)
                 .setFooter(`Message auto-supprimé dans 5 secondes`)
                 .setDescription(`<@${message.author.id}> **vous n'avez pas la permission de faire ca**`)
             let msg = await message.channel.send(replyEmbed);
@@ -22,7 +22,7 @@ module.exports = {
         
         if(!args[0]){
             var replyEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.DENY)
+                .setColor(bot.config.COLORS.RED)
                 .setFooter(`Message auto-supprimé dans 5 secondes`)
                 .setDescription(`<@${message.author.id}> **vous devez mentionner un membre en premier argument**`)
             let msg = await message.channel.send(replyEmbed);
@@ -32,7 +32,7 @@ module.exports = {
 
         if(!args[1]){
             var replyEmbed = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.DENY)
+                .setColor(bot.config.COLORS.RED)
                 .setFooter(`Message auto-supprimé dans 5 secondes`)
                 .setDescription(`<@${message.author.id}> **vous devez ecrire une SteamID64 correct en second argument**`)
             let msg = await message.channel.send(replyEmbed);
@@ -53,7 +53,7 @@ module.exports = {
             let body = r.body;
             if(!body){
                 var replyEmbed = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.DENY)
+                    .setColor(bot.config.COLORS.RED)
                     .setFooter(`Message auto-supprimé dans 5 secondes`)
                     .setDescription(`<@${message.author.id}> **une erreur est survenue !**`)
                 let msg = await message.channel.send(replyEmbed);
@@ -63,7 +63,7 @@ module.exports = {
             let profileInfos = body.profile;
             if(!profileInfos){
                 var replyEmbed = new Discord.MessageEmbed()
-                    .setColor(bot.config.COLORS.DENY)
+                    .setColor(bot.config.COLORS.RED)
                     .setFooter(`Message auto-supprimé dans 5 secondes`)
                     .setDescription(`<@${message.author.id}> **une erreur est survenue !**`)
                 let msg = await message.channel.send(replyEmbed);
@@ -76,7 +76,7 @@ module.exports = {
 
             //STAFFLIST EMBEDS
             let staffListEmbed1 = new Discord.MessageEmbed()
-                .setColor(bot.config.COLORS.BASE)
+                .setColor(bot.config.COLORS.BLURPLE)
                 .setTitle(`${botEmojis.GLOBAL.TEAM} Carte Staff de ${mentionnedStaff.username}`)
                 .addField('Tag Discord', `<@${mentionnedStaff.id}>`, true)
                 .addField('Nom Steam', `${steamName}`, true)
